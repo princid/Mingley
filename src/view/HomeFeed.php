@@ -3,6 +3,8 @@
 $title = "Home Page";
 require_once('../../includes/Header.php');
 
+require_once("../../config/constants.php");
+
 ?>
 
 <!-- header area start -->
@@ -1970,5 +1972,5 @@ require_once('../../includes/Header.php');
 
 
 <?php
-require_once("/var/www/html/PHP_Assesments/Mingley/includes/Footer.php");
+require_once("../../includes/Footer.php");
 ?>
