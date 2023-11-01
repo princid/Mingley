@@ -1,7 +1,8 @@
 <?php
+
 session_start();
 
-include("/var/www/html/PHP_Assesments/Mingley/config/constants.php");
+// require("../config/constants.php");
 
 ?>
 
