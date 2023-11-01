@@ -3,6 +3,8 @@
 $title = "Log In";
 require_once('../../includes/Header.php');
 
+require_once("../../config/constants.php");
+
 ?>
 
 
@@ -59,5 +61,5 @@ require_once('../../includes/Header.php');
 </script>
 
 <?php
-require_once("/var/www/html/PHP_Assesments/Mangloo/includes/Footer.php");
+require_once("../../includes/Footer.php");
 ?>
