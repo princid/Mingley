@@ -430,7 +430,7 @@ require_once('../../includes/Header.php');
 <main>
 
     <div class="main-wrapper">
-        <div class="profile-banner-large bg-img" data-bg="../../assets/img/post4.jpg">
+        <div class="profile-banner-large bg-img" data-bg="../../assets/img/banner.jpg" style="background-image: url(&quot;../../assets/img/banner.jpg&quot;);">
         </div>
         <div class="profile-menu-area bg-white">
             <div class="container">
@@ -439,7 +439,7 @@ require_once('../../includes/Header.php');
                         <div class="profile-picture-box">
                             <figure class="profile-picture">
                                 <a href="profile.html">
-                                    <img src="../../assets/img/profile4.jpg" alt="profile picture">
+                                    <img src="../../assets/img/profile2.jpg" alt="profile picture">
                                 </a>
                             </figure>
                         </div>
