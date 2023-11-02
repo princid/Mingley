@@ -29,36 +29,57 @@ class registerForm {
     if (firstname.length === 0) {
       this.setError("firstname", "*Firstname cannot be blank!");
       returnVal = false;
+    } else if (firstname.length < 2) {
+      this.setError(
+        "firstname",
+        "*Firstname must be at least 2 characters long."
+      );
+      returnVal = false;
+    } else if (!/^[a-zA-Z\s]+$/.test(firstname)) {
+      this.setError(
+        "firstname",
+        "*Firstname can only contain letters and spaces."
+      );
+      returnVal = false;
     }
-    
+
     // Validating Last Name
     let lastname = document.getElementById("lastname").value.trim(); // Trim whitespace
     if (lastname.length === 0) {
       this.setError("lastname", "*Lastname cannot be blank!");
       returnVal = false;
+    } else if (lastname.length < 2) {
+      this.setError(
+        "lastname",
+        "*Lastname must be at least 2 characters long."
+      );
+      returnVal = false;
+    } else if (!/^[a-zA-Z\s]+$/.test(lastname)) {
+      this.setError(
+        "lastname",
+        "*Lastname can only contain letters and spaces."
+      );
+      returnVal = false;
     }
-    
+
     // Validating username
     let username = document.getElementById("username").value.trim(); // Trim whitespace
     if (username.length === 0) {
       this.setError("username", "*Username cannot be blank!");
       returnVal = false;
-    } 
-    else if (!/^[a-z]+$/.test(username)) {
+    } else if (!/^[a-z]+$/.test(username)) {
       this.setError(
         "username",
         "*Username must contain only lowercase letters."
       );
       returnVal = false;
-    } 
-    else if (username.length < 3) {
+    } else if (username.length < 3) {
       this.setError(
         "username",
         "*Username must be at least 3 characters long."
       );
       returnVal = false;
-    } 
-    else if (username.length > 20) {
+    } else if (username.length > 20) {
       this.setError("username", "*Username cannot exceed 20 characters.");
       returnVal = false;
     }
