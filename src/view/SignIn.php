@@ -52,7 +52,6 @@ require_once("../../config/constants.php");
 <script>
     const alertBox = document.querySelector(".alertBox");
 
-
     setTimeout(() => {
         alertBox.innerHTML = "";
     }, 3000);
