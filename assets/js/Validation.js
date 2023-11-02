@@ -43,6 +43,24 @@ class registerForm {
     if (username.length === 0) {
       this.setError("username", "*Username cannot be blank!");
       returnVal = false;
+    } 
+    else if (!/^[a-z]+$/.test(username)) {
+      this.setError(
+        "username",
+        "*Username must contain only lowercase letters."
+      );
+      returnVal = false;
+    } 
+    else if (username.length < 3) {
+      this.setError(
+        "username",
+        "*Username must be at least 3 characters long."
+      );
+      returnVal = false;
+    } 
+    else if (username.length > 20) {
+      this.setError("username", "*Username cannot exceed 20 characters.");
+      returnVal = false;
     }
 
     // Validating Email
