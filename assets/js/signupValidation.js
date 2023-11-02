@@ -144,4 +144,4 @@ signUp_form.addEventListener("submit", (event) => {
   }
 });
 
-console.log("Prince");
+// console.log("Prince");

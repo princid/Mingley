@@ -1,7 +1,7 @@
 
 <?php
 
-// session_start();
+session_start();
 
 require("/var/www/html/PHP_Assesments/Mingley/src/model/Query.php");
 
@@ -27,6 +27,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         exit;
     }
 }
-// $user_password = trim(md5($_POST['password']));
 
 ?>
