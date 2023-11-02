@@ -44,7 +44,7 @@ require_once("../../config/constants.php");
                 </label>
             </div>
             <button class="w-100 signBtn" type="submit">Sign In</button>
-            <p class="text-end mt-1">New Here? <a href="<?= BASE_URL ?>src/view/SignUp.php" class=" text-muted text-decoration-none"><strong>Sign Up Now!</strong></a></p>
+            <p class="text mt-3">New Here? <a href="<?= BASE_URL ?>src/view/SignUp.php" class=" text-muted text-decoration-none"><strong>Sign Up Now!</strong></a></p>
         </form>
     </div>
 </div>

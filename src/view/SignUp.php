@@ -72,13 +72,14 @@ require_once("../../config/constants.php");
                 <div class="formError confirmPassword"></div>
             </div>
 
-            <div class="checkbox my-3">
+            <!-- <div class="checkbox my-3">
                 <label>
                     <input class="w-auto" type="checkbox" value="acceptTC" name="termCond" id="termCond"> Accept All Term and Conditions
                 </label>
-            </div>
+            </div> -->
+
             <input class="w-100 signBtn" type="submit" name="Submit" value="SIGN UP">
-            <p class="text-end mt-1">Already have a Mingley Account? <a href="<?= BASE_URL ?>src/view/SignIn.php" class=" text-muted text-decoration-none"><strong>Sign In Here!</strong></a></p>
+            <p class="text mt-3">Already have a Mingley Account? <a href="<?= BASE_URL ?>src/view/SignIn.php" class=" text-muted text-decoration-none"><strong>Sign In Here!</strong></a></p>
         </form>
     </div>
 </div>
