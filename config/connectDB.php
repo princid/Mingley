@@ -1,8 +1,10 @@
 <?php
-define('SERVER_NAME', 'localhost');
-define('USER_NAME', 'phpmyadmin');
-define('USER_PASSWORD', 'root');
-define('DB_NAME', 'mingley');
+
+require("constants.php");
+// define('SERVER_NAME', 'localhost');
+// define('USER_NAME', 'phpmyadmin');
+// define('USER_PASSWORD', 'root');
+// define('DB_NAME', 'mingley');
 
 // For windows if there's no username and pssword assigned
 // define('SERVER_NAME', 'localhost');
