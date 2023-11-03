@@ -13,6 +13,7 @@ if (isset($_POST['Submit'])) {
     $result = signIn($conn, $table, $user_email, $user_password);
 
     if($result === "Logged In Successfully!"){
+        // $_SESSION['id'] = $row['id'];
         $_SESSION["message"] = $result;
         header("location: http://localhost/PHP_Assesments/Mingley/src/view/HomeFeed.php");
         exit;
