@@ -1,6 +1,6 @@
 <?php
 
-require("/var/www/html/PHP_Assesments/Mingley/config/connectDB.php");
+require("../../config/connectDB.php");
 
 function signUp($conn, $table, $first_name, $last_name, $user_name, $user_email, $user_password)
 {

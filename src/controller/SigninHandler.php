@@ -1,6 +1,6 @@
 <?php
 session_start();
-require("/var/www/html/PHP_Assesments/Mingley/src/model/Query.php");
+require("../model/Query.php");
 
 if (isset($_POST['Submit'])) {
 

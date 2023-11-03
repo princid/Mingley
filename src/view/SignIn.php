@@ -7,10 +7,10 @@ require_once('../../includes/Header.php');
 
 require_once("../../config/constants.php");
 
-if ($_SESSION['id']) {
-    header("location: HomeFeed.php");
-    // exit();
-}
+// if ($_SESSION['id']) {
+//     header("location: HomeFeed.php");
+//     // exit();
+// }
 
 ?>
 
