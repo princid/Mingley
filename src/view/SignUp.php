@@ -63,16 +63,16 @@ require_once("../../config/constants.php");
             </div>
 
             <div class="form-floating my-2 position-relative">
-                <input type="password" class="form-control " name="password" id="password" placeholder="Password">
+                <input type="password" class="form-control password" name="password" id="password" placeholder="Password">
                 <label for="passwordInput" class="primary-text">Password <span class="text-danger"> *</span></label>
-                <i class="fa-regular fa-eye position-absolute openEye"></i>
+                <i class="fa-regular fa-eye position-absolute passEye"></i>
                 <div class="formError password"></div>
             </div>
 
             <div class="form-floating my-2 position-relative">
-                <input type="password" class="form-control " name="confirmPassword" id="confirmPassword" placeholder="Password">
+                <input type="password" class="form-control password" name="confirmPassword" id="confirmPassword" placeholder="Password">
                 <label for="confirmPasswordInput" class="primary-text">Confirm Password <span class="text-danger"> *</span></label>
-                <i class="fa-regular fa-eye position-absolute openEye"></i>
+                <i class="fa-regular fa-eye position-absolute confPassEye"></i>
                 <div class="formError confirmPassword"></div>
             </div>
 
@@ -96,6 +96,40 @@ require_once("../../config/constants.php");
     setTimeout(() => {
         alertBox.innerHTML = "";
     }, 3000);
+</script>
+
+<script>
+    const passEye = document.querySelector('.passEye');
+
+    passEye.addEventListener('click', () => {
+        const input = document.querySelector('#password');
+        if (input.getAttribute('type') === 'password') {
+            input.setAttribute('type', 'text');
+            passEye.classList.remove('fa-eye');
+            passEye.classList.add('fa-eye-slash');
+        } else {
+            input.setAttribute('type', 'password');
+            passEye.classList.remove('fa-eye-slash');
+            passEye.classList.add('fa-eye');
+        }
+
+    });
+
+    const confPassEye = document.querySelector('.confPassEye');
+
+    confPassEye.addEventListener('click', () => {
+        const input = document.querySelector('#confirmPassword');
+        if (input.getAttribute('type') === 'password') {
+            input.setAttribute('type', 'text');
+            confPassEye.classList.remove('fa-eye');
+            confPassEye.classList.add('fa-eye-slash');
+        } else {
+            input.setAttribute('type', 'password');
+            confPassEye.classList.remove('fa-eye-slash');
+            confPassEye.classList.add('fa-eye');
+        }
+
+    });
 </script>
 
 
