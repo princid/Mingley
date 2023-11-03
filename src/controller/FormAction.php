@@ -1,9 +1,9 @@
 
 <?php
 
-// session_start();
+session_start();
 
-require("/var/www/html/PHP_Assesments/Mingley/src/model/Query.php");
+require("../model/Query.php");
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $first_name = trim(htmlentities($_POST['firstname'], ENT_QUOTES, 'UTF-8'));
@@ -27,6 +27,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         exit;
     }
 }
-// $user_password = trim(md5($_POST['password']));
 
 ?>
