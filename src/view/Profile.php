@@ -36,37 +36,124 @@ require("Navbar.php");
                     <!-- My profile START -->
                     <div class="card rounded">
                         <!-- Cover image -->
-                        <div class="h-500px rounded-top profile_banner_img">
+                        <div class="rounded-top profile_banner_img">
                             <!-- Card body START -->
-                            <div class="card-body py-0 text-light mb-2">
-                                <div class="d-sm-flex align-items-start text-center text-sm-start mt-2 mb-2">
-                                    <div>
-                                        <!-- Avatar -->
-                                        <div class="" style="width: 8rem">
-                                            <img class="avatar-img rounded-circle border border-white border-3" src="../../assets/img/profile6.png" alt="">
+
+                            <!-- Profile Avatar -->
+                            <div class=" position-relative" style="width: 10rem; margin: 20px;">
+                                <img class="avatar-img rounded-circle border border-white border-3" src="../../assets/img/profile6.png" alt="">
+
+                                <!-- Update Image -->
+                                <button class="changeImage border border-white border-3" type="button" data-bs-toggle="modal" data-bs-target="#modalEditImage">
+                                    <!-- <i class="fa-solid fa-camera" style="color: #ffffff;"></i> -->
+                                    <i class="fa-solid fa-pencil" style="color: #ffffff;"></i>
+                                </button>
+
+                                <div class="modal fade" id="modalEditImage" tabindex="-1" aria-labelledby="modalImage" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="modalImage"><strong>Profile Picture</strong></h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                                            </div>
+                                            <form action="<?= BASE_URL ?>src/controller/" method="post" id="" name="">
+
+                                                <div class="modal-body w-75 m-auto" style="text-align:center">
+
+                                                    <small>A picture helps people recognize you and lets you know when you’re signed in to your account</small>
+
+                                                    <div class="" style="width: 10rem; margin: 20px auto;">
+                                                        <img class="avatar-img rounded-circle border border-white border-3" src="../../assets/img/profile6.png" alt="">
+                                                    </div>
+
+                                                    <div class="profilePicButtons d-flex" style="justify-content:space-between; align-items:center;">
+
+                                                        <div class="changeButton">
+                                                            <!-- <button class="btn btn-danger-soft me-2 " type="button">
+                                                                <i class="fa-solid fa-pencil" style="color: #0555e1;"></i>
+                                                                Change
+                                                            </button> -->
+                                                            <input type="file" name="" id="">
+                                                        </div>
+
+                                                        <div class="removeButton">
+                                                            <button class="btn btn-outline-danger me-2 p-3 " type="button">
+                                                                <i class="fa-solid fa-trash-can"></i>
+                                                                Remove
+                                                            </button>
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-secondary p-2" data-bs-dismiss="modal">Close</button>
+                                                    <!-- <button type="button" class="btn btn-outline-success p-2">SAVE CHANGES</button> -->
+                                                    <input class="btn w-25 btn-outline-success p-2" type="submit" name="Submit" value="SAVE CHANGES">
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
-
-
                                 </div>
-                                <!-- List profile -->
-                                <!-- <ul class="list-inline mb-0 text-center text-sm-start mt-3 mt-sm-0">
-                                    <li class="list-inline-item"><i class="bi bi-briefcase me-1"></i> Lead Developer</li>
-                                    <li class="list-inline-item"><i class="bi bi-geo-alt me-1"></i> New Hampshire</li>
-                                    <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i> Joined on Nov 26, 2019</li>
-                                </ul> -->
 
 
+                            </div>
 
+                            <!-- Update Banner Image -->
+                            <!-- <button class="btn btn-danger-soft me-2 bannerUpdate" type="button" data-bs-toggle="modal" data-bs-target="#modalEditBanner">
+                                <i class="bi bi-pencil-fill pe-1"></i>
+                                Edit Banner
+                            </button> -->
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalEditBanner" tabindex="-1" aria-labelledby="editBanner" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editBanner"><strong>Update Banner</strong></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form action="<?= BASE_URL ?>src/controller/update_profile_controller.php" method="post" id="update_form" name="update_form">
+                                            <div class="modal-body">
+
+                                                <!-- <label for="">First Name</label>
+                                                <input type="text" value="<?= $first_name; ?>" id="firstname" name="firstname">
+                                                <div class="formError firstname"></div>
+
+                                                <label for="">Last Name</label>
+                                                <input type="text" value="<?= $last_name; ?>" id="lastname" name="lastname">
+                                                <div class="formError lastname"></div>
+
+                                                <label for="">User Name</label>
+                                                <input type="text" value="<?= $user_name; ?>" id="username" name="username">
+                                                <div class="formError username"></div>
+
+                                                <label for="">User Email</label>
+                                                <input type="text" value="<?= $user_email; ?>" id="email" name="email">
+                                                <div class="formError email"></div> -->
+
+                                                <input type="file" name="" id="">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-secondary p-2" data-bs-dismiss="modal">Close</button>
+                                                <!-- <button type="button" class="btn btn-outline-success p-2">SAVE CHANGES</button> -->
+                                                <input class="btn w-25 btn-outline-success p-2" type="submit" name="Submit" value="SAVE CHANGES">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
 
                         <div class="mt-sm-4 d-flex" style="align-items: flex-start; justify-content:space-between; ">
                             <!-- Info -->
-                            <div class="userName">
+                            <div class="userInfo">
                                 <h1 class="mb-0 h5"><?= $first_name . " " . $last_name ?> <i class="bi bi-patch-check-fill text-success small"></i></h1>
-                                <p><?= "@". $user_name ?></p>
+                                <p><?= "@" . $user_name ?></p>
                             </div>
 
                             <div class="userDetails">
@@ -103,6 +190,7 @@ require("Navbar.php");
                             <!-- Button -->
                             <div class="d-flex justify-content-center">
 
+                                <!-- Update Profile -->
                                 <button class="btn btn-danger-soft me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalEditProfile">
                                     <i class="bi bi-pencil-fill pe-1"></i>
                                     Edit profile
@@ -110,7 +198,7 @@ require("Navbar.php");
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="modalEditProfile" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-                                    <div class="modal-dialog">
+                                    <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel2"><strong>Edit Profile</strong></h5>
@@ -127,9 +215,13 @@ require("Navbar.php");
                                                     <input type="text" value="<?= $last_name; ?>" id="lastname" name="lastname">
                                                     <div class="formError lastname"></div>
 
-                                                    <label for="">User Name</label>
+                                                    <label for="">Username</label>
                                                     <input type="text" value="<?= $user_name; ?>" id="username" name="username">
                                                     <div class="formError username"></div>
+
+                                                    <label for="">Add Bio</label>
+                                                    <input type="text" value="<?= $user_bio; ?>" id="user_bio" name="user_bio">
+                                                    <div class="formError user_bio"></div>
 
                                                     <label for="">User Email</label>
                                                     <input type="text" value="<?= $user_email; ?>" id="email" name="email">
@@ -197,11 +289,11 @@ require("Navbar.php");
                                 <input class="form-control pe-4 border-0" placeholder="Share your thoughts..." data-bs-toggle="modal" data-bs-target="#modalCreateFeed">
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="modalCreateFeed" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
+                                <div class="modal fade" id="modalCreateFeed" tabindex="-1" aria-labelledby="sharePost" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel"><strong>Create Post</strong></h5>
+                                                <h5 class="modal-title" id="sharePost"><strong>Create Post</strong></h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
@@ -603,7 +695,7 @@ require("Navbar.php");
                                 </div>
                                 <!-- Card body START -->
                                 <div class="card-body position-relative pt-0">
-                                    <p>He moonlights difficult engrossed it, sportsmen. Interested has all Devonshire difficulty gay assistance joy.</p>
+                                    <p><?= $user_bio; ?></p>
                                     <!-- Date time -->
                                     <ul class="list-unstyled mt-3 mb-0">
                                         <li class="mb-2"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Born: <strong> October 20, 1990 </strong> </li>
@@ -621,7 +713,7 @@ require("Navbar.php");
                             <div class="card rounded">
                                 <!-- Card header START -->
                                 <div class="card-header d-flex justify-content-between border-0">
-                                    <h5 class="card-title">Experience</h5>
+                                    <h5 class="card-title"> Experience </h5>
                                     <a class="btn btn-primary-soft btn-sm" href="#!"> <i class="fa-solid fa-plus"></i> </a>
                                 </div>
                                 <!-- Card header END -->
@@ -744,15 +836,22 @@ require("Navbar.php");
                                                 <!-- Card body -->
                                                 <div class="card-body p-2 pb-0">
                                                     <div class="avatar avatar-story avatar-xl">
-                                                        <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt=""></a>
+                                                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
                                                     </div>
                                                     <h6 class="card-title mb-1 mt-3"> <a href="#!"> Amanda Reed </a></h6>
                                                     <p class="mb-0 small lh-sm">16 mutual connections</p>
                                                 </div>
                                                 <!-- Card footer -->
-                                                <div class="card-footer p-2 border-0">
-                                                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message"> <i class="bi bi-chat-left-text"></i> </button>
-                                                    <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend"> <i class="bi bi-person-x"></i> </button>
+                                                <div class="card-footer p-2 border-0 profile_friend">
+
+                                                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message">
+                                                        <i class="bi bi-chat-left-text"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-sm btn-danger remove_friend" data-bs-toggle=" tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend">
+                                                        <i class="fa-solid fa-user-xmark" style="color: #ffffff;"></i>
+                                                    </button>
+
                                                 </div>
                                             </div>
                                             <!-- Friends item END -->
@@ -764,15 +863,22 @@ require("Navbar.php");
                                                 <!-- Card body -->
                                                 <div class="card-body p-2 pb-0">
                                                     <div class="avatar avatar-xl">
-                                                        <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt=""></a>
+                                                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
                                                     </div>
                                                     <h6 class="card-title mb-1 mt-3"> <a href="#!"> Samuel Bishop </a></h6>
                                                     <p class="mb-0 small lh-sm">22 mutual connections</p>
                                                 </div>
                                                 <!-- Card footer -->
-                                                <div class="card-footer p-2 border-0">
-                                                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message"> <i class="bi bi-chat-left-text"></i> </button>
-                                                    <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend"> <i class="bi bi-person-x"></i> </button>
+                                                <div class="card-footer p-2 border-0 profile_friend">
+
+                                                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message">
+                                                        <i class="bi bi-chat-left-text"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-sm btn-danger remove_friend" data-bs-toggle=" tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend">
+                                                        <i class="fa-solid fa-user-xmark" style="color: #ffffff;"></i>
+                                                    </button>
+
                                                 </div>
                                             </div>
                                             <!-- Friends item END -->
@@ -784,15 +890,22 @@ require("Navbar.php");
                                                 <!-- Card body -->
                                                 <div class="card-body p-2 pb-0">
                                                     <div class="avatar avatar-xl">
-                                                        <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt=""></a>
+                                                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
                                                     </div>
                                                     <h6 class="card-title mb-1 mt-3"> <a href="#"> Bryan Knight </a></h6>
                                                     <p class="mb-0 small lh-sm">1 mutual connection</p>
                                                 </div>
                                                 <!-- Card footer -->
-                                                <div class="card-footer p-2 border-0">
-                                                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message"> <i class="bi bi-chat-left-text"></i> </button>
-                                                    <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend"> <i class="bi bi-person-x"></i> </button>
+                                                <div class="card-footer p-2 border-0 profile_friend">
+
+                                                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message">
+                                                        <i class="bi bi-chat-left-text"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-sm btn-danger remove_friend" data-bs-toggle=" tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend">
+                                                        <i class="fa-solid fa-user-xmark" style="color: #ffffff;"></i>
+                                                    </button>
+
                                                 </div>
                                             </div>
                                             <!-- Friends item END -->
@@ -804,15 +917,20 @@ require("Navbar.php");
                                                 <!-- Card body -->
                                                 <div class="card-body p-2 pb-0">
                                                     <div class="avatar avatar-xl">
-                                                        <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt=""></a>
+                                                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
                                                     </div>
                                                     <h6 class="card-title mb-1 mt-3"> <a href="#!"> Amanda Reed </a></h6>
                                                     <p class="mb-0 small lh-sm">15 mutual connections</p>
                                                 </div>
                                                 <!-- Card footer -->
-                                                <div class="card-footer p-2 border-0">
-                                                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message"> <i class="bi bi-chat-left-text"></i> </button>
-                                                    <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend"> <i class="bi bi-person-x"></i> </button>
+                                                <div class="card-footer p-2 border-0 profile_friend">
+                                                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message">
+                                                        <i class="bi bi-chat-left-text"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-sm btn-danger remove_friend" data-bs-toggle=" tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend">
+                                                        <i class="fa-solid fa-user-xmark" style="color: #ffffff;"></i>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- Friends item END -->

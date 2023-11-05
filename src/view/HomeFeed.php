@@ -63,7 +63,7 @@ require("Navbar.php");
                                 <div class="profile-desc text-center">
                                     <h5 class="mb-0"> <?php echo ($first_name . " " . $last_name); ?> </h5>
                                     <small>Full Stack Developer || Mind2Web</small>
-                                    <p class="mt-2">I'd love to change the world, but they won’t give me the source code.</p>
+                                    <p class="mt-2"><?= $user_bio; ?></p>
                                 </div>
 
                                 <div class="hstack gap-2 gap-xl-3 justify-content-center">

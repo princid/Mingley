@@ -57,7 +57,7 @@ function fetchUserDetails($conn, $table, $condition){
 }
 
 
-function updateProfile($conn, $table, $first_name, $last_name, $user_name, $user_email, $condition){
+function updateProfile($conn, $table, $first_name, $last_name, $user_name, $user_email, $user_bio, $condition){
 
     // $check_user = "SELECT id FROM $table WHERE user_email = '$user_email' OR user_name = '$user_name' ";
     // $check_user_run = mysqli_query($conn, $check_user);
@@ -66,7 +66,7 @@ function updateProfile($conn, $table, $first_name, $last_name, $user_name, $user
     //     // Email or Username already exists
     //     return "Email/Username already exists! Try with another Email ID/Username.";
     // } else {
-        $update_query = " UPDATE $table SET first_name = '$first_name', last_name = '$last_name', user_name = '$user_name', user_email = '$user_email' WHERE $condition ";
+        $update_query = " UPDATE $table SET first_name = '$first_name', last_name = '$last_name', user_name = '$user_name', user_email = '$user_email', user_bio = '$user_bio' WHERE $condition ";
         $update_query_run = mysqli_query($conn, $update_query);
 
         if ($update_query_run) {

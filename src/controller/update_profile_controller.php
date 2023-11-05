@@ -9,6 +9,7 @@ if (($_SERVER['REQUEST_METHOD'] == "POST") && !empty($_SESSION)) {
     $last_name = trim(htmlentities($_POST['lastname'], ENT_QUOTES, 'UTF-8'));
     $user_name = trim(htmlentities($_POST['username'], ENT_QUOTES, 'UTF-8'));
     $user_email = trim(htmlentities($_POST['email'], ENT_QUOTES, 'UTF-8'));
+    $user_bio = trim(htmlentities($_POST['user_bio'], ENT_QUOTES, 'UTF-8'));
 
     $id = $_SESSION["id"];
 
@@ -16,7 +17,7 @@ if (($_SERVER['REQUEST_METHOD'] == "POST") && !empty($_SESSION)) {
 
     $condition = " id = '$id' ";
 
-    $result = updateProfile($conn, $table, $first_name, $last_name, $user_name, $user_email, $condition);
+    $result = updateProfile($conn, $table, $first_name, $last_name, $user_name, $user_email, $user_bio, $condition);
 
     if ($result === "Your Data Updated Successfully!") {
         $_SESSION["message"] = $result;

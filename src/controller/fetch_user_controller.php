@@ -18,6 +18,7 @@ if (!empty($_SESSION)) {
     $last_name = $result['last_name'];
     $user_name = $result['user_name'];
     $user_email = $result['user_email'];
+    $user_bio = $result['user_bio'];
     $user_register_date = $result['created_at'];
 
 }
