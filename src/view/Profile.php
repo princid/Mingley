@@ -108,7 +108,7 @@ require("Navbar.php");
                                 Edit Banner
                             </button> -->
 
-                            <!-- Modal -->
+                            <!-- Modal for banner updation -->
                             <div class="modal fade" id="modalEditBanner" tabindex="-1" aria-labelledby="editBanner" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
@@ -230,7 +230,7 @@ require("Navbar.php");
                                                     <!-- <input type="file" name="" id=""> -->
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-outline-secondary p-2" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-outline-secondary p-2" data-bs-dismiss="modal">CLOSE</button>
                                                     <!-- <button type="button" class="btn btn-outline-success p-2">SAVE CHANGES</button> -->
                                                     <input class="btn w-25 btn-outline-success p-2" type="submit" name="Submit" value="SAVE CHANGES">
                                                 </div>
@@ -262,8 +262,7 @@ require("Navbar.php");
 
 
                         <!-- Card body END -->
-                        <div class="card-footer mt-3 pt-2 pb-0">
-                            <!-- Nav profile pages -->
+                        <!-- <div class="card-footer mt-3 pt-2 pb-0">
                             <ul class="nav nav-bottom-line align-items-center justify-content-center justify-content-md-start mb-0 border-0">
                                 <li class="nav-item"> <a class="nav-link active" href="my-profile.html"> Posts </a> </li>
                                 <li class="nav-item"> <a class="nav-link" href="my-profile-about.html"> About </a> </li>
@@ -273,7 +272,7 @@ require("Navbar.php");
                                 <li class="nav-item"> <a class="nav-link" href="my-profile-events.html"> Events</a> </li>
                                 <li class="nav-item"> <a class="nav-link" href="my-profile-activity.html"> Activity</a> </li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- My profile END -->
 
@@ -352,12 +351,12 @@ require("Navbar.php");
                                 <div class="d-flex align-items-center">
                                     <!-- Avatar -->
                                     <div class="avatar avatar-story me-2">
-                                        <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt=""> </a>
+                                        <a href="#!"> <img class="avatar-img rounded-circle" src="../../assets/img/profile6.png" alt=""> </a>
                                     </div>
                                     <!-- Info -->
                                     <div>
                                         <div class="nav nav-divider">
-                                            <h6 class="nav-item card-title mb-0"> <a href="#!"> Lori Ferguson </a></h6>
+                                            <h6 class="nav-item card-title mb-0"> <a href="#!"> <?= $first_name. " ". $last_name; ?> </a></h6>
                                             <span class="nav-item small"> 2hr</span>
                                         </div>
                                         <p class="mb-0 small">Web Developer at Webestica</p>
@@ -388,19 +387,50 @@ require("Navbar.php");
                         <div class="card-body">
                             <p>I'm thrilled to share that I've completed a graduate certificate course in project management with the president's honor roll.</p>
                             <!-- Card img -->
-                            <img class="card-img" src="assets/images/post/3by2/01.jpg" alt="Post">
+                            <!-- Carousel for Post images -->
+                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-indicators">
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                </div>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="../../assets/img/post4.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="../../assets/img/post5.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="../../assets/img/post2.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+
+                            <!-- <img class="card-img" src="assets/images/post/3by2/01.jpg" alt="Post"> -->
+
                             <!-- Feed react START -->
                             <ul class="nav nav-stack py-3 small">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="#!"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Liked (56)</a>
+                                    <a class="nav-link active" href="#!"> <i class="fa-regular fa-heart"></i>
+                                        Likes (56)</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comments (12)</a>
+                                    <a class="nav-link" href="#!"> <i class="fa-regular fa-comment"></i>
+                                        Comments (12)</a>
                                 </li>
                                 <!-- Card share action START -->
                                 <li class="nav-item dropdown ms-sm-auto">
                                     <a class="nav-link mb-0" href="#" id="cardShareAction8" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="bi bi-reply-fill flip-horizontal ps-1"></i>Share (3)
+                                        <i class="fa-solid fa-share-nodes"></i> Share (3)
                                     </a>
                                     <!-- Card share action dropdown menu -->
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
@@ -699,7 +729,7 @@ require("Navbar.php");
                                     <!-- Date time -->
                                     <ul class="list-unstyled mt-3 mb-0">
                                         <li class="mb-2"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Born: <strong> October 20, 1990 </strong> </li>
-                                        <li class="mb-2"> <i class="bi bi-heart fa-fw pe-1"></i> Status: <strong> Single </strong> </li>
+                                        <!-- <li class="mb-2"> <i class="bi bi-heart fa-fw pe-1"></i> Status: <strong> Single </strong> </li> -->
                                         <li> <i class="bi bi-envelope fa-fw pe-1"></i> Email: <strong> <?= $user_email; ?> </strong> </li>
                                     </ul>
                                 </div>
@@ -708,70 +738,13 @@ require("Navbar.php");
                         </div>
                         <!-- Card END -->
 
-                        <!-- Card START -->
-                        <div class="col-md-6 col-lg-12">
-                            <div class="card rounded">
-                                <!-- Card header START -->
-                                <div class="card-header d-flex justify-content-between border-0">
-                                    <h5 class="card-title"> Experience </h5>
-                                    <a class="btn btn-primary-soft btn-sm" href="#!"> <i class="fa-solid fa-plus"></i> </a>
-                                </div>
-                                <!-- Card header END -->
-                                <!-- Card body START -->
-                                <div class="card-body position-relative pt-0">
-                                    <!-- Experience item START -->
-                                    <div class="d-flex">
-                                        <!-- Avatar -->
-                                        <div class="avatar me-3">
-                                            <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/logo/08.svg" alt=""> </a>
-                                        </div>
-                                        <!-- Info -->
-                                        <div>
-                                            <h6 class="card-title mb-0"><a href="#!"> Apple Computer, Inc. </a></h6>
-                                            <p class="small">May 2015 – Present Employment Duration 8 mos <a class="btn btn-primary-soft btn-xs ms-2" href="#!">Edit </a></p>
-                                        </div>
-                                    </div>
-                                    <!-- Experience item END -->
-
-                                    <!-- Experience item START -->
-                                    <div class="d-flex">
-                                        <!-- Avatar -->
-                                        <div class="avatar me-3">
-                                            <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/logo/09.svg" alt=""> </a>
-                                        </div>
-                                        <!-- Info -->
-                                        <div>
-                                            <h6 class="card-title mb-0"><a href="#!"> Microsoft Corporation </a></h6>
-                                            <p class="small">May 2017 – Present Employment Duration 1 yrs 5 mos <a class="btn btn-primary-soft btn-xs ms-2" href="#!">Edit </a></p>
-                                        </div>
-                                    </div>
-                                    <!-- Experience item END -->
-
-                                    <!-- Experience item START -->
-                                    <div class="d-flex">
-                                        <!-- Avatar -->
-                                        <div class="avatar me-3">
-                                            <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/logo/10.svg" alt=""> </a>
-                                        </div>
-                                        <!-- Info -->
-                                        <div>
-                                            <h6 class="card-title mb-0"><a href="#!"> Tata Consultancy Services. </a></h6>
-                                            <p class="small mb-0">May 2022 – Present Employment Duration 6 yrs 10 mos <a class="btn btn-primary-soft btn-xs ms-2" href="#!">Edit </a></p>
-                                        </div>
-                                    </div>
-                                    <!-- Experience item END -->
-
-                                </div>
-                                <!-- Card body END -->
-                            </div>
-                        </div>
-                        <!-- Card END -->
+                        
 
                         <!-- Card START -->
                         <div class="col-md-6 col-lg-12">
                             <div class="card rounded">
                                 <!-- Card header START -->
-                                <div class="card-header d-sm-flex justify-content-between border-0">
+                                <div class="card-header d-sm-flex justify-content-between border-0" style="align-items: end;">
                                     <h5 class="card-title">Photos</h5>
                                     <a class="btn btn-primary-soft btn-sm" href="#!"> See all photo</a>
                                 </div>
@@ -781,34 +754,29 @@ require("Navbar.php");
                                     <div class="row g-2">
                                         <!-- Photos item -->
                                         <div class="col-6">
-                                            <a href="assets/images/albums/01.jpg" data-gallery="image-popup" data-glightbox="">
-                                                <img class="rounded img-fluid" src="assets/images/albums/01.jpg" alt="">
+                                            <a href="../../assets/img/post.jpg" data-gallery="image-popup" data-glightbox="">
+                                                <img class="rounded img-fluid" src="../../assets/img/post.jpg" alt="">
+                                            </a>
+                                        </div>
+
+                                        <!-- Photos item -->
+                                        <div class="col-6">
+                                            <a href="../../assets/img/post.jpg" data-gallery="image-popup" data-glightbox="">
+                                                <img class="rounded img-fluid" src="../../assets/img/post.jpg" alt="">
+                                            </a>
+                                        </div>
+
+                                        <!-- Photos item -->
+                                        <div class="col-6">
+                                            <a href="../../assets/img/post.jpg" data-gallery="image-popup" data-glightbox="">
+                                                <img class="rounded img-fluid" src="../../assets/img/post.jpg" alt="">
                                             </a>
                                         </div>
                                         <!-- Photos item -->
                                         <div class="col-6">
-                                            <a href="assets/images/albums/02.jpg" data-gallery="image-popup" data-glightbox="">
-                                                <img class="rounded img-fluid" src="assets/images/albums/02.jpg" alt="">
+                                            <a href="../../assets/img/post.jpg" data-gallery="image-popup" data-glightbox="">
+                                                <img class="rounded img-fluid" src="../../assets/img/post.jpg" alt="">
                                             </a>
-                                        </div>
-                                        <!-- Photos item -->
-                                        <div class="col-4">
-                                            <a href="assets/images/albums/03.jpg" data-gallery="image-popup" data-glightbox="">
-                                                <img class="rounded img-fluid" src="assets/images/albums/03.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <!-- Photos item -->
-                                        <div class="col-4">
-                                            <a href="assets/images/albums/04.jpg" data-gallery="image-popup" data-glightbox="">
-                                                <img class="rounded img-fluid" src="assets/images/albums/04.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <!-- Photos item -->
-                                        <div class="col-4">
-                                            <a href="assets/images/albums/05.jpg" data-gallery="image-popup" data-glightbox="">
-                                                <img class="rounded img-fluid" src="assets/images/albums/05.jpg" alt="">
-                                            </a>
-                                            <!-- glightbox Albums left bar END  -->
                                         </div>
                                     </div>
                                 </div>
@@ -821,18 +789,18 @@ require("Navbar.php");
                         <div class="col-md-6 col-lg-12">
                             <div class="card rounded">
                                 <!-- Card header START -->
-                                <div class="card-header d-sm-flex justify-content-between align-items-center border-0">
+                                <div class="card-header d-sm-flex justify-content-between align-items-end border-0">
                                     <h5 class="card-title">Friends <span class="badge bg-danger bg-opacity-10 text-danger">230</span></h5>
                                     <a class="btn btn-primary-soft btn-sm" href="#!"> See all friends</a>
                                 </div>
                                 <!-- Card header END -->
                                 <!-- Card body START -->
-                                <div class="card-body position-relative pt-0">
+                                <div class="card-body position-relative">
                                     <div class="row g-3">
 
                                         <div class="col-6">
                                             <!-- Friends item START -->
-                                            <div class="card shadow-none text-center h-100">
+                                            <div class="card text-center h-100 myFriend">
                                                 <!-- Card body -->
                                                 <div class="card-body p-2 pb-0">
                                                     <div class="avatar avatar-story avatar-xl">
@@ -859,7 +827,7 @@ require("Navbar.php");
 
                                         <div class="col-6">
                                             <!-- Friends item START -->
-                                            <div class="card shadow-none text-center h-100">
+                                            <div class="card text-center h-100">
                                                 <!-- Card body -->
                                                 <div class="card-body p-2 pb-0">
                                                     <div class="avatar avatar-xl">
@@ -886,7 +854,7 @@ require("Navbar.php");
 
                                         <div class="col-6">
                                             <!-- Friends item START -->
-                                            <div class="card shadow-none text-center h-100">
+                                            <div class="card text-center h-100">
                                                 <!-- Card body -->
                                                 <div class="card-body p-2 pb-0">
                                                     <div class="avatar avatar-xl">
@@ -913,7 +881,7 @@ require("Navbar.php");
 
                                         <div class="col-6">
                                             <!-- Friends item START -->
-                                            <div class="card shadow-none text-center h-100">
+                                            <div class="card text-center h-100">
                                                 <!-- Card body -->
                                                 <div class="card-body p-2 pb-0">
                                                     <div class="avatar avatar-xl">

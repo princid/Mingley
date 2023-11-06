@@ -229,6 +229,45 @@ h6{
     border-radius: 6px !important;
 }
 
+
+#update_form label{
+    margin-bottom: 6px;
+    color: darkgray;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+#update_form input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid darkgray;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+#update_form button{
+    /* width: 100%; */
+    border: none;
+    border-bottom: 1px solid darkgray;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+
+#preview{
+    display: none;
+}
+
+
+
+
+/* .myFriend{
+    width: 10px;
+} */
+
 /* .profile_page_avatar{
     position: absolute;
     left: 50px;
@@ -746,7 +785,7 @@ textarea:focus {
     padding-left: calc(var(--bs-gutter-x) * .625);
 }
 
-.row {
+/* .row {
     --bs-gutter-x: 30px;
 }
 
@@ -1058,7 +1097,7 @@ textarea:focus {
 .row-30>[class*="col"] {
     padding-left: 15px;
     padding-right: 15px;
-}
+} */
 
 .lg-backdrop {
     background-color: rgba(51, 51, 51, 0.9);

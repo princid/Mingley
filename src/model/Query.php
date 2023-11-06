@@ -44,7 +44,7 @@ function signIn($conn, $table, $user_email, $user_password)
 }
 
 function fetchUserDetails($conn, $table, $condition){
-    $fetch_query = "SELECT * FROM $table WHERE $condition ";
+    $fetch_query = "SELECT * FROM $table WHERE $condition";
     $fetch_query_run = mysqli_query($conn, $fetch_query);
 
     if($fetch_query_run && mysqli_num_rows($fetch_query_run) > 0) {
@@ -76,6 +76,17 @@ function updateProfile($conn, $table, $first_name, $last_name, $user_name, $user
         }
     // }
     
+}
+
+function create_post($conn, $table, $id, $caption, $imageNamesAsString){
+    $insertPostQuery = "INSERT INTO $table (user_id, post_caption, post_images) VALUES ('$id', '$caption', '$imageNamesAsString')";
+    $insertPostQuery_run = mysqli_query($conn, $insertPostQuery);
+
+    if($insertPostQuery_run){
+        return "Post successfully uploaded...";
+    }else{
+        return "Error: " . mysqli_error($conn);
+    }
 }
 
 

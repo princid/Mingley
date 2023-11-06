@@ -1155,6 +1155,66 @@ require("/var/www/html/PHP_Assesments/Mangloo/config/constants.php");
 
 
 
+<!-- Card START -->
+<div class="col-md-6 col-lg-12">
+    <div class="card rounded">
+        <!-- Card header START -->
+        <div class="card-header d-flex justify-content-between border-0">
+            <h5 class="card-title"> Experience </h5>
+            <a class="btn btn-primary-soft btn-sm" href="#!"> <i class="fa-solid fa-plus"></i> </a>
+        </div>
+        <!-- Card header END -->
+        <!-- Card body START -->
+        <div class="card-body position-relative pt-0">
+            <!-- Experience item START -->
+            <div class="d-flex">
+                <!-- Avatar -->
+                <div class="avatar me-3">
+                    <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/logo/08.svg" alt=""> </a>
+                </div>
+                <!-- Info -->
+                <div>
+                    <h6 class="card-title mb-0"><a href="#!"> Apple Computer, Inc. </a></h6>
+                    <p class="small">May 2015 – Present Employment Duration 8 mos <a class="btn btn-primary-soft btn-xs ms-2" href="#!">Edit </a></p>
+                </div>
+            </div>
+            <!-- Experience item END -->
+
+            <!-- Experience item START -->
+            <div class="d-flex">
+                <!-- Avatar -->
+                <div class="avatar me-3">
+                    <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/logo/09.svg" alt=""> </a>
+                </div>
+                <!-- Info -->
+                <div>
+                    <h6 class="card-title mb-0"><a href="#!"> Microsoft Corporation </a></h6>
+                    <p class="small">May 2017 – Present Employment Duration 1 yrs 5 mos <a class="btn btn-primary-soft btn-xs ms-2" href="#!">Edit </a></p>
+                </div>
+            </div>
+            <!-- Experience item END -->
+
+            <!-- Experience item START -->
+            <div class="d-flex">
+                <!-- Avatar -->
+                <div class="avatar me-3">
+                    <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/logo/10.svg" alt=""> </a>
+                </div>
+                <!-- Info -->
+                <div>
+                    <h6 class="card-title mb-0"><a href="#!"> Tata Consultancy Services. </a></h6>
+                    <p class="small mb-0">May 2022 – Present Employment Duration 6 yrs 10 mos <a class="btn btn-primary-soft btn-xs ms-2" href="#!">Edit </a></p>
+                </div>
+            </div>
+            <!-- Experience item END -->
+
+        </div>
+        <!-- Card body END -->
+    </div>
+</div>
+<!-- Card END -->
+
+
 
 
 
@@ -2922,3 +2982,515 @@ input{
     <!-- Right sidebar END -->
 
 </div>
+
+
+
+
+
+
+
+<!-- post status start -->
+<div class="card rounded-2">
+    <!-- post title start -->
+    <div class="post-title d-flex align-items-center">
+        <!-- profile picture end -->
+        <div class="profile-thumb">
+            <a href="#">
+                <figure class="profile-thumb-middle">
+                    <img src="../../assets/img/profile4.jpg" alt="profile picture">
+                </figure>
+            </a>
+        </div>
+        <!-- profile picture end -->
+
+        <div class="posted-author">
+            <h6 class="author"><a href="profile.html">Jon Wileyam</a></h6>
+            <span class="post-time">15 min ago</span>
+        </div>
+
+        <div class="post-settings-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="post-settings arrow-shape">
+                <ul>
+                    <li><button>copy link to adda</button></li>
+                    <li><button>edit post</button></li>
+                    <li><button>embed adda</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- post title start -->
+    <div class="post-content">
+        <p class="post-desc pb-0">
+            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+            default model text, and a search for
+        </p>
+        <div class="post-meta">
+            <div class="post-meta-like">
+                <div><i class="fa-regular fa-heart"></i></div>
+                <div>You and 112 people like this</div>
+            </div>
+            <ul class="comment-share-meta">
+                <li>
+                    <button class="post-comment">
+                        <i class="bi bi-chat-bubble"></i>
+                        <span>41</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="post-share">
+                        <i class="bi bi-share"></i>
+                        <span>07</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- post status end -->
+
+<!-- post status start -->
+<div class="card rounded-2">
+    <!-- post title start -->
+    <div class="post-title d-flex align-items-center">
+        <!-- profile picture end -->
+        <div class="profile-thumb">
+            <a href="#">
+                <figure class="profile-thumb-middle">
+                    <img src="../../assets/img/profile4.jpg" alt="profile picture">
+                </figure>
+            </a>
+        </div>
+        <!-- profile picture end -->
+
+        <div class="posted-author">
+            <h6 class="author"><a href="profile.html">william henry</a></h6>
+            <span class="post-time">35 min ago</span>
+        </div>
+
+        <div class="post-settings-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="post-settings arrow-shape">
+                <ul>
+                    <li><button>copy link to adda</button></li>
+                    <li><button>edit post</button></li>
+                    <li><button>embed adda</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- post title start -->
+    <div class="post-content">
+        <p class="post-desc">
+            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+            default model text, and a search for 'lorem ipsum' will uncover many web sites still
+            in their infancy.
+        </p>
+        <div class="plyr__video-embed plyr-youtube">
+            <iframe src="https://www.youtube.com/embed/WeA7edXsU40" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="post-meta">
+            <div class="post-meta-like">
+                <!-- <i class="bi bi-heart-beat"></i> -->
+                <div><i class="fa-regular fa-heart"></i></div>
+                <div>You and 112 people like this</div>
+
+            </div>
+            <ul class="comment-share-meta">
+                <li>
+                    <button class="post-comment">
+                        <i class="bi bi-chat-bubble"></i>
+                        <span>36</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="post-share">
+                        <i class="bi bi-share"></i>
+                        <span>08</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- post status end -->
+
+<!-- post status start -->
+<div class="card rounded-2">
+    <!-- post title start -->
+    <div class="post-title d-flex align-items-center">
+        <!-- profile picture end -->
+        <div class="profile-thumb">
+            <a href="#">
+                <figure class="profile-thumb-middle">
+                    <img src="../../assets/img/profile4.jpg" alt="profile picture">
+                </figure>
+            </a>
+        </div>
+        <!-- profile picture end -->
+
+        <div class="posted-author">
+            <h6 class="author"><a href="profile.html">Kate Palson</a></h6>
+            <span class="post-time">35 min ago</span>
+        </div>
+
+        <div class="post-settings-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="post-settings arrow-shape">
+                <ul>
+                    <li><button>copy link to adda</button></li>
+                    <li><button>edit post</button></li>
+                    <li><button>embed adda</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- post title start -->
+    <div class="post-content">
+        <p class="post-desc">
+            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+            default model text, and a search for 'lorem ipsum' will uncover many web sites still
+            in their infancy.
+        </p>
+        <div class="post-thumb-gallery img-gallery">
+            <div class="row g-0">
+                <div class="col-8">
+                    <figure class="post-thumb">
+                        <a class="gallery-selector" href="assets/images/post/post-2.jpg">
+                            <img src="../../assets/img/post3.png" alt="post image">
+                        </a>
+                    </figure>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <figure class="post-thumb">
+                                <a class="gallery-selector" href="assets/images/post/post-3.jpg">
+                                    <img src="../../assets/img/post4.jpg" alt="post image">
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="col-12">
+                            <figure class="post-thumb">
+                                <a class="gallery-selector" href="assets/images/post/post-4.jpg">
+                                    <img src="../../assets/img/post4.jpg" alt="post image">
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="col-12">
+                            <figure class="post-thumb">
+                                <a class="gallery-selector" href="assets/images/post/post-5.jpg">
+                                    <img src="../../assets/img/post4.jpg" alt="post image">
+                                </a>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post-meta">
+            <div class="post-meta-like">
+                <div><i class="fa-regular fa-heart"></i></div>
+                <div>You and 112 people like this</div>
+            </div>
+            <ul class="comment-share-meta">
+                <li>
+                    <button class="post-comment">
+                        <i class="bi bi-chat-bubble"></i>
+                        <span>28</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="post-share">
+                        <i class="bi bi-share"></i>
+                        <span>12</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- post status end -->
+
+<!-- post status start -->
+<div class="card rounded-2">
+    <!-- post title start -->
+    <div class="post-title d-flex align-items-center">
+        <!-- profile picture end -->
+        <div class="profile-thumb">
+            <a href="#">
+                <figure class="profile-thumb-middle">
+                    <img src="../../assets/img/profile4.jpg" alt="profile picture">
+                </figure>
+            </a>
+        </div>
+        <!-- profile picture end -->
+
+        <div class="posted-author">
+            <h6 class="author"><a href="profile.html">Robart Faul</a></h6>
+            <span class="post-time">40 min ago</span>
+        </div>
+
+        <div class="post-settings-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="post-settings arrow-shape">
+                <ul>
+                    <li><button>copy link to adda</button></li>
+                    <li><button>edit post</button></li>
+                    <li><button>embed adda</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- post title start -->
+    <div class="post-content">
+        <p class="post-desc pb-0">
+            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+            default model text, and a search for Many desktop publishing packages and web page
+            editors now use Lorem Ipsum as their default model text, and a search for Many
+            desktop publishing duskam azer.
+        </p>
+        <div class="post-meta">
+            <div class="post-meta-like">
+                <div><i class="fa-regular fa-heart"></i></div>
+                <div>You and 112 people like this</div>
+            </div>
+            <ul class="comment-share-meta">
+                <li>
+                    <button class="post-comment">
+                        <i class="bi bi-chat-bubble"></i>
+                        <span>80</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="post-share">
+                        <i class="bi bi-share"></i>
+                        <span>10</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- post status end -->
+
+<!-- post status start -->
+<div class="card rounded-2">
+    <!-- post title start -->
+    <div class="post-title d-flex align-items-center">
+        <!-- profile picture end -->
+        <div class="profile-thumb">
+            <a href="#">
+                <figure class="profile-thumb-middle">
+                    <img src="../../assets/img/profile4.jpg" alt="profile picture">
+                </figure>
+            </a>
+        </div>
+        <!-- profile picture end -->
+
+        <div class="posted-author">
+            <h6 class="author"><a href="profile.html">Halen Omaro</a></h6>
+            <span class="post-time">45 min ago</span>
+        </div>
+
+        <div class="post-settings-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="post-settings arrow-shape">
+                <ul>
+                    <li><button>copy link to adda</button></li>
+                    <li><button>edit post</button></li>
+                    <li><button>embed adda</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- post title start -->
+    <div class="post-content">
+        <p class="post-desc">
+            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+            default model text, and a search for 'lorem ipsum' will uncover many web sites still
+            in their infancy.
+        </p>
+        <div class="plyr__video-embed plyr-video">
+            <iframe src="https://www.youtube.com/embed/odUtqDz4lEk" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p class="post-desc post-desc-secondary">
+            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+            default model text, and a search for
+        </p>
+        <div class="post-meta">
+            <div class="post-meta-like">
+                <div><i class="fa-regular fa-heart"></i></div>
+                <div>You and 112 people like this</div>
+            </div>
+            <ul class="comment-share-meta">
+                <li>
+                    <button class="post-comment">
+                        <i class="bi bi-chat-bubble"></i>
+                        <span>42</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="post-share">
+                        <i class="bi bi-share"></i>
+                        <span>05</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- post status end -->
+
+<!-- post status start -->
+<div class="card rounded-2">
+    <!-- post title start -->
+    <div class="post-title d-flex align-items-center">
+        <!-- profile picture end -->
+        <div class="profile-thumb">
+            <a href="#">
+                <figure class="profile-thumb-middle">
+                    <img src="../../assets/img/profile4.jpg" alt="profile picture">
+                </figure>
+            </a>
+        </div>
+        <!-- profile picture end -->
+
+        <div class="posted-author">
+            <h6 class="author"><a href="profile.html">Mili Raoulin</a></h6>
+            <span class="post-time">50 min ago</span>
+        </div>
+
+        <div class="post-settings-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="post-settings arrow-shape">
+                <ul>
+                    <li><button>copy link to adda</button></li>
+                    <li><button>edit post</button></li>
+                    <li><button>embed adda</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- post title start -->
+    <div class="post-content">
+        <p class="post-desc">
+            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+            default model text, and a search for 'lorem ipsum' will uncover many web sites still
+            in their infancy.
+        </p>
+        <div class="post-thumb-gallery img-gallery">
+            <div class="row g-0">
+                <div class="col-6">
+                    <figure class="post-thumb">
+                        <a class="gallery-selector" href="assets/images/post/post-6.jpg">
+                            <img src="../../assets/img/post3.png" alt="post image">
+                        </a>
+                    </figure>
+                </div>
+                <div class="col-6">
+                    <figure class="post-thumb">
+                        <a class="gallery-selector" href="assets/images/post/post-7.jpg">
+                            <img src="../../assets/img/post3.png" alt="post image">
+                        </a>
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <div class="post-meta">
+            <div class="post-meta-like">
+                <div><i class="fa-regular fa-heart"></i></div>
+                <div>You and 112 people like this</div>
+            </div>
+            <ul class="comment-share-meta">
+                <li>
+                    <button class="post-comment">
+                        <i class="bi bi-chat-bubble"></i>
+                        <span>65</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="post-share">
+                        <i class="bi bi-share"></i>
+                        <span>04</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- post status end -->
+
+<!-- post status start -->
+<div class="card rounded-2">
+    <!-- post title start -->
+    <div class="post-title d-flex align-items-center">
+        <!-- profile picture end -->
+        <div class="profile-thumb">
+            <a href="#">
+                <figure class="profile-thumb-middle">
+                    <img src="../../assets/img/profile4.jpg" alt="profile picture">
+                </figure>
+            </a>
+        </div>
+        <!-- profile picture end -->
+
+        <div class="posted-author">
+            <h6 class="author"><a href="profile.html">Jon Wileyam</a></h6>
+            <span class="post-time">15 min ago</span>
+        </div>
+
+        <div class="post-settings-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="post-settings arrow-shape">
+                <ul>
+                    <li><button>copy link to adda</button></li>
+                    <li><button>edit post</button></li>
+                    <li><button>embed adda</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- post title start -->
+    <div class="post-content">
+        <p class="post-desc pb-0">
+            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+            default model text, and a search for
+        </p>
+        <div class="post-meta">
+            <div class="post-meta-like">
+                <div><i class="fa-regular fa-heart"></i></div>
+                <div>You and 112 people like this</div>
+            </div>
+            <ul class="comment-share-meta">
+                <li>
+                    <button class="post-comment">
+                        <i class="bi bi-chat-bubble"></i>
+                        <span>41</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="post-share">
+                        <i class="bi bi-share"></i>
+                        <span>07</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- post status end -->

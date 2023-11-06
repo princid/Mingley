@@ -92,7 +92,7 @@ require("Navbar.php");
 
                                 <ul class="nav nav-link-secondary flex-column fw-bold gap-2">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="my-profile.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/home-outline-filled.svg" alt=""><span>Feed </span></a>
+                                        <a class="nav-link" href="#"> <i class="fa-solid fa-house"></i><span> Feed </span></a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="my-profile-connections.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/person-outline-filled.svg" alt=""><span>Connections </span></a>
@@ -120,29 +120,6 @@ require("Navbar.php");
 
                         </div>
 
-                        <ul class="nav small mt-4 justify-content-center lh-1">
-                            <li class="nav-item">
-                                <a class="nav-link" href="my-profile-about.html">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="settings.html">Settings</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" target="_blank" href="https://support.webestica.com/login">Support </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" target="_blank" href="docs/index.html">Docs </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="help.html">Help</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="privacy-and-terms.html">Privacy &amp; terms</a>
-                            </li>
-                        </ul>
-
-                        <p class="small text-center mt-1">©2023 <a class="text-reset" target="_blank" href="#"> Mingley </a></p>
-
                     </aside>
                 </div>
                 <!-- Left Bar Ends -->
@@ -157,10 +134,45 @@ require("Navbar.php");
                             <div class="avatar avatar-xs me-2">
                                 <a href="#"> <img class="avatar-img rounded-circle" src="../../assets/img/profile6.png" alt=""> </a>
                             </div>
+
+
                             <!-- Post input -->
-                            <form class="w-100">
-                                <textarea class="form-control pe-4 border-0" rows="2" data-autoresize="" placeholder="Share your thoughts..."></textarea>
-                            </form>
+                            <!-- <form class="w-100"> -->
+                            <input class="form-control pe-4 border-0" placeholder="Share your thoughts..." data-bs-toggle="modal" data-bs-target="#modalCreateFeed">
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalCreateFeed" tabindex="-1" aria-labelledby="sharePost" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="sharePost"><strong>Create Post</strong></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form action="<?= BASE_URL ?>src/controller/create_post_controller.php" method="post" id="submit_post" enctype="multipart/form-data">
+                                            <div class="modal-body">
+                                                <textarea name="caption" id="caption" cols="10" rows="5" placeholder="Share your thoughts..."></textarea>
+                                                <br>
+                                                <br>
+                                                <input type="file" name="files[]" id="upload_file" accept=".jpg, .jpeg, .png, .gif" multiple>
+                                                <small class="text-primary">Allowed File Type - jpg, jpeg, png, gif</small>
+                                            </div>
+
+                                            <div id="preview" class="p-3">
+                                                <h3>Image Preview</h3>
+                                                <div id="image_preview"></div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-secondary p-2 w-25" data-bs-dismiss="modal">CLOSE</button>
+                                                <input type="submit" name="upload_button" id="upload_btn" class="btn btn-outline-success p-2 w-25" value="POST">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- </form> -->
+
+
                         </div>
                         <!-- Share feed toolbar START -->
                         <ul class="nav nav-pills nav-stack small fw-normal">
@@ -196,6 +208,191 @@ require("Navbar.php");
                     <!-- share box end -->
 
                     <!-- post status start -->
+
+                    <?php foreach ($fetch_query_run as $usersData) { ?>
+                        <div class="card rounded-2">
+                            <!-- Card header START -->
+                            <div class="card-header border-0 pb-0">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <!-- Avatar -->
+                                        <div class="avatar me-2">
+                                            <a href="#!"> <img class="avatar-img rounded-circle" src="../../assets/img/profile6.png" alt=""> </a>
+                                        </div>
+                                        <!-- Info -->
+                                        <div>
+                                            <div class="nav nav-divider">
+                                                <h6 class="nav-item card-title mb-0"> <a href="#!"> <?= $usersData['first_name'] . " " ; ?> </a></h6>
+                                                <span class="nav-item small"> 2hr</span>
+                                            </div>
+                                            <p class="mb-0 small">Web Developer at Mind2Web</p>
+                                        </div>
+                                    </div>
+                                    <!-- Card feed action dropdown START -->
+                                    <div class="dropdown">
+                                        <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-three-dots"></i>
+                                        </a>
+                                        <!-- Card feed action dropdown menu -->
+                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction" style="">
+                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
+                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori ferguson </a></li>
+                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
+                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- Card feed action dropdown END -->
+                                </div>
+                            </div>
+                            <!-- Card header END -->
+
+                            <!-- Card body START -->
+                            <div class="card-body">
+                                <!-- <p>I'm thrilled to share that I've completed a graduate certificate course in project management with the president's honor roll.</p> -->
+                                <p><?= $usersData['post_caption']; ?> </p>
+                                <!-- Card img -->
+
+                                <!-- Carousel for Post images -->
+                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-indicators">
+                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                    </div>
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img src="../../assets/img/post4.jpg" class="d-block w-100" alt="...">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="../../assets/img/post5.jpg" class="d-block w-100" alt="...">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="../../assets/img/post2.jpg" class="d-block w-100" alt="...">
+                                        </div>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+
+                                <!-- <img class="card-img" src="../../assets/img/post4.jpg" alt="Post"> -->
+
+                                <!-- Feed react START -->
+                                <ul class="nav nav-stack py-3 mt-1 small">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#!" data-bs-container="body" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-custom-class="tooltip-text-start" data-bs-title="Frances Guerrero<br> Lori Stevens<br> Billy Vasquez<br> Judy Nguyen<br> Larry Lawson<br> Amanda Reed<br> Louis Crawford">
+                                            <i class="fa-regular fa-heart"></i>
+                                            Likes (56)
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#!">
+                                            <i class="fa-regular fa-comment"></i>
+                                            Comments (12)
+                                        </a>
+                                    </li>
+                                    <!-- Card share action START -->
+                                    <li class="nav-item dropdown ms-sm-auto">
+                                        <a class="nav-link mb-0" href="#" id="cardShareAction" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa-solid fa-share-nodes"></i> Share (3)
+                                        </a>
+                                        <!-- Card share action dropdown menu -->
+                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction">
+                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-envelope fa-fw pe-2"></i>Send via Direct Message</a></li>
+                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark-check fa-fw pe-2"></i>Bookmark </a></li>
+                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-link fa-fw pe-2"></i>Copy link to post</a></li>
+                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-share fa-fw pe-2"></i>Share post via …</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-pencil-square fa-fw pe-2"></i>Share to News Feed</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- Card share action END -->
+                                </ul>
+                                <!-- Feed react END -->
+
+                                <!-- Add comment -->
+                                <div class="d-flex mb-3">
+                                    <!-- Avatar -->
+                                    <div class="avatar avatar-xs me-2">
+                                        <a href="#!"> <img class="avatar-img rounded-circle" src="../../assets/img/profile2.jpg" alt=""> </a>
+                                    </div>
+                                    <!-- Comment box  -->
+                                    <form class="nav nav-item w-100 position-relative">
+                                        <textarea data-autoresize="" class="form-control pe-5 bg-light" rows="1" placeholder="Add a comment..."></textarea>
+                                        <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit">
+                                            <i class="fa-solid fa-paper-plane"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                <!-- Comment wrap START -->
+                                <ul class="comment-wrap list-unstyled">
+                                    <!-- Comment item START -->
+                                    <li class="comment-item">
+                                        <div class="d-flex position-relative px-5 mt-4">
+                                            <!-- Avatar -->
+                                            <div class="avatar avatar-xs">
+                                                <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile2.jpg" alt=""></a>
+                                            </div>
+                                            <div class="ms-2">
+                                                <!-- Comment by -->
+                                                <div class="bg-light rounded-start-top-0 rounded">
+                                                    <div class="d-flex justify-content-between">
+                                                        <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>
+                                                        <small class="ms-2">5hr</small>
+                                                    </div>
+                                                    <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>
+                                                </div>
+                                                <!-- Comment react -->
+                                                <ul class="nav nav-divider py-2 small">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="#!"> Like (3)</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="#!"> Reply</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="#!"> View 5 replies</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                    </li>
+
+                                    <!-- Comment item END -->
+                                </ul>
+                            </div>
+
+                            <!-- Card body END -->
+
+                            <!-- Card footer START -->
+                            <div class="card-footer border-0 pt-0">
+                                <!-- Load more comments -->
+                                <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
+                                    <div class="spinner-dots me-2">
+                                        <span class="spinner-dot"></span>
+                                        <span class="spinner-dot"></span>
+                                        <span class="spinner-dot"></span>
+                                    </div>
+                                    Load more comments
+                                </a>
+                            </div>
+                            <!-- Card footer END -->
+                        </div>
+                    <?php } ?>
+
                     <div class="card rounded-2">
                         <!-- Card header START -->
                         <div class="card-header border-0 pb-0">
@@ -203,12 +400,12 @@ require("Navbar.php");
                                 <div class="d-flex align-items-center">
                                     <!-- Avatar -->
                                     <div class="avatar me-2">
-                                        <a href="#!"> <img class="avatar-img rounded-circle" src="../../assets/img/profile5.jpg" alt=""> </a>
+                                        <a href="#!"> <img class="avatar-img rounded-circle" src="../../assets/img/profile6.png" alt=""> </a>
                                     </div>
                                     <!-- Info -->
                                     <div>
                                         <div class="nav nav-divider">
-                                            <h6 class="nav-item card-title mb-0"> <a href="#!"> Lori Ferguson </a></h6>
+                                            <h6 class="nav-item card-title mb-0"> <a href="#!"> <?= $first_name . " " . $last_name; ?> </a></h6>
                                             <span class="nav-item small"> 2hr</span>
                                         </div>
                                         <p class="mb-0 small">Web Developer at Mind2Web</p>
@@ -235,23 +432,62 @@ require("Navbar.php");
                             </div>
                         </div>
                         <!-- Card header END -->
+
                         <!-- Card body START -->
                         <div class="card-body">
-                            <p>I'm thrilled to share that I've completed a graduate certificate course in project management with the president's honor roll.</p>
+                            <!-- <p>I'm thrilled to share that I've completed a graduate certificate course in project management with the president's honor roll.</p> -->
+                            <p><?= $post_caption; ?> </p>
                             <!-- Card img -->
-                            <img class="card-img" src="../../assets/img/post4.jpg" alt="Post">
+
+                            <!-- Carousel for Post images -->
+                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-indicators">
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                </div>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="../../assets/img/post4.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="../../assets/img/post5.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="../../assets/img/post2.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+
+                            <!-- <img class="card-img" src="../../assets/img/post4.jpg" alt="Post"> -->
+
                             <!-- Feed react START -->
-                            <ul class="nav nav-stack py-3 small">
+                            <ul class="nav nav-stack py-3 mt-1 small">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="#!" data-bs-container="body" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-custom-class="tooltip-text-start" data-bs-title="Frances Guerrero<br> Lori Stevens<br> Billy Vasquez<br> Judy Nguyen<br> Larry Lawson<br> Amanda Reed<br> Louis Crawford"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Liked (56)</a>
+                                    <a class="nav-link active" href="#!" data-bs-container="body" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-custom-class="tooltip-text-start" data-bs-title="Frances Guerrero<br> Lori Stevens<br> Billy Vasquez<br> Judy Nguyen<br> Larry Lawson<br> Amanda Reed<br> Louis Crawford">
+                                        <i class="fa-regular fa-heart"></i>
+                                        Likes (56)
+                                    </a>
                                 </li>
+
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comments (12)</a>
+                                    <a class="nav-link" href="#!">
+                                        <i class="fa-regular fa-comment"></i>
+                                        Comments (12)
+                                    </a>
                                 </li>
                                 <!-- Card share action START -->
                                 <li class="nav-item dropdown ms-sm-auto">
                                     <a class="nav-link mb-0" href="#" id="cardShareAction" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="bi bi-reply-fill flip-horizontal ps-1"></i>Share (3)
+                                        <i class="fa-solid fa-share-nodes"></i> Share (3)
                                     </a>
                                     <!-- Card share action dropdown menu -->
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction">
@@ -338,513 +574,10 @@ require("Navbar.php");
                         </div>
                         <!-- Card footer END -->
                     </div>
+
                     <!-- post status end -->
 
-                    <!-- post status start -->
-                    <div class="card rounded-2">
-                        <!-- post title start -->
-                        <div class="post-title d-flex align-items-center">
-                            <!-- profile picture end -->
-                            <div class="profile-thumb">
-                                <a href="#">
-                                    <figure class="profile-thumb-middle">
-                                        <img src="../../assets/img/profile4.jpg" alt="profile picture">
-                                    </figure>
-                                </a>
-                            </div>
-                            <!-- profile picture end -->
 
-                            <div class="posted-author">
-                                <h6 class="author"><a href="profile.html">Jon Wileyam</a></h6>
-                                <span class="post-time">15 min ago</span>
-                            </div>
-
-                            <div class="post-settings-bar">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <div class="post-settings arrow-shape">
-                                    <ul>
-                                        <li><button>copy link to adda</button></li>
-                                        <li><button>edit post</button></li>
-                                        <li><button>embed adda</button></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- post title start -->
-                        <div class="post-content">
-                            <p class="post-desc pb-0">
-                                Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                                default model text, and a search for
-                            </p>
-                            <div class="post-meta">
-                                <div class="post-meta-like">
-                                    <div><i class="fa-regular fa-heart"></i></div>
-                                    <div>You and 112 people like this</div>
-                                </div>
-                                <ul class="comment-share-meta">
-                                    <li>
-                                        <button class="post-comment">
-                                            <i class="bi bi-chat-bubble"></i>
-                                            <span>41</span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="post-share">
-                                            <i class="bi bi-share"></i>
-                                            <span>07</span>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- post status end -->
-
-                    <!-- post status start -->
-                    <div class="card rounded-2">
-                        <!-- post title start -->
-                        <div class="post-title d-flex align-items-center">
-                            <!-- profile picture end -->
-                            <div class="profile-thumb">
-                                <a href="#">
-                                    <figure class="profile-thumb-middle">
-                                        <img src="../../assets/img/profile4.jpg" alt="profile picture">
-                                    </figure>
-                                </a>
-                            </div>
-                            <!-- profile picture end -->
-
-                            <div class="posted-author">
-                                <h6 class="author"><a href="profile.html">william henry</a></h6>
-                                <span class="post-time">35 min ago</span>
-                            </div>
-
-                            <div class="post-settings-bar">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <div class="post-settings arrow-shape">
-                                    <ul>
-                                        <li><button>copy link to adda</button></li>
-                                        <li><button>edit post</button></li>
-                                        <li><button>embed adda</button></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- post title start -->
-                        <div class="post-content">
-                            <p class="post-desc">
-                                Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                                default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                                in their infancy.
-                            </p>
-                            <div class="plyr__video-embed plyr-youtube">
-                                <iframe src="https://www.youtube.com/embed/WeA7edXsU40" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <div class="post-meta">
-                                <div class="post-meta-like">
-                                    <!-- <i class="bi bi-heart-beat"></i> -->
-                                    <div><i class="fa-regular fa-heart"></i></div>
-                                    <div>You and 112 people like this</div>
-
-                                </div>
-                                <ul class="comment-share-meta">
-                                    <li>
-                                        <button class="post-comment">
-                                            <i class="bi bi-chat-bubble"></i>
-                                            <span>36</span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="post-share">
-                                            <i class="bi bi-share"></i>
-                                            <span>08</span>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- post status end -->
-
-                    <!-- post status start -->
-                    <div class="card rounded-2">
-                        <!-- post title start -->
-                        <div class="post-title d-flex align-items-center">
-                            <!-- profile picture end -->
-                            <div class="profile-thumb">
-                                <a href="#">
-                                    <figure class="profile-thumb-middle">
-                                        <img src="../../assets/img/profile4.jpg" alt="profile picture">
-                                    </figure>
-                                </a>
-                            </div>
-                            <!-- profile picture end -->
-
-                            <div class="posted-author">
-                                <h6 class="author"><a href="profile.html">Kate Palson</a></h6>
-                                <span class="post-time">35 min ago</span>
-                            </div>
-
-                            <div class="post-settings-bar">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <div class="post-settings arrow-shape">
-                                    <ul>
-                                        <li><button>copy link to adda</button></li>
-                                        <li><button>edit post</button></li>
-                                        <li><button>embed adda</button></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- post title start -->
-                        <div class="post-content">
-                            <p class="post-desc">
-                                Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                                default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                                in their infancy.
-                            </p>
-                            <div class="post-thumb-gallery img-gallery">
-                                <div class="row g-0">
-                                    <div class="col-8">
-                                        <figure class="post-thumb">
-                                            <a class="gallery-selector" href="assets/images/post/post-2.jpg">
-                                                <img src="../../assets/img/post3.png" alt="post image">
-                                            </a>
-                                        </figure>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <figure class="post-thumb">
-                                                    <a class="gallery-selector" href="assets/images/post/post-3.jpg">
-                                                        <img src="../../assets/img/post4.jpg" alt="post image">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-12">
-                                                <figure class="post-thumb">
-                                                    <a class="gallery-selector" href="assets/images/post/post-4.jpg">
-                                                        <img src="../../assets/img/post4.jpg" alt="post image">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-12">
-                                                <figure class="post-thumb">
-                                                    <a class="gallery-selector" href="assets/images/post/post-5.jpg">
-                                                        <img src="../../assets/img/post4.jpg" alt="post image">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post-meta">
-                                <div class="post-meta-like">
-                                    <div><i class="fa-regular fa-heart"></i></div>
-                                    <div>You and 112 people like this</div>
-                                </div>
-                                <ul class="comment-share-meta">
-                                    <li>
-                                        <button class="post-comment">
-                                            <i class="bi bi-chat-bubble"></i>
-                                            <span>28</span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="post-share">
-                                            <i class="bi bi-share"></i>
-                                            <span>12</span>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- post status end -->
-
-                    <!-- post status start -->
-                    <div class="card rounded-2">
-                        <!-- post title start -->
-                        <div class="post-title d-flex align-items-center">
-                            <!-- profile picture end -->
-                            <div class="profile-thumb">
-                                <a href="#">
-                                    <figure class="profile-thumb-middle">
-                                        <img src="../../assets/img/profile4.jpg" alt="profile picture">
-                                    </figure>
-                                </a>
-                            </div>
-                            <!-- profile picture end -->
-
-                            <div class="posted-author">
-                                <h6 class="author"><a href="profile.html">Robart Faul</a></h6>
-                                <span class="post-time">40 min ago</span>
-                            </div>
-
-                            <div class="post-settings-bar">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <div class="post-settings arrow-shape">
-                                    <ul>
-                                        <li><button>copy link to adda</button></li>
-                                        <li><button>edit post</button></li>
-                                        <li><button>embed adda</button></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- post title start -->
-                        <div class="post-content">
-                            <p class="post-desc pb-0">
-                                Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                                default model text, and a search for Many desktop publishing packages and web page
-                                editors now use Lorem Ipsum as their default model text, and a search for Many
-                                desktop publishing duskam azer.
-                            </p>
-                            <div class="post-meta">
-                                <div class="post-meta-like">
-                                    <div><i class="fa-regular fa-heart"></i></div>
-                                    <div>You and 112 people like this</div>
-                                </div>
-                                <ul class="comment-share-meta">
-                                    <li>
-                                        <button class="post-comment">
-                                            <i class="bi bi-chat-bubble"></i>
-                                            <span>80</span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="post-share">
-                                            <i class="bi bi-share"></i>
-                                            <span>10</span>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- post status end -->
-
-                    <!-- post status start -->
-                    <div class="card rounded-2">
-                        <!-- post title start -->
-                        <div class="post-title d-flex align-items-center">
-                            <!-- profile picture end -->
-                            <div class="profile-thumb">
-                                <a href="#">
-                                    <figure class="profile-thumb-middle">
-                                        <img src="../../assets/img/profile4.jpg" alt="profile picture">
-                                    </figure>
-                                </a>
-                            </div>
-                            <!-- profile picture end -->
-
-                            <div class="posted-author">
-                                <h6 class="author"><a href="profile.html">Halen Omaro</a></h6>
-                                <span class="post-time">45 min ago</span>
-                            </div>
-
-                            <div class="post-settings-bar">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <div class="post-settings arrow-shape">
-                                    <ul>
-                                        <li><button>copy link to adda</button></li>
-                                        <li><button>edit post</button></li>
-                                        <li><button>embed adda</button></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- post title start -->
-                        <div class="post-content">
-                            <p class="post-desc">
-                                Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                                default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                                in their infancy.
-                            </p>
-                            <div class="plyr__video-embed plyr-video">
-                                <iframe src="https://www.youtube.com/embed/odUtqDz4lEk" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <p class="post-desc post-desc-secondary">
-                                Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                                default model text, and a search for
-                            </p>
-                            <div class="post-meta">
-                                <div class="post-meta-like">
-                                    <div><i class="fa-regular fa-heart"></i></div>
-                                    <div>You and 112 people like this</div>
-                                </div>
-                                <ul class="comment-share-meta">
-                                    <li>
-                                        <button class="post-comment">
-                                            <i class="bi bi-chat-bubble"></i>
-                                            <span>42</span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="post-share">
-                                            <i class="bi bi-share"></i>
-                                            <span>05</span>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- post status end -->
-
-                    <!-- post status start -->
-                    <div class="card rounded-2">
-                        <!-- post title start -->
-                        <div class="post-title d-flex align-items-center">
-                            <!-- profile picture end -->
-                            <div class="profile-thumb">
-                                <a href="#">
-                                    <figure class="profile-thumb-middle">
-                                        <img src="../../assets/img/profile4.jpg" alt="profile picture">
-                                    </figure>
-                                </a>
-                            </div>
-                            <!-- profile picture end -->
-
-                            <div class="posted-author">
-                                <h6 class="author"><a href="profile.html">Mili Raoulin</a></h6>
-                                <span class="post-time">50 min ago</span>
-                            </div>
-
-                            <div class="post-settings-bar">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <div class="post-settings arrow-shape">
-                                    <ul>
-                                        <li><button>copy link to adda</button></li>
-                                        <li><button>edit post</button></li>
-                                        <li><button>embed adda</button></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- post title start -->
-                        <div class="post-content">
-                            <p class="post-desc">
-                                Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                                default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                                in their infancy.
-                            </p>
-                            <div class="post-thumb-gallery img-gallery">
-                                <div class="row g-0">
-                                    <div class="col-6">
-                                        <figure class="post-thumb">
-                                            <a class="gallery-selector" href="assets/images/post/post-6.jpg">
-                                                <img src="../../assets/img/post3.png" alt="post image">
-                                            </a>
-                                        </figure>
-                                    </div>
-                                    <div class="col-6">
-                                        <figure class="post-thumb">
-                                            <a class="gallery-selector" href="assets/images/post/post-7.jpg">
-                                                <img src="../../assets/img/post3.png" alt="post image">
-                                            </a>
-                                        </figure>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post-meta">
-                                <div class="post-meta-like">
-                                    <div><i class="fa-regular fa-heart"></i></div>
-                                    <div>You and 112 people like this</div>
-                                </div>
-                                <ul class="comment-share-meta">
-                                    <li>
-                                        <button class="post-comment">
-                                            <i class="bi bi-chat-bubble"></i>
-                                            <span>65</span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="post-share">
-                                            <i class="bi bi-share"></i>
-                                            <span>04</span>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- post status end -->
-
-                    <!-- post status start -->
-                    <div class="card rounded-2">
-                        <!-- post title start -->
-                        <div class="post-title d-flex align-items-center">
-                            <!-- profile picture end -->
-                            <div class="profile-thumb">
-                                <a href="#">
-                                    <figure class="profile-thumb-middle">
-                                        <img src="../../assets/img/profile4.jpg" alt="profile picture">
-                                    </figure>
-                                </a>
-                            </div>
-                            <!-- profile picture end -->
-
-                            <div class="posted-author">
-                                <h6 class="author"><a href="profile.html">Jon Wileyam</a></h6>
-                                <span class="post-time">15 min ago</span>
-                            </div>
-
-                            <div class="post-settings-bar">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <div class="post-settings arrow-shape">
-                                    <ul>
-                                        <li><button>copy link to adda</button></li>
-                                        <li><button>edit post</button></li>
-                                        <li><button>embed adda</button></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- post title start -->
-                        <div class="post-content">
-                            <p class="post-desc pb-0">
-                                Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                                default model text, and a search for
-                            </p>
-                            <div class="post-meta">
-                                <div class="post-meta-like">
-                                    <div><i class="fa-regular fa-heart"></i></div>
-                                    <div>You and 112 people like this</div>
-                                </div>
-                                <ul class="comment-share-meta">
-                                    <li>
-                                        <button class="post-comment">
-                                            <i class="bi bi-chat-bubble"></i>
-                                            <span>41</span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="post-share">
-                                            <i class="bi bi-share"></i>
-                                            <span>07</span>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- post status end -->
 
                 </div>
                 <!-- Mid Post Section ends here -->
@@ -995,6 +728,29 @@ require("Navbar.php");
                             </div>
                         </div>
                         <!-- Card News END -->
+
+                        <ul class="nav small mt-4 justify-content-center lh-1">
+                            <li class="nav-item">
+                                <a class="nav-link" href="my-profile-about.html">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="settings.html">Settings</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" target="_blank" href="https://support.webestica.com/login">Support </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" target="_blank" href="docs/index.html">Docs </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="help.html">Help</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="privacy-and-terms.html">Privacy &amp; terms</a>
+                            </li>
+                        </ul>
+
+                        <p class="small text-center mt-1">©2023 <a class="text-reset" target="_blank" href="#"> Mingley </a></p>
                     </div>
                 </div>
                 <!-- Right Bar ends here -->
@@ -1017,6 +773,9 @@ require("Navbar.php");
 <!-- Scroll to Top End -->
 
 
+<script src="../../assets/js/jquery.js"></script>
+
+
 <script>
     const alertBox = document.querySelector(".alertBox");
 
@@ -1024,6 +783,30 @@ require("Navbar.php");
         alertBox.innerHTML = "";
     }, 3000);
 </script>
+
+
+<!-- <script type="text/javascript">
+    $(document).ready(function() {
+        $("#submit_post").on("submit", function(e) {
+            e.preventDefault();
+
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: "",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    $("#preview").show();
+                    $("#image_preview").html(data);
+                    $("#upload_file").val('');
+                }
+            })
+        })
+    });
+</script> -->
 
 
 
