@@ -1155,6 +1155,66 @@ require("/var/www/html/PHP_Assesments/Mangloo/config/constants.php");
 
 
 
+<!-- Card START -->
+<div class="col-md-6 col-lg-12">
+    <div class="card rounded">
+        <!-- Card header START -->
+        <div class="card-header d-flex justify-content-between border-0">
+            <h5 class="card-title"> Experience </h5>
+            <a class="btn btn-primary-soft btn-sm" href="#!"> <i class="fa-solid fa-plus"></i> </a>
+        </div>
+        <!-- Card header END -->
+        <!-- Card body START -->
+        <div class="card-body position-relative pt-0">
+            <!-- Experience item START -->
+            <div class="d-flex">
+                <!-- Avatar -->
+                <div class="avatar me-3">
+                    <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/logo/08.svg" alt=""> </a>
+                </div>
+                <!-- Info -->
+                <div>
+                    <h6 class="card-title mb-0"><a href="#!"> Apple Computer, Inc. </a></h6>
+                    <p class="small">May 2015 – Present Employment Duration 8 mos <a class="btn btn-primary-soft btn-xs ms-2" href="#!">Edit </a></p>
+                </div>
+            </div>
+            <!-- Experience item END -->
+
+            <!-- Experience item START -->
+            <div class="d-flex">
+                <!-- Avatar -->
+                <div class="avatar me-3">
+                    <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/logo/09.svg" alt=""> </a>
+                </div>
+                <!-- Info -->
+                <div>
+                    <h6 class="card-title mb-0"><a href="#!"> Microsoft Corporation </a></h6>
+                    <p class="small">May 2017 – Present Employment Duration 1 yrs 5 mos <a class="btn btn-primary-soft btn-xs ms-2" href="#!">Edit </a></p>
+                </div>
+            </div>
+            <!-- Experience item END -->
+
+            <!-- Experience item START -->
+            <div class="d-flex">
+                <!-- Avatar -->
+                <div class="avatar me-3">
+                    <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/logo/10.svg" alt=""> </a>
+                </div>
+                <!-- Info -->
+                <div>
+                    <h6 class="card-title mb-0"><a href="#!"> Tata Consultancy Services. </a></h6>
+                    <p class="small mb-0">May 2022 – Present Employment Duration 6 yrs 10 mos <a class="btn btn-primary-soft btn-xs ms-2" href="#!">Edit </a></p>
+                </div>
+            </div>
+            <!-- Experience item END -->
+
+        </div>
+        <!-- Card body END -->
+    </div>
+</div>
+<!-- Card END -->
+
+
 
 
 
@@ -2922,3 +2982,1013 @@ input{
     <!-- Right sidebar END -->
 
 </div>
+
+
+
+
+
+
+
+<!-- post status start -->
+<div class="card rounded-2">
+    <!-- post title start -->
+    <div class="post-title d-flex align-items-center">
+        <!-- profile picture end -->
+        <div class="profile-thumb">
+            <a href="#">
+                <figure class="profile-thumb-middle">
+                    <img src="../../assets/img/profile4.jpg" alt="profile picture">
+                </figure>
+            </a>
+        </div>
+        <!-- profile picture end -->
+
+        <div class="posted-author">
+            <h6 class="author"><a href="profile.html">Jon Wileyam</a></h6>
+            <span class="post-time">15 min ago</span>
+        </div>
+
+        <div class="post-settings-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="post-settings arrow-shape">
+                <ul>
+                    <li><button>copy link to adda</button></li>
+                    <li><button>edit post</button></li>
+                    <li><button>embed adda</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- post title start -->
+    <div class="post-content">
+        <p class="post-desc pb-0">
+            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+            default model text, and a search for
+        </p>
+        <div class="post-meta">
+            <div class="post-meta-like">
+                <div><i class="fa-regular fa-heart"></i></div>
+                <div>You and 112 people like this</div>
+            </div>
+            <ul class="comment-share-meta">
+                <li>
+                    <button class="post-comment">
+                        <i class="bi bi-chat-bubble"></i>
+                        <span>41</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="post-share">
+                        <i class="bi bi-share"></i>
+                        <span>07</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- post status end -->
+
+<!-- post status start -->
+<div class="card rounded-2">
+    <!-- post title start -->
+    <div class="post-title d-flex align-items-center">
+        <!-- profile picture end -->
+        <div class="profile-thumb">
+            <a href="#">
+                <figure class="profile-thumb-middle">
+                    <img src="../../assets/img/profile4.jpg" alt="profile picture">
+                </figure>
+            </a>
+        </div>
+        <!-- profile picture end -->
+
+        <div class="posted-author">
+            <h6 class="author"><a href="profile.html">william henry</a></h6>
+            <span class="post-time">35 min ago</span>
+        </div>
+
+        <div class="post-settings-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="post-settings arrow-shape">
+                <ul>
+                    <li><button>copy link to adda</button></li>
+                    <li><button>edit post</button></li>
+                    <li><button>embed adda</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- post title start -->
+    <div class="post-content">
+        <p class="post-desc">
+            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+            default model text, and a search for 'lorem ipsum' will uncover many web sites still
+            in their infancy.
+        </p>
+        <div class="plyr__video-embed plyr-youtube">
+            <iframe src="https://www.youtube.com/embed/WeA7edXsU40" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="post-meta">
+            <div class="post-meta-like">
+                <!-- <i class="bi bi-heart-beat"></i> -->
+                <div><i class="fa-regular fa-heart"></i></div>
+                <div>You and 112 people like this</div>
+
+            </div>
+            <ul class="comment-share-meta">
+                <li>
+                    <button class="post-comment">
+                        <i class="bi bi-chat-bubble"></i>
+                        <span>36</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="post-share">
+                        <i class="bi bi-share"></i>
+                        <span>08</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- post status end -->
+
+<!-- post status start -->
+<div class="card rounded-2">
+    <!-- post title start -->
+    <div class="post-title d-flex align-items-center">
+        <!-- profile picture end -->
+        <div class="profile-thumb">
+            <a href="#">
+                <figure class="profile-thumb-middle">
+                    <img src="../../assets/img/profile4.jpg" alt="profile picture">
+                </figure>
+            </a>
+        </div>
+        <!-- profile picture end -->
+
+        <div class="posted-author">
+            <h6 class="author"><a href="profile.html">Kate Palson</a></h6>
+            <span class="post-time">35 min ago</span>
+        </div>
+
+        <div class="post-settings-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="post-settings arrow-shape">
+                <ul>
+                    <li><button>copy link to adda</button></li>
+                    <li><button>edit post</button></li>
+                    <li><button>embed adda</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- post title start -->
+    <div class="post-content">
+        <p class="post-desc">
+            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+            default model text, and a search for 'lorem ipsum' will uncover many web sites still
+            in their infancy.
+        </p>
+        <div class="post-thumb-gallery img-gallery">
+            <div class="row g-0">
+                <div class="col-8">
+                    <figure class="post-thumb">
+                        <a class="gallery-selector" href="assets/images/post/post-2.jpg">
+                            <img src="../../assets/img/post3.png" alt="post image">
+                        </a>
+                    </figure>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <figure class="post-thumb">
+                                <a class="gallery-selector" href="assets/images/post/post-3.jpg">
+                                    <img src="../../assets/img/post4.jpg" alt="post image">
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="col-12">
+                            <figure class="post-thumb">
+                                <a class="gallery-selector" href="assets/images/post/post-4.jpg">
+                                    <img src="../../assets/img/post4.jpg" alt="post image">
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="col-12">
+                            <figure class="post-thumb">
+                                <a class="gallery-selector" href="assets/images/post/post-5.jpg">
+                                    <img src="../../assets/img/post4.jpg" alt="post image">
+                                </a>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post-meta">
+            <div class="post-meta-like">
+                <div><i class="fa-regular fa-heart"></i></div>
+                <div>You and 112 people like this</div>
+            </div>
+            <ul class="comment-share-meta">
+                <li>
+                    <button class="post-comment">
+                        <i class="bi bi-chat-bubble"></i>
+                        <span>28</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="post-share">
+                        <i class="bi bi-share"></i>
+                        <span>12</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- post status end -->
+
+<!-- post status start -->
+<div class="card rounded-2">
+    <!-- post title start -->
+    <div class="post-title d-flex align-items-center">
+        <!-- profile picture end -->
+        <div class="profile-thumb">
+            <a href="#">
+                <figure class="profile-thumb-middle">
+                    <img src="../../assets/img/profile4.jpg" alt="profile picture">
+                </figure>
+            </a>
+        </div>
+        <!-- profile picture end -->
+
+        <div class="posted-author">
+            <h6 class="author"><a href="profile.html">Robart Faul</a></h6>
+            <span class="post-time">40 min ago</span>
+        </div>
+
+        <div class="post-settings-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="post-settings arrow-shape">
+                <ul>
+                    <li><button>copy link to adda</button></li>
+                    <li><button>edit post</button></li>
+                    <li><button>embed adda</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- post title start -->
+    <div class="post-content">
+        <p class="post-desc pb-0">
+            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+            default model text, and a search for Many desktop publishing packages and web page
+            editors now use Lorem Ipsum as their default model text, and a search for Many
+            desktop publishing duskam azer.
+        </p>
+        <div class="post-meta">
+            <div class="post-meta-like">
+                <div><i class="fa-regular fa-heart"></i></div>
+                <div>You and 112 people like this</div>
+            </div>
+            <ul class="comment-share-meta">
+                <li>
+                    <button class="post-comment">
+                        <i class="bi bi-chat-bubble"></i>
+                        <span>80</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="post-share">
+                        <i class="bi bi-share"></i>
+                        <span>10</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- post status end -->
+
+<!-- post status start -->
+<div class="card rounded-2">
+    <!-- post title start -->
+    <div class="post-title d-flex align-items-center">
+        <!-- profile picture end -->
+        <div class="profile-thumb">
+            <a href="#">
+                <figure class="profile-thumb-middle">
+                    <img src="../../assets/img/profile4.jpg" alt="profile picture">
+                </figure>
+            </a>
+        </div>
+        <!-- profile picture end -->
+
+        <div class="posted-author">
+            <h6 class="author"><a href="profile.html">Halen Omaro</a></h6>
+            <span class="post-time">45 min ago</span>
+        </div>
+
+        <div class="post-settings-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="post-settings arrow-shape">
+                <ul>
+                    <li><button>copy link to adda</button></li>
+                    <li><button>edit post</button></li>
+                    <li><button>embed adda</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- post title start -->
+    <div class="post-content">
+        <p class="post-desc">
+            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+            default model text, and a search for 'lorem ipsum' will uncover many web sites still
+            in their infancy.
+        </p>
+        <div class="plyr__video-embed plyr-video">
+            <iframe src="https://www.youtube.com/embed/odUtqDz4lEk" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p class="post-desc post-desc-secondary">
+            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+            default model text, and a search for
+        </p>
+        <div class="post-meta">
+            <div class="post-meta-like">
+                <div><i class="fa-regular fa-heart"></i></div>
+                <div>You and 112 people like this</div>
+            </div>
+            <ul class="comment-share-meta">
+                <li>
+                    <button class="post-comment">
+                        <i class="bi bi-chat-bubble"></i>
+                        <span>42</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="post-share">
+                        <i class="bi bi-share"></i>
+                        <span>05</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- post status end -->
+
+<!-- post status start -->
+<div class="card rounded-2">
+    <!-- post title start -->
+    <div class="post-title d-flex align-items-center">
+        <!-- profile picture end -->
+        <div class="profile-thumb">
+            <a href="#">
+                <figure class="profile-thumb-middle">
+                    <img src="../../assets/img/profile4.jpg" alt="profile picture">
+                </figure>
+            </a>
+        </div>
+        <!-- profile picture end -->
+
+        <div class="posted-author">
+            <h6 class="author"><a href="profile.html">Mili Raoulin</a></h6>
+            <span class="post-time">50 min ago</span>
+        </div>
+
+        <div class="post-settings-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="post-settings arrow-shape">
+                <ul>
+                    <li><button>copy link to adda</button></li>
+                    <li><button>edit post</button></li>
+                    <li><button>embed adda</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- post title start -->
+    <div class="post-content">
+        <p class="post-desc">
+            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+            default model text, and a search for 'lorem ipsum' will uncover many web sites still
+            in their infancy.
+        </p>
+        <div class="post-thumb-gallery img-gallery">
+            <div class="row g-0">
+                <div class="col-6">
+                    <figure class="post-thumb">
+                        <a class="gallery-selector" href="assets/images/post/post-6.jpg">
+                            <img src="../../assets/img/post3.png" alt="post image">
+                        </a>
+                    </figure>
+                </div>
+                <div class="col-6">
+                    <figure class="post-thumb">
+                        <a class="gallery-selector" href="assets/images/post/post-7.jpg">
+                            <img src="../../assets/img/post3.png" alt="post image">
+                        </a>
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <div class="post-meta">
+            <div class="post-meta-like">
+                <div><i class="fa-regular fa-heart"></i></div>
+                <div>You and 112 people like this</div>
+            </div>
+            <ul class="comment-share-meta">
+                <li>
+                    <button class="post-comment">
+                        <i class="bi bi-chat-bubble"></i>
+                        <span>65</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="post-share">
+                        <i class="bi bi-share"></i>
+                        <span>04</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- post status end -->
+
+<!-- post status start -->
+<div class="card rounded-2">
+    <!-- post title start -->
+    <div class="post-title d-flex align-items-center">
+        <!-- profile picture end -->
+        <div class="profile-thumb">
+            <a href="#">
+                <figure class="profile-thumb-middle">
+                    <img src="../../assets/img/profile4.jpg" alt="profile picture">
+                </figure>
+            </a>
+        </div>
+        <!-- profile picture end -->
+
+        <div class="posted-author">
+            <h6 class="author"><a href="profile.html">Jon Wileyam</a></h6>
+            <span class="post-time">15 min ago</span>
+        </div>
+
+        <div class="post-settings-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="post-settings arrow-shape">
+                <ul>
+                    <li><button>copy link to adda</button></li>
+                    <li><button>edit post</button></li>
+                    <li><button>embed adda</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- post title start -->
+    <div class="post-content">
+        <p class="post-desc pb-0">
+            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+            default model text, and a search for
+        </p>
+        <div class="post-meta">
+            <div class="post-meta-like">
+                <div><i class="fa-regular fa-heart"></i></div>
+                <div>You and 112 people like this</div>
+            </div>
+            <ul class="comment-share-meta">
+                <li>
+                    <button class="post-comment">
+                        <i class="bi bi-chat-bubble"></i>
+                        <span>41</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="post-share">
+                        <i class="bi bi-share"></i>
+                        <span>07</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- post status end -->
+
+
+
+
+<!-- create_post_controller -->
+<?php
+
+session_start();
+
+
+require_once("../model/Query.php");
+
+require_once("fetch_user_controller.php");
+
+if (isset($_POST['upload_button'])) {
+
+    $user_id = $_SESSION["id"]; // Get the user's ID, you may need to adjust this
+
+    $caption = trim(htmlentities($_POST['caption'], ENT_QUOTES, 'UTF-8'));
+
+    // $post_id = $_POST['post_id'];
+
+    // Create a directory for the user if it doesn't exist
+    $user_directory = '../../assets/posts/' . $user_id;
+    if (!is_dir($user_directory)) {
+        mkdir($user_directory, 0777, true);
+    }
+
+    // Generate a unique post ID, you can use a function or database auto-increment.
+    // $post_id = uniqid();
+    // $post_directory = $user_directory . '/' . $post_id;
+    // mkdir($post_directory, 0777, true);
+
+    // $post_directory = $user_directory . '/' . $post_id;
+    // mkdir($post_directory, 0777, true);
+
+
+    $fileCount = count($_FILES['files']['name']);
+    $$uploadedFileNames = [];
+
+    for ($i = 0; $i < $fileCount; $i++) {
+        $tmpFilePath = $_FILES['files']['tmp_name'][$i];
+        $fileType = pathinfo($_FILES['files']['name'][$i], PATHINFO_EXTENSION);
+
+        if (in_array($fileType, ['jpg', 'jpeg', 'png', 'gif'])) {
+            $newImageName = $first_name . " - " . date("Y.m.d") . " - " . date("h.i.s A") . " - " . rand(10000, 999999) . "." . $fileType;
+
+            $uploadedFileNames[] = $newImageName;
+
+            // $newFilePath = $post_directory . '/' . $newImageName;
+            $newFilePath = $user_directory . '/' . $newImageName;
+
+            move_uploaded_file($tmpFilePath, $newFilePath);
+        }
+    }
+
+
+    // Convert the array of image names to a comma-separated string.
+    $imageNamesAsString = implode(',', $uploadedFileNames);
+
+    $table = 'posts_table';
+
+    $result_post = createPost($conn, $table, $user_id, $caption, $imageNamesAsString);
+
+    // $myname = $result_post['user_name'];
+
+
+    if ($result_post === "Post successfully uploaded...") {
+        $_SESSION["message"] = $result_post;
+        header("location: http://localhost/PHP_Assesments/Mingley/src/view/HomeFeed.php");
+        exit;
+    } else {
+        $_SESSION["message"] = $result_post;
+        header("location: http://localhost/PHP_Assesments/Mingley/src/view/HomeFeed.php");
+        exit;
+    }
+}
+
+
+?>
+
+
+
+<!-- Profile page feed -->
+<!-- Card feed item START -->
+<div class="card rounded">
+    <!-- Card header START -->
+    <div class="card-header border-0 pb-0">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <!-- Avatar -->
+                <div class="avatar avatar-story me-2">
+                    <a href="#!"> <img class="avatar-img rounded-circle" src="../../assets/img/profile6.png" alt=""> </a>
+                </div>
+                <!-- Info -->
+                <div>
+                    <div class="nav nav-divider">
+                        <h6 class="nav-item card-title mb-0"> <a href="#!"> <?= $first_name . " " . $last_name; ?> </a></h6>
+                        <span class="nav-item small"> 2hr</span>
+                    </div>
+                    <p class="mb-0 small">Web Developer at Webestica</p>
+                </div>
+            </div>
+            <!-- Card feed action dropdown START -->
+            <div class="dropdown">
+                <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-three-dots"></i>
+                </a>
+                <!-- Card feed action dropdown menu -->
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction1">
+                    <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
+                    <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori ferguson </a></li>
+                    <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
+                    <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+                </ul>
+            </div>
+            <!-- Card feed action dropdown END -->
+        </div>
+    </div>
+    <!-- Card header END -->
+    <!-- Card body START -->
+    <div class="card-body">
+        <p>I'm thrilled to share that I've completed a graduate certificate course in project management with the president's honor roll.</p>
+        <!-- Card img -->
+        <!-- Carousel for Post images -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="../../assets/img/post4.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="../../assets/img/post5.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="../../assets/img/post2.jpg" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <!-- <img class="card-img" src="assets/images/post/3by2/01.jpg" alt="Post"> -->
+
+        <!-- Feed react START -->
+        <ul class="nav nav-stack py-3 small">
+            <li class="nav-item">
+                <a class="nav-link active" href="#!"> <i class="fa-regular fa-heart"></i>
+                    Likes (56)</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#!"> <i class="fa-regular fa-comment"></i>
+                    Comments (12)</a>
+            </li>
+            <!-- Card share action START -->
+            <li class="nav-item dropdown ms-sm-auto">
+                <a class="nav-link mb-0" href="#" id="cardShareAction8" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-share-nodes"></i> Share (3)
+                </a>
+                <!-- Card share action dropdown menu -->
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
+                    <li><a class="dropdown-item" href="#"> <i class="bi bi-envelope fa-fw pe-2"></i>Send via Direct Message</a></li>
+                    <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark-check fa-fw pe-2"></i>Bookmark </a></li>
+                    <li><a class="dropdown-item" href="#"> <i class="bi bi-link fa-fw pe-2"></i>Copy link to post</a></li>
+                    <li><a class="dropdown-item" href="#"> <i class="bi bi-share fa-fw pe-2"></i>Share post via …</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#"> <i class="bi bi-pencil-square fa-fw pe-2"></i>Share to News Feed</a></li>
+                </ul>
+            </li>
+            <!-- Card share action END -->
+        </ul>
+        <!-- Feed react END -->
+
+        <!-- Add comment -->
+        <div class="d-flex mb-3">
+            <!-- Avatar -->
+            <div class="avatar avatar-xs me-2">
+                <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/avatar/12.jpg" alt=""> </a>
+            </div>
+            <!-- Comment box  -->
+            <form class="position-relative w-100">
+                <textarea class="form-control pe-4 bg-light" rows="1" placeholder="Add a comment..."></textarea>
+            </form>
+        </div>
+        <!-- Comment wrap START -->
+        <ul class="comment-wrap list-unstyled">
+            <!-- Comment item START -->
+            <li class="comment-item">
+                <div class="d-flex position-relative">
+                    <!-- Avatar -->
+                    <div class="avatar avatar-xs">
+                        <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt=""></a>
+                    </div>
+                    <div class="ms-2">
+                        <!-- Comment by -->
+                        <div class="bg-light rounded-start-top-0 p-3 rounded">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>
+                                <small class="ms-2">5hr</small>
+                            </div>
+                            <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>
+                        </div>
+                        <!-- Comment react -->
+                        <ul class="nav nav-divider py-2 small">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#!"> Like (3)</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#!"> Reply</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#!"> View 5 replies</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Comment item nested START -->
+                <ul class="comment-item-nested list-unstyled">
+                    <!-- Comment item START -->
+                    <li class="comment-item">
+                        <div class="d-flex">
+                            <!-- Avatar -->
+                            <div class="avatar avatar-xs">
+                                <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/06.jpg" alt=""></a>
+                            </div>
+                            <!-- Comment by -->
+                            <div class="ms-2">
+                                <div class="bg-light p-3 rounded">
+                                    <div class="d-flex justify-content-between">
+                                        <h6 class="mb-1"> <a href="#!"> Lori Stevens </a> </h6>
+                                        <small class="ms-2">2hr</small>
+                                    </div>
+                                    <p class="small mb-0">See resolved goodness felicity shy civility domestic had but Drawings offended yet answered Jennings perceive.</p>
+                                </div>
+                                <!-- Comment react -->
+                                <ul class="nav nav-divider py-2 small">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#!"> Like (5)</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#!"> Reply</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Comment item END -->
+                    <!-- Comment item START -->
+                    <li class="comment-item">
+                        <div class="d-flex">
+                            <!-- Avatar -->
+                            <div class="avatar avatar-story avatar-xs">
+                                <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/07.jpg" alt=""></a>
+                            </div>
+                            <!-- Comment by -->
+                            <div class="ms-2">
+                                <div class="bg-light p-3 rounded">
+                                    <div class="d-flex justify-content-between">
+                                        <h6 class="mb-1"> <a href="#!"> Billy Vasquez </a> </h6>
+                                        <small class="ms-2">15min</small>
+                                    </div>
+                                    <p class="small mb-0">Wishing calling is warrant settled was lucky.</p>
+                                </div>
+                                <!-- Comment react -->
+                                <ul class="nav nav-divider py-2 small">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#!"> Like</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#!"> Reply</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Comment item END -->
+                </ul>
+                <!-- Load more replies -->
+                <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center mb-3 ms-5" data-bs-toggle="button" aria-pressed="true">
+                    <div class="spinner-dots me-2">
+                        <span class="spinner-dot"></span>
+                        <span class="spinner-dot"></span>
+                        <span class="spinner-dot"></span>
+                    </div>
+                    Load more replies
+                </a>
+                <!-- Comment item nested END -->
+            </li>
+            <!-- Comment item END -->
+            <!-- Comment item START -->
+            <li class="comment-item">
+                <div class="d-flex">
+                    <!-- Avatar -->
+                    <div class="avatar avatar-xs">
+                        <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt=""></a>
+                    </div>
+                    <!-- Comment by -->
+                    <div class="ms-2">
+                        <div class="bg-light p-3 rounded">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a> </h6>
+                                <small class="ms-2">4min</small>
+                            </div>
+                            <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>
+                        </div>
+                        <!-- Comment react -->
+                        <ul class="nav nav-divider pt-2 small">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#!"> Like (1)</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#!"> Reply</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#!"> View 6 replies</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <!-- Comment item END -->
+        </ul>
+        <!-- Comment wrap END -->
+    </div>
+    <!-- Card body END -->
+    <!-- Card footer START -->
+    <div class="card-footer border-0 pt-0">
+        <!-- Load more comments -->
+        <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
+            <div class="spinner-dots me-2">
+                <span class="spinner-dot"></span>
+                <span class="spinner-dot"></span>
+                <span class="spinner-dot"></span>
+            </div>
+            Load more comments
+        </a>
+    </div>
+    <!-- Card footer END -->
+</div>
+<!-- Card feed item END -->
+
+<!-- Card feed item START -->
+<div class="card rounded">
+
+    <div class="border-bottom">
+        <p class="small mb-0 px-4 py-2"><i class="bi bi-heart-fill text-danger pe-1"></i>Sam Lanson likes this post</p>
+    </div>
+    <!-- Card header START -->
+    <div class="card-header border-0 pb-0">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <!-- Avatar -->
+                <div class="avatar me-2">
+                    <a href="#"> <img class="avatar-img rounded-circle" src="assets/images/logo/13.svg" alt=""> </a>
+                </div>
+                <!-- Title -->
+                <div>
+                    <h6 class="card-title mb-0"> <a href="#!"> Apple Education </a></h6>
+                    <p class="mb-0 small">9 November at 23:29</p>
+                </div>
+            </div>
+            <!-- Card share action menu -->
+            <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardShareAction5" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-three-dots"></i>
+            </a>
+            <!-- Card share action dropdown menu -->
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction5">
+                <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
+                <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori ferguson </a></li>
+                <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
+                <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+            </ul>
+        </div>
+        <!-- Card share action END -->
+    </div>
+    <!-- Card header START -->
+
+    <!-- Card body START -->
+    <div class="card-body pb-0">
+        <p>Find out how you can save time in the classroom this year. Earn recognition while you learn new skills on iPad and Mac. Start recognition your first Apple Teacher badge today!</p>
+        <!-- Feed react START -->
+        <ul class="nav nav-stack pb-2 small">
+            <li class="nav-item">
+                <a class="nav-link active text-secondary" href="#!"> <i class="bi bi-heart-fill me-1 icon-xs bg-danger text-white rounded-circle"></i> Louis, Billy and 126 others </a>
+            </li>
+            <li class="nav-item ms-sm-auto">
+                <a class="nav-link" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comments (12)</a>
+            </li>
+        </ul>
+        <!-- Feed react END -->
+    </div>
+    <!-- Card body END -->
+    <!-- Card Footer START -->
+    <div class="card-footer py-3">
+        <!-- Feed react START -->
+        <ul class="nav nav-fill nav-stack small">
+            <li class="nav-item">
+                <a class="nav-link mb-0 active" href="#!"> <i class="bi bi-heart pe-1"></i>Liked (56)</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mb-0" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comments (12)</a>
+            </li>
+            <!-- Card share action dropdown START -->
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link mb-0" id="cardShareAction6" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-reply-fill flip-horizontal ps-1"></i>Share (3)
+                </a>
+                <!-- Card share action dropdown menu -->
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction6">
+                    <li><a class="dropdown-item" href="#"> <i class="bi bi-envelope fa-fw pe-2"></i>Send via Direct Message</a></li>
+                    <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark-check fa-fw pe-2"></i>Bookmark </a></li>
+                    <li><a class="dropdown-item" href="#"> <i class="bi bi-link fa-fw pe-2"></i>Copy link to post</a></li>
+                    <li><a class="dropdown-item" href="#"> <i class="bi bi-share fa-fw pe-2"></i>Share post via …</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#"> <i class="bi bi-pencil-square fa-fw pe-2"></i>Share to News Feed</a></li>
+                </ul>
+            </li>
+            <!-- Card share action dropdown END -->
+            <li class="nav-item">
+                <a class="nav-link mb-0" href="#!"> <i class="bi bi-send-fill pe-1"></i>Send</a>
+            </li>
+        </ul>
+        <!-- Feed react END -->
+    </div>
+    <!-- Card Footer END -->
+</div>
+<!-- Card feed item END -->
+
+
+
+
+<!-- Profile Page media (Photos section) -->
+<!-- Card START -->
+<div class="col-md-6 col-lg-12">
+    <div class="card rounded">
+        <!-- Card header START -->
+        <div class="card-header d-sm-flex justify-content-between border-0" style="align-items: end;">
+            <h5 class="card-title">Photos</h5>
+            <a class="btn btn-primary-soft btn-sm" href="#!"> See all photo</a>
+        </div>
+        <!-- Card header END -->
+        <!-- Card body START -->
+        <div class="card-body position-relative pt-0">
+            <div class="row g-2">
+                <!-- Photos item -->
+                <div class="col-6">
+                    <a href="../../assets/img/post.jpg" data-gallery="image-popup" data-glightbox="">
+                        <img class="rounded img-fluid" src="../../assets/img/post.jpg" alt="">
+                    </a>
+                </div>
+
+                <!-- Photos item -->
+                <div class="col-6">
+                    <a href="../../assets/img/post.jpg" data-gallery="image-popup" data-glightbox="">
+                        <img class="rounded img-fluid" src="../../assets/img/post.jpg" alt="">
+                    </a>
+                </div>
+
+                <!-- Photos item -->
+                <div class="col-6">
+                    <a href="../../assets/img/post.jpg" data-gallery="image-popup" data-glightbox="">
+                        <img class="rounded img-fluid" src="../../assets/img/post.jpg" alt="">
+                    </a>
+                </div>
+                <!-- Photos item -->
+                <div class="col-6">
+                    <a href="../../assets/img/post.jpg" data-gallery="image-popup" data-glightbox="">
+                        <img class="rounded img-fluid" src="../../assets/img/post.jpg" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Card body END -->
+    </div>
+</div>
+<!-- Card END -->
