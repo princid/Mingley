@@ -261,6 +261,10 @@ h6{
     display: none;
 }
 
+.card-body{
+    flex: none !important;
+}
+
 
 
 
@@ -398,16 +402,16 @@ img {
 
 .btn,
 button {
-    border: none;
+    /* border: none; */
     cursor: pointer;
-    outline: none;
-    padding: 0;
+    /* outline: none; */
+    /* padding: 0; */
     -webkit-box-shadow: none;
     box-shadow: none;
     -webkit-transition: 0.4s;
     -o-transition: 0.4s;
     transition: 0.4s;
-    background-color: transparent;
+    /* background-color: transparent; */
 }
 
 .btn:active,
@@ -1441,11 +1445,10 @@ only screen and (max-width: 767.98px) {
 }
 
 .top-search-btn {
-    top: 0;
     right: 0;
-    font-size: 20px;
     position: absolute;
     color: #333333;
+    border: none;
 }
 
 .top-search-btn:hover {

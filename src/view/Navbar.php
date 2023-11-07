@@ -1,6 +1,6 @@
 <?php
 
-error_reporting(0);
+// error_reporting(0);
 
 session_start();
 
@@ -10,7 +10,9 @@ require_once('../../includes/Header.php');
 
 require_once("../../config/constants.php");
 
-require("../controller/fetch_user_controller.php");
+require_once("../controller/fetch_user_controller.php");
+
+
 
 // var_dump($first_name);
 // exit;
@@ -35,7 +37,7 @@ if (empty($_SESSION['id'])) {
                         <nav>
                             <ul>
                                 <li class="active"><a href="HomeFeed.php"><i class="fa-solid fa-house"></i></a></li>
-                                
+
                                 <!-- Pending -->
                                 <li class="msg-trigger"><a class="msg-trigger-btn" href="#a"><i class="fa-solid fa-message"></i></a>
 
@@ -44,7 +46,7 @@ if (empty($_SESSION['id'])) {
                                 <!-- Notification Dropdown -->
                                 <li class="notification-trigger">
                                     <a class="msg-trigger-btn" href="#" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-solid fa-bell"></i>
+                                        <i class="fa-solid fa-bell"></i><span class="position-absolute top-10 translate-middle badge border border-light rounded-circle bg-danger p-2"><span class="visually-hidden">unread messages</span></span>
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="notifDropdown" style="width: 450px">

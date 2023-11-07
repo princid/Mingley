@@ -33,6 +33,7 @@ function signIn($conn, $table, $user_email, $user_password)
     if (mysqli_num_rows($signIn_check_run) > 0) {
         while($row = mysqli_fetch_assoc($signIn_check_run)) {
             $_SESSION["id"] = $row['id'];
+            $_SESSION["first_name"] = $row['first_name'];
             // var_dump($row);
             // exit;
             return "Logged In Successfully!";
@@ -43,14 +44,14 @@ function signIn($conn, $table, $user_email, $user_password)
     }
 }
 
-function fetchUserDetails($conn, $table, $condition){
-    $fetch_query = "SELECT * FROM $table WHERE $condition";
+function fetchUserDetails($conn, $fetch_table, $condition){
+    $fetch_query = "SELECT * FROM $fetch_table WHERE $condition";
     $fetch_query_run = mysqli_query($conn, $fetch_query);
 
     if($fetch_query_run && mysqli_num_rows($fetch_query_run) > 0) {
+        
         $row = mysqli_fetch_assoc($fetch_query_run);
-        // var_dump($row);
-        // exit;
+
         $_SESSION['id'] = $row['id'];
         return $row;
     }
@@ -78,14 +79,96 @@ function updateProfile($conn, $table, $first_name, $last_name, $user_name, $user
     
 }
 
-function create_post($conn, $table, $id, $caption, $imageNamesAsString){
-    $insertPostQuery = "INSERT INTO $table (user_id, post_caption, post_images) VALUES ('$id', '$caption', '$imageNamesAsString')";
+// echo "pojdfhjdg";
+// var_dump($conn);
+
+function createPost($conn, $table, $user_id, $caption, $imageNamesAsString){
+    // var_dump($users_table);
+    // echo "rahoooooo";
+    $insertPostQuery = "INSERT INTO $table (user_id, post_caption, post_images) VALUES ('$user_id', '$caption', '$imageNamesAsString')";
     $insertPostQuery_run = mysqli_query($conn, $insertPostQuery);
 
+
     if($insertPostQuery_run){
+
+        // $post_data = mysqli_fetch_assoc($show_post_run);
+
+        // $_SESSION['id'] = $post_data['id'];
+
         return "Post successfully uploaded...";
+
     }else{
         return "Error: " . mysqli_error($conn);
+    }
+
+}
+
+// echo "dhoniiiii";
+
+
+function show_post_on_feed($conn, $users_table, $posts_table, $feed_post_condition){
+
+    $show_post = "SELECT * FROM $users_table JOIN $posts_table ON $feed_post_condition ORDER BY $posts_table.posted_at DESC";
+
+    $show_post_run = mysqli_query($conn, $show_post);
+
+    $post_data = array();
+
+    if($show_post_run && mysqli_num_rows($show_post_run) > 0){
+
+        while ($data = mysqli_fetch_assoc($show_post_run)) {
+            $post_data[] = $data;
+        }
+
+        // foreach ($post_data as $post) {
+        //     // var_dump($post);
+        //     // echo "Post Title: " . $post['post_caption'] . "<br>";
+        //     // echo "Post Content: " . $post['post_images'] . "<br>";
+        //     // echo "Post Owner: " . $post['first_name'] . "<br>";
+        //     $post_author = $post["first_name"]. " ". $post["last_name"];
+        //     $post_caption = $post["post_caption"];
+        //     $post_images = $post["post_images"];
+        // }
+
+        return $post_data;
+    }
+}
+
+
+function show_post_on_profile($conn, $users_table, $posts_table, $profile_feed_condition, $where_condition){
+
+    $show_profile_post = "SELECT * FROM $users_table JOIN $posts_table ON $profile_feed_condition WHERE $where_condition ORDER BY $posts_table.posted_at DESC";
+
+    $show_profile_post_run = mysqli_query($conn, $show_profile_post);
+
+    $profile_post_data = array();
+
+    if($show_profile_post_run && mysqli_num_rows($show_profile_post_run) > 0){
+
+        while ($my_data = mysqli_fetch_assoc($show_profile_post_run)) {
+            $profile_post_data[] = $my_data;
+        }
+
+        return $profile_post_data;
+    }
+}
+
+
+function show_post_on_friends_profile($conn, $users_table, $posts_table, $profile_feed_condition, $where_condition){
+
+    $show_profile_post = "SELECT * FROM $users_table JOIN $posts_table ON $profile_feed_condition WHERE $where_condition ORDER BY $posts_table.posted_at DESC";
+
+    $show_profile_post_run = mysqli_query($conn, $show_profile_post);
+
+    $profile_post_data = array();
+
+    if($show_profile_post_run && mysqli_num_rows($show_profile_post_run) > 0){
+
+        while ($my_data = mysqli_fetch_assoc($show_profile_post_run)) {
+            $profile_post_data[] = $my_data;
+        }
+
+        return $profile_post_data;
     }
 }
 
@@ -175,3 +258,6 @@ function create_post($conn, $table, $id, $caption, $imageNamesAsString){
 //         }
 //     }
 // }
+
+
+// echo "mdghjgrig";

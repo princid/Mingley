@@ -1,37 +1,40 @@
 <?php
-
 session_start();
 
-// require("../../config/connectDB.php");
-require("../model/Query.php");
+require_once("../model/Query.php");
+require_once("fetch_user_controller.php");
 
 if (isset($_POST['upload_button'])) {
-    
-    $id = $_SESSION["id"]; // Get the user's ID, you may need to adjust this
-
+    $user_id = $_SESSION["id"];
     $caption = trim(htmlentities($_POST['caption'], ENT_QUOTES, 'UTF-8'));
+    $post_id = $_POST['post_id'];
     
     // Create a directory for the user if it doesn't exist
-    $user_directory = '../../assets/posts/' . $id;
+    $user_directory = '../../assets/posts/' . $user_id;
     if (!is_dir($user_directory)) {
         mkdir($user_directory, 0777, true);
     }
-    
-    // Generate a unique post ID, you can use a function or database auto-increment.
-    $post_id = uniqid();
+
     $post_directory = $user_directory . '/' . $post_id;
     mkdir($post_directory, 0777, true);
 
-    
-    $fileCount = count($_FILES['files']['name']);
-    $$uploadedFileNames = [];
-    
-    for ($i = 0; $i < $fileCount; $i++) {
+    // Limit the number of uploads to 10
+    $maxUploads = 10;
+    $uploadedFileNames = [];
+
+    if (count($_FILES['files']['name']) > $maxUploads) {
+        // Displaying an error message if more than 10 images are selected
+        $_SESSION["message"] = "You can upload up to 10 images only.";
+        header("location: http://localhost/PHP_Assesments/Mingley/src/view/HomeFeed.php");
+        exit;
+    }
+
+    for ($i = 0; $i < count($_FILES['files']['name']); $i++) {
         $tmpFilePath = $_FILES['files']['tmp_name'][$i];
         $fileType = pathinfo($_FILES['files']['name'][$i], PATHINFO_EXTENSION);
         
         if (in_array($fileType, ['jpg', 'jpeg', 'png', 'gif'])) {
-            $newImageName = $post_id . " - " . date("Y.m.d") . " - " . date("h.i.s A") . " - " . rand(10000, 999999). ".". $fileType;
+            $newImageName = $first_name . " - " . date("Y.m.d") . " - " . date("h.i.s A") . " - " . rand(10000, 999999). ".". $fileType;
             
             $uploadedFileNames[] = $newImageName;
             
@@ -42,30 +45,19 @@ if (isset($_POST['upload_button'])) {
     }
     
     // Convert the array of image names to a comma-separated string.
-    $imageNamesAsString = implode(', ', $uploadedFileNames);
+    $imageNamesAsString = implode(',', $uploadedFileNames);
 
     $table = 'posts_table';
 
-    var_dump($table);
-    $result = create_post($conn, $table, $id, $caption, $imageNamesAsString);
+    $result_post = createPost($conn, $table, $user_id, $caption, $imageNamesAsString);
 
-
-    if ($result === "Post successfully uploaded...") {
-        $_SESSION["message"] = $result;
+    if ($result_post === "Post successfully uploaded...") {
+        $_SESSION["message"] = $result_post;
         header("location: http://localhost/PHP_Assesments/Mingley/src/view/HomeFeed.php");
         exit;
     } else {
-        $_SESSION["message"] = $result;
+        $_SESSION["message"] = $result_post;
         header("location: http://localhost/PHP_Assesments/Mingley/src/view/HomeFeed.php");
         exit;
     }
-
-
 }
-
-else{
-    echo "dfgvbdfjg";
-}
-
-
-?>
