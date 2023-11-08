@@ -95,7 +95,7 @@ hr{
     width: 100%;
     height: 100%;
     /* -o-object-fit: cover; */
-    object-fit: cover;
+    object-fit: fill;
 }
 
 .gap-2{
@@ -2153,8 +2153,8 @@ only screen and (max-width: 767.98px) {
 }
 
 .profile-thumb-small {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     display: block;
     border-radius: 50%;
     overflow: hidden;
@@ -2294,7 +2294,9 @@ only screen and (max-width: 767.98px) {
     width: 80px;
     height: 80px;
     display: block;
+    object-fit: fill;
     border-radius: 50%;
+    border: 3px solid #fff;
     overflow: hidden;
     bottom: -40px;
     left: 0;

@@ -42,7 +42,7 @@ var_dump($post_author_username);
 
                 <?php var_dump($_GET['user_id']);
                 var_dump($post_author_username);
-                 ?>
+                ?>
 
                 <!-- Main content START -->
                 <div class="col-lg-8 vstack">
@@ -148,6 +148,7 @@ var_dump($post_author_username);
                         $post_author_username = $feed_post_data['user_name'];
                         $post_author_bio = $feed_post_data['user_bio'];
                         $post_author_email = $feed_post_data['user_email'];
+                        $post_author_profile_pic = $feed_post_data['user_profile_pic'];
                         $post_caption = $feed_post_data['post_caption'];
                         $posted_at = $feed_post_data['posted_at'];
                         $all_post_images = explode(',', $feed_post_data['post_images']);
@@ -162,7 +163,13 @@ var_dump($post_author_username);
                                     <div class="d-flex align-items-center">
                                         <!-- Avatar -->
                                         <div class="avatar me-2">
-                                            <a href="#!"> <img class="avatar-img rounded-circle" src="../../assets/img/profile6.png" alt=""> </a>
+                                            <a href="#">
+                                                <?php if (!empty($post_author_profile_pic)) { ?>
+                                                    <img class="avatar-img rounded-circle border border-primary border-2 p-1" src="<?= BASE_URL ?>assets/profile_pic/<?= $post_user_id . "/" . $post_author_profile_pic; ?>" alt="">
+                                                <?php } else { ?>
+                                                    <img class="avatar-img rounded-circle border border-primary border-2 p-1" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                                <?php } ?>
+                                            </a>
                                         </div>
                                         <!-- Info -->
                                         <div>
@@ -204,7 +211,7 @@ var_dump($post_author_username);
                                                 <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
                                             </ul>
                                         <?php } ?>
-                                        
+
                                     </div>
                                     <!-- Card feed action dropdown END -->
                                 </div>
@@ -217,45 +224,49 @@ var_dump($post_author_username);
                                 <p><?= $post_caption; ?> </p>
                                 <!-- Card img -->
 
-                                <!-- Carousel for Post images -->
-                                <div id="<?= $carousel_id; ?>" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                                    <div class="carousel-indicators">
+                                <!-- Carousel -->
+                                <?php if (count($all_post_images) > 1) { ?>
+                                    <!-- Carousel for Post images -->
+                                    <div id="<?= $carousel_id; ?>" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                                        <div class="carousel-indicators">
 
-                                        <?php
-                                        // Loop through all the post images
-                                        foreach ($all_post_images as $index => $post_image) {
-                                            $activeClass = ($index === 0) ? 'active' : '';
-                                        ?>
-                                            <button type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide-to="<?= $index; ?>" class="<?= $activeClass; ?>" aria-label="Slide <?= $index + 1; ?>"></button>
-                                        <?php } ?>
+                                            <?php
+                                            // Loop through all the post images
+                                            foreach ($all_post_images as $index => $post_image) {
+                                                $activeClass = ($index === 0) ? 'active' : '';
+                                            ?>
+                                                <button type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide-to="<?= $index; ?>" class="<?= $activeClass; ?>" aria-label="Slide <?= $index + 1; ?>"></button>
+                                            <?php } ?>
 
+                                        </div>
+
+                                        <div class="carousel-inner">
+
+                                            <?php
+                                            // Loop through all the post images
+                                            foreach ($all_post_images as $index => $post_image) {
+                                                $activeClass = ($index === 0) ? 'active' : '';
+                                            ?>
+                                                <div class="carousel-item <?= $activeClass; ?>">
+                                                    <img src="<?= BASE_URL ?>assets/posts/<?= $post_user_id . "/" . $post_image; ?>" class="d-block w-100" style="height:300px; object-fit:contain;" alt="Post Image">
+                                                </div>
+                                            <?php } ?>
+
+                                        </div>
+
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
                                     </div>
+                                <?php } else { ?>
+                                    <img src="<?= BASE_URL ?>assets/posts/<?= $post_user_id . "/" . $all_post_images[0]; ?>" class="d-block w-100" style="height:300px; object-fit:contain;" alt="Post Image">
+                                <?php } ?>
 
-                                    <div class="carousel-inner">
-
-                                        <?php
-                                        // Loop through all the post images
-                                        foreach ($all_post_images as $index => $post_image) {
-                                            $activeClass = ($index === 0) ? 'active' : '';
-                                        ?>
-                                            <div class="carousel-item <?= $activeClass; ?>">
-                                                <img src="<?= BASE_URL ?>assets/posts/<?= $post_user_id . "/" . $post_image; ?>" class="d-block w-100" style="height:300px; object-fit:contain;" alt="Post Image">
-                                            </div>
-                                        <?php } ?>
-
-                                    </div>
-
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
-                                </div>
-
-                                <!-- <img class="card-img" src="../../assets/img/post4.jpg" alt="Post"> -->
 
                                 <!-- Feed react START -->
                                 <ul class="nav nav-stack py-3 mt-1">
