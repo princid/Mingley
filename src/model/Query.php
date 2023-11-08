@@ -3,6 +3,8 @@ session_start();
 
 require("../../config/connectDB.php");
 
+
+// Function to let users sign up
 function signUp($conn, $table, $first_name, $last_name, $user_name, $user_email, $user_password)
 {
     $check_user = "SELECT id FROM $table WHERE user_email = '$user_email' OR user_name = '$user_name' ";
@@ -23,7 +25,8 @@ function signUp($conn, $table, $first_name, $last_name, $user_name, $user_email,
     }
 }
 
-// 
+
+// Function to let users log in 
 function signIn($conn, $table, $user_email, $user_password)
 {
     $signIn_check = "SELECT id, user_email, user_password FROM $table WHERE user_email = '$user_email' AND user_password = '$user_password' ";
@@ -44,6 +47,8 @@ function signIn($conn, $table, $user_email, $user_password)
     }
 }
 
+
+// Function to fetch user's details
 function fetchUserDetails($conn, $fetch_table, $condition){
     $fetch_query = "SELECT * FROM $fetch_table WHERE $condition";
     $fetch_query_run = mysqli_query($conn, $fetch_query);
@@ -58,6 +63,7 @@ function fetchUserDetails($conn, $fetch_table, $condition){
 }
 
 
+// Function to update user's profile, such as name, email, bio, etc..
 function updateProfile($conn, $table, $first_name, $last_name, $user_name, $user_email, $user_bio, $condition){
 
     // $check_user = "SELECT id FROM $table WHERE user_email = '$user_email' OR user_name = '$user_name' ";
@@ -79,9 +85,9 @@ function updateProfile($conn, $table, $first_name, $last_name, $user_name, $user
     
 }
 
-// echo "pojdfhjdg";
-// var_dump($conn);
 
+
+// Function to create post (upload post)
 function createPost($conn, $table, $user_id, $caption, $imageNamesAsString){
     // var_dump($users_table);
     // echo "rahoooooo";
@@ -103,9 +109,9 @@ function createPost($conn, $table, $user_id, $caption, $imageNamesAsString){
 
 }
 
-// echo "dhoniiiii";
 
 
+// Function to show posts on Home Page's feed.
 function show_post_on_feed($conn, $users_table, $posts_table, $feed_post_condition){
 
     $show_post = "SELECT * FROM $users_table JOIN $posts_table ON $feed_post_condition ORDER BY $posts_table.posted_at DESC";
@@ -135,6 +141,7 @@ function show_post_on_feed($conn, $users_table, $posts_table, $feed_post_conditi
 }
 
 
+// Function to show our own posts on our profile.
 function show_post_on_profile($conn, $users_table, $posts_table, $profile_feed_condition, $where_condition){
 
     $show_profile_post = "SELECT * FROM $users_table JOIN $posts_table ON $profile_feed_condition WHERE $where_condition ORDER BY $posts_table.posted_at DESC";
@@ -154,6 +161,7 @@ function show_post_on_profile($conn, $users_table, $posts_table, $profile_feed_c
 }
 
 
+// Function to check other users profile
 function show_post_on_friends_profile($conn, $users_table, $posts_table, $profile_feed_condition, $where_condition){
 
     $show_profile_post = "SELECT * FROM $users_table JOIN $posts_table ON $profile_feed_condition WHERE $where_condition ORDER BY $posts_table.posted_at DESC";
@@ -173,91 +181,43 @@ function show_post_on_friends_profile($conn, $users_table, $posts_table, $profil
 }
 
 
+// Function to update the user's profile picture
+function update_profile_pic($conn, $table, $profile_pic_name, $condition){
+    
+    $update_profile_pic = "UPDATE $table SET user_profile_pic = '$profile_pic_name' WHERE $condition ";
+    
+    $update_profile_pic_run = mysqli_query($conn, $update_profile_pic);
+
+    // var_dump($conn);
+
+    if ($update_profile_pic_run) {
+        return "Your Profile Pic Updated Successfully!";
+    } else {
+        return "Error: " . mysqli_error($conn);
+    }
+}
+
+
+// Function for showing all the unknown users on Home page's right bar to send them friend request
+function getAllUserRecord($conn, $getAll_table){
+    $getAllUser = "SELECT * FROM $getAll_table ";
+    $getAllUser_run = mysqli_query($conn, $getAllUser);
+
+    $getAllUser_data = array();
+
+    if($getAllUser_run && mysqli_num_rows($getAllUser_run) > 0){
+        while ($my_data = mysqli_fetch_assoc($getAllUser_run)) {
+            $getAllUser_data[] = $my_data;
+        }
+        return $getAllUser_data;
+
+    }
+}
 
 
 
+// Function for Post Like
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function signUp($conn, $table, $first_name, $last_name, $user_name, $user_email, $user_password)
-// {
-//     $check_user = "SELECT id FROM $table WHERE user_email = ? OR user_name = ?";
-//     $stmt_check_user = mysqli_prepare($conn, $check_user);
-//     mysqli_stmt_bind_param($stmt_check_user, "ss", $user_email, $user_name);
-//     mysqli_stmt_execute($stmt_check_user);
-//     $result_check_user = mysqli_stmt_get_result($stmt_check_user);
-
-//     if (mysqli_num_rows($result_check_user) > 0) {
-//         // Email or Username already exists
-//         return "Email/Username already exists! Try with another Email ID/Username.";
-//     } else {
-//         $signUp_query = "INSERT INTO $table (first_name, last_name, user_name, user_email, user_password) VALUES (?, ?, ?, ?, ?)";
-//         $stmt_signUp = mysqli_prepare($conn, $signUp_query);
-
-//         if ($stmt_signUp) {
-//             mysqli_stmt_bind_param($stmt_signUp, "sssss", $first_name, $last_name, $user_name, $user_email, $user_password);
-
-//             if (mysqli_stmt_execute($stmt_signUp)) {
-//                 // Registered successfully
-//                 return "Registered Successfully!";
-//             } else {
-//                 // Error during registration
-//                 return "Error: " . mysqli_error($conn);
-//             }
-//             mysqli_stmt_close($stmt_signUp);
-//         } else {
-//             // Error preparing the statement
-//             return "Error: " . mysqli_error($conn);
-//         }
-//     }
+// function like_post(){
+//     $liked_post = "INSERT INTO $likes_table WHERE $condition"
 // }
-
-
-// echo "mdghjgrig";

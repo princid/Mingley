@@ -157,9 +157,14 @@ if (empty($_SESSION['id'])) {
                         <!-- profile picture start -->
                         <div class="profile-setting-box">
                             <div class="profile-thumb-small">
-                                <a href="#" class="profile-triger" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a href="#" class="profile-triger h-100 w-100" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" >
                                     <!-- <figure> -->
-                                    <img src="../../assets/img/profile6.png" alt="profile picture">
+                                    <?php if (!empty($user_profile_pic)) { ?>
+                                        <img class="avatar-img rounded-circle border border-primary border-2 p-1" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
+                                    <?php } else { ?>
+                                        <img class="avatar-img rounded-circle border border-primary border-2 p-1" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                    <?php } ?>
+                                    <!-- <img src="../../assets/img/profile6.png" alt="profile picture"> -->
                                     <!-- </figure> -->
                                 </a>
 

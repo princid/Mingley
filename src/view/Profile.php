@@ -8,6 +8,10 @@ require_once("Navbar.php");
 
 require_once("../controller/show_post_on_profile.php");
 
+// require_once("../controller/fetch_user_controller.php");
+
+// require_once("../controller/profile_pic_controller.php");
+
 
 ?>
 
@@ -42,8 +46,12 @@ require_once("../controller/show_post_on_profile.php");
                             <!-- Card body START -->
 
                             <!-- Profile Avatar -->
-                            <div class=" position-relative" style="width: 10rem; margin: 20px;">
-                                <img class="avatar-img rounded-circle border border-white border-3" src="../../assets/img/profile6.png" alt="">
+                            <div class=" position-relative" style="width: 10rem; height:10rem; margin: 20px;">
+                                <?php if (!empty($user_profile_pic)) { ?>
+                                    <img class="avatar-img rounded-circle border border-white border-3" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
+                                <?php } else { ?>
+                                    <img class="avatar-img rounded-circle border border-white border-3" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                <?php } ?>
 
                                 <!-- Update Profile Image -->
                                 <button class="changeImage border border-white border-3" type="button" data-bs-toggle="modal" data-bs-target="#modalEditImage">
@@ -59,14 +67,19 @@ require_once("../controller/show_post_on_profile.php");
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
                                             </div>
-                                            <form action="<?= BASE_URL ?>src/controller/" method="post" id="" name="">
+
+                                            <form action="<?= BASE_URL ?>src/controller/profile_pic_controller.php" method="post" id="" name="" enctype="multipart/form-data">
 
                                                 <div class="modal-body w-75 m-auto" style="text-align:center">
 
                                                     <small>A picture helps people recognize you and lets you know when you’re signed in to your account</small>
 
-                                                    <div class="" style="width: 10rem; margin: 20px auto;">
-                                                        <img class="avatar-img rounded-circle border border-white border-3" src="../../assets/img/profile6.png" alt="">
+                                                    <div class="" style="width: 10rem; height:10rem; margin: 20px auto;">
+                                                        <?php if (!empty($user_profile_pic)) { ?>
+                                                            <img class="avatar-img rounded-circle border border-white border-3" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
+                                                        <?php } else { ?>
+                                                            <img class="avatar-img rounded-circle border border-white border-3" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                                        <?php } ?>
                                                     </div>
 
                                                     <div class="profilePicButtons d-flex" style="justify-content:space-between; align-items:center;">
@@ -76,7 +89,8 @@ require_once("../controller/show_post_on_profile.php");
                                                                 <i class="fa-solid fa-pencil" style="color: #0555e1;"></i>
                                                                 Change
                                                             </button> -->
-                                                            <input type="file" name="" id="">
+                                                            <input type="file" name="profile_pic" id="profile_pic" accept=".jpg, .jpeg, .png, .gif">
+
                                                         </div>
 
                                                         <div class="removeButton">
@@ -93,10 +107,11 @@ require_once("../controller/show_post_on_profile.php");
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-outline-secondary w-25 p-2" data-bs-dismiss="modal">Close</button>
-                                                    <!-- <button type="button" class="btn btn-outline-success p-2">SAVE CHANGES</button> -->
-                                                    <input class="btn w-25 btn-outline-success p-2" type="submit" name="Submit" value="SAVE CHANGES">
+
+                                                    <input class="btn w-25 btn-outline-success p-2" type="submit" name="edit_profile_pic" id="edit_profile_pic" value="SAVE CHANGES">
                                                 </div>
                                             </form>
+
                                         </div>
                                     </div>
                                 </div>
@@ -118,26 +133,12 @@ require_once("../controller/show_post_on_profile.php");
                                             <h5 class="modal-title" id="editBanner"><strong>Update Banner</strong></h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
+
                                         <form action="<?= BASE_URL ?>src/controller/update_profile_controller.php" method="post" id="update_form" name="update_form">
                                             <div class="modal-body">
 
-                                                <!-- <label for="">First Name</label>
-                                                <input type="text" value="<?= $first_name; ?>" id="firstname" name="firstname">
-                                                <div class="formError firstname"></div>
-
-                                                <label for="">Last Name</label>
-                                                <input type="text" value="<?= $last_name; ?>" id="lastname" name="lastname">
-                                                <div class="formError lastname"></div>
-
-                                                <label for="">User Name</label>
-                                                <input type="text" value="<?= $user_name; ?>" id="username" name="username">
-                                                <div class="formError username"></div>
-
-                                                <label for="">User Email</label>
-                                                <input type="text" value="<?= $user_email; ?>" id="email" name="email">
-                                                <div class="formError email"></div> -->
-
                                                 <input type="file" name="" id="">
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-outline-secondary p-2" data-bs-dismiss="modal">Close</button>
@@ -145,6 +146,7 @@ require_once("../controller/show_post_on_profile.php");
                                                 <input class="btn w-25 btn-outline-success p-2" type="submit" name="Submit" value="SAVE CHANGES">
                                             </div>
                                         </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -284,7 +286,11 @@ require_once("../controller/show_post_on_profile.php");
                         <div class="d-flex mb-3">
                             <!-- Avatar -->
                             <div class="avatar avatar-xs me-2">
-                                <a href="#"> <img class="avatar-img rounded-circle" src="../../assets/img/profile6.png" alt=""> </a>
+                                <?php if (!empty($user_profile_pic)) { ?>
+                                    <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
+                                <?php } else { ?>
+                                    <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                <?php } ?>
                             </div>
 
 
@@ -371,6 +377,7 @@ require_once("../controller/show_post_on_profile.php");
                         $post_id = $feed_post_data["post_id"];
                         $post_user_id = $feed_post_data["user_id"];
                         $post_author = $feed_post_data['first_name'] . " " . $feed_post_data['last_name'];
+                        $post_author_profile_pic = $feed_post_data['user_profile_pic'];
                         $post_caption = $feed_post_data['post_caption'];
                         $posted_at = $feed_post_data['posted_at'];
                         $all_post_images = explode(',', $feed_post_data['post_images']);
@@ -386,7 +393,11 @@ require_once("../controller/show_post_on_profile.php");
                                     <div class="d-flex align-items-center">
                                         <!-- Avatar -->
                                         <div class="avatar me-2">
-                                            <a href="#!"> <img class="avatar-img rounded-circle" src="../../assets/img/profile6.png" alt=""> </a>
+                                            <?php if (!empty($post_author_profile_pic)) { ?>
+                                                <img class="avatar-img rounded-circle border border-primary border-2 p-1" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $post_author_profile_pic; ?>" alt="">
+                                            <?php } else { ?>
+                                                <img class="avatar-img rounded-circle border border-primary border-2 p-1" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                            <?php } ?>
                                         </div>
                                         <!-- Info -->
                                         <div>
@@ -425,45 +436,49 @@ require_once("../controller/show_post_on_profile.php");
                                 <p><?= $post_caption; ?> </p>
                                 <!-- Card img -->
 
-                                <!-- Carousel for Post images -->
-                                <div id="<?= $carousel_id; ?>" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                                    <div class="carousel-indicators">
+                                <!-- Carousel -->
+                                <?php if (count($all_post_images) > 1) { ?>
+                                    <!-- Carousel for Post images -->
+                                    <div id="<?= $carousel_id; ?>" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                                        <div class="carousel-indicators">
 
-                                        <?php
-                                        // Loop through all the post images
-                                        foreach ($all_post_images as $index => $post_image) {
-                                            $activeClass = ($index === 0) ? 'active' : '';
-                                        ?>
-                                            <button type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide-to="<?= $index; ?>" class="<?= $activeClass; ?>" aria-label="Slide <?= $index + 1; ?>"></button>
-                                        <?php } ?>
+                                            <?php
+                                            // Loop through all the post images
+                                            foreach ($all_post_images as $index => $post_image) {
+                                                $activeClass = ($index === 0) ? 'active' : '';
+                                            ?>
+                                                <button type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide-to="<?= $index; ?>" class="<?= $activeClass; ?>" aria-label="Slide <?= $index + 1; ?>"></button>
+                                            <?php } ?>
 
+                                        </div>
+
+                                        <div class="carousel-inner">
+
+                                            <?php
+                                            // Loop through all the post images
+                                            foreach ($all_post_images as $index => $post_image) {
+                                                $activeClass = ($index === 0) ? 'active' : '';
+                                            ?>
+                                                <div class="carousel-item <?= $activeClass; ?>">
+                                                    <img src="<?= BASE_URL ?>assets/posts/<?= $post_user_id . "/" . $post_image; ?>" class="d-block w-100" style="height:300px; object-fit:contain;" alt="Post Image">
+                                                </div>
+                                            <?php } ?>
+
+                                        </div>
+
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
                                     </div>
+                                <?php } else { ?>
+                                    <img src="<?= BASE_URL ?>assets/posts/<?= $post_user_id . "/" . $all_post_images[0]; ?>" class="d-block w-100" style="height:300px; object-fit:contain;" alt="Post Image">
+                                <?php } ?>
 
-                                    <div class="carousel-inner">
-
-                                        <?php
-                                        // Loop through all the post images
-                                        foreach ($all_post_images as $index => $post_image) {
-                                            $activeClass = ($index === 0) ? 'active' : '';
-                                        ?>
-                                            <div class="carousel-item <?= $activeClass; ?>">
-                                                <img src="<?= BASE_URL ?>assets/posts/<?= $post_user_id . "/" . $post_image; ?>" class="d-block w-100" style="height:300px; object-fit:contain;" alt="Post Image">
-                                            </div>
-                                        <?php } ?>
-
-                                    </div>
-
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
-                                </div>
-
-                                <!-- <img class="card-img" src="../../assets/img/post4.jpg" alt="Post"> -->
 
                                 <!-- Feed react START -->
                                 <ul class="nav nav-stack py-3 mt-1">
@@ -505,7 +520,13 @@ require_once("../controller/show_post_on_profile.php");
                                 <div class="d-flex mb-3">
                                     <!-- Avatar -->
                                     <div class="avatar avatar-xs me-2">
-                                        <a href="#!"> <img class="avatar-img rounded-circle" src="../../assets/img/profile2.jpg" alt=""> </a>
+                                        <a href="#!">
+                                            <?php if (!empty($user_profile_pic)) { ?>
+                                                <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
+                                            <?php } else { ?>
+                                                <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                            <?php } ?>
+                                        </a>
                                     </div>
                                     <!-- Comment box  -->
                                     <form class="nav nav-item w-100 position-relative">

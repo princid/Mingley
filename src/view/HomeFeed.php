@@ -16,6 +16,8 @@ require_once("../controller/create_post_controller.php");
 
 require_once("../controller/show_post_on_feed.php");
 
+require_once("../controller/getAllUserRecord.php");
+
 // var_dump($feed_post_result);
 // exit;
 
@@ -60,7 +62,11 @@ require_once("../controller/show_post_on_feed.php");
                                         <img src="../../assets/img/banner2.png" class="rounded-2" alt="">
                                     </a>
                                     <a href="Profile.php" class="profile-thumb-2">
-                                        <img src="../../assets/img/profile6.png" alt="">
+                                        <?php if (!empty($user_profile_pic)) { ?>
+                                            <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
+                                        <?php } else { ?>
+                                            <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                        <?php } ?>
                                     </a>
                                 </figure>
                                 <div class="profile-desc text-center">
@@ -144,7 +150,11 @@ require_once("../controller/show_post_on_feed.php");
                         <div class="d-flex mb-3">
                             <!-- Avatar -->
                             <div class="avatar avatar-xs me-2">
-                                <a href="#"> <img class="avatar-img rounded-circle" src="../../assets/img/profile6.png" alt=""> </a>
+                                <?php if (!empty($user_profile_pic)) { ?>
+                                    <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
+                                <?php } else { ?>
+                                    <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                <?php } ?>
                             </div>
 
 
@@ -232,6 +242,7 @@ require_once("../controller/show_post_on_feed.php");
                         $post_id = $feed_post_data["post_id"];
                         $post_user_id = $feed_post_data["user_id"];
                         $post_author = $feed_post_data['first_name'] . " " . $feed_post_data['last_name'];
+                        $post_author_profile_pic = $feed_post_data['user_profile_pic'];
                         $post_caption = $feed_post_data['post_caption'];
                         $posted_at = $feed_post_data['posted_at'];
                         $all_post_images = explode(',', $feed_post_data['post_images']);
@@ -239,6 +250,8 @@ require_once("../controller/show_post_on_feed.php");
                         $carousel_id = 'carouselIndicators_' . $post_id;
 
                         $friend_profileUrl = "FriendProfile.php?user_id=" . $post_user_id;
+
+                        // var_dump($post_author_profile_pic);
 
                     ?>
 
@@ -250,9 +263,21 @@ require_once("../controller/show_post_on_feed.php");
                                         <!-- Avatar -->
                                         <div class="avatar me-2">
                                             <?php if ($post_user_id == $_SESSION['id']) { ?>
-                                                <a href="Profile.php"> <img class="avatar-img rounded-circle" src="../../assets/img/profile6.png" alt=""> </a>
+                                                <a href="Profile.php">
+                                                    <?php if (!empty($post_author_profile_pic)) { ?>
+                                                        <img class="avatar-img rounded-circle border border-primary border-2 p-1" src="<?= BASE_URL ?>assets/profile_pic/<?= $post_user_id . "/" . $post_author_profile_pic; ?>" alt="">
+                                                    <?php } else { ?>
+                                                        <img class="avatar-img rounded-circle border border-primary border-2 p-1" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                                    <?php } ?>
+                                                </a>
                                             <?php } else { ?>
-                                                <a href="<?= $friend_profileUrl; ?>"> <img class="avatar-img rounded-circle" src="../../assets/img/profile6.png" alt=""> </a>
+                                                <a href="<?= $friend_profileUrl; ?>">
+                                                    <?php if (!empty($post_author_profile_pic)) { ?>
+                                                        <img class="avatar-img rounded-circle border border-primary border-2 p-1" src="<?= BASE_URL ?>assets/profile_pic/<?= $post_user_id . "/" . $post_author_profile_pic; ?>" alt="">
+                                                    <?php } else { ?>
+                                                        <img class="avatar-img rounded-circle border border-primary border-2 p-1" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                                    <?php } ?>
+                                                </a>
                                             <?php } ?>
                                         </div>
                                         <!-- Info -->
@@ -289,7 +314,7 @@ require_once("../controller/show_post_on_feed.php");
                                             <!-- Card feed action dropdown menu -->
                                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
                                                 <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
-                                                <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori ferguson </a></li>
+                                                <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow <?= $post_author; ?> </a></li>
                                                 <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
                                                 <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
                                                 <li>
@@ -311,43 +336,47 @@ require_once("../controller/show_post_on_feed.php");
                                 <p><?= $post_caption; ?> </p>
                                 <!-- Card img -->
 
-                                <!-- Carousel for Post images -->
-                                <div id="<?= $carousel_id; ?>" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                                    <div class="carousel-indicators">
+                                <?php if (count($all_post_images) > 1) { ?>
+                                    <!-- Carousel for Post images -->
+                                    <div id="<?= $carousel_id; ?>" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                                        <div class="carousel-indicators">
 
-                                        <?php
-                                        // Loop through all the post images
-                                        foreach ($all_post_images as $index => $post_image) {
-                                            $activeClass = ($index === 0) ? 'active' : '';
-                                        ?>
-                                            <button type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide-to="<?= $index; ?>" class="<?= $activeClass; ?>" aria-label="Slide <?= $index + 1; ?>"></button>
-                                        <?php } ?>
+                                            <?php
+                                            // Loop through all the post images
+                                            foreach ($all_post_images as $index => $post_image) {
+                                                $activeClass = ($index === 0) ? 'active' : '';
+                                            ?>
+                                                <button type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide-to="<?= $index; ?>" class="<?= $activeClass; ?>" aria-label="Slide <?= $index + 1; ?>"></button>
+                                            <?php } ?>
 
+                                        </div>
+
+                                        <div class="carousel-inner">
+
+                                            <?php
+                                            // Loop through all the post images
+                                            foreach ($all_post_images as $index => $post_image) {
+                                                $activeClass = ($index === 0) ? 'active' : '';
+                                            ?>
+                                                <div class="carousel-item <?= $activeClass; ?>">
+                                                    <img src="<?= BASE_URL ?>assets/posts/<?= $post_user_id . "/" . $post_image; ?>" class="d-block w-100" style="height:300px; object-fit:contain;" alt="Post Image">
+                                                </div>
+                                            <?php } ?>
+
+                                        </div>
+
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
                                     </div>
-
-                                    <div class="carousel-inner">
-
-                                        <?php
-                                        // Loop through all the post images
-                                        foreach ($all_post_images as $index => $post_image) {
-                                            $activeClass = ($index === 0) ? 'active' : '';
-                                        ?>
-                                            <div class="carousel-item <?= $activeClass; ?>">
-                                                <img src="<?= BASE_URL ?>assets/posts/<?= $post_user_id . "/" . $post_image; ?>" class="d-block w-100" style="height:300px; object-fit:contain;" alt="Post Image">
-                                            </div>
-                                        <?php } ?>
-
-                                    </div>
-
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
-                                </div>
+                                <?php } else { ?>
+                                    <img src="<?= BASE_URL ?>assets/posts/<?= $post_user_id . "/" . $all_post_images[0]; ?>" class="d-block w-100" style="height:300px; object-fit:contain;" alt="Post Image">
+                                <?php } ?>
 
                                 <!-- <img class="card-img" src="../../assets/img/post4.jpg" alt="Post"> -->
 
@@ -391,7 +420,13 @@ require_once("../controller/show_post_on_feed.php");
                                 <div class="d-flex mb-3">
                                     <!-- Avatar -->
                                     <div class="avatar avatar-xs me-2">
-                                        <a href="#!"> <img class="avatar-img rounded-circle" src="../../assets/img/profile2.jpg" alt=""> </a>
+                                        <a href="#!">
+                                            <?php if (!empty($user_profile_pic)) { ?>
+                                                <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
+                                            <?php } else { ?>
+                                                <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                            <?php } ?>
+                                        </a>
                                     </div>
                                     <!-- Comment box  -->
                                     <form class="nav nav-item w-100 position-relative">
@@ -478,86 +513,45 @@ require_once("../controller/show_post_on_feed.php");
                                     <h5 class="card-title mb-0">Who to follow</h5>
                                 </div>
                                 <!-- Card header END -->
+
                                 <!-- Card body START -->
                                 <div class="card_body">
-                                    <!-- Connection item START -->
-                                    <div class="hstack gap-2 mb-3 mt-3">
-                                        <!-- Avatar -->
-                                        <div class="avatar">
-                                            <a href="#"><img class="avatar-img rounded-circle" src="../../assets/img/profile2.jpg" alt=""></a>
-                                        </div>
-                                        <!-- Title -->
-                                        <div class="overflow-hidden">
-                                            <a class="h6 mb-0" href="#!">Judy Nguyen </a>
-                                            <p class="mb-0 small text-truncate">News anchor</p>
-                                        </div>
-                                        <!-- Button -->
-                                        <a class="btn btn-primary-soft rounded-circle icon-md ms-auto rightNav_anchor" href="#"><i class="fa-solid fa-plus"> </i></a>
-                                    </div>
-                                    <!-- Connection item END -->
-                                    <!-- Connection item START -->
-                                    <div class="hstack gap-2 mb-3 mt-3">
-                                        <!-- Avatar -->
-                                        <div class="avatar avatar-story">
-                                            <a href="#!"> <img class="avatar-img rounded-circle" src="../../assets/img/profile2.jpg" alt=""> </a>
-                                        </div>
-                                        <!-- Title -->
-                                        <div class="overflow-hidden">
-                                            <a class="h6 mb-0" href="#!">Amanda Reed </a>
-                                            <p class="mb-0 small text-truncate">Web Developer</p>
-                                        </div>
-                                        <!-- Button -->
-                                        <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="#"><i class="fa-solid fa-plus"> </i></a>
-                                    </div>
-                                    <!-- Connection item END -->
 
-                                    <!-- Connection item START -->
-                                    <div class="hstack gap-2 mb-3 mt-3">
-                                        <!-- Avatar -->
-                                        <div class="avatar">
-                                            <a href="#"> <img class="avatar-img rounded-circle" src="../../assets/img/profile2.jpg" alt=""> </a>
-                                        </div>
-                                        <!-- Title -->
-                                        <div class="overflow-hidden">
-                                            <a class="h6 mb-0" href="#!">Billy Vasquez </a>
-                                            <p class="mb-0 small text-truncate">News anchor</p>
-                                        </div>
-                                        <!-- Button -->
-                                        <a class="btn btn-primary-soft rounded-circle icon-md ms-auto"><i class="bi bi-person-check-fill"> </i></a>
-                                    </div>
-                                    <!-- Connection item END -->
+                                    <?php foreach ($fetch_user_result as $send_friend_request) {
 
-                                    <!-- Connection item START -->
-                                    <div class="hstack gap-2 mb-3 mt-3">
-                                        <!-- Avatar -->
-                                        <div class="avatar">
-                                            <a href="#"> <img class="avatar-img rounded-circle" src="../../assets/img/profile2.jpg" alt=""> </a>
-                                        </div>
-                                        <!-- Title -->
-                                        <div class="overflow-hidden">
-                                            <a class="h6 mb-0" href="#!">Lori Ferguson </a>
-                                            <p class="mb-0 small text-truncate">Web Developer at Webestica</p>
-                                        </div>
-                                        <!-- Button -->
-                                        <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="#"><i class="fa-solid fa-plus"> </i></a>
-                                    </div>
-                                    <!-- Connection item END -->
+                                        // $post_id = $feed_post_data["post_id"];
+                                        $unknown_user_id = $send_friend_request["id"];
+                                        $unknown_user_name = $send_friend_request['first_name'] . " " . $send_friend_request['last_name'];
+                                        $unknown_user_pic = $send_friend_request['user_profile_pic'];
+                                        $unknown_user_bio = $send_friend_request['user_bio'];
 
-                                    <!-- Connection item START -->
-                                    <div class="hstack gap-2 mb-3 mt-3">
-                                        <!-- Avatar -->
-                                        <div class="avatar">
-                                            <a href="#"> <img class="avatar-img rounded-circle" src="../../assets/img/profile2.jpg" alt=""> </a>
+                                        // var_dump($unknown_user_name);
+
+                                    ?>
+
+                                        <!-- Connection item START -->
+                                        <div class="hstack gap-2 mb-3 mt-3">
+                                            <!-- Avatar -->
+                                            <div class="avatar">
+                                                <a href="#">
+                                                    <?php if (!empty($unknown_user_pic)) { ?>
+                                                        <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $unknown_user_id . "/" . $unknown_user_pic; ?>" alt="">
+                                                    <?php } else { ?>
+                                                        <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                                    <?php } ?>
+                                                </a>
+                                            </div>
+                                            <!-- Title -->
+                                            <div class="overflow-hidden">
+                                                <a class="h6 mb-0" href="#!"><?= $unknown_user_name; ?> </a>
+                                                <p class="mb-0 small text-truncate">News anchor</p>
+                                            </div>
+                                            <!-- Button -->
+                                            <a class="btn btn-primary-soft rounded-circle icon-md ms-auto rightNav_anchor" href="#"><i class="fa-solid fa-plus"> </i></a>
                                         </div>
-                                        <!-- Title -->
-                                        <div class="overflow-hidden">
-                                            <a class="h6 mb-0" href="#!">Carolyn Ortiz </a>
-                                            <p class="mb-0 small text-truncate">News anchor</p>
-                                        </div>
-                                        <!-- Button -->
-                                        <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="#"><i class="fa-solid fa-plus"> </i></a>
-                                    </div>
-                                    <!-- Connection item END -->
+                                        <!-- Connection item END -->
+
+                                    <?php } ?>
 
                                     <!-- View more button -->
                                     <div class="card-footer d-grid mt-3">
