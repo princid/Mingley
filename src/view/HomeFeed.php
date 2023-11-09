@@ -18,6 +18,8 @@ require_once("../controller/show_post_on_feed.php");
 
 require_once("../controller/getAllUserRecord.php");
 
+// require_once("../controller/like_controller.php");
+
 // var_dump($feed_post_result);
 // exit;
 
@@ -119,13 +121,13 @@ require_once("../controller/getAllUserRecord.php");
                                         <a class="nav-link" href="groups.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/chat-outline-filled.svg" alt=""><span>Groups </span></a>
                                     </li> -->
                                     <li class="nav-item">
-                                        <a class="nav-link" href="notifications.html">
+                                        <a class="nav-link" href="#">
                                             <i class="fa-solid fa-bell pe-2"></i>
                                             <span>Notifications </span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="settings.html">
+                                        <a class="nav-link" href="">
                                             <i class="fa-solid fa-gear pe-2"></i>
                                             <span>Settings </span>
                                         </a>
@@ -235,7 +237,7 @@ require_once("../controller/getAllUserRecord.php");
                     </div>
                     <!-- share box end -->
 
-                    <!-- post status start -->
+                    <!-- post box start -->
 
                     <?php foreach ($feed_post_result as $feed_post_data) {
 
@@ -250,6 +252,11 @@ require_once("../controller/getAllUserRecord.php");
                         $carousel_id = 'carouselIndicators_' . $post_id;
 
                         $friend_profileUrl = "FriendProfile.php?user_id=" . $post_user_id;
+
+                        $like_status = $feed_post_data["like_status"];
+
+                        // $like_status = check_like_status($conn, $post_id, $_SESSION['id']); 
+                        // var_dump($like_status);
 
                         // var_dump($post_author_profile_pic);
 
@@ -382,10 +389,11 @@ require_once("../controller/getAllUserRecord.php");
 
                                 <!-- Feed react START -->
                                 <ul class="nav nav-stack py-3 mt-1">
+
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="#!" data-bs-container="body" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-custom-class="tooltip-text-start" data-bs-title="Frances Guerrero<br> Lori Stevens<br> Billy Vasquez<br> Judy Nguyen<br> Larry Lawson<br> Amanda Reed<br> Louis Crawford">
-                                            <i class="fa-regular fa-heart"></i>
-                                            Likes (56)
+                                        <a class="nav-link active likesAnchor" href="#" data-post-id="<?= $post_id ?>" data-like-status="<?= $like_status ?>">
+                                            <i class="fa-<?= $like_status ? 'solid text-danger' : 'regular' ?> fa-heart postLike" data-post-id="<?= $post_id ?>"></i>
+                                            Likes <span id="likes_count">(<?= $feed_post_data['likes_count'] ?>)</span>
                                         </a>
                                     </li>
 
@@ -495,7 +503,7 @@ require_once("../controller/getAllUserRecord.php");
                     <?php } ?>
 
 
-                    <!-- post status end -->
+                    <!-- post box end -->
 
 
 
@@ -510,7 +518,7 @@ require_once("../controller/getAllUserRecord.php");
                             <div class="card rounded-2">
                                 <!-- Card header START -->
                                 <div class="card-header p-0 border-0">
-                                    <h5 class="card-title mb-0">Who to follow</h5>
+                                    <h5 class="card-title mb-0">Suggested accounts :</h5>
                                 </div>
                                 <!-- Card header END -->
 
@@ -543,8 +551,8 @@ require_once("../controller/getAllUserRecord.php");
                                             </div>
                                             <!-- Title -->
                                             <div class="overflow-hidden">
-                                                <a class="h6 mb-0" href="#!"><?= $unknown_user_name; ?> </a>
-                                                <p class="mb-0 small text-truncate">News anchor</p>
+                                                <a class="h6 mb-0" href="#"><?= $unknown_user_name; ?> </a>
+                                                <p title="<?= $unknown_user_bio; ?>" class="mb-0 small text-truncate"><?= $unknown_user_bio; ?></p>
                                             </div>
                                             <!-- Button -->
                                             <a class="btn btn-primary-soft rounded-circle icon-md ms-auto rightNav_anchor" href="#"><i class="fa-solid fa-plus"> </i></a>
@@ -655,6 +663,7 @@ require_once("../controller/getAllUserRecord.php");
 <script src="../../assets/js/jquery.js"></script>
 
 
+
 <script>
     const alertBox = document.querySelector(".alertBox");
 
@@ -664,28 +673,41 @@ require_once("../controller/getAllUserRecord.php");
 </script>
 
 
-<!-- <script type="text/javascript">
+<script>
     $(document).ready(function() {
-        $("#submit_post").on("submit", function(e) {
-            e.preventDefault();
-
-            var formData = new FormData(this);
+        $(document).on('click', '.likesAnchor', function(event) {
+            event.preventDefault();
+            const postID = $(this).data('post-id');
+            const likeStatus = $(this).data('like-status');
+            const postLike = $(`.postLike[data-post-id="${postID}"]`);
 
             $.ajax({
-                url: "",
-                type: "POST",
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(data) {
-                    $("#preview").show();
-                    $("#image_preview").html(data);
-                    $("#upload_file").val('');
+                url: '../controller/like_controller.php',
+                method: 'POST',
+                data: {
+                    post_id: postID
+                },
+                dataType: 'json',
+                success: function(response) {
+
+                    console.log(response);
+                    if (response['like_status'] === 'liked') {
+                        postLike.removeClass('fa-regular').addClass('fa-solid').css('color', 'red');
+                        $(this).data('like-status', 1);
+                    } else if (response['like_status'] === 'unliked') {
+                        postLike.removeClass('fa-solid').addClass('fa-regular').css('color', 'initial');
+                        $(this).data('like-status', 0);
+                    }
+                    $("#likes_count").html(response['likes_count']);
+                },
+                error: function(error) {
+                    console.error('Error:', error);
                 }
-            })
-        })
+            });
+        });
     });
-</script> -->
+</script>
+
 
 
 

@@ -265,6 +265,14 @@ h6{
     flex: none !important;
 }
 
+.likesAnchor{
+    color: #333333;
+}
+
+.nav{
+    /* --bs-nav-link-font-weight: 600; */
+    --bs-nav-link-color: #333333;
+}
 
 
 

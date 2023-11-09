@@ -6,7 +6,6 @@ require_once("../model/Query.php");
 
 if (!empty($_SESSION)) {
 
-    // $id = !empty($_GET['user_id']) ? $_GET['user_id'] : $_SESSION['id'];
     $id = $_SESSION['id'];
 
     $fetch_table = 'users_table';

@@ -113,7 +113,7 @@ var_dump($post_author_username);
                                 <li class="nav-item"> <a class="nav-link" href="my-profile-activity.html"> Activity</a> </li>
                             </ul> -->
 
-                            <button class="btn btn-outline-primary w-25 me-3"><i class="fa-solid fa-user-plus pe-3"></i> Follow</button>
+                            <button class="btn btn-outline-primary w-25 me-3"><i class="fa-solid fa-user-plus pe-3"></i> Add Friend</button>
                             <button class="btn btn-outline-success w-25"><i class="fa-regular fa-message pe-3"></i> Message</button>
                         </div>
 

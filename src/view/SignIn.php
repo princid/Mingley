@@ -70,6 +70,7 @@ require_once("../../config/constants.php");
 
     passEye.addEventListener('click', () => {
         const input = document.querySelector('#password');
+        
         if (input.getAttribute('type') === 'password') {
             input.setAttribute('type', 'text');
             passEye.classList.remove('fa-eye');

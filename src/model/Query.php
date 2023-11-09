@@ -112,33 +112,96 @@ function createPost($conn, $table, $user_id, $caption, $imageNamesAsString){
 
 
 // Function to show posts on Home Page's feed.
-function show_post_on_feed($conn, $users_table, $posts_table, $feed_post_condition){
+// function show_post_on_feed($conn, $users_table, $posts_table, $feed_post_condition){
 
-    $show_post = "SELECT * FROM $users_table JOIN $posts_table ON $feed_post_condition ORDER BY $posts_table.posted_at DESC";
+//     $show_post = "SELECT * FROM $users_table JOIN $posts_table ON $feed_post_condition ORDER BY $posts_table.posted_at DESC";
+
+//     $show_post_run = mysqli_query($conn, $show_post);
+
+//     $post_data = array();
+
+//     if($show_post_run && mysqli_num_rows($show_post_run) > 0){
+
+//         while ($data = mysqli_fetch_assoc($show_post_run)) {
+//             $post_data[] = $data;
+//         }
+
+
+//         return $post_data;
+//     }
+// }
+
+
+
+// BY GPT BABA
+// Function to show posts on Home Page's feed.
+// function show_post_on_feed($conn, $users_table, $posts_table, $likes_table, $feed_post_condition, $current_user_id)
+// {
+//     $show_post = "SELECT 
+//                     $users_table.*,
+//                     $posts_table.*,
+//                     COUNT(CASE WHEN $likes_table.like_status = 1 THEN 1 END) AS likes_count,
+//                     MAX($likes_table.like_status) AS like_status
+//                 FROM $users_table
+//                 JOIN $posts_table ON $feed_post_condition
+//                 LEFT JOIN $likes_table ON $posts_table.post_id = $likes_table.post_id AND $likes_table.liked_by_id = $current_user_id
+//                 GROUP BY $posts_table.post_id
+//                 ORDER BY $posts_table.posted_at DESC";
+
+//     $show_post_run = mysqli_query($conn, $show_post);
+
+//     $post_data = array();
+
+//     if ($show_post_run && mysqli_num_rows($show_post_run) > 0) {
+
+//         while ($data = mysqli_fetch_assoc($show_post_run)) {
+//             $post_data[] = $data;
+//         }
+
+//         return $post_data;
+//     }
+// }
+
+function show_post_on_feed($conn, $users_table, $posts_table, $likes_table, $feed_post_condition, $current_user_id)
+{
+    $show_post = "SELECT 
+                    $users_table.*,
+                    $posts_table.*,
+                    (SELECT COUNT(*) FROM $likes_table WHERE $likes_table.post_id = $posts_table.post_id AND $likes_table.like_status = 1) AS likes_count,
+                    MAX($likes_table.like_status) AS like_status
+                FROM $users_table
+                JOIN $posts_table ON $feed_post_condition
+                LEFT JOIN $likes_table ON $posts_table.post_id = $likes_table.post_id AND $likes_table.liked_by_id = $current_user_id
+                GROUP BY $posts_table.post_id
+                ORDER BY $posts_table.posted_at DESC";
 
     $show_post_run = mysqli_query($conn, $show_post);
 
     $post_data = array();
 
-    if($show_post_run && mysqli_num_rows($show_post_run) > 0){
+    if ($show_post_run && mysqli_num_rows($show_post_run) > 0) {
 
         while ($data = mysqli_fetch_assoc($show_post_run)) {
             $post_data[] = $data;
         }
 
-        // foreach ($post_data as $post) {
-        //     // var_dump($post);
-        //     // echo "Post Title: " . $post['post_caption'] . "<br>";
-        //     // echo "Post Content: " . $post['post_images'] . "<br>";
-        //     // echo "Post Owner: " . $post['first_name'] . "<br>";
-        //     $post_author = $post["first_name"]. " ". $post["last_name"];
-        //     $post_caption = $post["post_caption"];
-        //     $post_images = $post["post_images"];
-        // }
-
         return $post_data;
     }
 }
+
+
+
+
+
+// foreach ($post_data as $post) {
+//     // var_dump($post);
+//     // echo "Post Title: " . $post['post_caption'] . "<br>";
+//     // echo "Post Content: " . $post['post_images'] . "<br>";
+//     // echo "Post Owner: " . $post['first_name'] . "<br>";
+//     $post_author = $post["first_name"]. " ". $post["last_name"];
+//     $post_caption = $post["post_caption"];
+//     $post_images = $post["post_images"];
+// }
 
 
 // Function to show our own posts on our profile.
@@ -218,6 +281,27 @@ function getAllUserRecord($conn, $getAll_table){
 
 // Function for Post Like
 
-// function like_post(){
-//     $liked_post = "INSERT INTO $likes_table WHERE $condition"
-// }
+function toggleLike($conn, $postID, $userID)
+{
+    $checkQuery = "SELECT * FROM likes_table WHERE post_id = $postID AND liked_by_id = $userID";
+    $result = $conn->query($checkQuery);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $like_status = $row["like_status"];
+
+        if ($like_status == 1) {
+            $updateUnlike = "UPDATE likes_table SET like_status = '0' WHERE post_id = $postID AND liked_by_id = $userID";
+            $conn->query($updateUnlike);
+            return 'unliked';
+        } else {
+            $updateLike = "UPDATE likes_table SET like_status = '1' WHERE post_id = $postID AND liked_by_id = $userID";
+            $conn->query($updateLike);
+            return 'liked';
+        }
+    } else {
+        $insertQuery = "INSERT INTO likes_table (post_id, liked_by_id, like_status) VALUES ($postID, $userID, 1)";
+        $conn->query($insertQuery);
+        return 'liked';
+    }
+}
