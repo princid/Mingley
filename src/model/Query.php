@@ -305,3 +305,8 @@ function toggleLike($conn, $postID, $userID)
         return 'liked';
     }
 }
+
+
+function postComment(){
+
+}

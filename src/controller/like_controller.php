@@ -60,7 +60,8 @@ if (!empty($_SESSION)) {
 
     $count_like = $feed_post_result[0]['likes_count'];
 
-    $response = ["likes_count" => $count_like, "status" => 200, "like_status" => $like_stat];
+    $response = ["likes_count" => $count_like, "status" => 200, "like_status" => $like_stat, "post_id" => $postID];
+    // $response = ["status" => 200, "like_status" => $like_stat, "post_id" => $postID];
 
     echo json_encode($response);
 

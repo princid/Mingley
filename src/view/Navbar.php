@@ -44,7 +44,7 @@ if (empty($_SESSION['id'])) {
                                 </li>
 
                                 <li class="search-trigger">
-                                    <a class="search-trigger-btn" href="#">
+                                    <a class="search-trigger-btn" href="SearchPage.php">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </a>
                                 </li>

@@ -255,6 +255,8 @@ require_once("../controller/getAllUserRecord.php");
 
                         $like_status = $feed_post_data["like_status"];
 
+                        // $count_like = $feed_post_data['likes_count'];
+
                         // $like_status = check_like_status($conn, $post_id, $_SESSION['id']); 
                         // var_dump($like_status);
 
@@ -393,7 +395,8 @@ require_once("../controller/getAllUserRecord.php");
                                     <li class="nav-item">
                                         <a class="nav-link active likesAnchor" href="#" data-post-id="<?= $post_id ?>" data-like-status="<?= $like_status ?>">
                                             <i class="fa-<?= $like_status ? 'solid text-danger' : 'regular' ?> fa-heart postLike" data-post-id="<?= $post_id ?>"></i>
-                                            Likes <span id="likes_count">(<?= $feed_post_data['likes_count'] ?>)</span>
+                                            Likes <span id="likes_count_<?= $post_id; ?>">(<?= $feed_post_data['likes_count'] ?>)</span>
+                                            <!-- <span id="likes_count_<?= $post_id; ?>">(<?= $count_like ?>)</span> Likes -->
                                         </a>
                                     </li>
 
@@ -673,40 +676,7 @@ require_once("../controller/getAllUserRecord.php");
 </script>
 
 
-<script>
-    $(document).ready(function() {
-        $(document).on('click', '.likesAnchor', function(event) {
-            event.preventDefault();
-            const postID = $(this).data('post-id');
-            const likeStatus = $(this).data('like-status');
-            const postLike = $(`.postLike[data-post-id="${postID}"]`);
-
-            $.ajax({
-                url: '../controller/like_controller.php',
-                method: 'POST',
-                data: {
-                    post_id: postID
-                },
-                dataType: 'json',
-                success: function(response) {
-
-                    console.log(response);
-                    if (response['like_status'] === 'liked') {
-                        postLike.removeClass('fa-regular').addClass('fa-solid').css('color', 'red');
-                        $(this).data('like-status', 1);
-                    } else if (response['like_status'] === 'unliked') {
-                        postLike.removeClass('fa-solid').addClass('fa-regular').css('color', 'initial');
-                        $(this).data('like-status', 0);
-                    }
-                    $("#likes_count").html(response['likes_count']);
-                },
-                error: function(error) {
-                    console.error('Error:', error);
-                }
-            });
-        });
-    });
-</script>
+<script src="../../assets/js/postLike.js"></script>
 
 
 
