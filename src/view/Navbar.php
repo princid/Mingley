@@ -39,7 +39,7 @@ if (empty($_SESSION['id'])) {
                                 <li class="active"><a href="HomeFeed.php"><i class="fa-solid fa-house"></i></a></li>
 
                                 <!-- Pending -->
-                                <li class="msg-trigger"><a class="msg-trigger-btn" href="#a"><i class="fa-solid fa-message"></i></a>
+                                <li class="msg-trigger"><a class="msg-trigger-btn" href="Chat.php"><i class="fa-solid fa-message"></i></a>
 
                                 </li>
 

@@ -75,7 +75,7 @@
 }
 
 hr{
-    margin: 1rem !important;
+    /* margin: 1rem !important; */
     border: 0;
     border-top: var(--bs-border-width) solid;
     opacity: .25;
