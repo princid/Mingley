@@ -98,7 +98,7 @@ require_once("../controller/getAllUserRecord.php");
                 <!-- Mid Post Section Starts here -->
                 <div class="col-md-8 col-lg-6 vstack gap-1">
 
-                    <!-- share box start -->
+                    <!-- chat box start -->
                     <div class="card card-body rounded-2">
                         <div class="d-flex mb-3">
                             <!-- Avatar -->
@@ -119,8 +119,36 @@ require_once("../controller/getAllUserRecord.php");
                         </div>
                         <hr class="divider">
 
+                        <div class="chatArea">
+
+                        </div>
+
+                        <div class="chatInputArea">
+                            <div class="d-flex mb-3">
+                                <!-- Avatar -->
+                                <div class="avatar avatar-xs me-2">
+                                    <a href="#!">
+                                        <?php if (!empty($user_profile_pic)) { ?>
+                                            <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
+                                        <?php } else { ?>
+                                            <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                        <?php } ?>
+                                    </a>
+                                </div>
+                                <!-- chat input box  -->
+                                <form class="nav nav-item w-100 position-relative">
+                                    <input type="text" name="" id="" class="form-control pe-5 bg-light" rows="1" placeholder="Message...">
+                                    <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+
                     </div>
-                    <!-- share box end -->
+                    <!-- chat box end -->
+
 
 
 

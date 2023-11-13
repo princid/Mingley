@@ -8,12 +8,13 @@ require_once("Navbar.php");
 
 require_once("../controller/show_post_on_profile.php");
 
-$post_author = $profile_feed_result['first_name'] . " " . $profile_feed_result['last_name'];
-$post_author_username = $profile_feed_result['user_name'];
-$post_author_bio = $profile_feed_result['user_bio'];
-$post_author_email = $profile_feed_result['user_email'];
+$post_author = $profile_feed_result[0]['first_name'] . " " . $profile_feed_result[0]['last_name'];
+$post_author_username = $profile_feed_result[0]['user_name'];
+$post_author_bio = $profile_feed_result[0]['user_bio'];
+$post_author_email = $profile_feed_result[0]['user_email'];
 
-var_dump($post_author_username);
+// print_r($profile_feed_result);
+// exit;
 
 
 ?>
@@ -40,8 +41,9 @@ var_dump($post_author_username);
 
             <div class="row g-4">
 
-                <?php var_dump($_GET['user_id']);
-                var_dump($post_author_username);
+                <?php
+                // var_dump($_GET['user_id']);
+                // var_dump($post_author_username);
                 ?>
 
                 <!-- Main content START -->
@@ -113,8 +115,8 @@ var_dump($post_author_username);
                                 <li class="nav-item"> <a class="nav-link" href="my-profile-activity.html"> Activity</a> </li>
                             </ul> -->
 
-                            <button class="btn btn-outline-primary w-25 me-3"><i class="fa-solid fa-user-plus pe-3"></i> Add Friend</button>
-                            <button class="btn btn-outline-success w-25"><i class="fa-regular fa-message pe-3"></i> Message</button>
+                            <button class="btn btn-outline-primary w-25 me-3"><i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong></button>
+                            <button class="btn btn-outline-success w-25"><i class="fa-regular fa-message pe-3"></i> <strong>Message</strong></button>
                         </div>
 
                     </div>
