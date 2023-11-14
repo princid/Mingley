@@ -290,7 +290,11 @@ h6{
 .chatArea{
     width: 100%;
     height: 400px;
+    box-shadow: inset 0 0 35px 5px rgba(161, 161, 161, 0.384), inset 0 2px 1px 1px rgba(255,255,255,0.9);
+    margin-bottom: 30px;
+    padding: 20px;
 }
+
 
 
 /* .myFriend{
