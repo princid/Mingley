@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 require("../../config/connectDB.php");
@@ -309,4 +310,60 @@ function toggleLike($conn, $postID, $userID)
 
 function postComment(){
 
+}
+
+function countPost($conn, $posts_table, $condition)
+{
+    $post_count = "SELECT user_id, COUNT(post_id) AS total_posts
+                    FROM $posts_table 
+                    WHERE $condition
+                    GROUP BY user_id";
+
+    $post_count_run = mysqli_query($conn, $post_count);
+
+    $getPost_count = array();
+
+    if ($post_count_run && mysqli_num_rows($post_count_run) > 0) {
+        while ($my_data = mysqli_fetch_assoc($post_count_run)) {
+            $getPost_count[] = $my_data;
+        }
+        return $getPost_count;
+    }
+}
+
+
+function countFollowers($conn, $follows_table, $user_id)
+{
+    $query = "SELECT
+                user_id,
+                COUNT(*) AS followers_count
+            FROM $follows_table
+            WHERE user_id = $user_id AND follow_status = 'follow'
+            GROUP BY user_id";
+
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        return mysqli_fetch_assoc($result);
+    }
+
+    return null;
+}
+
+function countFollowings($conn, $follows_table, $user_id)
+{
+    $query = "SELECT
+                follower_id AS user_id,
+                COUNT(*) AS followings_count
+            FROM $follows_table
+            WHERE follower_id = $user_id AND follow_status = 'follow'
+            GROUP BY follower_id";
+
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        return mysqli_fetch_assoc($result);
+    }
+
+    return null;
 }
