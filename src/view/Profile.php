@@ -6,11 +6,17 @@ $title = "Profile Page";
 
 require_once("Navbar.php");
 
+
+require_once('../controller/countPost.php');
+$total_posts = $count_post_result[0]['total_posts'];
+
+
+require_once('../controller/countFollowersAndFollowings.php');
+$total_followers = $followers_count['followers_count'];
+$total_followings = $followings_count['followings_count'];
+
+
 require_once("../controller/show_post_on_profile.php");
-
-// require_once("../controller/fetch_user_controller.php");
-
-// require_once("../controller/profile_pic_controller.php");
 
 
 ?>
@@ -165,8 +171,12 @@ require_once("../controller/show_post_on_profile.php");
                                     <!-- User stat item -->
                                     <div style="text-align:center">
                                         <a href="">
-                                            <h6 class="mb-0">256</h6>
-                                            <small>Post</small>
+                                            <?php if (!empty($total_posts)) { ?>
+                                                <h6 class="mb-0"><?= $total_posts; ?></h6>
+                                            <?php } else { ?>
+                                                <h6 class="mb-0">0</h6>
+                                            <?php } ?>
+                                            <small>Posts</small>
                                         </a>
                                     </div>
                                     <!-- Divider -->
@@ -174,7 +184,11 @@ require_once("../controller/show_post_on_profile.php");
                                     <!-- User stat item -->
                                     <div style="text-align:center">
                                         <a href="">
-                                            <h6 class="mb-0">2.5K</h6>
+                                            <?php if (!empty($total_followers)) { ?>
+                                                <h6 class="mb-0"><?= $total_followers; ?></h6>
+                                            <?php } else { ?>
+                                                <h6 class="mb-0">0</h6>
+                                            <?php } ?>
                                             <small>Followers</small>
                                         </a>
                                     </div>
@@ -183,8 +197,12 @@ require_once("../controller/show_post_on_profile.php");
                                     <!-- User stat item -->
                                     <div style="text-align:center">
                                         <a href="">
-                                            <h6 class="mb-0">365</h6>
-                                            <small>Following</small>
+                                            <?php if (!empty($total_followings)) { ?>
+                                                <h6 class="mb-0"><?= $total_followings; ?></h6>
+                                            <?php } else { ?>
+                                                <h6 class="mb-0">0</h6>
+                                            <?php } ?>
+                                            <small>Followings</small>
                                         </a>
                                     </div>
                                 </div>
@@ -251,13 +269,13 @@ require_once("../controller/show_post_on_profile.php");
                                     </button>
                                     <!-- Card share action dropdown menu -->
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">
-                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share profile in a message</a></li>
-                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to PDF</a></li>
-                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-lock fa-fw pe-2"></i>Lock profile</a></li>
+                                        <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-share pe-2"></i>Share profile in a message</a></li>
+                                        <!-- <li><a class="dropdown-item" href="#"> <i class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to PDF</a></li> -->
+                                        <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-lock pe-2"></i>Lock profile</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-gear fa-fw pe-2"></i>Profile settings</a></li>
+                                        <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-gear pe-2"></i>Profile settings</a></li>
                                     </ul>
                                 </div>
                             </div>
