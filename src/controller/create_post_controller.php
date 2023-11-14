@@ -9,7 +9,7 @@ if (isset($_POST['upload_button'])) {
     $caption = trim(htmlentities($_POST['caption'], ENT_QUOTES, 'UTF-8'));
     $post_id = $_POST['post_id'];
     
-    // Create a directory for the user if it doesn't exist
+    // Created a directory for the user if it doesn't exist
     $user_directory = '../../assets/posts/' . $user_id;
     if (!is_dir($user_directory)) {
         mkdir($user_directory, 0777, true);
@@ -18,7 +18,7 @@ if (isset($_POST['upload_button'])) {
     $post_directory = $user_directory . '/' . $post_id;
     mkdir($post_directory, 0777, true);
 
-    // Limit the number of uploads to 10
+    // Limiting the number of uploads to 10
     $maxUploads = 10;
     $uploadedFileNames = [];
 

@@ -39,8 +39,14 @@ if (empty($_SESSION['id'])) {
                                 <li class="active"><a href="HomeFeed.php"><i class="fa-solid fa-house"></i></a></li>
 
                                 <!-- Pending -->
-                                <li class="msg-trigger"><a class="msg-trigger-btn" href="#a"><i class="fa-solid fa-message"></i></a>
+                                <li class="msg-trigger"><a class="msg-trigger-btn" href="Chat.php"><i class="fa-solid fa-message"></i></a>
 
+                                </li>
+
+                                <li class="search-trigger">
+                                    <a class="search-trigger-btn" href="SearchPage.php">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </a>
                                 </li>
 
                                 <!-- Notification Dropdown -->
@@ -145,19 +151,20 @@ if (empty($_SESSION['id'])) {
 
                 <div class="col-md-5">
                     <div class="header-top-right d-flex align-items-center justify-content-end">
+                        
                         <!-- header top search start -->
-                        <div class="header-top-search">
+                        <!-- <div class="header-top-search">
                             <form class="top-search-box">
                                 <input type="text" placeholder="Search" class="top-search-field">
                                 <button class="top-search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </form>
-                        </div>
+                        </div> -->
                         <!-- header top search end -->
 
                         <!-- profile picture start -->
                         <div class="profile-setting-box">
                             <div class="profile-thumb-small">
-                                <a href="#" class="profile-triger h-100 w-100" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" >
+                                <a href="#" class="profile-triger h-100 w-100" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                     <!-- <figure> -->
                                     <?php if (!empty($user_profile_pic)) { ?>
                                         <img class="avatar-img rounded-circle border border-primary border-2 p-1" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
