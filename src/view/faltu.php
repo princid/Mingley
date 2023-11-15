@@ -3992,3 +3992,58 @@ if (isset($_POST['upload_button'])) {
     </div>
 </div>
 <!-- Card END -->
+
+
+
+<!-- Left bar of Chat box after card body line-52 -->
+
+
+
+
+<?php foreach ($fetch_user_result as $chat_friend) {
+
+    // $post_id = $feed_post_data["post_id"];
+    $chat_user_id = $chat_friend["id"];
+    $chat_user_name = $chat_friend["user_name"];
+    $chat_user_full_name = $chat_friend['first_name'] . " " . $chat_friend['last_name'];
+    $chat_user_pic = $chat_friend['user_profile_pic'];
+    $chat_user_bio = $chat_friend['user_bio'];
+
+
+?>
+
+    <?php if ($chat_user_id != $_SESSION['id']) { ?>
+        <!-- Connection item START -->
+        <div class="hstack gap-2 mb-3 mt-3">
+            <!-- Avatar -->
+            <div class="avatar">
+
+                <?php if (!empty($chat_user_pic)) { ?>
+                    <img class="avatar-img rounded-circle position-relative" src="<?= BASE_URL ?>assets/profile_pic/<?= $chat_user_id . "/" . $chat_user_pic; ?>" alt="">
+                    <i class="fa fa-circle text-success position-absolute rounded-circle border border-white border-3" style="bottom: -5px; right: 0;"></i>
+                <?php } else { ?>
+                    <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                <?php } ?>
+
+            </div>
+            <!-- Title -->
+            <div class="overflow-hidden">
+
+                <h4 class="h6 mb-0"><?= $chat_user_full_name; ?></h4>
+                <p title="<?= $chat_user_bio; ?>" class="mb-0 small text-truncate"><?= $chat_user_bio; ?></p>
+
+            </div>
+            <!-- Button -->
+
+            <?php if (!empty($chat_user_pic)) { ?>
+                <a class="btn icon-md chatUserBtn" href="#" data-username="<?= $chat_user_name; ?>" data-profile-pic="<?= BASE_URL ?>assets/profile_pic/<?= $chat_user_id . "/" . $chat_user_pic; ?>"><i class="fa-solid fa-angle-right"></i></a>
+            <?php } else { ?>
+                <a class="btn icon-md chatUserBtn" href="#" data-username="<?= $chat_user_name; ?>" data-profile-pic="<?= BASE_URL ?>assets/profile_pic/profileDummy.png"><i class="fa-solid fa-angle-right"></i></a>
+            <?php } ?>
+
+        </div>
+        <hr>
+        <!-- Connection item END -->
+
+    <?php } ?>
+<?php } ?>
