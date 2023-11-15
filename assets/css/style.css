@@ -290,10 +290,64 @@ h6{
 .chatArea{
     width: 100%;
     height: 400px;
-    box-shadow: inset 0 0 35px 5px rgba(161, 161, 161, 0.384), inset 0 2px 1px 1px rgba(255,255,255,0.9);
+    /* box-shadow: inset 0 0 35px 5px rgba(161, 161, 161, 0.384), inset 0 2px 1px 1px rgba(255,255,255,0.9); */
     margin-bottom: 30px;
     padding: 20px;
+    background-image: url(../img/chatbg11.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-y: scroll;
 }
+
+.item-group-you{
+    flex-direction: row-reverse;
+    position: relative;
+    margin: 0 0 30px 0;
+    align-items: center;
+    gap: 10px;
+}
+
+.text-message-you{
+    /* background-color: #1f6fd6; */
+    background-color: #1b8b4a;
+    color: #fff;
+    border-radius: 6px 6px 6px 0;
+    padding: 10px;
+}
+
+.time-track-you{
+    position: absolute;
+    font-size: 12px;
+    /* top: 50px; */
+    text-align: right;
+    right: 60px;
+    bottom: -20px;
+}
+
+.item-group-other{
+    position: relative;
+    margin: 0 0 30px 0;
+    align-items: center;
+    gap: 10px;
+}
+
+.text-message-other{
+    background-color: #848884;
+    color: #ffffff;
+    border-radius: 6px 6px 0 6px;
+    padding: 10px;
+}
+
+.time-track-other{
+    position: absolute;
+    font-size: 12px;
+    /* top: 50px; */
+    bottom: -20px;
+    text-align: left;
+    left: 60px;
+}
+
+
 
 
 
