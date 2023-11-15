@@ -6,13 +6,18 @@ $title = "Chat with your Friends";
 
 require("Navbar.php");
 
-require_once("../controller/getAllUserRecord.php");
+// require_once("../controller/getAllUserRecord.php");
 
-// var_dump($fetch_user_result);
 
-// var_dump($fetch_user_result[2]['user_profile_pic']);
+if (isset($_GET['sender']) && $_GET['receiver'] == null) {
+    echo "<script>window.location='HomeFeed.php';</script>";
+} else {
+    $sender   = $_GET["sender"];
+    $receiver = $_GET["receiver"];
+}
 
-// $user_profile_pic
+
+// $user_id = $_SESSION['id'];
 
 ?>
 
@@ -35,101 +40,44 @@ require_once("../controller/getAllUserRecord.php");
 
             <div class="row g-4">
 
-                <!-- Left Bar Starts -->
-                <div class="col-lg-3">
-                    <aside class="widget-area">
-
-                        <!-- Card follow START -->
-                        <div class="col-sm-6 col-lg-12">
-                            <div class="card rounded-2">
-                                <!-- Card header START -->
-                                <div class="card-header p-0 border-0">
-                                    <h5 class="card-title mb-0">Previous Chats :</h5>
-                                </div>
-                                <!-- Card header END -->
-
-                                <!-- Card body START -->
-                                <div class="card_body">
-
-                                    <?php foreach ($fetch_user_result as $chat_friend) {
-
-                                        // $post_id = $feed_post_data["post_id"];
-                                        $chat_user_id = $chat_friend["id"];
-                                        $chat_user_name = $chat_friend["user_name"];
-                                        $chat_user_full_name = $chat_friend['first_name'] . " " . $chat_friend['last_name'];
-                                        $chat_user_pic = $chat_friend['user_profile_pic'];
-                                        $chat_user_bio = $chat_friend['user_bio'];
-
-
-                                    ?>
-
-                                        <?php if ($chat_user_id != $_SESSION['id']) { ?>
-                                            <!-- Connection item START -->
-                                            <div class="hstack gap-2 mb-3 mt-3">
-                                                <!-- Avatar -->
-                                                <div class="avatar">
-
-                                                    <?php if (!empty($chat_user_pic)) { ?>
-                                                        <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $chat_user_id . "/" . $chat_user_pic; ?>" alt="">
-                                                    <?php } else { ?>
-                                                        <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
-                                                    <?php } ?>
-
-                                                </div>
-                                                <!-- Title -->
-                                                <div class="overflow-hidden">
-
-                                                    <h4 class="h6 mb-0"><?= $chat_user_full_name; ?></h4>
-                                                    <p title="<?= $chat_user_bio; ?>" class="mb-0 small text-truncate"><?= $chat_user_bio; ?></p>
-
-                                                </div>
-                                                <!-- Button -->
-
-                                                <?php if (!empty($chat_user_pic)) { ?>
-                                                    <a class="btn icon-md chatUserBtn" href="#" data-username="<?= $chat_user_name; ?>" data-profile-pic="<?= BASE_URL ?>assets/profile_pic/<?= $chat_user_id . "/" . $chat_user_pic; ?>"><i class="fa-solid fa-angle-right"></i></a>
-                                                <?php } else { ?>
-                                                    <a class="btn icon-md chatUserBtn" href="#" data-username="<?= $chat_user_name; ?>" data-profile-pic="<?= BASE_URL ?>assets/profile_pic/profileDummy.png"><i class="fa-solid fa-angle-right"></i></a>
-                                                <?php } ?>
-
-                                            </div>
-                                            <hr>
-                                            <!-- Connection item END -->
-
-                                        <?php } ?>
-                                    <?php } ?>
-
-                                    <!-- View more button -->
-                                    <div class=" d-grid mt-3">
-                                        <a class="btn btn-sm btn-primary-soft" href="#!">View more</a>
-                                    </div>
-                                </div>
-                                <!-- Card body END -->
-                            </div>
-                        </div>
-                        <!-- Card follow START -->
-
-                    </aside>
-                </div>
-                <!-- Left Bar Ends -->
+                <?php
+                include('../../includes/ChatSideBar.php');
+                ?>
 
                 <!-- Mid Post Section Starts here -->
                 <div class="col-md-8 col-lg-6 vstack gap-1">
                     <!-- chat box start -->
                     <div class="card card-body rounded-2">
-                        <div class="d-flex mb-3 fw-bold" style="align-items: center;">
-                            <!-- Avatar -->
-                            <div class="avatar avatar-xs me-2 chatUserPic">
+                        <div class="d-flex mb-3 fw-bold gap-3" style="align-items: center;">
 
-                            </div>
+                            <?php
+                            $query = "SELECT * FROM users_table WHERE users_table.id = '$receiver' ";
+                            $result = mysqli_query($conn, $query);
+                            if ($result) {
+                                foreach ($result as $list) {
+                                    $full_name = $list["first_name"] . " " . $list["last_name"];
+                                    $profile_pic = $list["user_profile_pic"];
+                                    $list_id = $list["id"];
+                            ?>
+                                    <?php if (!empty($profile_pic)) { ?>
+                                        <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $list_id . "/" . $profile_pic; ?>" alt="" style="width: 3rem; height: 3rem;">
 
-                            <div class="chatUser">
+                                    <?php } else { ?>
+                                        <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="" style="width: 3rem;">
 
-                            </div>
+                                    <?php } ?>
+                                    <!-- <i class="fa fa-circle text-success position-absolute rounded-circle border border-white border-3" style="bottom: 72px; left: 50px;"></i> -->
+                                    <h6><?= $full_name; ?></h6>
+                            <?php }
+                            } ?>
+
                         </div>
-                        <!-- <hr class="divider"> -->
 
                         <div class="chatArea">
-                            <p>sdhfsdf</p>
+
+                            <!-- Loading all the chats here through chat_loader.php file -->
+                            <div id="chat_load"></div>
+
                         </div>
 
                         <div class="chatInputArea">
@@ -145,13 +93,16 @@ require_once("../controller/getAllUserRecord.php");
                                     </a>
                                 </div>
                                 <!-- chat input box -->
-                                <form class="nav nav-item w-100 position-relative">
-                                    <textarea class="form-control" id="" placeholder="Message..." rows="2"></textarea>
-                                    <!-- <textarea type="text" name="" id="" class="form-control pe-5 bg-light" rows="1" placeholder="Message..."> -->
-                                    <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit">
+                                <form class="nav nav-item w-100 position-relative" id="chatForm" method="post">
+                                    <input type="hidden" id="receive" value="<?php echo $receiver; ?>">
+                                    <input type="hidden" id="send" value="<?php echo $sender; ?>">
+                                    <textarea class="form-control" id="message" placeholder="Type Message..." rows="2"></textarea>
+                                    <button id="chatBtn" class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit">
                                         <i class="fa-solid fa-paper-plane"></i>
                                     </button>
                                 </form>
+
+                                <div id="msg"></div>
                             </div>
                         </div>
                     </div>
@@ -167,88 +118,8 @@ require_once("../controller/getAllUserRecord.php");
 
 </main>
 
+<script src="../../assets/js/jquery.js"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Select all elements with the class 'chatUserBtn'
-        const chatUserBtns = document.querySelectorAll('.chatUserBtn');
-
-        // Function to update chat user div
-        function updateChatUser(username, profilePic) {
-            const chatUserDiv = document.querySelector('.chatUser');
-            chatUserDiv.textContent = '@' + username;
-
-            const chatUserPicDiv = document.querySelector('.chatUserPic');
-            if (profilePic !== null && profilePic !== "") {
-                chatUserPicDiv.innerHTML = `<img class="avatar-img rounded-circle" src="${profilePic}" alt="">`;
-            } else {
-                // Show the dummy image if profilePic is not available
-                chatUserPicDiv.innerHTML = `<img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">`;
-            }
-        }
-
-        // Add click event listener to each button
-        chatUserBtns.forEach(function(button) {
-            button.addEventListener('click', function(event) {
-                // Prevent the default behavior of the anchor tag
-                event.preventDefault();
-
-                // Get the username and profilePic from the data attributes
-                const username = button.getAttribute('data-username');
-                const profilePic = button.getAttribute('data-profile-pic');
-
-                // Update the chat user div with username and profilePic
-                updateChatUser(username, profilePic);
-            });
-        });
-
-        // Trigger a click event on the top-most chat user button after page load
-        const topMostChatUserBtn = chatUserBtns[0];
-        if (topMostChatUserBtn) {
-            const defaultUsername = topMostChatUserBtn.getAttribute('data-username');
-            const defaultProfilePic = topMostChatUserBtn.getAttribute('data-profile-pic');
-            updateChatUser(defaultUsername, defaultProfilePic);
-        }
-    });
-</script>
+<script src="../../assets/js/chatLoad.js"></script>
 
 
-<!-- <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Select all elements with the class 'chatUserBtn'
-        const chatUserBtns = document.querySelectorAll('.chatUserBtn');
-
-        // Function to update chat user div
-        function updateChatUser(username, profilePic) {
-            const chatUserDiv = document.querySelector('.chatUser');
-            chatUserDiv.textContent = '@' + username;
-
-            const chatUserPicDiv = document.querySelector('.chatUserPic');
-            const imageSrc = profilePic || 'http://localhost/PHP_Assesments/Mingley/assets/profile_pic/profileDummy.png';
-            chatUserPicDiv.innerHTML = `<img class="avatar-img rounded-circle" src="${imageSrc}" alt="">`;
-        }
-
-        // Add click event listener to each button
-        chatUserBtns.forEach(function(button) {
-            button.addEventListener('click', function(event) {
-                // Prevent the default behavior of the anchor tag
-                event.preventDefault();
-
-                // Get the username and profilePic from the data attributes
-                const username = button.getAttribute('data-username');
-                const profilePic = button.getAttribute('data-profile-pic');
-
-                // Update the chat user div with username and profilePic
-                updateChatUser(username, profilePic);
-            });
-        });
-
-        // Trigger a click event on the top-most chat user button after page load
-        const topMostChatUserBtn = chatUserBtns[0];
-        if (topMostChatUserBtn) {
-            const defaultUsername = topMostChatUserBtn.getAttribute('data-username');
-            const defaultProfilePic = topMostChatUserBtn.getAttribute('data-profile-pic');
-            updateChatUser(defaultUsername, defaultProfilePic);
-        }
-    });
-</script> -->
