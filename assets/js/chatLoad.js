@@ -5,7 +5,6 @@ $(document).ready(function () {
     const send = $("#send").val();
 
     if (textmsg == "") {
-      // console.log(textmsg);
       alert("Type Message...");
       return false;
     }
@@ -30,6 +29,7 @@ $(document).ready(function () {
     chat_validation();
   });
 
+  //   chat loader
   $(function () {
     const receive = $("#receive").val();
     const send = $("#send").val();
@@ -47,5 +47,4 @@ $(document).ready(function () {
       });
     }, 100);
   });
-  
 });
