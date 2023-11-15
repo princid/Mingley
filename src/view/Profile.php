@@ -651,7 +651,7 @@ require_once("../controller/show_post_on_profile.php");
                             <div class="card rounded">
                                 <!-- Card header START -->
                                 <div class="card-header d-sm-flex justify-content-between align-items-end border-0">
-                                    <h5 class="card-title">Friends <span class="badge bg-danger bg-opacity-10 text-danger">230</span></h5>
+                                    <h5 class="card-title">Followers <span class="badge bg-danger bg-opacity-10 text-danger">230</span></h5>
                                     <a class="btn btn-primary-soft btn-sm" href="#!"> See all friends</a>
                                 </div>
                                 <!-- Card header END -->
