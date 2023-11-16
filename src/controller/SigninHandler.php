@@ -1,6 +1,7 @@
 <?php
 session_start();
 require("../model/Query.php");
+require_once("../../config/constants.php");
 
 if (isset($_POST['Submit'])) {
 
@@ -15,11 +16,11 @@ if (isset($_POST['Submit'])) {
     if($result === "Logged In Successfully!"){
         // $_SESSION['id'] = $row['id'];
         $_SESSION["message"] = $result;
-        header("location: http://localhost/PHP_Assesments/Mingley/src/view/HomeFeed.php");
+        header("location: ".BASE_URL."src/view/HomeFeed.php");
         exit;
     } else {
         $_SESSION["message"] = $result;
-        header("location: http://localhost/PHP_Assesments/Mingley/src/view/SignIn.php");
+        header("location: ".BASE_URL."src/view/SignIn.php");
         exit;
     }
 
