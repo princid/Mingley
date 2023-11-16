@@ -194,6 +194,7 @@ function show_post_on_feed($conn, $users_table, $posts_table, $likes_table, $fee
 
 
 
+
 // foreach ($post_data as $post) {
 //     // var_dump($post);
 //     // echo "Post Title: " . $post['post_caption'] . "<br>";
@@ -304,6 +305,23 @@ function toggleLike($conn, $postID, $userID)
         $insertQuery = "INSERT INTO likes_table (post_id, liked_by_id, like_status) VALUES ($postID, $userID, 1)";
         $conn->query($insertQuery);
         return 'liked';
+    }
+}
+
+// Function to Count Post Like
+
+function likesCounter($conn, $likes_table,$postID)
+{
+    // Query to check total likes on a post
+    $checkQuery = "SELECT COUNT(like_id) as total_likes FROM $likes_table WHERE post_id = $postID and like_status = '1'";
+    $result = mysqli_query($conn, $checkQuery);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $total_likes = $row["total_likes"];
+        return $total_likes;
+    } else {
+        return 0;
     }
 }
 
