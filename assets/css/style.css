@@ -341,29 +341,12 @@ h6{
 .time-track-other{
     position: absolute;
     font-size: 12px;
-    /* top: 50px; */
     bottom: -20px;
     text-align: left;
     left: 60px;
 }
 
 
-
-
-
-/* .myFriend{
-    width: 10px;
-} */
-
-/* .profile_page_avatar{
-    position: absolute;
-    left: 50px;
-    top: 150px;
-} */
-
-/* .card_body{
-    padding: 10px auto;
-} */
 
 
 /*------------------------------------------------------------------
@@ -399,21 +382,6 @@ body {
     line-height: 1.7;
     font-size: 14px;
     font-weight: 400;
-    /* background-color: #f1f1f1; */
-
-    /* background: rgb(155,239,255);
-    background: linear-gradient(90deg, rgba(155,239,255,1) 0%, rgba(220,184,235,0.8463760504201681) 49%, rgba(129,239,242,1) 100%); */
-
-    /* background-color: #f1f1f173; */
-
-    /* background-color: #e7e7e7; */
-
-    /* background-color: #E5E4E2; */
-
-    /* background-color: #6182af; */
-
-    /* background-color: #eff2f6; */
-
     background-color: #e8f7f6;
 
     /* font-family: "Inter", sans-serif; */
