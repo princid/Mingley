@@ -1,28 +1,5 @@
 <?php
 require_once("../model/Query.php");
-require_once("../../config/connectDB.php");
-
-function update($conn, $table_name, $set_data, $condition)
-{
-    try {
-        if (!empty($condition)) {
-            $update_query = "UPDATE $table_name SET $set_data WHERE $condition";
-
-            $update_result = mysqli_query($conn, $update_query);
-            if ($update_result) {
-                return $update_result;
-            } else {
-                return false;
-            }
-        } else {
-            echo "No Condition Available";
-            return false;
-        }
-    } catch (Exception $e) {
-        echo "Error : " . $e->getMessage();
-        return false;
-    }
-}
 
 
 function userPostDeleteHandler($data)
