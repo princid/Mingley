@@ -6,6 +6,8 @@ $title = "Friend Profile";
 
 require_once("Navbar.php");
 
+require_once("../../config/connectDB.php");
+
 require_once('../controller/countPost.php');
 $total_posts = $count_post_result['total_posts'];
 
@@ -16,9 +18,9 @@ $total_followings = $followings_count['followings_count'];
 
 require_once("../controller/show_post_on_profile.php");
 
-require_once("../controller/showFollowersAndFollowings.php");
-var_dump($followers_display);
-var_dump($followings_display);
+// require_once("../controller/showFollowersAndFollowings.php");
+// var_dump($followers_display);
+// var_dump($followings_display);
 
 require_once("../controller/getAllUserRecord.php");
 
@@ -421,12 +423,178 @@ $receiver = $_GET['user_id'];
 
                         <!-- Showing Followers Here -->
                         <div class="tab-pane fade" id="ex3-tabs-2" role="tabpanel" aria-labelledby="ex3-tab-2">
-                            Tab 2 content
+
+                            <div class="table-responsive">
+                                <table id="follower_table_id" class="table table-hover table-nowrap display">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Full Name</th>
+                                            <th scope="col">Username</th>
+                                            <th scope="col" class="text-center">Send Message</th>
+                                            <th scope="col" class="text-end">View Profile</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tabular_card">
+                                        <?php
+
+                                        $follower_query  = "SELECT *
+                                                                FROM follows_table INNER JOIN users_table ON follows_table.follower_id = users_table.id
+                                                                WHERE user_id = $receiver AND follow_status = 'follow'";
+
+                                        $follower_query_result = mysqli_query($conn, $follower_query);
+
+                                        if ($follower_query_result)
+
+                                            foreach ($follower_query_result as $follower_data) {
+
+                                                $user_id          = $follower_data["id"];
+                                                $user_fullname    = $follower_data["first_name"] . " " . $follower_data["last_name"];
+                                                $user_shortname   = $follower_data["user_name"];
+                                                $user_profile_pic = $follower_data["user_profile_pic"];
+
+                                                $follower_profileUrl = "FriendProfile.php?user_id=" . $user_id;
+
+                                        ?>
+
+                                            <tr data-user-id="<?php echo $user_id; ?>">
+                                                <td>
+                                                    <?php if (!empty($user_profile_pic)) { ?>
+                                                        <img title="<?php echo $user_shortname; ?>" src="<?php echo BASE_URL ?>assets/profile_pic/<?php echo $user_id . "/" . $user_profile_pic; ?>" alt="" class="avatar avatar-sm rounded-circle me-2">
+
+                                                    <?php } else { ?>
+                                                        <img title="<?php echo $user_shortname; ?>" src="<?php echo BASE_URL ?>assets/profile_pic/profileDummy.png" class="avatar avatar-sm rounded-circle me-2">
+                                                    <?php } ?>
+
+                                                    <?php if ($user_id != $curr_id) { ?>
+                                                        <a class="text-heading font-semibold" href="<?= $follower_profileUrl; ?>">
+                                                            <?php echo strtoupper($user_fullname); ?>
+                                                        </a>
+                                                    <?php } else { ?>
+                                                        <a class="text-heading font-semibold" href="Profile.php">
+                                                            <?php echo strtoupper($user_fullname); ?>
+                                                        </a>
+                                                    <?php } ?>
+                                                </td>
+
+                                                <td>
+                                                    <?php echo ($user_shortname); ?>
+                                                </td>
+
+                                                <td class="text-center">
+                                                    <?php if ($user_id != $curr_id) { ?>
+                                                        <a href="<?= $follower_profileUrl; ?>"><button type="button" class="btn btn-outline-success"><i class="fa-regular fa-message"></i></button></a>
+                                                    <?php } else { ?>
+                                                        <a href="Profile.php"><button type="button" class="btn btn-outline-success"><i class="fa-regular fa-message"></i></button></a>
+                                                    <?php } ?>
+                                                </td>
+
+                                                <td class="text-end">
+                                                    <?php if ($user_id != $curr_id) { ?>
+                                                        <a href="<?= $follower_profileUrl; ?>"><button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></button></a>
+                                                    <?php } else { ?>
+                                                        <a href="Profile.php"><button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></button></a>
+                                                    <?php } ?>
+                                                </td>
+
+                                            </tr>
+
+
+                                        <?php } ?>
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
                         </div>
 
                         <!-- Showing Followings Here -->
                         <div class="tab-pane fade" id="ex3-tabs-3" role="tabpanel" aria-labelledby="ex3-tab-3">
-                            Tab 3 content
+
+                            <div class="table-responsive">
+                                <table id="following_table_id" class="table table-hover table-nowrap display">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Full Name</th>
+                                            <th scope="col">Username</th>
+                                            <th scope="col" class="text-center">Send Message</th>
+                                            <th scope="col" class="text-end">View Profile</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tabular_card">
+                                        <?php
+
+                                        $following_query  = "SELECT *
+                                                                FROM follows_table INNER JOIN users_table ON follows_table.user_id = users_table.id
+                                                                WHERE follower_id = $receiver AND follow_status = 'follow'";
+
+                                        $following_query_result = mysqli_query($conn, $following_query);
+
+                                        if ($following_query_result)
+
+                                            foreach ($following_query_result as $following_data) {
+
+                                                $user_id          = $following_data["id"];
+                                                $user_fullname    = $following_data["first_name"] . " " . $following_data["last_name"];
+                                                $user_shortname   = $following_data["user_name"];
+                                                $user_profile_pic = $following_data["user_profile_pic"];
+
+                                                $following_profileUrl = "FriendProfile.php?user_id=" . $user_id;
+
+                                        ?>
+
+                                            <tr data-user-id="<?php echo $user_id; ?>">
+                                                <td>
+                                                    <?php if (!empty($user_profile_pic)) { ?>
+                                                        <img title="<?php echo $user_shortname; ?>" src="<?php echo BASE_URL ?>assets/profile_pic/<?php echo $user_id . "/" . $user_profile_pic; ?>" alt="" class="avatar avatar-sm rounded-circle me-2">
+
+                                                    <?php } else { ?>
+                                                        <img title="<?php echo $user_shortname; ?>" src="<?php echo BASE_URL ?>assets/profile_pic/profileDummy.png" class="avatar avatar-sm rounded-circle me-2">
+                                                    <?php } ?>
+
+                                                    <?php if ($user_id == $receiver) { ?>
+                                                        <a class="text-heading font-semibold" href="<?= $following_profileUrl; ?>">
+                                                            <?php echo strtoupper($user_fullname); ?>
+                                                        </a>
+                                                    <?php } else { ?>
+                                                        <a class="text-heading font-semibold" href="Profile.php">
+                                                            <?php echo strtoupper($user_fullname); ?>
+                                                        </a>
+                                                    <?php } ?>
+                                                </td>
+
+                                                <td>
+                                                    <?php echo ($user_shortname); ?>
+                                                </td>
+
+                                                <td class="text-center">
+                                                    <?php if ($user_id != $curr_id) { ?>
+                                                        <a href="<?= $following_profileUrl; ?>"><button type="button" class="btn btn-outline-success"><i class="fa-regular fa-message"></i></button></a>
+                                                    <?php } else { ?>
+                                                        <a href="Profile.php"><button type="button" class="btn btn-outline-success"><i class="fa-regular fa-message"></i></button></a>
+                                                    <?php } ?>
+                                                </td>
+
+                                                <td class="text-end">
+                                                    <?php if ($user_id != $curr_id) { ?>
+                                                        <a href="<?= $following_profileUrl; ?>"><button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></button></a>
+                                                    <?php } else { ?>
+                                                        <a href="Profile.php"><button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></button></a>
+                                                    <?php } ?>
+                                                </td>
+
+                                            </tr>
+
+
+                                        <?php } ?>
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
                         </div>
                     </div>
                     <!-- Tabs content -->
@@ -456,7 +624,56 @@ $receiver = $_GET['user_id'];
 </div>
 <!-- Scroll to Top End -->
 
-<script src="<?= BASE_URL ?>assets/js/updateFormValidation.js"></script>
+
+<script src="../../assets/js/jquery.js"></script>
+
+<!-- cdn links for jquery table -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        const follower_table = $('#follower_table_id').DataTable({
+            "paging": true,
+            "pageLength": 2,
+            "order": [1, 'asc'],
+            "pagingType": "simple_numbers",
+            "language": {
+                "paginate": {
+                    "next": "&gt;",
+                    "previous": "&lt;"
+                },
+                "lengthMenu": "Show <select>" +
+                    "<option value='5'>5</option>" +
+                    "<option value='10'>10</option>" +
+                    "<option value='25'>25</option>" +
+                    "<option value='-1'>All</option>" +
+                    "</select> entries",
+                "searchPlaceholder": "Search..."
+            }
+        });
+
+        const following_table = $('#following_table_id').DataTable({
+            "paging": true,
+            "pageLength": 2,
+            "order": [1, 'asc'],
+            "pagingType": "simple_numbers",
+            "language": {
+                "paginate": {
+                    "next": "&gt;",
+                    "previous": "&lt;"
+                },
+                "lengthMenu": "Show <select>" +
+                    "<option value='5'>5</option>" +
+                    "<option value='10'>10</option>" +
+                    "<option value='25'>25</option>" +
+                    "<option value='-1'>All</option>" +
+                    "</select> entries",
+                "searchPlaceholder": "Search..."
+            }
+        });
+    });
+</script>
 
 
 <script>

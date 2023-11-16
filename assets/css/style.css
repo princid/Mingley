@@ -349,7 +349,7 @@ h6{
 }
 
 
-/************************************** JQUERY TABLE STYLING START ***********************************************/
+/************************************** JQUERY TABLE STYLING START Search page ***********************************************/
 #table_id th {
     background-color: #337ab7;
     color: #fff;
@@ -450,6 +450,84 @@ h6{
 }
 
 /************************************** JQUERY TABLE STYLING END ***********************************************/
+
+
+/**************************** Follower Table jQuery Styling start **********************************/
+
+#follower_table_id th {
+    background-color: #337ab7;
+    color: #fff;
+    font-weight: bold;
+}
+
+#follower_table_id tr {
+    background-color: #f9f9f900;
+}
+
+/* Styling the selected rows */
+#follower_table_id tr.selected {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+/* Customizing the search input field */
+
+#follower_table_id_filter input {
+    border: 1px solid #00c1ff;
+    padding: 5px 15px;
+    margin: 20px 0;
+    border-radius: 20px;
+    background-color: #fff;
+}
+
+/* Customizing the search label */
+#follower_table_id_filter label {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/**************************** Follower Table jQuery Styling end **********************************/
+
+
+/**************************** Following Table jQuery Styling start **********************************/
+
+#following_table_id th {
+    background-color: #337ab7;
+    color: #fff;
+    font-weight: bold;
+}
+
+#following_table_id tr {
+    background-color: #f9f9f900;
+}
+
+/* Styling the selected rows */
+#following_table_id tr.selected {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+/* Customizing the search input field */
+
+#following_table_id_filter input {
+    border: 1px solid #00c1ff;
+    padding: 5px 15px;
+    margin: 20px 0;
+    border-radius: 20px;
+    background-color: #fff;
+}
+
+/* Customizing the search label */
+#following_table_id_filter label {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Following table jQuery styling ends */
 
 
 /*------------------------------------------------------------------
