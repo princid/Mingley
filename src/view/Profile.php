@@ -6,7 +6,6 @@ $title = "Profile Page";
 
 require_once("Navbar.php");
 
-
 require_once('../controller/countPost.php');
 $total_posts = $count_post_result[0]['total_posts'];
 
@@ -40,6 +39,7 @@ require_once("../controller/show_post_on_profile.php");
                     </div>
                 </div>
             <?php } ?>
+            <div id="msg"></div>
 
             <div class="row g-4">
 
@@ -121,8 +121,6 @@ require_once("../controller/show_post_on_profile.php");
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
 
                             <!-- Update Banner Image -->
@@ -156,7 +154,6 @@ require_once("../controller/show_post_on_profile.php");
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
                         <div class="mt-sm-4 d-flex" style="align-items: flex-start; justify-content:space-between; ">
@@ -335,7 +332,7 @@ require_once("../controller/show_post_on_profile.php");
 
                                                 <br>
 
-                                                <small class="text-danger" id="max_upload_error" style="">You can upload up to 10 images only.</small>
+                                                <small class="text-danger" id="max_upload_error">You can upload up to 10 images only.</small>
 
                                             </div>
 
@@ -401,8 +398,11 @@ require_once("../controller/show_post_on_profile.php");
                         $all_post_images = explode(',', $feed_post_data['post_images']);
 
                         $carousel_id = 'carouselIndicators_' . $post_id;
-
+                        $friend_profileUrl = "FriendProfile.php?user_id=" . $post_user_id;
+                        $like_status = $feed_post_data["like_status"];
+                        // $count_like = $feed_post_data['likes_count'];
                     ?>
+
 
                         <div class="card rounded-2">
                             <!-- Card header START -->
@@ -432,16 +432,66 @@ require_once("../controller/show_post_on_profile.php");
                                             <i class="bi bi-three-dots"></i>
                                         </a>
                                         <!-- Card feed action dropdown menu -->
-                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction" style="">
+                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
                                             <li><a class="dropdown-item" href="#"> <i class="fa-regular fa-bookmark pe-2"></i>Save post</a></li>
-                                            <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-pencil pe-2"></i>Edit Post </a></li>
+                                            <li><button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalEditPost<?=$post_id?>"> <i class="fa-solid fa-pencil pe-2"></i>Edit Post </button></li>
                                             <!-- <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
                                             <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li> -->
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>
-                                            <li><a class="dropdown-item text-danger" href="#"> <i class="fa-regular fa-trash-can pe-2"></i>Delete post</a></li>
+
+                                            <!-- Button to delete Post Modal -->
+                                            <li><button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#modalDeletePost<?=$post_id?>">
+                                                    <i class="fa-regular fa-trash-can pe-2"></i>Delete post
+                                                </button></li>
+
+
                                         </ul>
+                                        <!-- Modal to Edit Post -->
+                                        <div class="modal fade" id="modalEditPost<?=$post_id?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Post</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+
+                                                    <form action="<?= BASE_URL ?>src/controller/update_profile_controller.php" method="post" id="update_form" name="update_form">
+                                                        <div class="modal-body">
+
+                                                            <input type="text" name="" id="caption<?=$post_id?>" placeholder="" value="<?=$post_caption?>">
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-outline-secondary p-2" data-bs-dismiss="modal">Close</button>
+                                                            <!-- <button type="button" class="btn btn-outline-success p-2">SAVE CHANGES</button> -->
+                                                            <input class="btn w-25 btn-outline-danger p-2 edit_btn" data-post-id="<?=$post_id?>" id=""  type="button" name="Submit" value="UPDATE POST">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Modal to delete Post -->
+                                        <div class="modal fade" id="modalDeletePost<?=$post_id?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Post Confirmation!!!</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <p>Are You sure you want to Delete this Post ?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-outline-secondary p-2" data-bs-dismiss="modal">Close</button>
+                                                        <!-- <button type="button" class="btn btn-outline-success p-2">SAVE CHANGES</button> -->
+                                                        <input class="btn w-25 btn-outline-danger p-2 delete_btn" type="button" id="" data-post-id="<?=$post_id?>" value="DELETE POST">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <!-- Card feed action dropdown END -->
                                 </div>
@@ -451,7 +501,7 @@ require_once("../controller/show_post_on_profile.php");
                             <!-- Card body START -->
                             <div class="card-body">
                                 <!-- <p>I'm thrilled to share that I've completed a graduate certificate course in project management with the president's honor roll.</p> -->
-                                <p><?= $post_caption; ?> </p>
+                                <p id="post_caption_<?=$post_id?>"><?= $post_caption; ?> </p>
                                 <!-- Card img -->
 
                                 <!-- Carousel -->
@@ -501,9 +551,10 @@ require_once("../controller/show_post_on_profile.php");
                                 <!-- Feed react START -->
                                 <ul class="nav nav-stack py-3 mt-1">
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="#!" data-bs-container="body" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-custom-class="tooltip-text-start" data-bs-title="Frances Guerrero<br> Lori Stevens<br> Billy Vasquez<br> Judy Nguyen<br> Larry Lawson<br> Amanda Reed<br> Louis Crawford">
-                                            <i class="fa-regular fa-heart"></i>
-                                            Likes (56)
+                                        <a class="nav-link active likesAnchor" href="#" data-post-id="<?= $post_id ?>" data-like-status="<?= $like_status ?>">
+                                            <i class="fa-<?= $like_status ? 'solid text-danger' : 'regular' ?> fa-heart postLike" data-post-id="<?= $post_id ?>"></i>
+                                            Likes (<span id="likes_count_<?= $post_id; ?>"><?= $feed_post_data['likes_count'] ?></span>)
+                                            <!-- <span id="likes_count_<?= $post_id; ?>">(<?= $count_like ?>)</span> Likes -->
                                         </a>
                                     </li>
 
@@ -794,6 +845,8 @@ require_once("../controller/show_post_on_profile.php");
 <!-- Scroll to Top End -->
 
 <script src="<?= BASE_URL ?>assets/js/updateFormValidation.js"></script>
+<script src="../../assets/js/postLike.js"></script>
+<script src="../../assets/js/postCRUD.js"></script>
 
 
 <script>

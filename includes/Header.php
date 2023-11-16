@@ -25,6 +25,9 @@ session_start();
     <link rel="stylesheet" href="assets/bootstrap/icons/bootstrap-icons.css"> -->
 
 
+    <!-- JQuery -->
+    <script src="../../assets/js/jquery.js"></script>
+
     <!-- Bootstrap CSS CDN Link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -43,25 +46,25 @@ session_start();
 
     <!-- Icon Font CSS -->
     <!-- <link rel="stylesheet" href="assets/css/vendor/bicon.min.css"> -->
-    
+
     <!-- Flat Icon CSS -->
     <!-- <link rel="stylesheet" href="assets/css/vendor/flaticon.css"> -->
-    
+
     <!-- audio & video player CSS -->
     <!-- <link rel="stylesheet" href="assets/css/plugins/plyr.css"> -->
-    
+
     <!-- Slick CSS -->
     <!-- <link rel="stylesheet" href="assets/css/plugins/slick.min.css"> -->
-    
+
     <!-- nice-select CSS -->
     <!-- <link rel="stylesheet" href="assets/css/plugins/nice-select.css"> -->
-    
+
     <!-- perfect scrollbar css -->
     <!-- <link rel="stylesheet" href="assets/css/plugins/perfect-scrollbar.css"> -->
-    
+
     <!-- light gallery css -->
     <!-- <link rel="stylesheet" href="assets/css/plugins/lightgallery.min.css"> -->
-    
+
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="../../assets/css/style.css">
 
