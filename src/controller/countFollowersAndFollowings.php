@@ -13,13 +13,6 @@ if (!empty($_SESSION)) {
     $followers_count = countFollowers($conn, $follows_table, $user_id);
     $followings_count = countFollowings($conn, $follows_table, $user_id);
 
-    // if ($followers_count && $followings_count) {
-    //     $total_followers = $followers_count['followers_count'];
-    //     $total_followings = $followings_count['followings_count'];
-
-    //     echo "Followers: " . $total_followers . "<br>";
-    //     echo "Followings: " . $total_followings . "<br>";
-    // }
 }
 
 

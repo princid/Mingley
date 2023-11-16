@@ -196,7 +196,7 @@ if (empty($_SESSION['id'])) {
                                     </li>
 
                                     <!-- Links -->
-                                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>Settings &amp; Privacy</a></li>
+                                    <!-- <li><a class="dropdown-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>Settings &amp; Privacy</a></li>
                                     <li>
                                         <a class="dropdown-item" href="#" target="_blank">
                                             <i class="fa-fw bi bi-life-preserver me-2"></i>Support
@@ -206,11 +206,12 @@ if (empty($_SESSION['id'])) {
                                         <a class="dropdown-item" href="#" target="_blank">
                                             <i class="fa-fw bi bi-card-text me-2"></i>Documentation
                                         </a>
-                                    </li>
+                                    </li> -->
                                     <li class="dropdown-divider"></li>
                                     <li>
-                                        <a class="dropdown-item bg-danger-soft-hover" href="SignOut.php">
-                                            <i class="bi bi-power fa-fw me-2"></i>
+                                        <a class="dropdown-item bg-danger-soft-hover text-danger" href="SignOut.php">
+                                            <!-- <i class="bi bi-power fa-fw me-2 text-danger"></i> -->
+                                            <i class="fa-solid fa-power-off text-danger pe-2 mx-auto"></i>
                                             Sign Out
                                         </a>
                                     </li>

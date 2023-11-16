@@ -265,7 +265,9 @@ function update_profile_pic($conn, $table, $profile_pic_name, $condition){
 
 // Function for showing all the unknown users on Home page's right bar to send them friend request
 function getAllUserRecord($conn, $getAll_table){
+
     $getAllUser = "SELECT * FROM $getAll_table ";
+
     $getAllUser_run = mysqli_query($conn, $getAllUser);
 
     $getAllUser_data = array();
@@ -275,11 +277,27 @@ function getAllUserRecord($conn, $getAll_table){
             $getAllUser_data[] = $my_data;
         }
         return $getAllUser_data;
+        // return mysqli_fetch_assoc($getAllUser_run);
 
     }
+    // return null;
 }
 
 
+// Function for getting the data of current user
+function currentUser($conn, $getAll_table, $user_id)
+{
+
+    $getAllUser = "SELECT * FROM $getAll_table WHERE id = '$user_id' ";
+
+    $getAllUser_run = mysqli_query($conn, $getAllUser);
+
+    if ($getAllUser_run && mysqli_num_rows($getAllUser_run) > 0) {
+        return mysqli_fetch_assoc($getAllUser_run);
+
+    }
+    return null;
+}
 
 // Function for Post Like
 
@@ -339,14 +357,17 @@ function countPost($conn, $posts_table, $condition)
 
     $post_count_run = mysqli_query($conn, $post_count);
 
-    $getPost_count = array();
+    // $getPost_count = array();
 
     if ($post_count_run && mysqli_num_rows($post_count_run) > 0) {
-        while ($my_data = mysqli_fetch_assoc($post_count_run)) {
-            $getPost_count[] = $my_data;
-        }
-        return $getPost_count;
+        // while ($my_data = mysqli_fetch_assoc($post_count_run)) {
+        //     $getPost_count[] = $my_data;
+        // }
+        // return $getPost_count;
+
+        return mysqli_fetch_assoc($post_count_run);
     }
+    return null;
 }
 
 
@@ -368,6 +389,8 @@ function countFollowers($conn, $follows_table, $user_id)
     return null;
 }
 
+
+
 function countFollowings($conn, $follows_table, $user_id)
 {
     $query = "SELECT
@@ -384,4 +407,40 @@ function countFollowings($conn, $follows_table, $user_id)
     }
 
     return null;
+}
+
+
+function showFollowers($conn, $follows_table, $users_table, $user_id){
+    $show_follower_query = "SELECT *
+                            FROM $follows_table INNER JOIN $users_table ON $follows_table.follower_id = $users_table.id
+                            WHERE user_id = $user_id AND follow_status = 'follow'";
+
+    $result = mysqli_query($conn, $show_follower_query);
+
+    $get_followers = array();
+
+    if($result && mysqli_num_rows($result) > 0) {
+
+        while ($my_data = mysqli_fetch_assoc($result)) {
+            $get_followers[] = $my_data;
+        }
+        return $get_followers;
+    }
+}
+
+function showFollowings($conn, $follows_table, $users_table, $user_id){
+    $show_follower_query = "SELECT *
+                            FROM $follows_table INNER JOIN $users_table ON $follows_table.user_id = $users_table.id
+                            WHERE follower_id = $user_id AND follow_status = 'follow'";
+
+    $result = mysqli_query($conn, $show_follower_query);
+
+    $get_followings = array();
+
+    if($result && mysqli_num_rows($result) > 0) {
+        while ($my_data = mysqli_fetch_assoc($result)) {
+            $get_followings[] = $my_data;
+        }
+        return $get_followings;
+    }
 }

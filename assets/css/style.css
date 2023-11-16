@@ -313,6 +313,7 @@ h6{
     color: #fff;
     border-radius: 6px 6px 6px 0;
     padding: 10px;
+    word-break: break-all;
 }
 
 .time-track-you{
@@ -336,6 +337,7 @@ h6{
     color: #ffffff;
     border-radius: 6px 6px 0 6px;
     padding: 10px;
+    word-break: break-all;
 }
 
 .time-track-other{
@@ -381,10 +383,11 @@ h6{
 /* Customizing the search input field */
 
 #table_id_filter input {
-    border: 1px solid #ccc;
+    border: 1px solid #00c1ff;
     padding: 5px 15px;
     margin: 20px 0;
     border-radius: 20px;
+    background-color: #fff;
 }
 
 /* Customizing the search label */
