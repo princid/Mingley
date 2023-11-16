@@ -14,14 +14,10 @@ $curr_id = $_SESSION['id'];
 ?>
 
 
-
-
-
-<!-- <main>
-
+<main>
     <div class="main-wrapper pt-80">
-
         <div class="container">
+
 
             <?php if (isset($_SESSION['message'])) { ?>
                 <div class="alertBox">
@@ -36,64 +32,6 @@ $curr_id = $_SESSION['id'];
                 </div>
             <?php } ?>
 
-            <div class="row g-4">
-
-
-                <form class="navbar-form navbar-left" action="" method="post">
-                    <div class="input-group justify-content-center">
-                        <div class="form-outline" style="width: 500px;">
-                            <input type="text" name="searchbar" id="searchbar" class="form-control h-100" placeholder="Search..." required autocomplete="off" />
-     
-                        </div>
-                        <button type="submit" name="searchBtn" id="searchBtn" class="btn btn-primary">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
-
-
-                <div class="col">
-
-
-                </div>
-
-
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-
-
-
-
-            </div>
-        </div>
-
-    </div>
-
-</main> -->
-
-<main>
-    <div class="main-wrapper pt-80">
-        <div class="container">
-
-
-
-
-
             <div class="col">
 
                 <div class="table-responsive">
@@ -102,10 +40,6 @@ $curr_id = $_SESSION['id'];
                             <tr>
                                 <th scope="col">Full Name</th>
                                 <th scope="col">Username</th>
-                                <!-- <th scope="col">Account Creation Date</th>
-                                    <th scope="col">Status</th>
-                                    <th class="text-center" scope="col">Change Status</th>
-                                    <th class="text-center" scope="col">Assign Role</th> -->
                                 <th scope="col" class="text-end">View Profile</th>
                             </tr>
                         </thead>
@@ -126,7 +60,6 @@ $curr_id = $_SESSION['id'];
 
                                     $search_profileUrl = "FriendProfile.php?user_id=" . $user_id;
 
-                                    // var_dump($search_data);
                             ?>
 
                                 <tr data-user-id="<?php echo $user_id; ?>">

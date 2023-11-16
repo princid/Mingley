@@ -8,7 +8,7 @@ $active_item = 1;
 require_once("Navbar.php");
 
 require_once('../controller/countPost.php');
-$total_posts = $count_post_result[0]['total_posts'];
+$total_posts = $count_post_result['total_posts'];
 
 
 require_once('../controller/countFollowersAndFollowings.php');
@@ -20,18 +20,6 @@ require_once("../controller/create_post_controller.php");
 
 require_once("../controller/show_post_on_feed.php");
 
-require_once("../controller/getAllUserRecord.php");
-
-// require_once("../controller/like_controller.php");
-
-// var_dump($feed_post_result);
-// exit;
-
-// Checking if Session is active or not
-// if (empty($_SESSION['id'])) {
-//     header("location: SignIn.php");
-//     exit();
-// }
 
 ?>
 
@@ -532,63 +520,7 @@ require_once("../controller/getAllUserRecord.php");
                 <!-- Right Bar starts here -->
                 <div class="col-lg-3">
                     <div class="row g-4">
-                        <!-- Card follow START -->
-                        <div class="col-sm-6 col-lg-12">
-                            <div class="card rounded-2">
-                                <!-- Card header START -->
-                                <div class="card-header p-0 border-0">
-                                    <h5 class="card-title mb-0">Suggested accounts :</h5>
-                                </div>
-                                <!-- Card header END -->
 
-                                <!-- Card body START -->
-                                <div class="card_body">
-
-                                    <?php foreach ($fetch_user_result as $send_friend_request) {
-
-                                        // $post_id = $feed_post_data["post_id"];
-                                        $unknown_user_id = $send_friend_request["id"];
-                                        $unknown_user_name = $send_friend_request['first_name'] . " " . $send_friend_request['last_name'];
-                                        $unknown_user_pic = $send_friend_request['user_profile_pic'];
-                                        $unknown_user_bio = $send_friend_request['user_bio'];
-
-                                        // var_dump($unknown_user_name);
-
-                                    ?>
-
-                                        <!-- Connection item START -->
-                                        <div class="hstack gap-2 mb-3 mt-3">
-                                            <!-- Avatar -->
-                                            <div class="avatar">
-                                                <a href="#">
-                                                    <?php if (!empty($unknown_user_pic)) { ?>
-                                                        <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $unknown_user_id . "/" . $unknown_user_pic; ?>" alt="">
-                                                    <?php } else { ?>
-                                                        <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
-                                                    <?php } ?>
-                                                </a>
-                                            </div>
-                                            <!-- Title -->
-                                            <div class="overflow-hidden">
-                                                <a class="h6 mb-0" href="#"><?= $unknown_user_name; ?> </a>
-                                                <p title="<?= $unknown_user_bio; ?>" class="mb-0 small text-truncate"><?= $unknown_user_bio; ?></p>
-                                            </div>
-                                            <!-- Button -->
-                                            <a class="btn btn-primary-soft rounded-circle icon-md ms-auto rightNav_anchor" href="#"><i class="fa-solid fa-plus"> </i></a>
-                                        </div>
-                                        <!-- Connection item END -->
-
-                                    <?php } ?>
-
-                                    <!-- View more button -->
-                                    <div class="card-footer d-grid mt-3">
-                                        <a class="btn btn-sm btn-primary-soft" href="#!">View more</a>
-                                    </div>
-                                </div>
-                                <!-- Card body END -->
-                            </div>
-                        </div>
-                        <!-- Card follow START -->
 
                         <!-- Card News START -->
                         <div class="col-sm-6 col-lg-12">
@@ -602,22 +534,22 @@ require_once("../controller/getAllUserRecord.php");
                                 <div class="card-body">
                                     <!-- News item -->
                                     <div class="mb-3">
-                                        <h6 class="mb-0"><a href="blog-details.html">Ten questions you should answer truthfully</a></h6>
+                                        <h6 class="mb-0"><a href="">Ten questions you should answer truthfully</a></h6>
                                         <small>2hr</small>
                                     </div>
                                     <!-- News item -->
                                     <div class="mb-3">
-                                        <h6 class="mb-0"><a href="blog-details.html">Five unbelievable facts about money</a></h6>
+                                        <h6 class="mb-0"><a href="">Five unbelievable facts about money</a></h6>
                                         <small>3hr</small>
                                     </div>
                                     <!-- News item -->
                                     <div class="mb-3">
-                                        <h6 class="mb-0"><a href="blog-details.html">Best Pinterest Boards for learning about business</a></h6>
+                                        <h6 class="mb-0"><a href="">Best Pinterest Boards for learning about business</a></h6>
                                         <small>4hr</small>
                                     </div>
                                     <!-- News item -->
                                     <div class="mb-3">
-                                        <h6 class="mb-0"><a href="blog-details.html">Skills that you can learn from business</a></h6>
+                                        <h6 class="mb-0"><a href="">Skills that you can learn from business</a></h6>
                                         <small>6hr</small>
                                     </div>
                                     <!-- Load more comments -->
@@ -637,26 +569,26 @@ require_once("../controller/getAllUserRecord.php");
 
                         <ul class="nav small mt-4 justify-content-center lh-1">
                             <li class="nav-item">
-                                <a class="nav-link" href="my-profile-about.html">About</a>
+                                <a class="nav-link" href="">About</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="settings.html">Settings</a>
+                                <a class="nav-link" href="">Settings</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" target="_blank" href="https://support.webestica.com/login">Support </a>
+                                <a class="nav-link" target="_blank" href="">Support </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" target="_blank" href="docs/index.html">Docs </a>
+                                <a class="nav-link" target="_blank" href="">Docs </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="help.html">Help</a>
+                                <a class="nav-link" href="">Help</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="privacy-and-terms.html">Privacy &amp; terms</a>
+                                <a class="nav-link" href="">Privacy &amp; terms</a>
                             </li>
                         </ul>
 
-                        <p class="small text-center mt-1">©2023 <a class="text-reset" target="_blank" href="#"> Mingley </a></p>
+                        <p class="small text-center mt-1">©2023 <a class="text-reset" target="_blank" href=""> Mingley </a></p>
                     </div>
                 </div>
                 <!-- Right Bar ends here -->
@@ -672,11 +604,13 @@ require_once("../controller/getAllUserRecord.php");
 <div class="scroll-top visible">
     <i class="fa-solid fa-hand-point-up"></i>
 </div>
-
-<div class="chat_icon visible">
-    <i class="fa-regular fa-message" style="color: #ffffff;"></i>
-</div>
 <!-- Scroll to Top End -->
+
+<a href="Chat.php">
+    <div class="chat_icon visible">
+        <i class="fa-regular fa-message" style="color: #ffffff;"></i>
+    </div>
+</a>
 
 
 <script src="../../assets/js/jquery.js"></script>
