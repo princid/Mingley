@@ -411,7 +411,7 @@ require_once("../controller/getAllUserRecord.php");
                                     <li class="nav-item">
                                         <a class="nav-link active likesAnchor" href="#" data-post-id="<?= $post_id ?>" data-like-status="<?= $like_status ?>">
                                             <i class="fa-<?= $like_status ? 'solid text-danger' : 'regular' ?> fa-heart postLike" data-post-id="<?= $post_id ?>"></i>
-                                            Likes <span id="likes_count_<?= $post_id; ?>">(<?= $feed_post_data['likes_count'] ?>)</span>
+                                            Likes (<span id="likes_count_<?= $post_id; ?>"><?= $feed_post_data['likes_count'] ?></span>)
                                             <!-- <span id="likes_count_<?= $post_id; ?>">(<?= $count_like ?>)</span> Likes -->
                                         </a>
                                     </li>
