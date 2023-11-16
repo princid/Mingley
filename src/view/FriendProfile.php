@@ -30,6 +30,11 @@ $post_author_email = $profile_feed_result[0]['user_email'];
 // print_r($profile_feed_result);
 // exit;
 
+$curr_id = $_SESSION['id'];
+$receiver = $_GET['user_id'];
+
+// var_dump($curr_id);
+// var_dump($receiver);
 
 
 // var_dump($total_posts);
@@ -149,8 +154,8 @@ $post_author_email = $profile_feed_result[0]['user_email'];
                                 <li class="nav-item"> <a class="nav-link" href="my-profile-activity.html"> Activity</a> </li>
                             </ul> -->
 
-                            <button class="btn btn-outline-primary w-25 me-3"><i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong></button>
-                            <button class="btn btn-outline-success w-25"><i class="fa-regular fa-message pe-3"></i> <strong>Message</strong></button>
+                            <button class="btn btn-outline-primary me-3" style="padding: 10px 50px;"><i class=" fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong></button>
+                            <a href="Chat.php?sender=<?php echo $curr_id; ?>&receiver=<?php echo $receiver; ?>"><button class="btn btn-outline-success" style="padding: 10px 50px;"><i class=" fa-regular fa-message pe-3"></i> <strong>Message</strong></button></a>
                         </div>
 
                     </div>
