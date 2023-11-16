@@ -347,6 +347,106 @@ h6{
 }
 
 
+/************************************** JQUERY TABLE STYLING START ***********************************************/
+#table_id th {
+    background-color: #337ab7;
+    color: #fff;
+    font-weight: bold;
+}
+
+#table_id tr {
+    background-color: #f9f9f900;
+}
+
+/* Styling the selected rows */
+#table_id tr.selected {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.tabular_card{
+    background: rgb(193,251,241);
+    background: radial-gradient(circle, rgba(193,251,241,1) 0%, rgba(255,255,255,1) 50%, rgba(126,246,225,1) 100%);
+}
+
+.table>tbody {
+    vertical-align: middle;
+}
+
+/* Styling the pagination controls */
+.dataTables_paginate {
+    background-color: #f9f9f9;
+}
+
+/* Customizing the search input field */
+
+#table_id_filter input {
+    border: 1px solid #ccc;
+    padding: 5px 15px;
+    margin: 20px 0;
+    border-radius: 20px;
+}
+
+/* Customizing the search label */
+#table_id_filter label {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Show entries of jQuery Table */
+/* Customizing the appearance of the length of the menu container */
+.dataTables_length {
+    margin: 20px 20px 20px 0;
+}
+
+/* Styling the "Show X entries" label */
+.dataTables_length label {
+    font-weight: bold;  
+}
+
+/* Styling the select (dropdown) element */
+.dataTables_length select {
+    width: auto; 
+    padding: 4px; 
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    
+}
+
+/* Styling the "entries" text */
+.dataTables_length select:after {
+    content: " entries";
+}
+
+/* Styling the "Show X entries" label when it's selected */
+.dataTables_length select option:checked {
+    background-color: #007BFF;
+    color: white; 
+}
+
+/* Styling the dropdown arrow icon */
+.dataTables_length select::after {
+    content: "▼";
+    margin-left: 5px;
+}
+
+/* Style the pagination */
+.dataTables_wrapper .dataTables_paginate {
+    text-align: center; /* Center the pagination */
+    margin-top: 20px; /* Add margin from the top */
+}
+
+.dataTables_info {
+    margin-top: 20px; /* Add margin from the top */
+}
+
+.dataTables_paginate {
+    background-color: #f9f9f900;
+}
+
+/************************************** JQUERY TABLE STYLING END ***********************************************/
 
 
 /*------------------------------------------------------------------
