@@ -4,6 +4,7 @@ session_start();
 
 $title = "Home Page";
 
+$active_item = 1;
 require_once("Navbar.php");
 
 require_once('../controller/countPost.php');

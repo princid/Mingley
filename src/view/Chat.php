@@ -3,7 +3,7 @@
 session_start();
 
 $title = "Chat with your Friends";
-
+$active_item = 2;
 require("Navbar.php");
 
 // require_once("../controller/getAllUserRecord.php");
@@ -123,3 +123,6 @@ if (isset($_GET['sender']) && $_GET['receiver'] == null) {
 <script src="../../assets/js/chatLoad.js"></script>
 
 
+<?php
+require_once("../../includes/Footer.php");
+?>

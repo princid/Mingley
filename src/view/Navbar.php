@@ -35,15 +35,22 @@ if (empty($_SESSION['id'])) {
                     <!-- header top navigation start -->
                     <div class="header-top-navigation">
                         <nav>
-                            <ul>
-                                <li class="active"><a href="HomeFeed.php"><i class="fa-solid fa-house"></i></a></li>
-
-                                <!-- Pending -->
-                                <li class="msg-trigger"><a class="msg-trigger-btn" href="Chat.php"><i class="fa-solid fa-message"></i></a>
-
+                            <ul class="main_navbar">
+                                <li class="<?= $active_item == 1 ? 'active' : ''; ?>">
+                                    <a href="HomeFeed.php">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
                                 </li>
 
-                                <li class="search-trigger">
+
+                                <li class="msg <?= $active_item == 2 ? 'active' : ''; ?>">
+                                    <a class="msg-trigger-btn" href="Chat.php">
+                                        <i class="fa-solid fa-message"></i>
+                                    </a>
+                                </li>
+
+                                <!-- Pending -->
+                                <li class="search-trigger <?= $active_item == 3 ? 'active' : ''; ?>">
                                     <a class="search-trigger-btn" href="SearchPage.php">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </a>
@@ -151,7 +158,7 @@ if (empty($_SESSION['id'])) {
 
                 <div class="col-md-5">
                     <div class="header-top-right d-flex align-items-center justify-content-end">
-                        
+
                         <!-- header top search start -->
                         <!-- <div class="header-top-search">
                             <form class="top-search-box">
