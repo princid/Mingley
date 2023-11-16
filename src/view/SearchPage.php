@@ -4,6 +4,7 @@ session_start();
 
 $title = "Search Users";
 
+$active_item = 3;
 require_once("Navbar.php");
 
 ?>
@@ -150,3 +151,7 @@ require_once("Navbar.php");
         </div>
     </div>
 </main>
+
+<?php
+require_once("../../includes/Footer.php");
+?>

@@ -4,13 +4,17 @@ session_start();
 
 $title = "Home Page";
 
-// require_once('../../includes/Header.php');
-
-// require_once("../../config/constants.php");
-
-// require("../controller/fetch_user_controller.php");
-
+$active_item = 1;
 require_once("Navbar.php");
+
+require_once('../controller/countPost.php');
+$total_posts = $count_post_result[0]['total_posts'];
+
+
+require_once('../controller/countFollowersAndFollowings.php');
+$total_followers = $followers_count['followers_count'];
+$total_followings = $followings_count['followings_count'];
+
 
 require_once("../controller/create_post_controller.php");
 
@@ -80,22 +84,34 @@ require_once("../controller/getAllUserRecord.php");
                                 <div class="hstack gap-2 gap-xl-3 justify-content-center">
                                     <!-- User stat item -->
                                     <div style="text-align:center">
-                                        <h6 class="mb-0">256</h6>
-                                        <small>Post</small>
+                                        <?php if (!empty($total_posts)) { ?>
+                                            <h6 class="mb-0"><?= $total_posts; ?></h6>
+                                        <?php } else { ?>
+                                            <h6 class="mb-0">0</h6>
+                                        <?php } ?>
+                                        <small>Posts</small>
                                     </div>
                                     <!-- Divider -->
                                     <div class="vr"></div>
                                     <!-- User stat item -->
                                     <div style="text-align:center">
-                                        <h6 class="mb-0">2.5K</h6>
+                                        <?php if (!empty($total_followers)) { ?>
+                                            <h6 class="mb-0"><?= $total_followers; ?></h6>
+                                        <?php } else { ?>
+                                            <h6 class="mb-0">0</h6>
+                                        <?php } ?>
                                         <small>Followers</small>
                                     </div>
                                     <!-- Divider -->
                                     <div class="vr"></div>
                                     <!-- User stat item -->
                                     <div style="text-align:center">
-                                        <h6 class="mb-0">365</h6>
-                                        <small>Following</small>
+                                        <?php if (!empty($total_followings)) { ?>
+                                            <h6 class="mb-0"><?= $total_followings; ?></h6>
+                                        <?php } else { ?>
+                                            <h6 class="mb-0">0</h6>
+                                        <?php } ?>
+                                        <small>Followings</small>
                                     </div>
                                 </div>
 

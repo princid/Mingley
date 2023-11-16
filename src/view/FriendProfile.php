@@ -6,16 +6,38 @@ $title = "Friend Profile";
 
 require_once("Navbar.php");
 
+require_once('../controller/countPost.php');
+$total_posts = $count_post_result[0]['total_posts'];
+
+// require_once('../controller/countFollowers.php');
+// $total_followers = $count_follower_result[0]['total_followers'];
+
+
+require_once('../controller/countFollowersAndFollowings.php');
+$total_followers = $followers_count['followers_count'];
+$total_followings = $followings_count['followings_count'];
+
+// var_dump($total_posts);
+
 require_once("../controller/show_post_on_profile.php");
 
 $post_author = $profile_feed_result[0]['first_name'] . " " . $profile_feed_result[0]['last_name'];
 $post_author_username = $profile_feed_result[0]['user_name'];
+$post_author_profile_img = $profile_feed_result[0]['user_profile_pic'];
 $post_author_bio = $profile_feed_result[0]['user_bio'];
 $post_author_email = $profile_feed_result[0]['user_email'];
 
 // print_r($profile_feed_result);
 // exit;
 
+$curr_id = $_SESSION['id'];
+$receiver = $_GET['user_id'];
+
+// var_dump($curr_id);
+// var_dump($receiver);
+
+
+// var_dump($total_posts);
 
 ?>
 
@@ -55,8 +77,13 @@ $post_author_email = $profile_feed_result[0]['user_email'];
                             <!-- Card body START -->
 
                             <!-- Profile Avatar -->
-                            <div class="position-absolute" style="width: 12rem; margin: 20px; top:20%; left:40%;">
-                                <img class="avatar-img rounded-circle border border-white border-3" src="../../assets/img/profile6.png" alt="">
+                            <div class="position-absolute" style="width: 12rem; height: 12rem; margin: 20px; top:20%; left:40%;">
+                                <!-- <img class="avatar-img rounded-circle border border-white border-3" src="../../assets/img/profile6.png" alt=""> -->
+                                <?php if (!empty($post_author_profile_img)) { ?>
+                                    <img class="avatar-img rounded-circle border border-white border-3" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $post_author_profile_img; ?>" alt="">
+                                <?php } else { ?>
+                                    <img class="avatar-img rounded-circle border border-white border-3" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                <?php } ?>
                             </div>
 
                         </div>
@@ -73,8 +100,12 @@ $post_author_email = $profile_feed_result[0]['user_email'];
                                     <!-- User stat item -->
                                     <div style="text-align:center">
                                         <a href="">
-                                            <h6 class="mb-0">256</h6>
-                                            <small>Post</small>
+                                            <?php if (!empty($total_posts)) { ?>
+                                                <h6 class="mb-0"><?= $total_posts; ?></h6>
+                                            <?php } else { ?>
+                                                <h6 class="mb-0">0</h6>
+                                            <?php } ?>
+                                            <small>Posts</small>
                                         </a>
                                     </div>
                                     <!-- Divider -->
@@ -82,7 +113,11 @@ $post_author_email = $profile_feed_result[0]['user_email'];
                                     <!-- User stat item -->
                                     <div style="text-align:center">
                                         <a href="">
-                                            <h6 class="mb-0">2.5K</h6>
+                                            <?php if (!empty($total_followers)) { ?>
+                                                <h6 class="mb-0"><?= $total_followers; ?></h6>
+                                            <?php } else { ?>
+                                                <h6 class="mb-0">0</h6>
+                                            <?php } ?>
                                             <small>Followers</small>
                                         </a>
                                     </div>
@@ -91,8 +126,12 @@ $post_author_email = $profile_feed_result[0]['user_email'];
                                     <!-- User stat item -->
                                     <div style="text-align:center">
                                         <a href="">
-                                            <h6 class="mb-0">365</h6>
-                                            <small>Following</small>
+                                            <?php if (!empty($total_followings)) { ?>
+                                                <h6 class="mb-0"><?= $total_followings; ?></h6>
+                                            <?php } else { ?>
+                                                <h6 class="mb-0">0</h6>
+                                            <?php } ?>
+                                            <small>Followings</small>
                                         </a>
                                     </div>
                                 </div>
@@ -115,8 +154,8 @@ $post_author_email = $profile_feed_result[0]['user_email'];
                                 <li class="nav-item"> <a class="nav-link" href="my-profile-activity.html"> Activity</a> </li>
                             </ul> -->
 
-                            <button class="btn btn-outline-primary w-25 me-3"><i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong></button>
-                            <button class="btn btn-outline-success w-25"><i class="fa-regular fa-message pe-3"></i> <strong>Message</strong></button>
+                            <button class="btn btn-outline-primary me-3" style="padding: 10px 50px;"><i class=" fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong></button>
+                            <a href="Chat.php?sender=<?php echo $curr_id; ?>&receiver=<?php echo $receiver; ?>"><button class="btn btn-outline-success" style="padding: 10px 50px;"><i class=" fa-regular fa-message pe-3"></i> <strong>Message</strong></button></a>
                         </div>
 
                     </div>
@@ -141,6 +180,8 @@ $post_author_email = $profile_feed_result[0]['user_email'];
                         <!-- Card body END -->
                         <!-- </div> -->
                     </div>
+
+                    <h3>Posts</h3>
 
                     <?php foreach ($profile_feed_result as $feed_post_data) {
 
