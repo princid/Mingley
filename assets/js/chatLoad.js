@@ -1,6 +1,7 @@
 $(document).ready(function () {
   function chat_validation() {
     const textmsg = $("#message").val();
+    // alert(textmsg);
     const receive = $("#receive").val();
     const send = $("#send").val();
 
@@ -9,13 +10,13 @@ $(document).ready(function () {
       return false;
     }
 
-    const datastr =
-      "message=" + textmsg + "&receive=" + receive + "&send=" + send;
+    // const datastr =
+    //   "message=" + textmsg + "&receive=" + receive + "&send=" + send;
 
     $.ajax({
       url: "../../response/chatlog.php",
       type: "POST",
-      data: datastr,
+      data: { message: textmsg, receive: receive , send: send},
       success: function (e) {
         $("#msg").html(e);
       },
