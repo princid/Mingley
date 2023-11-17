@@ -90,40 +90,34 @@ $receiver = $_GET['user_id'];
                                 <div class="hstack gap-2 gap-xl-3 justify-content-start">
                                     <!-- User stat item -->
                                     <div style="text-align:center">
-                                        <a href="">
-                                            <?php if (!empty($total_posts)) { ?>
-                                                <h6 class="mb-0"><?= $total_posts; ?></h6>
-                                            <?php } else { ?>
-                                                <h6 class="mb-0">0</h6>
-                                            <?php } ?>
-                                            <small>Posts</small>
-                                        </a>
+                                        <?php if (!empty($total_posts)) { ?>
+                                            <h6 class="mb-0"><?= $total_posts; ?></h6>
+                                        <?php } else { ?>
+                                            <h6 class="mb-0">0</h6>
+                                        <?php } ?>
+                                        <small>Posts</small>
                                     </div>
                                     <!-- Divider -->
                                     <div class="vr"></div>
                                     <!-- User stat item -->
                                     <div style="text-align:center">
-                                        <a href="">
-                                            <?php if (!empty($total_followers)) { ?>
-                                                <h6 class="mb-0"><?= $total_followers; ?></h6>
-                                            <?php } else { ?>
-                                                <h6 class="mb-0">0</h6>
-                                            <?php } ?>
-                                            <small>Followers</small>
-                                        </a>
+                                        <?php if (!empty($total_followers)) { ?>
+                                            <h6 class="mb-0"><?= $total_followers; ?></h6>
+                                        <?php } else { ?>
+                                            <h6 class="mb-0">0</h6>
+                                        <?php } ?>
+                                        <small>Followers</small>
                                     </div>
                                     <!-- Divider -->
                                     <div class="vr"></div>
                                     <!-- User stat item -->
                                     <div style="text-align:center">
-                                        <a href="">
-                                            <?php if (!empty($total_followings)) { ?>
-                                                <h6 class="mb-0"><?= $total_followings; ?></h6>
-                                            <?php } else { ?>
-                                                <h6 class="mb-0">0</h6>
-                                            <?php } ?>
-                                            <small>Followings</small>
-                                        </a>
+                                        <?php if (!empty($total_followings)) { ?>
+                                            <h6 class="mb-0"><?= $total_followings; ?></h6>
+                                        <?php } else { ?>
+                                            <h6 class="mb-0">0</h6>
+                                        <?php } ?>
+                                        <small>Followings</small>
                                     </div>
                                 </div>
                             </div>
@@ -193,6 +187,8 @@ $receiver = $_GET['user_id'];
                                 $post_caption = $feed_post_data['post_caption'];
                                 $posted_at = $feed_post_data['posted_at'];
                                 $all_post_images = explode(',', $feed_post_data['post_images']);
+
+                                $like_status = $feed_post_data["like_status"];
 
                                 $carousel_id = 'carouselIndicators_' . $post_id;
                             ?>
@@ -311,10 +307,12 @@ $receiver = $_GET['user_id'];
 
                                         <!-- Feed react START -->
                                         <ul class="nav nav-stack py-3 mt-1">
+
                                             <li class="nav-item">
-                                                <a class="nav-link active" href="#!" data-bs-container="body" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-custom-class="tooltip-text-start" data-bs-title="Frances Guerrero<br> Lori Stevens<br> Billy Vasquez<br> Judy Nguyen<br> Larry Lawson<br> Amanda Reed<br> Louis Crawford">
-                                                    <i class="fa-regular fa-heart"></i>
-                                                    Likes (56)
+                                                <a class="nav-link active likesAnchor" href="#" data-post-id="<?= $post_id ?>" data-like-status="<?= $like_status ?>">
+                                                    <i class="fa-<?= $like_status ? 'solid text-danger' : 'regular' ?> fa-heart postLike" data-post-id="<?= $post_id ?>"></i>
+                                                    Likes (<span id="likes_count_<?= $post_id; ?>"><?= $feed_post_data['likes_count'] ?></span>)
+                                                    <!-- <span id="likes_count_<?= $post_id; ?>">(<?= $count_like ?>)</span> Likes -->
                                                 </a>
                                             </li>
 
@@ -454,6 +452,8 @@ $receiver = $_GET['user_id'];
 
                                                 $follower_profileUrl = "FriendProfile.php?user_id=" . $user_id;
 
+                                                $follower_chatUrl = "Chat.php?user_id=" . $user_id;
+
                                         ?>
 
                                             <tr data-user-id="<?php echo $user_id; ?>">
@@ -466,11 +466,11 @@ $receiver = $_GET['user_id'];
                                                     <?php } ?>
 
                                                     <?php if ($user_id != $curr_id) { ?>
-                                                        <a class="text-heading font-semibold" href="<?= $follower_profileUrl; ?>">
+                                                        <a class="text-heading font-semibold text-truncate" href="<?= $follower_profileUrl; ?>">
                                                             <?php echo strtoupper($user_fullname); ?>
                                                         </a>
                                                     <?php } else { ?>
-                                                        <a class="text-heading font-semibold" href="Profile.php">
+                                                        <a class="text-heading font-semibold text-truncate" href="Profile.php">
                                                             <?php echo strtoupper($user_fullname); ?>
                                                         </a>
                                                     <?php } ?>
@@ -482,9 +482,7 @@ $receiver = $_GET['user_id'];
 
                                                 <td class="text-center">
                                                     <?php if ($user_id != $curr_id) { ?>
-                                                        <a href="<?= $follower_profileUrl; ?>"><button type="button" class="btn btn-outline-success"><i class="fa-regular fa-message"></i></button></a>
-                                                    <?php } else { ?>
-                                                        <a href="Profile.php"><button type="button" class="btn btn-outline-success"><i class="fa-regular fa-message"></i></button></a>
+                                                        <a href="Chat.php?sender=<?php echo $curr_id; ?>&receiver=<?php echo $user_id; ?>"><button type="button" class="btn btn-outline-success"><i class="fa-regular fa-message"></i></button></a>
                                                     <?php } ?>
                                                 </td>
 
@@ -542,6 +540,8 @@ $receiver = $_GET['user_id'];
 
                                                 $following_profileUrl = "FriendProfile.php?user_id=" . $user_id;
 
+                                                $following_chatUrl = "Chat.php?user_id=" . $user_id;
+
                                         ?>
 
                                             <tr data-user-id="<?php echo $user_id; ?>">
@@ -554,11 +554,11 @@ $receiver = $_GET['user_id'];
                                                     <?php } ?>
 
                                                     <?php if ($user_id == $receiver) { ?>
-                                                        <a class="text-heading font-semibold" href="<?= $following_profileUrl; ?>">
+                                                        <a class="text-heading font-semibold text-truncate" href="<?= $following_profileUrl; ?>">
                                                             <?php echo strtoupper($user_fullname); ?>
                                                         </a>
                                                     <?php } else { ?>
-                                                        <a class="text-heading font-semibold" href="Profile.php">
+                                                        <a class="text-heading font-semibold text-truncate" href="Profile.php">
                                                             <?php echo strtoupper($user_fullname); ?>
                                                         </a>
                                                     <?php } ?>
@@ -570,9 +570,7 @@ $receiver = $_GET['user_id'];
 
                                                 <td class="text-center">
                                                     <?php if ($user_id != $curr_id) { ?>
-                                                        <a href="<?= $following_profileUrl; ?>"><button type="button" class="btn btn-outline-success"><i class="fa-regular fa-message"></i></button></a>
-                                                    <?php } else { ?>
-                                                        <a href="Profile.php"><button type="button" class="btn btn-outline-success"><i class="fa-regular fa-message"></i></button></a>
+                                                        <a href="Chat.php?sender=<?php echo $curr_id; ?>&receiver=<?php echo $user_id; ?>"><button type="button" class="btn btn-outline-success"><i class="fa-regular fa-message"></i></button></a>
                                                     <?php } ?>
                                                 </td>
 
@@ -603,10 +601,6 @@ $receiver = $_GET['user_id'];
                 </div>
                 <!-- Main content END -->
 
-                <?php //} 
-                ?>
-
-
             </div>
         </div>
 
@@ -623,6 +617,10 @@ $receiver = $_GET['user_id'];
     <i class="fa-regular fa-message" style="color: #ffffff;"></i>
 </div>
 <!-- Scroll to Top End -->
+
+
+<script src="../../assets/js/postLike.js"></script>
+<script src="../../assets/js/postCRUD.js"></script>
 
 
 <script src="../../assets/js/jquery.js"></script>
