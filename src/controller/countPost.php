@@ -9,8 +9,10 @@ if (!empty($_SESSION)) {
     
     $posts_table = 'posts_table';
 
-    $condition = " $id = $posts_table.user_id ";
+    $condition1 = " $id = $posts_table.user_id ";
 
-    $count_post_result = countPost($conn, $posts_table, $condition);
+    $condition2 = " $posts_table.is_deleted = 0 ";
+
+    $count_post_result = countPost($conn, $posts_table, $condition1, $condition2);
 
 }
