@@ -25,7 +25,7 @@ if (isset($_POST['upload_button'])) {
     if (count($_FILES['files']['name']) > $maxUploads) {
         // Displaying an error message if more than 10 images are selected
         $_SESSION["message"] = "You can upload up to 10 images only.";
-        header("location: http://localhost/PHP_Assesments/Mingley/src/view/HomeFeed.php");
+        header("location: ".BASE_URL."src/view/HomeFeed.php");
         exit;
     }
 
@@ -53,11 +53,11 @@ if (isset($_POST['upload_button'])) {
 
     if ($result_post === "Post successfully uploaded...") {
         $_SESSION["message"] = $result_post;
-        header("location: http://localhost/PHP_Assesments/Mingley/src/view/HomeFeed.php");
+        header("location:".BASE_URL."src/view/HomeFeed.php");
         exit;
     } else {
         $_SESSION["message"] = $result_post;
-        header("location: http://localhost/PHP_Assesments/Mingley/src/view/HomeFeed.php");
+        header("location:".BASE_URL."src/view/HomeFeed.php");
         exit;
     }
 }
