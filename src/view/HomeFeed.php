@@ -271,7 +271,7 @@ require_once("../controller/show_post_on_feed.php");
 
                     ?>
 
-                            <div class="card rounded-2">
+                            <div class="card rounded-2" id="post_card<?=$post_id?>">
                                 <!-- Card header START -->
                                 <div class="card-header border-0 pb-0">
                                     <div class="d-flex align-items-center justify-content-between">
