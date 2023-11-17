@@ -19,9 +19,6 @@ $(document).ready(function () {
         // You can handle the response as needed
         console.log(response);
 
-        // Update the comment section dynamically (if needed)
-        // For simplicity, let's assume you have a function to reload comments
-        // reloadComments(post_id);
       },
     });
   });

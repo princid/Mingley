@@ -16,7 +16,11 @@ $(document).ready(function () {
     $.ajax({
       url: "../../response/chatlog.php",
       type: "POST",
-      data: { message: textmsg, receive: receive , send: send},
+      data: { 
+        message: textmsg, 
+        receive: receive , 
+        send: send
+      },
       success: function (e) {
         $("#msg").html(e);
       },
@@ -35,13 +39,16 @@ $(document).ready(function () {
     const receive = $("#receive").val();
     const send = $("#send").val();
 
-    const dataStr = "receive=" + receive + "&send=" + send;
+    // const dataStr = "receive=" + receive + "&send=" + send;
 
     setInterval(function () {
       $.ajax({
         url: "../../response/chat_loader.php",
         type: "GET",
-        data: dataStr,
+        data: { 
+          receive: receive, 
+          send: send 
+        },
         success: function (e) {
           $("#chat_load").html(e);
         },
