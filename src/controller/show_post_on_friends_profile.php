@@ -19,9 +19,12 @@ if (!empty($_SESSION)) {
 
     $posts_table = 'posts_table';
 
+    $likes_table = 'likes_table';
+
     $profile_feed_condition = " $users_table.id = $posts_table.user_id ";
 
     $where_condition = " $id = $users_table.id ";
 
-    $profile_feed_result = show_post_on_profile($conn, $users_table, $posts_table, $profile_feed_condition, $where_condition);
+    // $profile_feed_result = show_post_on_profile($conn, $users_table, $posts_table, $profile_feed_condition, $where_condition);
+    $profile_feed_result = show_post_on_friends_profile($conn, $users_table, $posts_table, $likes_table, $profile_feed_condition, $where_condition, $id);
 }
