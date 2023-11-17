@@ -214,6 +214,66 @@ function show_post_on_feed($conn, $users_table, $posts_table, $likes_table, $fee
 
 
 
+function show_post_on_profile($conn, $users_table, $posts_table, $likes_table, $profile_feed_condition, $where_condition, $current_user_id)
+{
+    $show_post = "SELECT 
+                    $users_table.*,
+                    $posts_table.*,
+                    (SELECT COUNT(*) FROM $likes_table WHERE $likes_table.post_id = $posts_table.post_id AND $likes_table.like_status = 1) AS likes_count,
+                    MAX($likes_table.like_status) AS like_status
+                FROM $users_table
+                JOIN $posts_table ON $profile_feed_condition
+                LEFT JOIN $likes_table ON $posts_table.post_id = $likes_table.post_id AND $likes_table.liked_by_id = $current_user_id
+                WHERE $where_condition
+                GROUP BY $posts_table.post_id
+                ORDER BY $posts_table.posted_at DESC";
+
+    $show_post_run = mysqli_query($conn, $show_post);
+
+    $post_data = array();
+
+    if ($show_post_run && mysqli_num_rows($show_post_run) > 0) {
+
+        while ($data = mysqli_fetch_assoc($show_post_run)) {
+            $post_data[] = $data;
+        }
+
+        return $post_data;
+    }
+}
+
+
+
+function show_post_on_friends_profile($conn, $users_table, $posts_table, $likes_table, $profile_feed_condition, $where_condition, $id)
+{
+    $show_post = "SELECT 
+                    $users_table.*,
+                    $posts_table.*,
+                    (SELECT COUNT(*) FROM $likes_table WHERE $likes_table.post_id = $posts_table.post_id AND $likes_table.like_status = 1) AS likes_count,
+                    MAX($likes_table.like_status) AS like_status
+                FROM $users_table
+                JOIN $posts_table ON $profile_feed_condition
+                LEFT JOIN $likes_table ON $posts_table.post_id = $likes_table.post_id AND $likes_table.liked_by_id = $id
+                WHERE $where_condition
+                GROUP BY $posts_table.post_id
+                ORDER BY $posts_table.posted_at DESC";
+
+    $show_post_run = mysqli_query($conn, $show_post);
+
+    $post_data = array();
+
+    if ($show_post_run && mysqli_num_rows($show_post_run) > 0) {
+
+        while ($data = mysqli_fetch_assoc($show_post_run)) {
+            $post_data[] = $data;
+        }
+
+        return $post_data;
+    }
+}
+
+
+
 
 
 
@@ -229,43 +289,43 @@ function show_post_on_feed($conn, $users_table, $posts_table, $likes_table, $fee
 
 
 // Function to show our own posts on our profile.
-function show_post_on_profile($conn, $users_table, $posts_table, $profile_feed_condition, $where_condition){
+// function show_post_on_profile($conn, $users_table, $posts_table, $profile_feed_condition, $where_condition){
 
-    $show_profile_post = "SELECT * FROM $users_table JOIN $posts_table ON $profile_feed_condition WHERE $where_condition ORDER BY $posts_table.posted_at DESC";
+//     $show_profile_post = "SELECT * FROM $users_table JOIN $posts_table ON $profile_feed_condition WHERE $where_condition ORDER BY $posts_table.posted_at DESC";
 
-    $show_profile_post_run = mysqli_query($conn, $show_profile_post);
+//     $show_profile_post_run = mysqli_query($conn, $show_profile_post);
 
-    $profile_post_data = array();
+//     $profile_post_data = array();
 
-    if($show_profile_post_run && mysqli_num_rows($show_profile_post_run) > 0){
+//     if($show_profile_post_run && mysqli_num_rows($show_profile_post_run) > 0){
 
-        while ($my_data = mysqli_fetch_assoc($show_profile_post_run)) {
-            $profile_post_data[] = $my_data;
-        }
+//         while ($my_data = mysqli_fetch_assoc($show_profile_post_run)) {
+//             $profile_post_data[] = $my_data;
+//         }
 
-        return $profile_post_data;
-    }
-}
+//         return $profile_post_data;
+//     }
+// }
 
 
 // Function to check other users profile
-function show_post_on_friends_profile($conn, $users_table, $posts_table, $profile_feed_condition, $where_condition){
+// function show_post_on_friends_profile($conn, $users_table, $posts_table, $profile_feed_condition, $where_condition){
 
-    $show_profile_post = "SELECT * FROM $users_table JOIN $posts_table ON $profile_feed_condition WHERE $where_condition ORDER BY $posts_table.posted_at DESC";
+//     $show_profile_post = "SELECT * FROM $users_table JOIN $posts_table ON $profile_feed_condition WHERE $where_condition ORDER BY $posts_table.posted_at DESC";
 
-    $show_profile_post_run = mysqli_query($conn, $show_profile_post);
+//     $show_profile_post_run = mysqli_query($conn, $show_profile_post);
 
-    $profile_post_data = array();
+//     $profile_post_data = array();
 
-    if($show_profile_post_run && mysqli_num_rows($show_profile_post_run) > 0){
+//     if($show_profile_post_run && mysqli_num_rows($show_profile_post_run) > 0){
 
-        while ($my_data = mysqli_fetch_assoc($show_profile_post_run)) {
-            $profile_post_data[] = $my_data;
-        }
+//         while ($my_data = mysqli_fetch_assoc($show_profile_post_run)) {
+//             $profile_post_data[] = $my_data;
+//         }
 
-        return $profile_post_data;
-    }
-}
+//         return $profile_post_data;
+//     }
+// }
 
 
 // Function to update the user's profile picture
@@ -370,11 +430,11 @@ function postComment(){
 
 }
 
-function countPost($conn, $posts_table, $condition)
+function countPost($conn, $posts_table, $condition1, $condition2)
 {
     $post_count = "SELECT user_id, COUNT(post_id) AS total_posts
                     FROM $posts_table 
-                    WHERE $condition
+                    WHERE $condition1 AND $condition2
                     GROUP BY user_id";
 
     $post_count_run = mysqli_query($conn, $post_count);
