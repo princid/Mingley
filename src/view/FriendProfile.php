@@ -4,6 +4,8 @@ session_start();
 
 $title = "Friend Profile";
 
+require_once("../../includes/Header.php");
+
 require_once("Navbar.php");
 
 require_once("../../config/connectDB.php");
@@ -23,6 +25,7 @@ require_once("../controller/show_post_on_profile.php");
 // var_dump($followings_display);
 
 require_once("../controller/getAllUserRecord.php");
+$logged_in_user_pic = $fetch_user_result[0]["user_profile_pic"];
 
 $current_user_fullname    = $current_user_data["first_name"] . " " . $current_user_data["last_name"];
 $current_username         = $current_user_data["user_name"];
@@ -33,6 +36,7 @@ $current_user_bio         = $current_user_data["user_bio"];
 
 $curr_id = $_SESSION['id'];
 $receiver = $_GET['user_id'];
+
 
 ?>
 
@@ -126,13 +130,28 @@ $receiver = $_GET['user_id'];
 
                         <!-- Card body END -->
                         <div class="card-footer mt-3 pt-2 pb-0 d-flex justify-content-center">
-                            <button class="btn btn-outline-primary me-3" style="padding: 10px 50px;"><i class=" fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong></button>
+                            <?php
+                            // Check if the user is already being followed
+                            $query = "SELECT * FROM follows_table WHERE user_id = $receiver AND follower_id = $curr_id";
+                            $result = mysqli_query($conn, $query);
+
+                            $follow_data = mysqli_fetch_assoc($result);
+
+                            if (mysqli_num_rows($result) > 0 && $follow_data['follow_status'] == 1) {
+                            ?>
+                                <button data-user-id="<?= $receiver; ?>" class="follow_btn btn btn-outline-secondary me-3" style="padding: 10px 50px;"><i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong></button>
+                            <?php } else { ?>
+                                <button data-user-id="<?= $receiver; ?>" class="follow_btn btn btn-outline-primary me-3" style="padding: 10px 50px;"><i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong></button>
+                            <?php } ?>
+
                             <a href="Chat.php?sender=<?php echo $curr_id; ?>&receiver=<?php echo $receiver; ?>"><button class="btn btn-outline-success" style="padding: 10px 50px;"><i class=" fa-regular fa-message pe-3"></i> <strong>Message</strong></button></a>
                         </div>
 
                     </div>
                     <!-- My profile END -->
 
+
+                    <!-- About Section -->
                     <div class="card card-body rounded-2">
                         <!-- <div class="card rounded"> -->
                         <div class="card-header border-0 pb-0">
@@ -153,9 +172,8 @@ $receiver = $_GET['user_id'];
                         <!-- </div> -->
                     </div>
 
-                    <!-- <h3>Posts</h3> -->
 
-                    <!-- Tabs navs -->
+                    <!-- Tabs navs start -->
                     <ul class="nav nav-tabs nav-justified mb-3" id="ex1" role="tablist">
                         <li class="nav-item" role="presentation">
                             <a class="nav-link active" id="ex3-tab-1" data-bs-toggle="tab" href="#ex3-tabs-1" role="tab" aria-controls="ex3-tabs-1" aria-selected="true"><strong>Posts</strong></a>
@@ -167,14 +185,14 @@ $receiver = $_GET['user_id'];
                             <a class="nav-link" id="ex3-tab-3" data-bs-toggle="tab" href="#ex3-tabs-3" role="tab" aria-controls="ex3-tabs-3" aria-selected="false"><strong>Followings</strong></a>
                         </li>
                     </ul>
+                    <!-- Tabs navs end -->
 
-                    <!-- Tabs navs -->
-
-                    <!-- Tabs content -->
+                    <!-- Tabs content start -->
                     <div class="tab-content" id="ex2-content">
 
                         <!-- Showing Posts Here -->
                         <div class="tab-pane fade show active" id="ex3-tabs-1" role="tabpanel" aria-labelledby="ex3-tab-1">
+
                             <?php foreach ($profile_feed_result as $feed_post_data) {
 
                                 $post_id = $feed_post_data["post_id"];
@@ -191,6 +209,10 @@ $receiver = $_GET['user_id'];
                                 $like_status = $feed_post_data["like_status"];
 
                                 $carousel_id = 'carouselIndicators_' . $post_id;
+
+                                // var_dump($post_user_id);
+                                // var_dump($curr_id);
+                                // var_dump($fetch_user_result[0]["user_profile_pic"]);
                             ?>
 
                                 <div class="card rounded-2">
@@ -239,7 +261,6 @@ $receiver = $_GET['user_id'];
                                                     <!-- Card feed action dropdown menu -->
                                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
                                                         <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
-                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori ferguson </a></li>
                                                         <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
                                                         <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
                                                         <li>
@@ -347,7 +368,13 @@ $receiver = $_GET['user_id'];
                                         <div class="d-flex mb-3">
                                             <!-- Avatar -->
                                             <div class="avatar avatar-xs me-2">
-                                                <a href="#!"> <img class="avatar-img rounded-circle" src="../../assets/img/profile2.jpg" alt=""> </a>
+                                                <a href="">
+                                                    <?php if (!empty($logged_in_user_pic)) { ?>
+                                                        <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $curr_id . "/" . $logged_in_user_pic; ?>" alt="">
+                                                    <?php } else { ?>
+                                                        <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                                    <?php } ?>
+                                                </a>
                                             </div>
                                             <!-- Comment box  -->
                                             <form class="nav nav-item w-100 position-relative">
@@ -437,7 +464,7 @@ $receiver = $_GET['user_id'];
 
                                         $follower_query  = "SELECT *
                                                                 FROM follows_table INNER JOIN users_table ON follows_table.follower_id = users_table.id
-                                                                WHERE user_id = $receiver AND follow_status = 'follow'";
+                                                                WHERE user_id = $receiver AND follow_status = '1'";
 
                                         $follower_query_result = mysqli_query($conn, $follower_query);
 
@@ -488,9 +515,9 @@ $receiver = $_GET['user_id'];
 
                                                 <td class="text-end">
                                                     <?php if ($user_id != $curr_id) { ?>
-                                                        <a href="<?= $follower_profileUrl; ?>"><button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></button></a>
+                                                        <a title="View Profile" href="<?= $follower_profileUrl; ?>"><button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></button></a>
                                                     <?php } else { ?>
-                                                        <a href="Profile.php"><button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></button></a>
+                                                        <a title="View Profile" href="Profile.php"><button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></button></a>
                                                     <?php } ?>
                                                 </td>
 
@@ -525,7 +552,7 @@ $receiver = $_GET['user_id'];
 
                                         $following_query  = "SELECT *
                                                                 FROM follows_table INNER JOIN users_table ON follows_table.user_id = users_table.id
-                                                                WHERE follower_id = $receiver AND follow_status = 'follow'";
+                                                                WHERE follower_id = $receiver AND follow_status = '1'";
 
                                         $following_query_result = mysqli_query($conn, $following_query);
 
@@ -576,9 +603,9 @@ $receiver = $_GET['user_id'];
 
                                                 <td class="text-end">
                                                     <?php if ($user_id != $curr_id) { ?>
-                                                        <a href="<?= $following_profileUrl; ?>"><button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></button></a>
+                                                        <a title="View Profile" href="<?= $following_profileUrl; ?>"><button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></button></a>
                                                     <?php } else { ?>
-                                                        <a href="Profile.php"><button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></button></a>
+                                                        <a title="View Profile" href="Profile.php"><button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></button></a>
                                                     <?php } ?>
                                                 </td>
 
@@ -595,7 +622,7 @@ $receiver = $_GET['user_id'];
 
                         </div>
                     </div>
-                    <!-- Tabs content -->
+                    <!-- Tabs content end -->
 
 
                 </div>
@@ -618,16 +645,17 @@ $receiver = $_GET['user_id'];
 </div>
 <!-- Scroll to Top End -->
 
+<!-- Including jQuery -->
+<script src="../../assets/js/jquery.js"></script>
 
 <script src="../../assets/js/postLike.js"></script>
 <script src="../../assets/js/postCRUD.js"></script>
 
-
-<script src="../../assets/js/jquery.js"></script>
-
 <!-- cdn links for jquery table -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+<script src="../../assets/js/alertMessage.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -674,12 +702,52 @@ $receiver = $_GET['user_id'];
 </script>
 
 
-<script>
-    const alertBox = document.querySelector(".alertBox");
 
-    setTimeout(() => {
-        alertBox.innerHTML = "";
-    }, 3000);
+
+<!-- Follow User -->
+<script>
+    $(document).ready(function() {
+        // Click event for the follow button
+        $('.follow_btn').on('click', function() {
+
+            // const userId = $(this).data('user-id');
+
+            const button = $(this);
+            const userId = button.data('user-id');
+
+            // AJAX request
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost/PHP_Assesments/Mingley/src/controller/follow_action.php',
+                data: {
+                    userId: userId
+                },
+                dataType: 'json',
+                success: function(response) {
+                    console.log(response);
+                    if (response.status === 'success') {
+                        // Update the button text or style based on the follow status
+                        // if (response.message === 'User followed' || response.message === 'Follow status updated') {
+                        console.log(response.follow_status);
+                        if (response.follow_status === 1) {
+                            // $('.follow_btn').html('<i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong>');
+                            button.html('<i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong>');
+                        } else {
+                            // $('.follow_btn').html('<i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong>');
+                            button.html('<i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong>');
+                        }
+                    } else {
+                        // Handle the error scenario
+                        console.log('Error: ' + response.message);
+                    }
+                },
+                error: function() {
+                    // Handle AJAX error
+                    console.log('AJAX request failed');
+                }
+            });
+        });
+    });
 </script>
 
 
