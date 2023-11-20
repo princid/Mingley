@@ -4,6 +4,9 @@ session_start();
 
 $title = "Chat with your Friends";
 $active_item = 2;
+
+require_once("../../includes/Header.php");
+
 require("Navbar.php");
 
 // require_once("../controller/getAllUserRecord.php");
@@ -84,7 +87,7 @@ if (isset($_GET['sender']) && $_GET['receiver'] == null) {
                             <div class="d-flex mb-3" style="align-items: center;">
                                 <!-- Avatar -->
                                 <div class="avatar avatar-xs me-2">
-                                    <a href="#!">
+                                    <a href="">
                                         <?php if (!empty($user_profile_pic)) { ?>
                                             <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
                                         <?php } else { ?>
@@ -92,6 +95,7 @@ if (isset($_GET['sender']) && $_GET['receiver'] == null) {
                                         <?php } ?>
                                     </a>
                                 </div>
+                                
                                 <!-- chat input box -->
                                 <form class="nav nav-item w-100 position-relative" id="chatForm" method="post">
                                     <input type="hidden" id="receive" value="<?php echo $receiver; ?>">
