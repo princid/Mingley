@@ -90,13 +90,8 @@ require_once("../../config/constants.php");
 
 <script src="<?= BASE_URL ?>assets/js/signupValidation.js"></script>
 
-<script>
-    const alertBox = document.querySelector(".alertBox");
+<script src="../../assets/js/alertMessage.js"></script>
 
-    setTimeout(() => {
-        alertBox.innerHTML = "";
-    }, 3000);
-</script>
 
 <script>
     const passEye = document.querySelector('.passEye');
