@@ -5,6 +5,9 @@ session_start();
 $title = "Home Page";
 
 $active_item = 1;
+
+require_once("../../includes/Header.php");
+
 require_once("Navbar.php");
 
 require_once('../controller/countPost.php');
@@ -45,109 +48,10 @@ require_once("../controller/show_post_on_feed.php");
 
             <div class="row g-4">
 
-                <!-- Left Bar Starts -->
-                <div class="col-lg-3">
-                    <aside class="widget-area">
-
-                        <!-- widget single item start -->
-                        <div class="card card-profile widget-item p-0 rounded-2">
-                            <div class="profile-banner">
-                                <figure class="profile-banner-small">
-                                    <a href="profile.html">
-                                        <img src="../../assets/img/banner2.png" class="rounded-2" alt="">
-                                    </a>
-                                    <a href="Profile.php" class="profile-thumb-2">
-                                        <?php if (!empty($user_profile_pic)) { ?>
-                                            <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
-                                        <?php } else { ?>
-                                            <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
-                                        <?php } ?>
-                                    </a>
-                                </figure>
-                                <div class="profile-desc text-center">
-                                    <h5 class="mb-0"> <?php echo ($first_name . " " . $last_name); ?> </h5>
-                                    <small>@<?= $user_name; ?></small>
-                                    <p class="mt-2"><?= $user_bio; ?></p>
-                                </div>
-
-                                <div class="hstack gap-2 gap-xl-3 justify-content-center">
-                                    <!-- User stat item -->
-                                    <div style="text-align:center">
-                                        <?php if (!empty($total_posts)) { ?>
-                                            <h6 class="mb-0"><?= $total_posts; ?></h6>
-                                        <?php } else { ?>
-                                            <h6 class="mb-0">0</h6>
-                                        <?php } ?>
-                                        <small>Posts</small>
-                                    </div>
-                                    <!-- Divider -->
-                                    <div class="vr"></div>
-                                    <!-- User stat item -->
-                                    <div style="text-align:center">
-                                        <?php if (!empty($total_followers)) { ?>
-                                            <h6 class="mb-0"><?= $total_followers; ?></h6>
-                                        <?php } else { ?>
-                                            <h6 class="mb-0">0</h6>
-                                        <?php } ?>
-                                        <small>Followers</small>
-                                    </div>
-                                    <!-- Divider -->
-                                    <div class="vr"></div>
-                                    <!-- User stat item -->
-                                    <div style="text-align:center">
-                                        <?php if (!empty($total_followings)) { ?>
-                                            <h6 class="mb-0"><?= $total_followings; ?></h6>
-                                        <?php } else { ?>
-                                            <h6 class="mb-0">0</h6>
-                                        <?php } ?>
-                                        <small>Followings</small>
-                                    </div>
-                                </div>
-
-                                <hr>
-
-                                <ul class="nav nav-link-secondary flex-column fw-bold gap-2">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">
-                                            <i class="fa-solid fa-house pe-2"></i>
-                                            <span> Feed </span>
-                                        </a>
-                                    </li>
-                                    <!-- <li class="nav-item">
-                                        <a class="nav-link" href="my-profile-connections.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/person-outline-filled.svg" alt=""><span>Connections </span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="blog.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/earth-outline-filled.svg" alt=""><span>Latest News </span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="events.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/calendar-outline-filled.svg" alt=""><span>Events </span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="groups.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/chat-outline-filled.svg" alt=""><span>Groups </span></a>
-                                    </li> -->
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">
-                                            <i class="fa-solid fa-bell pe-2"></i>
-                                            <span>Notifications </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="">
-                                            <i class="fa-solid fa-gear pe-2"></i>
-                                            <span>Settings </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="card-footer text-center py-2">
-                                <a class="btn btn-link btn-sm" href="Profile.php">View Profile </a>
-                            </div>
-
-                        </div>
-
-                    </aside>
-                </div>
-                <!-- Left Bar Ends -->
+                <!-- Including Home Page's Left Bar here... -->
+                <?php
+                require("../../includes/HomeLeftBar.php");
+                ?>
 
                 <!-- Mid Post Section Starts here -->
                 <div class="col-md-8 col-lg-6 vstack gap-1">
@@ -165,11 +69,10 @@ require_once("../controller/show_post_on_feed.php");
                             </div>
 
 
-                            <!-- Post input -->
-                            <!-- <form class="w-100"> -->
+                            <!-- Post creation input -->
                             <input class="form-control pe-4 border-0" placeholder="Share your thoughts..." data-bs-toggle="modal" data-bs-target="#modalCreateFeed">
 
-                            <!-- Modal -->
+                            <!-- Modal for Post Creation -->
                             <div class="modal fade" id="modalCreateFeed" tabindex="-1" aria-labelledby="sharePost" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
@@ -205,10 +108,8 @@ require_once("../controller/show_post_on_feed.php");
                                     </div>
                                 </div>
                             </div>
-                            <!-- </form> -->
-
-
                         </div>
+
                         <!-- Share feed toolbar START -->
                         <ul class="nav nav-pills nav-stack small fw-normal">
                             <li class="nav-item">
@@ -243,7 +144,6 @@ require_once("../controller/show_post_on_feed.php");
                     <!-- share box end -->
 
                     <!-- post box start -->
-
                     <?php foreach ($feed_post_result as $feed_post_data) {
 
                         // var_dump($feed_post_data);
@@ -271,7 +171,7 @@ require_once("../controller/show_post_on_feed.php");
 
                     ?>
 
-                            <div class="card rounded-2" id="post_card<?=$post_id?>">
+                            <div class="card rounded-2" id="post_card<?= $post_id ?>">
                                 <!-- Card header START -->
                                 <div class="card-header border-0 pb-0">
                                     <div class="d-flex align-items-center justify-content-between">
@@ -393,7 +293,6 @@ require_once("../controller/show_post_on_feed.php");
                                                 <!-- Card feed action dropdown menu -->
                                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
                                                     <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
-                                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow <?= $post_author; ?> </a></li>
                                                     <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
                                                     <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
                                                     <li>
@@ -501,7 +400,7 @@ require_once("../controller/show_post_on_feed.php");
                                     <div class="d-flex mb-3">
                                         <!-- Avatar -->
                                         <div class="avatar avatar-xs me-2">
-                                            <a href="#!">
+                                            <a href="">
                                                 <?php if (!empty($user_profile_pic)) { ?>
                                                     <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
                                                 <?php } else { ?>
@@ -509,45 +408,67 @@ require_once("../controller/show_post_on_feed.php");
                                                 <?php } ?>
                                             </a>
                                         </div>
+
                                         <!-- Comment box  -->
-                                        <form class="nav nav-item w-100 position-relative">
-                                            <textarea data-autoresize="" class="form-control pe-5 bg-light" rows="1" placeholder="Add a comment..."></textarea>
-                                            <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit">
+                                        <form class="nav nav-item w-100 position-relative" method="post" id="commentBox" data-post-id="<?= $post_id; ?>">
+                                            <textarea data-autoresize="" class="form-control pe-5 bg-light" rows="2" placeholder="Add a comment..."></textarea>
+                                            <button class="commentBtn nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit">
                                                 <i class="fa-solid fa-paper-plane"></i>
                                             </button>
                                         </form>
+
                                     </div>
                                     <!-- Comment wrap START -->
                                     <ul class="comment-wrap list-unstyled">
                                         <!-- Comment item START -->
                                         <li class="comment-item">
                                             <div class="d-flex position-relative px-5 mt-4">
-                                                <!-- Avatar -->
-                                                <div class="avatar avatar-xs">
-                                                    <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile2.jpg" alt=""></a>
-                                                </div>
-                                                <div class="ms-2">
-                                                    <!-- Comment by -->
-                                                    <div class="bg-light rounded-start-top-0 rounded">
-                                                        <div class="d-flex justify-content-between">
-                                                            <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>
-                                                            <small class="ms-2">5hr</small>
-                                                        </div>
-                                                        <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>
+                                                <?php
+                                                $get_comment_query = "SELECT * FROM comment_table LEFT JOIN users_table ON comment_table.comment_owner = users_table.id WHERE comment_table.post_id = '$post_id' ";
+
+                                                $get_comment_query_run = mysqli_query($conn, $get_comment_query);
+
+                                                while($get_comment_data = mysqli_fetch_assoc($get_comment_query_run)){
+                                                    var_dump($get_comment_data);
+                                                    $comment_owner_profile_pic = $comment_data['user_profile_pic'];
+                                                    $comment_owner_name = $comment_data['first_name'] . " " . $comment_data['last_data'];
+                                                    // var_dump($comment_owner_name);
+                                                };
+
+                                                // var_dump($get_comment_data);
+                                                // foreach ($get_comment_data as $comment_data) {
+                                                //     $comment_owner_profile_pic = $comment_data['user_profile_pic'];
+                                                //     $comment_owner_name = $comment_data['first_name'] . " " . $comment_data['last_data'];
+                                                    // var_dump($comment_data);
+
+                                                ?>
+                                                    <!-- Avatar -->
+                                                    <div class="avatar avatar-xs">
+                                                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile2.jpg" alt=""></a>
                                                     </div>
-                                                    <!-- Comment react -->
-                                                    <ul class="nav nav-divider py-2 small">
-                                                        <li class="nav-item">
-                                                            <a class="nav-link" href="#!"> Like (3)</a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a class="nav-link" href="#!"> Reply</a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a class="nav-link" href="#!"> View 5 replies</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                    <div class="ms-2">
+                                                        <!-- Comment by -->
+                                                        <div class="bg-light rounded-start-top-0 rounded">
+                                                            <div class="d-flex justify-content-between">
+                                                                <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>
+                                                                <small class="ms-2">5hr</small>
+                                                            </div>
+                                                            <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>
+                                                        </div>
+                                                        <!-- Comment react -->
+                                                        <ul class="nav nav-divider py-2 small">
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" href="#!"> Like (3)</a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" href="#!"> Reply</a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" href="#!"> View 5 replies</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                <?php //} ?>
                                             </div>
 
                                         </li>
@@ -585,81 +506,11 @@ require_once("../controller/show_post_on_feed.php");
                 </div>
                 <!-- Mid Post Section ends here -->
 
-                <!-- Right Bar starts here -->
-                <div class="col-lg-3">
-                    <div class="row g-4">
 
-
-                        <!-- Card News START -->
-                        <div class="col-sm-6 col-lg-12">
-                            <div class="card rounded-2">
-                                <!-- Card header START -->
-                                <div class="card-header pb-0 border-0">
-                                    <h5 class="card-title mb-0">Today’s news</h5>
-                                </div>
-                                <!-- Card header END -->
-                                <!-- Card body START -->
-                                <div class="card-body">
-                                    <!-- News item -->
-                                    <div class="mb-3">
-                                        <h6 class="mb-0"><a href="">Ten questions you should answer truthfully</a></h6>
-                                        <small>2hr</small>
-                                    </div>
-                                    <!-- News item -->
-                                    <div class="mb-3">
-                                        <h6 class="mb-0"><a href="">Five unbelievable facts about money</a></h6>
-                                        <small>3hr</small>
-                                    </div>
-                                    <!-- News item -->
-                                    <div class="mb-3">
-                                        <h6 class="mb-0"><a href="">Best Pinterest Boards for learning about business</a></h6>
-                                        <small>4hr</small>
-                                    </div>
-                                    <!-- News item -->
-                                    <div class="mb-3">
-                                        <h6 class="mb-0"><a href="">Skills that you can learn from business</a></h6>
-                                        <small>6hr</small>
-                                    </div>
-                                    <!-- Load more comments -->
-                                    <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center active" data-bs-toggle="button" aria-pressed="true">
-                                        <div class="spinner-dots me-2">
-                                            <span class="spinner-dot"></span>
-                                            <span class="spinner-dot"></span>
-                                            <span class="spinner-dot"></span>
-                                        </div>
-                                        View all latest news
-                                    </a>
-                                </div>
-                                <!-- Card body END -->
-                            </div>
-                        </div>
-                        <!-- Card News END -->
-
-                        <ul class="nav small mt-4 justify-content-center lh-1">
-                            <li class="nav-item">
-                                <a class="nav-link" href="">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">Settings</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" target="_blank" href="">Support </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" target="_blank" href="">Docs </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">Help</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">Privacy &amp; terms</a>
-                            </li>
-                        </ul>
-
-                        <p class="small text-center mt-1">©2023 <a class="text-reset" target="_blank" href=""> Mingley </a></p>
-                    </div>
-                </div>
-                <!-- Right Bar ends here -->
+                <!-- Including Home Page's Right Bar here... -->
+                <?php
+                require("../../includes/HomeRightBar.php");
+                ?>
 
             </div>
 
@@ -686,22 +537,49 @@ require_once("../controller/show_post_on_feed.php");
 
 
 
-<script>
-    const alertBox = document.querySelectorAll(".alertBox");
-    if (alertBox) {
-        setTimeout(() => {
-            alertBox.forEach(el => {
-                console.log(el);
-                el.innerHTML = "";
-            })
-        }, 3000);
-    }
-</script>
+<script src="../../assets/js/alertMessage.js"></script>
 
 
 <script src="../../assets/js/postLike.js"></script>
 
 <script src="../../assets/js/postCRUD.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.commentBtn').on('click', function(e) {
+            e.preventDefault();
+
+            const button = $(this);
+            const postId = button.closest('form').data('post-id');
+            const commentContent = button.siblings('textarea').val();
+
+            console.log(commentContent);
+
+            $.ajax({
+                type: 'POST',
+                url: '../controller/comment_controller.php',
+                data: {
+                    postId: postId,
+                    commentContent: commentContent
+                },
+                dataType: 'json',
+                success: function(response) {
+                    console.log(response);
+                    if (response.status === 'success') {
+                        // Do something on success, like updating the UI or showing a message
+                        console.log('Comment added successfully');
+                    } else {
+                        // Handle the error scenario
+                        console.log('Error: ' + response.message);
+                    }
+                },
+                error: function() {
+                    console.log('AJAX reaquest failed...');
+                }
+            })
+        })
+    })
+</script>
 
 
 

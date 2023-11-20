@@ -4,7 +4,10 @@ session_start();
 
 $title = "Profile Page";
 
+require_once("../../includes/Header.php");
+
 require_once("Navbar.php");
+
 
 require_once("../../config/connectDB.php");
 
@@ -282,8 +285,8 @@ $receiver = $_GET['user_id'];
                     </div>
                     <!-- My profile END -->
 
-                    <!-- Share feed START -->
 
+                    <!-- Share feed START -->
                     <div class="card card-body rounded-2">
                         <div class="d-flex mb-3">
                             <!-- Avatar -->
@@ -389,6 +392,7 @@ $receiver = $_GET['user_id'];
 
                     <div class="tab-content" id="ex2-content">
 
+                        <!-- Showing Posts Here -->
                         <div class="tab-pane fade show active" id="ex3-tabs-1" role="tabpanel" aria-labelledby="ex3-tab-1">
                             <!-- Card feed item START -->
                             <?php foreach ($profile_feed_result as $feed_post_data) {
@@ -401,6 +405,8 @@ $receiver = $_GET['user_id'];
                                 $posted_at = $feed_post_data['posted_at'];
                                 $all_post_images = explode(',', $feed_post_data['post_images']);
 
+                                // var_dump($all_post_images);
+
                                 $carousel_id = 'carouselIndicators_' . $post_id;
                                 $friend_profileUrl = "FriendProfile.php?user_id=" . $post_user_id;
 
@@ -411,7 +417,7 @@ $receiver = $_GET['user_id'];
                             ?>
 
 
-                                    <div class="card rounded-2" id="post_card<?=$post_id?>">
+                                    <div class="card rounded-2" id="post_card<?= $post_id ?>">
                                         <!-- Card header START -->
                                         <div class="card-header border-0 pb-0">
                                             <div class="d-flex align-items-center justify-content-between">
@@ -692,7 +698,7 @@ $receiver = $_GET['user_id'];
 
                                         $follower_query  = "SELECT *
                                                                 FROM follows_table INNER JOIN users_table ON follows_table.follower_id = users_table.id
-                                                                WHERE user_id = $curr_id AND follow_status = 'follow'";
+                                                                WHERE user_id = $curr_id AND follow_status = '1'";
 
                                         $follower_query_result = mysqli_query($conn, $follower_query);
 
@@ -781,7 +787,7 @@ $receiver = $_GET['user_id'];
 
                                         $following_query  = "SELECT *
                                                                 FROM follows_table INNER JOIN users_table ON follows_table.user_id = users_table.id
-                                                                WHERE follower_id = $curr_id AND follow_status = 'follow'";
+                                                                WHERE follower_id = $curr_id AND follow_status = '1'";
 
                                         $following_query_result = mysqli_query($conn, $following_query);
 
@@ -852,168 +858,13 @@ $receiver = $_GET['user_id'];
                     </div>
                     <!-- Tabs content -->
 
-
-
                 </div>
                 <!-- Main content END -->
 
-                <!-- Right sidebar START -->
-                <div class="col-lg-4">
-
-                    <div class="row g-4">
-
-                        <!-- Card START -->
-                        <div class="col-md-6 col-lg-12">
-                            <div class="card rounded">
-                                <div class="card-header border-0 pb-0">
-                                    <h5 class="card-title">About</h5>
-                                    <!-- Button modal -->
-                                </div>
-                                <!-- Card body START -->
-                                <div class="card-body position-relative pt-0">
-                                    <p><?= $user_bio; ?></p>
-                                    <!-- Date time -->
-                                    <ul class="list-unstyled mt-3 mb-0">
-                                        <li class="mb-2"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Born: <strong> October 20, 1990 </strong> </li>
-                                        <!-- <li class="mb-2"> <i class="bi bi-heart fa-fw pe-1"></i> Status: <strong> Single </strong> </li> -->
-                                        <li> <i class="bi bi-envelope fa-fw pe-1"></i> Email: <strong> <?= $user_email; ?> </strong> </li>
-                                    </ul>
-                                </div>
-                                <!-- Card body END -->
-                            </div>
-                        </div>
-                        <!-- Card END -->
-
-
-                        <!-- Card START -->
-                        <div class="col-md-6 col-lg-12">
-                            <div class="card rounded">
-                                <!-- Card header START -->
-                                <div class="card-header d-sm-flex justify-content-between align-items-end border-0">
-                                    <h5 class="card-title">Followers <span class="badge bg-danger bg-opacity-10 text-danger">230</span></h5>
-                                    <a class="btn btn-primary-soft btn-sm" href="#!"> See all friends</a>
-                                </div>
-                                <!-- Card header END -->
-                                <!-- Card body START -->
-                                <div class="card-body position-relative">
-                                    <div class="row g-3">
-
-                                        <div class="col-6">
-                                            <!-- Friends item START -->
-                                            <div class="card text-center h-100 myFriend">
-                                                <!-- Card body -->
-                                                <div class="card-body p-2 pb-0">
-                                                    <div class="avatar avatar-story avatar-xl">
-                                                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
-                                                    </div>
-                                                    <h6 class="card-title mb-1 mt-3"> <a href="#!"> Amanda Reed </a></h6>
-                                                    <p class="mb-0 small lh-sm">16 mutual connections</p>
-                                                </div>
-                                                <!-- Card footer -->
-                                                <div class="card-footer p-2 border-0 profile_friend">
-
-                                                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message">
-                                                        <i class="bi bi-chat-left-text"></i>
-                                                    </button>
-
-                                                    <button class="btn btn-sm btn-danger remove_friend" data-bs-toggle=" tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend">
-                                                        <i class="fa-solid fa-user-xmark" style="color: #ffffff;"></i>
-                                                    </button>
-
-                                                </div>
-                                            </div>
-                                            <!-- Friends item END -->
-                                        </div>
-
-                                        <div class="col-6">
-                                            <!-- Friends item START -->
-                                            <div class="card text-center h-100">
-                                                <!-- Card body -->
-                                                <div class="card-body p-2 pb-0">
-                                                    <div class="avatar avatar-xl">
-                                                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
-                                                    </div>
-                                                    <h6 class="card-title mb-1 mt-3"> <a href="#!"> Samuel Bishop </a></h6>
-                                                    <p class="mb-0 small lh-sm">22 mutual connections</p>
-                                                </div>
-                                                <!-- Card footer -->
-                                                <div class="card-footer p-2 border-0 profile_friend">
-
-                                                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message">
-                                                        <i class="bi bi-chat-left-text"></i>
-                                                    </button>
-
-                                                    <button class="btn btn-sm btn-danger remove_friend" data-bs-toggle=" tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend">
-                                                        <i class="fa-solid fa-user-xmark" style="color: #ffffff;"></i>
-                                                    </button>
-
-                                                </div>
-                                            </div>
-                                            <!-- Friends item END -->
-                                        </div>
-
-                                        <div class="col-6">
-                                            <!-- Friends item START -->
-                                            <div class="card text-center h-100">
-                                                <!-- Card body -->
-                                                <div class="card-body p-2 pb-0">
-                                                    <div class="avatar avatar-xl">
-                                                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
-                                                    </div>
-                                                    <h6 class="card-title mb-1 mt-3"> <a href="#"> Bryan Knight </a></h6>
-                                                    <p class="mb-0 small lh-sm">1 mutual connection</p>
-                                                </div>
-                                                <!-- Card footer -->
-                                                <div class="card-footer p-2 border-0 profile_friend">
-
-                                                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message">
-                                                        <i class="bi bi-chat-left-text"></i>
-                                                    </button>
-
-                                                    <button class="btn btn-sm btn-danger remove_friend" data-bs-toggle=" tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend">
-                                                        <i class="fa-solid fa-user-xmark" style="color: #ffffff;"></i>
-                                                    </button>
-
-                                                </div>
-                                            </div>
-                                            <!-- Friends item END -->
-                                        </div>
-
-                                        <div class="col-6">
-                                            <!-- Friends item START -->
-                                            <div class="card text-center h-100">
-                                                <!-- Card body -->
-                                                <div class="card-body p-2 pb-0">
-                                                    <div class="avatar avatar-xl">
-                                                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
-                                                    </div>
-                                                    <h6 class="card-title mb-1 mt-3"> <a href="#!"> Amanda Reed </a></h6>
-                                                    <p class="mb-0 small lh-sm">15 mutual connections</p>
-                                                </div>
-                                                <!-- Card footer -->
-                                                <div class="card-footer p-2 border-0 profile_friend">
-                                                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message">
-                                                        <i class="bi bi-chat-left-text"></i>
-                                                    </button>
-
-                                                    <button class="btn btn-sm btn-danger remove_friend" data-bs-toggle=" tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend">
-                                                        <i class="fa-solid fa-user-xmark" style="color: #ffffff;"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <!-- Friends item END -->
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <!-- Card body END -->
-                            </div>
-                        </div>
-                        <!-- Card END -->
-                    </div>
-
-                </div>
-                <!-- Right sidebar END -->
+                <?php 
+                    require("../../includes/ProfileRightBar.php");
+                ?>
+                
 
             </div>
         </div>
@@ -1032,19 +883,14 @@ $receiver = $_GET['user_id'];
 </div>
 <!-- Scroll to Top End -->
 
+<script src="../../assets/js/jquery.js"></script>
+
 <script src="<?= BASE_URL ?>assets/js/updateFormValidation.js"></script>
 <script src="../../assets/js/postLike.js"></script>
 <script src="../../assets/js/postCRUD.js"></script>
 
 
-<script>
-    const alertBox = document.querySelector(".alertBox");
-    if (alertBox) {
-        setTimeout(() => {
-            alertBox.innerHTML = "";
-        }, 3000);
-    }
-</script>
+<script src="../../assets/js/alertMessage.js"></script>
 
 <!-- cdn links for jquery table -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">

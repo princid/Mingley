@@ -3,6 +3,7 @@
 session_start();
 
 $title = "Log In";
+
 require_once('../../includes/Header.php');
 
 require_once("../../config/constants.php");
@@ -57,20 +58,15 @@ require_once("../../config/constants.php");
     </div>
 </div>
 
-<script>
-    const alertBox = document.querySelector(".alertBox");
+<script src="../../assets/js/alertMessage.js"></script>
 
-    setTimeout(() => {
-        alertBox.innerHTML = "";
-    }, 3000);
-</script>
 
 <script>
     const passEye = document.querySelector('.passEye');
 
     passEye.addEventListener('click', () => {
         const input = document.querySelector('#password');
-        
+
         if (input.getAttribute('type') === 'password') {
             input.setAttribute('type', 'text');
             passEye.classList.remove('fa-eye');

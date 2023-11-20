@@ -459,7 +459,7 @@ function countFollowers($conn, $follows_table, $user_id)
                 user_id,
                 COUNT(*) AS followers_count
             FROM $follows_table
-            WHERE user_id = $user_id AND follow_status = 'follow'
+            WHERE user_id = $user_id AND follow_status = '1'
             GROUP BY user_id";
 
     $result = mysqli_query($conn, $query);
@@ -479,7 +479,7 @@ function countFollowings($conn, $follows_table, $user_id)
                 follower_id AS user_id,
                 COUNT(*) AS followings_count
             FROM $follows_table
-            WHERE follower_id = $user_id AND follow_status = 'follow'
+            WHERE follower_id = $user_id AND follow_status = '1'
             GROUP BY follower_id";
 
     $result = mysqli_query($conn, $query);
@@ -495,7 +495,7 @@ function countFollowings($conn, $follows_table, $user_id)
 function showFollowers($conn, $follows_table, $users_table, $user_id){
     $show_follower_query = "SELECT *
                             FROM $follows_table INNER JOIN $users_table ON $follows_table.follower_id = $users_table.id
-                            WHERE user_id = $user_id AND follow_status = 'follow'";
+                            WHERE user_id = $user_id AND follow_status = '1'";
 
     $result = mysqli_query($conn, $show_follower_query);
 
@@ -513,7 +513,7 @@ function showFollowers($conn, $follows_table, $users_table, $user_id){
 function showFollowings($conn, $follows_table, $users_table, $user_id){
     $show_follower_query = "SELECT *
                             FROM $follows_table INNER JOIN $users_table ON $follows_table.user_id = $users_table.id
-                            WHERE follower_id = $user_id AND follow_status = 'follow'";
+                            WHERE follower_id = $user_id AND follow_status = '1'";
 
     $result = mysqli_query($conn, $show_follower_query);
 

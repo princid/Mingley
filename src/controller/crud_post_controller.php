@@ -19,7 +19,8 @@ function userPostDeleteHandler($data)
 function editPostHandler($data)
 {
     global $conn;
-    $post_caption =  htmlentities(trim($data["post_caption"], " "), ENT_HTML5);
+    
+    $post_caption =  mysqli_real_escape_string($conn, $data["post_caption"]);
 
     $update_status = update($conn, "posts_table", "`post_caption`='$post_caption'", "post_id=$data[post_id]");
     if ($update_status) {

@@ -4,9 +4,6 @@
 
 session_start();
 
-// $title = "Home Page";
-
-require_once('../../includes/Header.php');
 
 require_once("../../config/constants.php");
 
