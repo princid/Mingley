@@ -5,6 +5,9 @@ session_start();
 $title = "Search Users";
 
 $active_item = 3;
+
+require_once("../../includes/Header.php");
+
 require_once("Navbar.php");
 
 require_once("../../config/connectDB.php");
@@ -46,17 +49,19 @@ $curr_id = $_SESSION['id'];
                         <tbody class="tabular_card">
                             <?php
 
-                            $search_user_query  = "SELECT * FROM users_table WHERE users_table.id != '$curr_id' ";
+                            $search_user_query  = "SELECT * FROM users_table JOIN follows_table ON users_table.id = follows_table.user_id WHERE users_table.id != '$curr_id' ";
                             $search_user_result = mysqli_query($conn, $search_user_query);
 
                             if ($search_user_result)
 
                                 foreach ($search_user_result as $search_data) {
 
-                                    $user_id          = $search_data["id"];
-                                    $user_fullname    = $search_data["first_name"] . " " . $search_data["last_name"];
-                                    $user_shortname   = $search_data["user_name"];
-                                    $user_profile_pic = $search_data["user_profile_pic"];
+                                    $user_id           = $search_data["id"];
+                                    $user_fullname     = $search_data["first_name"] . " " . $search_data["last_name"];
+                                    $user_shortname    = $search_data["user_name"];
+                                    $user_profile_pic  = $search_data["user_profile_pic"];
+
+                                    $follow_status     = $search_data["follow_status"];
 
                                     $search_profileUrl = "FriendProfile.php?user_id=" . $user_id;
 
@@ -74,6 +79,10 @@ $curr_id = $_SESSION['id'];
                                         <a class="text-heading font-semibold" href="<?= $search_profileUrl; ?>">
                                             <?php echo strtoupper($user_fullname); ?>
                                         </a>
+                                        <?php if ($follow_status == 1) { ?>
+                                            <small class="text-success">(Following)</small>
+                                        <?php } ?>
+
                                     </td>
 
                                     <td>
@@ -112,7 +121,7 @@ $curr_id = $_SESSION['id'];
     $(document).ready(function() {
         const table = $('#table_id').DataTable({
             "paging": true,
-            "pageLength": 2,
+            "pageLength": 5,
             "order": [1, 'asc'],
             "pagingType": "simple_numbers",
             "language": {
