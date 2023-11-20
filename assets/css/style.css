@@ -311,9 +311,10 @@ h6{
     /* background-color: #1f6fd6; */
     background-color: #1b8b4a;
     color: #fff;
-    border-radius: 6px 6px 6px 0;
+    border-radius: 8px 8px 0 8px;
     padding: 10px;
     word-break: break-all;
+    max-width: 615px;
 }
 
 .time-track-you{
@@ -335,9 +336,10 @@ h6{
 .text-message-other{
     background-color: #848884;
     color: #ffffff;
-    border-radius: 6px 6px 0 6px;
+    border-radius: 0 8px 8px 8px;
     padding: 10px;
     word-break: break-all;
+    max-width: 615px;
 }
 
 .time-track-other{
