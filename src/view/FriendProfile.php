@@ -95,9 +95,9 @@ $receiver = $_GET['user_id'];
                                     <!-- User stat item -->
                                     <div style="text-align:center">
                                         <?php if (!empty($total_posts)) { ?>
-                                            <h6 class="mb-0"><?= $total_posts; ?></h6>
+                                            <h6 class="mb-0" id="total-post-count"><?= $total_posts; ?></h6>
                                         <?php } else { ?>
-                                            <h6 class="mb-0">0</h6>
+                                            <h6 class="mb-0" id="total-post-count">0</h6>
                                         <?php } ?>
                                         <small>Posts</small>
                                     </div>
@@ -106,9 +106,9 @@ $receiver = $_GET['user_id'];
                                     <!-- User stat item -->
                                     <div style="text-align:center">
                                         <?php if (!empty($total_followers)) { ?>
-                                            <h6 class="mb-0"><?= $total_followers; ?></h6>
+                                            <h6 class="mb-0" id="total-follower-count"><?= $total_followers; ?></h6>
                                         <?php } else { ?>
-                                            <h6 class="mb-0">0</h6>
+                                            <h6 class="mb-0" id="total-follower-count">0</h6>
                                         <?php } ?>
                                         <small>Followers</small>
                                     </div>
@@ -117,9 +117,9 @@ $receiver = $_GET['user_id'];
                                     <!-- User stat item -->
                                     <div style="text-align:center">
                                         <?php if (!empty($total_followings)) { ?>
-                                            <h6 class="mb-0"><?= $total_followings; ?></h6>
+                                            <h6 class="mb-0" id="total-follower-count"><?= $total_followings; ?></h6>
                                         <?php } else { ?>
-                                            <h6 class="mb-0">0</h6>
+                                            <h6 class="mb-0" id="total-following-count">0</h6>
                                         <?php } ?>
                                         <small>Followings</small>
                                     </div>
@@ -136,14 +136,39 @@ $receiver = $_GET['user_id'];
                             $result = mysqli_query($conn, $query);
 
                             $follow_data = mysqli_fetch_assoc($result);
-
-                            if (mysqli_num_rows($result) > 0 && $follow_data['follow_status'] == 1) {
                             ?>
-                                <button data-user-id="<?= $receiver; ?>" class="follow_btn btn btn-outline-secondary me-3" style="padding: 10px 50px;"><i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong></button>
-                            <?php } else { ?>
-                                <button data-user-id="<?= $receiver; ?>" class="follow_btn btn btn-outline-primary me-3" style="padding: 10px 50px;"><i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong></button>
-                            <?php } ?>
+                            <div class="d-inline" id="follow-btn-container">
+                                <?php
+                                if (mysqli_num_rows($result) > 0 && $follow_data['follow_status'] == 1) {
+                                ?>
+                                    <button class=" btn btn-outline-secondary me-3" data-bs-toggle="modal" data-bs-target="#unfollow<?= $receiver ?>" style="padding: 10px 50px;"><i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong></button>
+                                    <!-- unfollow Button modal -->
+                                    <!-- <button type="button" class="btn btn-primary" >
+                                        Launch static backdrop modal
+                                    </button> -->
 
+                                <?php } else { ?>
+                                    <button data-user-id="<?= $receiver; ?>" class="follow_btn btn btn-outline-primary me-3" style="padding: 10px 50px;"><i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong></button>
+                                <?php } ?>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="unfollow<?= $receiver ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fw-bold fs-5" id="staticBackdropLabel">Unfollow Confirmation</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="fs-6">Are you sure you want to unfollow this account?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button data-user-id="<?= $receiver; ?>" type="button" class="follow_btn btn btn-danger fs-6">Unfollow</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <a href="Chat.php?sender=<?php echo $curr_id; ?>&receiver=<?php echo $receiver; ?>"><button class="btn btn-outline-success" style="padding: 10px 50px;"><i class=" fa-regular fa-message pe-3"></i> <strong>Message</strong></button></a>
                         </div>
 
@@ -708,7 +733,7 @@ $receiver = $_GET['user_id'];
 <script>
     $(document).ready(function() {
         // Click event for the follow button
-        $('.follow_btn').on('click', function() {
+        $(document).on('click', '.follow_btn', function() {
 
             // const userId = $(this).data('user-id');
 
@@ -718,23 +743,28 @@ $receiver = $_GET['user_id'];
             // AJAX request
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost/PHP_Assesments/Mingley/src/controller/follow_action.php',
+                url: '<?= BASE_URL ?>src/controller/follow_action.php',
                 data: {
                     userId: userId
                 },
                 dataType: 'json',
                 success: function(response) {
-                    console.log(response);
                     if (response.status === 'success') {
+                        console.log($("#total-follower-count"))
                         // Update the button text or style based on the follow status
                         // if (response.message === 'User followed' || response.message === 'Follow status updated') {
-                        console.log(response.follow_status);
-                        if (response.follow_status === 1) {
+                        if (response.follow_status == 1) {
+                            console.log(response);
                             // $('.follow_btn').html('<i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong>');
-                            button.html('<i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong>');
+                            $("#follow-btn-container").html(`<button  class=" btn btn-outline-secondary me-3" data-bs-toggle="modal" data-bs-target="#unfollow${userId}" style="padding: 10px 50px;"><i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong></button>`);
+                            // $('.follow_btn').html('<i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong>');
+                            // $('.follow_btn').removeClass('btn-outline-primary').addClass('btn-outline-secondary');
+                            $('#total-follower-count').text(response.followers_count);
                         } else {
+                            $(".btn-close").click();
                             // $('.follow_btn').html('<i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong>');
-                            button.html('<i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong>');
+                            $("#follow-btn-container").html(`<button data-user-id=${userId} class="follow_btn btn btn-outline-primary me-3" style="padding: 10px 50px;"><i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong></button>`);
+                            $('#total-follower-count').text(response.followers_count);
                         }
                     } else {
                         // Handle the error scenario
