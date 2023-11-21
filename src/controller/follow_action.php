@@ -1,6 +1,7 @@
 <?php
 session_start();
 require("../../config/connectDB.php");
+require_once("../model/Query.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['userId'])) {
     $userId = $_POST['userId'];
@@ -31,7 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['userId'])) {
                 $updatedStatusResult = mysqli_query($conn, $updatedStatusQuery);
                 $updatedStatus = mysqli_fetch_assoc($updatedStatusResult)['follow_status'];
 
-                echo json_encode(['status' => 'success', 'message' => 'Follow status updated', 'follow_status' => $updatedStatus]);
+                // Counting Current Total Followers
+                $followers_count = countFollowers($conn, 'follows_table', $userId);
+
+                echo json_encode(['status' => 'success', 'message' => 'Follow status updated', 'follow_status' => $updatedStatus , 'followers_count'=>$followers_count['followers_count']]);
             } else {
                 // Error in database operation
                 echo json_encode(['status' => 'error', 'message' => 'Failed to update follow status']);
