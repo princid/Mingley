@@ -49,7 +49,9 @@ $curr_id = $_SESSION['id'];
                         <tbody class="tabular_card">
                             <?php
 
-                            $search_user_query  = "SELECT * FROM users_table JOIN follows_table ON users_table.id = follows_table.user_id WHERE users_table.id != '$curr_id' ";
+                            // $search_user_query  = "SELECT * FROM users_table JOIN follows_table ON users_table.id = follows_table.user_id WHERE users_table.id != '$curr_id' ";
+
+                            $search_user_query  = "SELECT * FROM users_table";
                             $search_user_result = mysqli_query($conn, $search_user_query);
 
                             if ($search_user_result) {

@@ -751,28 +751,23 @@ $receiver = $_GET['user_id'];
                 success: function(response) {
                     if (response.status === 'success') {
                         console.log($("#total-follower-count"))
-                        // Update the button text or style based on the follow status
-                        // if (response.message === 'User followed' || response.message === 'Follow status updated') {
+
                         if (response.follow_status == 1) {
                             console.log(response);
-                            // $('.follow_btn').html('<i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong>');
                             $("#follow-btn-container").html(`<button  class=" btn btn-outline-secondary me-3" data-bs-toggle="modal" data-bs-target="#unfollow${userId}" style="padding: 10px 50px;"><i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong></button>`);
-                            // $('.follow_btn').html('<i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong>');
-                            // $('.follow_btn').removeClass('btn-outline-primary').addClass('btn-outline-secondary');
+
                             $('#total-follower-count').text(response.followers_count);
                         } else {
                             $(".btn-close").click();
-                            // $('.follow_btn').html('<i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong>');
                             $("#follow-btn-container").html(`<button data-user-id=${userId} class="follow_btn btn btn-outline-primary me-3" style="padding: 10px 50px;"><i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong></button>`);
+                            
                             $('#total-follower-count').text(response.followers_count);
                         }
                     } else {
-                        // Handle the error scenario
                         console.log('Error: ' + response.message);
                     }
                 },
                 error: function() {
-                    // Handle AJAX error
                     console.log('AJAX request failed');
                 }
             });
