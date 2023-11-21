@@ -1,6 +1,6 @@
 $(document).ready(function () {
   function chat_validation() {
-    const textmsg = $("#message").val();
+    const textmsg = $("#message").val().trim();
     // alert(textmsg);
     const receive = $("#receive").val();
     const send = $("#send").val();

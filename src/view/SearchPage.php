@@ -52,7 +52,7 @@ $curr_id = $_SESSION['id'];
                             $search_user_query  = "SELECT * FROM users_table JOIN follows_table ON users_table.id = follows_table.user_id WHERE users_table.id != '$curr_id' ";
                             $search_user_result = mysqli_query($conn, $search_user_query);
 
-                            if ($search_user_result)
+                            if ($search_user_result) {
 
                                 foreach ($search_user_result as $search_data) {
 
@@ -67,35 +67,36 @@ $curr_id = $_SESSION['id'];
 
                             ?>
 
-                                <tr data-user-id="<?php echo $user_id; ?>">
-                                    <td>
-                                        <?php if (!empty($user_profile_pic)) { ?>
-                                            <img title="<?php echo $user_shortname; ?>" src="<?php echo BASE_URL ?>assets/profile_pic/<?php echo $user_id . "/" . $user_profile_pic; ?>" alt="" class="avatar avatar-sm rounded-circle me-2">
+                                    <tr data-user-id="<?php echo $user_id; ?>">
+                                        <td>
+                                            <?php if (!empty($user_profile_pic)) { ?>
+                                                <img title="<?php echo $user_shortname; ?>" src="<?php echo BASE_URL ?>assets/profile_pic/<?php echo $user_id . "/" . $user_profile_pic; ?>" alt="" class="avatar avatar-sm rounded-circle me-2">
 
-                                        <?php } else { ?>
-                                            <img title="<?php echo $user_shortname; ?>" src="<?php echo BASE_URL ?>assets/profile_pic/profileDummy.png" class="avatar avatar-sm rounded-circle me-2">
-                                        <?php } ?>
+                                            <?php } else { ?>
+                                                <img title="<?php echo $user_shortname; ?>" src="<?php echo BASE_URL ?>assets/profile_pic/profileDummy.png" class="avatar avatar-sm rounded-circle me-2">
+                                            <?php } ?>
 
-                                        <a class="text-heading font-semibold" href="<?= $search_profileUrl; ?>">
-                                            <?php echo strtoupper($user_fullname); ?>
-                                        </a>
-                                        <?php if ($follow_status == 1) { ?>
-                                            <small class="text-success">(Following)</small>
-                                        <?php } ?>
+                                            <a class="text-heading font-semibold" href="<?= $search_profileUrl; ?>">
+                                                <?php echo strtoupper($user_fullname); ?>
+                                            </a>
+                                            <?php if ($follow_status == 1) { ?>
+                                                <small class="text-success">(Following)</small>
+                                            <?php } ?>
 
-                                    </td>
+                                        </td>
 
-                                    <td>
-                                        <?php echo ($user_shortname); ?>
-                                    </td>
+                                        <td>
+                                            <?php echo ($user_shortname); ?>
+                                        </td>
 
-                                    <td class="text-end">
-                                        <a href="<?= $search_profileUrl; ?>"><button type="button" class="btn btn-outline-primary">View Profile</button></a>
-                                    </td>
+                                        <td class="text-end">
+                                            <a href="<?= $search_profileUrl; ?>"><button type="button" class="btn btn-outline-primary">View Profile</button></a>
+                                        </td>
 
-                                </tr>
+                                    </tr>
 
 
+                                <?php } ?>
                             <?php } ?>
 
 

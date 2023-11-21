@@ -15,7 +15,7 @@ $total_posts = $count_post_result['total_posts'];
 
 
 require_once('../controller/countFollowersAndFollowings.php');
-$total_followers = $followers_count['followers_count'];
+$total_followers  = $followers_count['followers_count'];
 $total_followings = $followings_count['followings_count'];
 
 
@@ -147,13 +147,13 @@ require_once("../controller/show_post_on_feed.php");
                     <?php foreach ($feed_post_result as $feed_post_data) {
 
                         // var_dump($feed_post_data);
-                        $post_id = $feed_post_data["post_id"];
-                        $post_user_id = $feed_post_data["user_id"];
-                        $post_author = $feed_post_data['first_name'] . " " . $feed_post_data['last_name'];
+                        $post_id                 = $feed_post_data["post_id"];
+                        $post_user_id            = $feed_post_data["user_id"];
+                        $post_author             = $feed_post_data['first_name'] . " " . $feed_post_data['last_name'];
                         $post_author_profile_pic = $feed_post_data['user_profile_pic'];
-                        $post_caption = $feed_post_data['post_caption'];
-                        $posted_at = $feed_post_data['posted_at'];
-                        $all_post_images = explode(',', $feed_post_data['post_images']);
+                        $post_caption            = $feed_post_data['post_caption'];
+                        $posted_at               = $feed_post_data['posted_at'];
+                        $all_post_images         = explode(',', $feed_post_data['post_images']);
 
                         $carousel_id = 'carouselIndicators_' . $post_id;
 
@@ -369,7 +369,7 @@ require_once("../controller/show_post_on_feed.php");
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#!">
+                                            <a class="nav-link" href="#">
                                                 <i class="fa-regular fa-comment"></i>
                                                 Comments (12)
                                             </a>
@@ -429,23 +429,34 @@ require_once("../controller/show_post_on_feed.php");
 
                                                 while ($get_comment_data = mysqli_fetch_assoc($get_comment_query_run)) {
                                                     // var_dump($get_comment_data);
+                                                    $comment_owner_id          = $get_comment_data['comment_owner'];
                                                     $comment_owner_profile_pic = $get_comment_data['user_profile_pic'];
-                                                    $comment_owner_name = $get_comment_data['first_name'] . " " . $get_comment_data['last_name'];
-                                                    $comment_text = $get_comment_data['comment_text'];
+                                                    $comment_owner_name        = $get_comment_data['first_name'] . " " . $get_comment_data['last_name'];
+                                                    $comment_owner_username    = $get_comment_data['user_name'];
+                                                    $comment_text              = $get_comment_data['comment_text'];
+                                                    $comment_time              = $get_comment_data['comment_date'];
 
                                                 ?>
-                                                    <!-- Avatar -->
-                                                    <div class="avatar avatar-xs">
-                                                        <img class="avatar-img rounded-circle" src="../../assets/img/profile2.jpg" alt="">
-                                                    </div>
+
                                                     <div class="ms-2">
                                                         <!-- Comment by -->
-                                                        <div class="bg-light rounded-start-top-0 rounded">
-                                                            <div class="d-flex justify-content-between">
-                                                                <h6 class="mb-1"> <a href="#!"> <?= $comment_owner_name; ?> </a></h6>
-                                                                <small class="ms-2">5hr</small>
+                                                        <div class="bg-light rounded-start-top-0 rounded users_comment">
+                                                            <div class="d-flex mb-3">
+                                                                <div class="avatar avatar-xs">
+                                                                    <?php if (!empty($comment_owner_profile_pic)) { ?>
+                                                                        <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $comment_owner_id . "/" . $comment_owner_profile_pic; ?>" alt="">
+                                                                    <?php } else { ?>
+                                                                        <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                                                    <?php } ?>
+                                                                </div>
+                                                                <div class="d-block">
+                                                                    <div class="d-flex" style="margin: 0 10px">
+                                                                        <h6 class="mb-1"> <a href=""> <?= $comment_owner_username; ?> </a></h6>
+                                                                        <small class="ms-2 text-secondary"><?= $comment_time; ?></small>
+                                                                    </div>
+                                                                    <p class="small mb-0" style="margin: 0 10px; text-align: justify; line-height: 1.4;"><?= $comment_text; ?></p>
+                                                                </div>
                                                             </div>
-                                                            <p class="small mb-0"><?= $comment_text; ?></p>
                                                         </div>
                                                         <!-- Comment react -->
                                                         <!-- <ul class="nav nav-divider py-2 small">
@@ -474,7 +485,7 @@ require_once("../controller/show_post_on_feed.php");
                                 <!-- Card footer START -->
                                 <div class="card-footer border-0 pt-0">
                                     <!-- Load more comments -->
-                                    <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
+                                    <a href="#" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
                                         <div class="spinner-dots me-2">
                                             <span class="spinner-dot"></span>
                                             <span class="spinner-dot"></span>
@@ -543,9 +554,12 @@ require_once("../controller/show_post_on_feed.php");
 
             const button = $(this);
             const postId = button.closest('form').data('post-id');
-            const commentContent = button.siblings('textarea').val();
+            const commentContent = button.siblings('textarea').val().trim();
 
-            console.log(commentContent);
+            if (commentContent == "") {
+                alert("Type comment...");
+                return false;
+            }
 
             $.ajax({
                 type: 'POST',
@@ -556,12 +570,14 @@ require_once("../controller/show_post_on_feed.php");
                 },
                 dataType: 'json',
                 success: function(response) {
+
                     console.log(response);
+
                     if (response.status === 'success') {
-                        // Do something on success, like updating the UI or showing a message
+                        // Adding this to blank the textarea
+                        button.siblings('textarea').val('');
                         console.log('Comment added successfully');
                     } else {
-                        // Handle the error scenario
                         console.log('Error: ' + response.message);
                     }
                 },
@@ -569,6 +585,8 @@ require_once("../controller/show_post_on_feed.php");
                     console.log('AJAX reaquest failed...');
                 }
             })
+            // document.getElementById("commentBox").reset();
+            // return false;
         })
     })
 </script>
