@@ -72,11 +72,11 @@ if (empty($_SESSION['id'])) {
                                                     <li>
                                                         <div class="list-group-item list-group-item-action rounded badge-unread d-flex border-0 mb-1 p-3">
                                                             <div class="avatar text-center d-none d-sm-inline-block">
-                                                                <img class="avatar-img rounded-circle" src="../../assets/img/profile6.png" alt="">
+                                                                <div class="avatar-img rounded-circle bg-primary"><span class="text-white position-absolute top-50 start-50 translate-middle fw-bold">MS</span></div>
                                                             </div>
                                                             <div class="ms-sm-3">
                                                                 <div class=" d-flex">
-                                                                    <p class="small mb-2"><b>Judy Nguyen</b> sent you a friend request.</p>
+                                                                    <p class="small mb-2"><b>MS Dhoni</b> sent you a friend request.</p>
                                                                     <p class="small ms-3 text-nowrap text-end">Just now</p>
                                                                 </div>
                                                                 <div class="d-flex">
@@ -90,11 +90,11 @@ if (empty($_SESSION['id'])) {
                                                     <li>
                                                         <div class="list-group-item list-group-item-action rounded badge-unread d-flex border-0 mb-1 p-3 position-relative">
                                                             <div class="avatar text-center d-none d-sm-inline-block">
-                                                                <img class="avatar-img rounded-circle" src="../../assets/img/profile6.png" alt="">
+                                                                <div class="avatar-img rounded-circle bg-danger"><span class="text-white position-absolute top-50 start-50 translate-middle fw-bold">VK</span></div>
                                                             </div>
                                                             <div class="ms-sm-3 d-flex">
                                                                 <div>
-                                                                    <p class="small mb-2">Wish <b>Amanda Reed</b> a happy birthday (Nov 12)</p>
+                                                                    <p class="small mb-2">Wish <b>Virat Kohli</b> a happy birthday (Nov 12)</p>
                                                                     <button class="btn btn-sm btn-outline-success py-2 px-2 me-2">Say happy birthday 🎂</button>
                                                                 </div>
                                                                 <p class="small ms-3">2min</p>
@@ -109,7 +109,7 @@ if (empty($_SESSION['id'])) {
                                                             </div>
                                                             <div class="ms-sm-3" style="margin: auto">
                                                                 <div class="d-flex">
-                                                                    <p class="small mb-2">Webestica has 15 like and 1 new activity</p>
+                                                                    <p class="small mb-2">Mingley has 15 like and 1 new activity</p>
                                                                     <p class="small ms-3">1hr</p>
                                                                 </div>
                                                             </div>

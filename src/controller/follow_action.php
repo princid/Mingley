@@ -35,7 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['userId'])) {
                 // Counting Current Total Followers
                 $followers_count = countFollowers($conn, 'follows_table', $userId);
 
-                echo json_encode(['status' => 'success', 'message' => 'Follow status updated', 'follow_status' => $updatedStatus , 'followers_count'=>$followers_count['followers_count']]);
+                $followers_count['followers_count'] = empty($followers_count['followers_count']) ? 0 : $followers_count['followers_count'];
+
+                echo json_encode(['status' => 'success', 'message' => 'Follow status updated', 'follow_status' => $updatedStatus, 'followers_count' => $followers_count['followers_count']]);
             } else {
                 // Error in database operation
                 echo json_encode(['status' => 'error', 'message' => 'Failed to update follow status']);
