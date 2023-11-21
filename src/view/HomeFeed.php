@@ -365,7 +365,6 @@ require_once("../controller/show_post_on_feed.php");
                                             <a class="nav-link active likesAnchor" href="#" data-post-id="<?= $post_id ?>" data-like-status="<?= $like_status ?>">
                                                 <i class="fa-<?= $like_status ? 'solid text-danger' : 'regular' ?> fa-heart postLike" data-post-id="<?= $post_id ?>"></i>
                                                 Likes (<span id="likes_count_<?= $post_id; ?>"><?= $feed_post_data['likes_count'] ?></span>)
-                                                <!-- <span id="likes_count_<?= $post_id; ?>">(<?= $count_like ?>)</span> Likes -->
                                             </a>
                                         </li>
 
@@ -422,41 +421,34 @@ require_once("../controller/show_post_on_feed.php");
                                     <ul class="comment-wrap list-unstyled">
                                         <!-- Comment item START -->
                                         <li class="comment-item">
-                                            <div class="d-flex position-relative px-5 mt-4">
+                                            <div class="d-flex position-relative px-5 mt-4 flex-column">
                                                 <?php
                                                 $get_comment_query = "SELECT * FROM comment_table LEFT JOIN users_table ON comment_table.comment_owner = users_table.id WHERE comment_table.post_id = '$post_id' ";
 
                                                 $get_comment_query_run = mysqli_query($conn, $get_comment_query);
 
-                                                while($get_comment_data = mysqli_fetch_assoc($get_comment_query_run)){
-                                                    var_dump($get_comment_data);
-                                                    $comment_owner_profile_pic = $comment_data['user_profile_pic'];
-                                                    $comment_owner_name = $comment_data['first_name'] . " " . $comment_data['last_data'];
-                                                    // var_dump($comment_owner_name);
-                                                };
-
-                                                // var_dump($get_comment_data);
-                                                // foreach ($get_comment_data as $comment_data) {
-                                                //     $comment_owner_profile_pic = $comment_data['user_profile_pic'];
-                                                //     $comment_owner_name = $comment_data['first_name'] . " " . $comment_data['last_data'];
-                                                    // var_dump($comment_data);
+                                                while ($get_comment_data = mysqli_fetch_assoc($get_comment_query_run)) {
+                                                    // var_dump($get_comment_data);
+                                                    $comment_owner_profile_pic = $get_comment_data['user_profile_pic'];
+                                                    $comment_owner_name = $get_comment_data['first_name'] . " " . $get_comment_data['last_name'];
+                                                    $comment_text = $get_comment_data['comment_text'];
 
                                                 ?>
                                                     <!-- Avatar -->
                                                     <div class="avatar avatar-xs">
-                                                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile2.jpg" alt=""></a>
+                                                        <img class="avatar-img rounded-circle" src="../../assets/img/profile2.jpg" alt="">
                                                     </div>
                                                     <div class="ms-2">
                                                         <!-- Comment by -->
                                                         <div class="bg-light rounded-start-top-0 rounded">
                                                             <div class="d-flex justify-content-between">
-                                                                <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>
+                                                                <h6 class="mb-1"> <a href="#!"> <?= $comment_owner_name; ?> </a></h6>
                                                                 <small class="ms-2">5hr</small>
                                                             </div>
-                                                            <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>
+                                                            <p class="small mb-0"><?= $comment_text; ?></p>
                                                         </div>
                                                         <!-- Comment react -->
-                                                        <ul class="nav nav-divider py-2 small">
+                                                        <!-- <ul class="nav nav-divider py-2 small">
                                                             <li class="nav-item">
                                                                 <a class="nav-link" href="#!"> Like (3)</a>
                                                             </li>
@@ -466,9 +458,9 @@ require_once("../controller/show_post_on_feed.php");
                                                             <li class="nav-item">
                                                                 <a class="nav-link" href="#!"> View 5 replies</a>
                                                             </li>
-                                                        </ul>
+                                                        </ul> -->
                                                     </div>
-                                                <?php //} ?>
+                                                <?php } ?>
                                             </div>
 
                                         </li>
