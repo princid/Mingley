@@ -68,7 +68,6 @@ require_once("../controller/show_post_on_feed.php");
                                 <?php } ?>
                             </div>
 
-
                             <!-- Post creation input -->
                             <input class="form-control pe-4 border-0" placeholder="Share your thoughts..." data-bs-toggle="modal" data-bs-target="#modalCreateFeed">
 
@@ -90,8 +89,7 @@ require_once("../controller/show_post_on_feed.php");
                                                 <small class="text-primary">Allowed File Type - jpg, jpeg, png, gif</small>
 
                                                 <br>
-
-                                                <small class="text-danger" id="max_upload_error" style="">You can upload up to 10 images only.</small>
+                                                <small class="text-danger" id="max_upload_error">You can upload up to 10 images only.</small>
 
                                             </div>
 
@@ -146,7 +144,6 @@ require_once("../controller/show_post_on_feed.php");
                     <!-- post box start -->
                     <?php foreach ($feed_post_result as $feed_post_data) {
 
-                        // var_dump($feed_post_data);
                         $post_id                 = $feed_post_data["post_id"];
                         $post_user_id            = $feed_post_data["user_id"];
                         $post_author             = $feed_post_data['first_name'] . " " . $feed_post_data['last_name'];
@@ -154,19 +151,10 @@ require_once("../controller/show_post_on_feed.php");
                         $post_caption            = $feed_post_data['post_caption'];
                         $posted_at               = $feed_post_data['posted_at'];
                         $all_post_images         = explode(',', $feed_post_data['post_images']);
+                        $carousel_id             = 'carouselIndicators_' . $post_id;
+                        $friend_profileUrl       = "FriendProfile.php?user_id=" . $post_user_id;
+                        $like_status             = $feed_post_data["like_status"];
 
-                        $carousel_id = 'carouselIndicators_' . $post_id;
-
-                        $friend_profileUrl = "FriendProfile.php?user_id=" . $post_user_id;
-
-                        $like_status = $feed_post_data["like_status"];
-
-                        // $count_like = $feed_post_data['likes_count'];
-
-                        // $like_status = check_like_status($conn, $post_id, $_SESSION['id']); 
-                        // var_dump($like_status);
-
-                        // var_dump($post_author_profile_pic);
                         if ($feed_post_data["is_deleted"] != 1) {
 
                     ?>
@@ -196,6 +184,7 @@ require_once("../controller/show_post_on_feed.php");
                                                     </a>
                                                 <?php } ?>
                                             </div>
+
                                             <!-- Info -->
                                             <div>
                                                 <div class="nav nav-divider">
@@ -206,7 +195,6 @@ require_once("../controller/show_post_on_feed.php");
                                                     <?php } ?>
                                                 </div>
                                                 <span class="nav-item small"> <?= $posted_at; ?></span>
-                                                <!-- <p class="mb-0 small">Web Developer at Mind2Web</p> -->
                                             </div>
                                         </div>
                                         <!-- Card feed action dropdown START -->
@@ -216,16 +204,6 @@ require_once("../controller/show_post_on_feed.php");
                                             </a>
 
                                             <?php if ($post_user_id == $_SESSION['id']) { ?>
-
-                                                <!-- <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
-                                                <li><a class="dropdown-item" href="#"> <i class="fa-regular fa-bookmark pe-2"></i>Save post</a></li>
-                                                <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-pencil pe-2"></i>Edit Post </a></li>
-
-                                                <li>
-                                                    <hr class="dropdown-divider">
-                                                </li>
-                                                <li><a class="dropdown-item text-danger" href="#"> <i class="fa-regular fa-trash-can pe-2"></i>Delete post</a></li>
-                                            </ul> -->
                                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
                                                     <li><a class="dropdown-item" href="#"> <i class="fa-regular fa-bookmark pe-2"></i>Save post</a></li>
                                                     <li><button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalEditPost<?= $post_id ?>"> <i class="fa-solid fa-pencil pe-2"></i>Edit Post </button></li>
@@ -241,7 +219,6 @@ require_once("../controller/show_post_on_feed.php");
                                                             Delete post
                                                         </button>
                                                     </li>
-
                                                 </ul>
 
                                                 <!-- Modal to Edit Post -->
@@ -310,10 +287,9 @@ require_once("../controller/show_post_on_feed.php");
 
                                 <!-- Card body START -->
                                 <div class="card-body">
-                                    <!-- <p>I'm thrilled to share that I've completed a graduate certificate course in project management with the president's honor roll.</p> -->
                                     <p id="post_caption_<?= $post_id ?>"><?= $post_caption; ?> </p>
-                                    <!-- Card img -->
 
+                                    <!-- Card img -->
                                     <?php if (count($all_post_images) > 1) { ?>
                                         <!-- Carousel for Post images -->
                                         <div id="<?= $carousel_id; ?>" class="carousel carousel-dark slide" data-bs-ride="carousel">
@@ -356,8 +332,6 @@ require_once("../controller/show_post_on_feed.php");
                                         <img src="<?= BASE_URL ?>assets/posts/<?= $post_user_id . "/" . $all_post_images[0]; ?>" class="d-block w-100" style="height:300px; object-fit:contain;" alt="Post Image">
                                     <?php } ?>
 
-                                    <!-- <img class="card-img" src="../../assets/img/post4.jpg" alt="Post"> -->
-
                                     <!-- Feed react START -->
                                     <ul class="nav nav-stack py-3 mt-1">
 
@@ -399,13 +373,11 @@ require_once("../controller/show_post_on_feed.php");
                                     <div class="d-flex mb-3">
                                         <!-- Avatar -->
                                         <div class="avatar avatar-xs me-2">
-                                            <a href="">
                                                 <?php if (!empty($user_profile_pic)) { ?>
                                                     <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
                                                 <?php } else { ?>
                                                     <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
                                                 <?php } ?>
-                                            </a>
                                         </div>
 
                                         <!-- Comment box  -->
@@ -417,18 +389,18 @@ require_once("../controller/show_post_on_feed.php");
                                         </form>
 
                                     </div>
+
                                     <!-- Comment wrap START -->
                                     <ul class="comment-wrap list-unstyled">
                                         <!-- Comment item START -->
                                         <li class="comment-item">
-                                            <div class="d-flex position-relative px-5 mt-4 flex-column">
+                                            <div class="d-flex position-relative px-5 mt-4 flex-column individual_comment<?= $post_id; ?>">
                                                 <?php
                                                 $get_comment_query = "SELECT * FROM comment_table LEFT JOIN users_table ON comment_table.comment_owner = users_table.id WHERE comment_table.post_id = '$post_id' ";
 
                                                 $get_comment_query_run = mysqli_query($conn, $get_comment_query);
 
                                                 while ($get_comment_data = mysqli_fetch_assoc($get_comment_query_run)) {
-                                                    // var_dump($get_comment_data);
                                                     $comment_owner_id          = $get_comment_data['comment_owner'];
                                                     $comment_owner_profile_pic = $get_comment_data['user_profile_pic'];
                                                     $comment_owner_name        = $get_comment_data['first_name'] . " " . $get_comment_data['last_name'];
@@ -438,8 +410,8 @@ require_once("../controller/show_post_on_feed.php");
 
                                                 ?>
 
-                                                    <div class="ms-2">
-                                                        <!-- Comment by -->
+                                                    <div class="ms-2 ">
+                                                        <!-- Commented by -->
                                                         <div class="bg-light rounded-start-top-0 rounded users_comment">
                                                             <div class="d-flex mb-3">
                                                                 <div class="avatar avatar-xs">
@@ -459,6 +431,7 @@ require_once("../controller/show_post_on_feed.php");
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    
                                                 <?php } ?>
                                             </div>
 
@@ -466,6 +439,7 @@ require_once("../controller/show_post_on_feed.php");
 
                                         <!-- Comment item END -->
                                     </ul>
+
                                 </div>
 
                                 <!-- Card body END -->
@@ -488,15 +462,10 @@ require_once("../controller/show_post_on_feed.php");
                         <?php } ?>
 
                     <?php } ?>
-
-
                     <!-- post box end -->
-
-
 
                 </div>
                 <!-- Mid Post Section ends here -->
-
 
                 <!-- Including Home Page's Right Bar here... -->
                 <?php
@@ -535,48 +504,7 @@ require_once("../controller/show_post_on_feed.php");
 
 <script src="../../assets/js/postCRUD.js"></script>
 
-<script>
-    $(document).ready(function() {
-        $('.commentBtn').on('click', function(e) {
-            e.preventDefault();
-
-            const button = $(this);
-            const postId = button.closest('form').data('post-id');
-            const commentContent = button.siblings('textarea').val().trim();
-
-            if (commentContent == "") {
-                alert("Type comment...");
-                return false;
-            }
-
-            $.ajax({
-                type: 'POST',
-                url: '../controller/comment_controller.php',
-                data: {
-                    postId: postId,
-                    commentContent: commentContent
-                },
-                dataType: 'json',
-                success: function(response) {
-
-                    console.log(response);
-
-                    if (response.status === 'success') {
-                        // Adding this to blank the textarea
-                        button.siblings('textarea').val('');
-                        console.log('Comment added successfully');
-                    } else {
-                        console.log('Error: ' + response.message);
-                    }
-                },
-                error: function() {
-                    console.log('AJAX reaquest failed...');
-                }
-            })
-        })
-    })
-</script>
-
+<script src="../../assets/js/postComment.js"></script>
 
 
 <?php

@@ -602,59 +602,73 @@ $receiver = $_GET['user_id'];
                                             <div class="d-flex mb-3">
                                                 <!-- Avatar -->
                                                 <div class="avatar avatar-xs me-2">
-                                                    <a href="#!">
-                                                        <?php if (!empty($user_profile_pic)) { ?>
-                                                            <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
-                                                        <?php } else { ?>
-                                                            <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
-                                                        <?php } ?>
-                                                    </a>
+                                                    <?php if (!empty($user_profile_pic)) { ?>
+                                                        <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
+                                                    <?php } else { ?>
+                                                        <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                                    <?php } ?>
                                                 </div>
+
                                                 <!-- Comment box  -->
-                                                <form class="nav nav-item w-100 position-relative">
-                                                    <textarea data-autoresize="" class="form-control pe-5 bg-light" rows="1" placeholder="Add a comment..."></textarea>
-                                                    <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit">
+                                                <form class="nav nav-item w-100 position-relative" method="post" id="commentBox" data-post-id="<?= $post_id; ?>">
+                                                    <textarea data-autoresize="" class="form-control pe-5 bg-light" rows="2" placeholder="Add a comment..."></textarea>
+                                                    <button class="commentBtn nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit">
                                                         <i class="fa-solid fa-paper-plane"></i>
                                                     </button>
                                                 </form>
+
                                             </div>
+
                                             <!-- Comment wrap START -->
                                             <ul class="comment-wrap list-unstyled">
                                                 <!-- Comment item START -->
                                                 <li class="comment-item">
-                                                    <div class="d-flex position-relative px-5 mt-4">
-                                                        <!-- Avatar -->
-                                                        <div class="avatar avatar-xs">
-                                                            <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile2.jpg" alt=""></a>
-                                                        </div>
-                                                        <div class="ms-2">
-                                                            <!-- Comment by -->
-                                                            <div class="bg-light rounded-start-top-0 rounded">
-                                                                <div class="d-flex justify-content-between">
-                                                                    <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>
-                                                                    <small class="ms-2">5hr</small>
+                                                    <div class="d-flex position-relative px-5 mt-4 flex-column individual_comment<?= $post_id; ?>">
+                                                        <?php
+                                                        $get_comment_query = "SELECT * FROM comment_table LEFT JOIN users_table ON comment_table.comment_owner = users_table.id WHERE comment_table.post_id = '$post_id' ";
+
+                                                        $get_comment_query_run = mysqli_query($conn, $get_comment_query);
+
+                                                        while ($get_comment_data = mysqli_fetch_assoc($get_comment_query_run)) {
+                                                            // var_dump($get_comment_data);
+                                                            $comment_owner_id          = $get_comment_data['comment_owner'];
+                                                            $comment_owner_profile_pic = $get_comment_data['user_profile_pic'];
+                                                            $comment_owner_name        = $get_comment_data['first_name'] . " " . $get_comment_data['last_name'];
+                                                            $comment_owner_username    = $get_comment_data['user_name'];
+                                                            $comment_text              = $get_comment_data['comment_text'];
+                                                            $comment_time              = $get_comment_data['comment_date'];
+
+                                                        ?>
+
+                                                            <div class="ms-2 ">
+                                                                <!-- Comment by -->
+                                                                <div class="bg-light rounded-start-top-0 rounded users_comment">
+                                                                    <div class="d-flex mb-3">
+                                                                        <div class="avatar avatar-xs">
+                                                                            <?php if (!empty($comment_owner_profile_pic)) { ?>
+                                                                                <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $comment_owner_id . "/" . $comment_owner_profile_pic; ?>" alt="">
+                                                                            <?php } else { ?>
+                                                                                <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                                                            <?php } ?>
+                                                                        </div>
+                                                                        <div class="d-block">
+                                                                            <div class="d-flex" style="margin: 0 10px">
+                                                                                <h6 class="mb-1"> <a href=""> <?= $comment_owner_username; ?> </a></h6>
+                                                                                <small class="ms-2 text-secondary"><?= $comment_time; ?></small>
+                                                                            </div>
+                                                                            <p class="small mb-0" style="margin: 0 10px; text-align: justify; line-height: 1.4;"><?= $comment_text; ?></p>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>
                                                             </div>
-                                                            <!-- Comment react -->
-                                                            <ul class="nav nav-divider py-2 small">
-                                                                <li class="nav-item">
-                                                                    <a class="nav-link" href="#!"> Like (3)</a>
-                                                                </li>
-                                                                <li class="nav-item">
-                                                                    <a class="nav-link" href="#!"> Reply</a>
-                                                                </li>
-                                                                <li class="nav-item">
-                                                                    <a class="nav-link" href="#!"> View 5 replies</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                                                        <?php } ?>
                                                     </div>
 
                                                 </li>
 
                                                 <!-- Comment item END -->
                                             </ul>
+
                                         </div>
 
                                         <!-- Card body END -->
@@ -861,10 +875,10 @@ $receiver = $_GET['user_id'];
                 </div>
                 <!-- Main content END -->
 
-                <?php 
-                    require("../../includes/ProfileRightBar.php");
+                <?php
+                require("../../includes/ProfileRightBar.php");
                 ?>
-                
+
 
             </div>
         </div>
@@ -939,6 +953,8 @@ $receiver = $_GET['user_id'];
         });
     });
 </script>
+
+<script src="../../assets/js/postComment.js"></script>
 
 
 

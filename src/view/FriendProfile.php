@@ -20,12 +20,8 @@ $total_followings = $followings_count['followings_count'];
 
 require_once("../controller/show_post_on_profile.php");
 
-// require_once("../controller/showFollowersAndFollowings.php");
-// var_dump($followers_display);
-// var_dump($followings_display);
-
 require_once("../controller/getAllUserRecord.php");
-$logged_in_user_pic = $fetch_user_result[0]["user_profile_pic"];
+$logged_in_user_pic = $current_user_data[0]["user_profile_pic"];
 
 $current_user_fullname    = $current_user_data["first_name"] . " " . $current_user_data["last_name"];
 $current_username         = $current_user_data["user_name"];
@@ -235,238 +231,248 @@ $receiver = $_GET['user_id'];
 
                                 $carousel_id = 'carouselIndicators_' . $post_id;
 
-                                // var_dump($post_user_id);
-                                // var_dump($curr_id);
-                                // var_dump($fetch_user_result[0]["user_profile_pic"]);
+                                if ($feed_post_data["is_deleted"] != 1) {
                             ?>
 
-                                <div class="card rounded-2">
-                                    <!-- Card header START -->
-                                    <div class="card-header border-0 pb-0">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <!-- Avatar -->
-                                                <div class="avatar me-2">
-                                                    <a href="#">
-                                                        <?php if (!empty($post_author_profile_pic)) { ?>
-                                                            <img class="avatar-img rounded-circle border border-primary border-2 p-1" src="<?= BASE_URL ?>assets/profile_pic/<?= $post_user_id . "/" . $post_author_profile_pic; ?>" alt="">
-                                                        <?php } else { ?>
-                                                            <img class="avatar-img rounded-circle border border-primary border-2 p-1" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
-                                                        <?php } ?>
-                                                    </a>
-                                                </div>
-                                                <!-- Info -->
-                                                <div>
-                                                    <div class="nav nav-divider">
-                                                        <h6 class="nav-item card-title mb-0"> <a href="#!"> <?= $post_author; ?> </a></h6>
+                                    <div class="card rounded-2">
+                                        <!-- Card header START -->
+                                        <div class="card-header border-0 pb-0">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <!-- Avatar -->
+                                                    <div class="avatar me-2">
+                                                        <a href="#">
+                                                            <?php if (!empty($post_author_profile_pic)) { ?>
+                                                                <img class="avatar-img rounded-circle border border-primary border-2 p-1" src="<?= BASE_URL ?>assets/profile_pic/<?= $post_user_id . "/" . $post_author_profile_pic; ?>" alt="">
+                                                            <?php } else { ?>
+                                                                <img class="avatar-img rounded-circle border border-primary border-2 p-1" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                                            <?php } ?>
+                                                        </a>
                                                     </div>
-                                                    <span class="nav-item small"> <?= $posted_at; ?></span>
-                                                    <!-- <p class="mb-0 small">Web Developer at Mind2Web</p> -->
-                                                </div>
-                                            </div>
-                                            <!-- Card feed action dropdown START -->
-                                            <div class="dropdown">
-                                                <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="bi bi-three-dots"></i>
-                                                </a>
-                                                <!-- Card feed action dropdown menu -->
-
-                                                <?php if ($post_user_id == $_SESSION['id']) { ?>
-
-                                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
-                                                        <li><a class="dropdown-item" href="#"> <i class="fa-regular fa-bookmark pe-2"></i>Save post</a></li>
-                                                        <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-pencil pe-2"></i>Edit Post </a></li>
-
-                                                        <li>
-                                                            <hr class="dropdown-divider">
-                                                        </li>
-                                                        <li><a class="dropdown-item text-danger" href="#"> <i class="fa-regular fa-trash-can pe-2"></i>Delete post</a></li>
-                                                    </ul>
-                                                <?php } else { ?>
-                                                    <!-- Card feed action dropdown menu -->
-                                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
-                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
-                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
-                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
-                                                        <li>
-                                                            <hr class="dropdown-divider">
-                                                        </li>
-                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
-                                                    </ul>
-                                                <?php } ?>
-
-                                            </div>
-                                            <!-- Card feed action dropdown END -->
-                                        </div>
-                                    </div>
-                                    <!-- Card header END -->
-
-                                    <!-- Card body START -->
-                                    <div class="card-body">
-                                        <!-- <p>I'm thrilled to share that I've completed a graduate certificate course in project management with the president's honor roll.</p> -->
-                                        <p><?= $post_caption; ?> </p>
-                                        <!-- Card img -->
-
-                                        <!-- Carousel -->
-                                        <?php if (count($all_post_images) > 1) { ?>
-                                            <!-- Carousel for Post images -->
-                                            <div id="<?= $carousel_id; ?>" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                                                <div class="carousel-indicators">
-
-                                                    <?php
-                                                    // Loop through all the post images
-                                                    foreach ($all_post_images as $index => $post_image) {
-                                                        $activeClass = ($index === 0) ? 'active' : '';
-                                                    ?>
-                                                        <button type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide-to="<?= $index; ?>" class="<?= $activeClass; ?>" aria-label="Slide <?= $index + 1; ?>"></button>
-                                                    <?php } ?>
-
-                                                </div>
-
-                                                <div class="carousel-inner">
-
-                                                    <?php
-                                                    // Loop through all the post images
-                                                    foreach ($all_post_images as $index => $post_image) {
-                                                        $activeClass = ($index === 0) ? 'active' : '';
-                                                    ?>
-                                                        <div class="carousel-item <?= $activeClass; ?>">
-                                                            <img src="<?= BASE_URL ?>assets/posts/<?= $post_user_id . "/" . $post_image; ?>" class="d-block w-100" style="height:300px; object-fit:contain;" alt="Post Image">
+                                                    <!-- Info -->
+                                                    <div>
+                                                        <div class="nav nav-divider">
+                                                            <h6 class="nav-item card-title mb-0"> <a href="#!"> <?= $post_author; ?> </a></h6>
                                                         </div>
+                                                        <span class="nav-item small"> <?= $posted_at; ?></span>
+                                                    </div>
+                                                </div>
+                                                <!-- Card feed action dropdown START -->
+                                                <div class="dropdown">
+                                                    <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="bi bi-three-dots"></i>
+                                                    </a>
+                                                    <!-- Card feed action dropdown menu -->
+
+                                                    <?php if ($post_user_id == $_SESSION['id']) { ?>
+
+                                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
+                                                            <li><a class="dropdown-item" href="#"> <i class="fa-regular fa-bookmark pe-2"></i>Save post</a></li>
+                                                            <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-pencil pe-2"></i>Edit Post </a></li>
+
+                                                            <li>
+                                                                <hr class="dropdown-divider">
+                                                            </li>
+                                                            <li><a class="dropdown-item text-danger" href="#"> <i class="fa-regular fa-trash-can pe-2"></i>Delete post</a></li>
+                                                        </ul>
+                                                    <?php } else { ?>
+                                                        <!-- Card feed action dropdown menu -->
+                                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
+                                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
+                                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
+                                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
+                                                            <li>
+                                                                <hr class="dropdown-divider">
+                                                            </li>
+                                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+                                                        </ul>
                                                     <?php } ?>
 
                                                 </div>
-
-                                                <button class="carousel-control-prev" type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide="prev">
-                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Previous</span>
-                                                </button>
-                                                <button class="carousel-control-next" type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide="next">
-                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Next</span>
-                                                </button>
+                                                <!-- Card feed action dropdown END -->
                                             </div>
-                                        <?php } else { ?>
-                                            <img src="<?= BASE_URL ?>assets/posts/<?= $post_user_id . "/" . $all_post_images[0]; ?>" class="d-block w-100" style="height:300px; object-fit:contain;" alt="Post Image">
-                                        <?php } ?>
+                                        </div>
+                                        <!-- Card header END -->
+
+                                        <!-- Card body START -->
+                                        <div class="card-body">
+                                            <p><?= $post_caption; ?> </p>
+
+                                            <!-- Card img Carousel -->
+                                            <?php if (count($all_post_images) > 1) { ?>
+                                                <!-- Carousel for Post images -->
+                                                <div id="<?= $carousel_id; ?>" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                                                    <div class="carousel-indicators">
+
+                                                        <?php
+                                                        // Loop through all the post images
+                                                        foreach ($all_post_images as $index => $post_image) {
+                                                            $activeClass = ($index === 0) ? 'active' : '';
+                                                        ?>
+                                                            <button type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide-to="<?= $index; ?>" class="<?= $activeClass; ?>" aria-label="Slide <?= $index + 1; ?>"></button>
+                                                        <?php } ?>
+
+                                                    </div>
+
+                                                    <div class="carousel-inner">
+
+                                                        <?php
+                                                        // Loop through all the post images
+                                                        foreach ($all_post_images as $index => $post_image) {
+                                                            $activeClass = ($index === 0) ? 'active' : '';
+                                                        ?>
+                                                            <div class="carousel-item <?= $activeClass; ?>">
+                                                                <img src="<?= BASE_URL ?>assets/posts/<?= $post_user_id . "/" . $post_image; ?>" class="d-block w-100" style="height:300px; object-fit:contain;" alt="Post Image">
+                                                            </div>
+                                                        <?php } ?>
+
+                                                    </div>
+
+                                                    <button class="carousel-control-prev" type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next" type="button" data-bs-target="#<?= $carousel_id; ?>" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </button>
+                                                </div>
+                                            <?php } else { ?>
+                                                <img src="<?= BASE_URL ?>assets/posts/<?= $post_user_id . "/" . $all_post_images[0]; ?>" class="d-block w-100" style="height:300px; object-fit:contain;" alt="Post Image">
+                                            <?php } ?>
 
 
-                                        <!-- Feed react START -->
-                                        <ul class="nav nav-stack py-3 mt-1">
+                                            <!-- Feed react START -->
+                                            <ul class="nav nav-stack py-3 mt-1">
 
-                                            <li class="nav-item">
-                                                <a class="nav-link active likesAnchor" href="#" data-post-id="<?= $post_id ?>" data-like-status="<?= $like_status ?>">
-                                                    <i class="fa-<?= $like_status ? 'solid text-danger' : 'regular' ?> fa-heart postLike" data-post-id="<?= $post_id ?>"></i>
-                                                    Likes (<span id="likes_count_<?= $post_id; ?>"><?= $feed_post_data['likes_count'] ?></span>)
-                                                    <!-- <span id="likes_count_<?= $post_id; ?>">(<?= $count_like ?>)</span> Likes -->
-                                                </a>
-                                            </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link active likesAnchor" href="#" data-post-id="<?= $post_id ?>" data-like-status="<?= $like_status ?>">
+                                                        <i class="fa-<?= $like_status ? 'solid text-danger' : 'regular' ?> fa-heart postLike" data-post-id="<?= $post_id ?>"></i>
+                                                        Likes (<span id="likes_count_<?= $post_id; ?>"><?= $feed_post_data['likes_count'] ?></span>)
+                                                        <!-- <span id="likes_count_<?= $post_id; ?>">(<?= $count_like ?>)</span> Likes -->
+                                                    </a>
+                                                </li>
 
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#!">
-                                                    <i class="fa-regular fa-comment"></i>
-                                                    Comments (12)
-                                                </a>
-                                            </li>
-                                            <!-- Card share action START -->
-                                            <li class="nav-item dropdown ms-sm-auto">
-                                                <a class="nav-link mb-0" href="#" id="cardShareAction" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="fa-solid fa-share-nodes"></i> Share (3)
-                                                </a>
-                                                <!-- Card share action dropdown menu -->
-                                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction">
-                                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-envelope fa-fw pe-2"></i>Send via Direct Message</a></li>
-                                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark-check fa-fw pe-2"></i>Bookmark </a></li>
-                                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-link fa-fw pe-2"></i>Copy link to post</a></li>
-                                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-share fa-fw pe-2"></i>Share post via …</a></li>
-                                                    <li>
-                                                        <hr class="dropdown-divider">
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-pencil-square fa-fw pe-2"></i>Share to News Feed</a></li>
-                                                </ul>
-                                            </li>
-                                            <!-- Card share action END -->
-                                        </ul>
-                                        <!-- Feed react END -->
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#!">
+                                                        <i class="fa-regular fa-comment"></i>
+                                                        Comments (12)
+                                                    </a>
+                                                </li>
+                                                <!-- Card share action START -->
+                                                <li class="nav-item dropdown ms-sm-auto">
+                                                    <a class="nav-link mb-0" href="#" id="cardShareAction" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fa-solid fa-share-nodes"></i> Share (3)
+                                                    </a>
+                                                    <!-- Card share action dropdown menu -->
+                                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction">
+                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-envelope fa-fw pe-2"></i>Send via Direct Message</a></li>
+                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark-check fa-fw pe-2"></i>Bookmark </a></li>
+                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-link fa-fw pe-2"></i>Copy link to post</a></li>
+                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-share fa-fw pe-2"></i>Share post via …</a></li>
+                                                        <li>
+                                                            <hr class="dropdown-divider">
+                                                        </li>
+                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-pencil-square fa-fw pe-2"></i>Share to News Feed</a></li>
+                                                    </ul>
+                                                </li>
+                                                <!-- Card share action END -->
+                                            </ul>
+                                            <!-- Feed react END -->
 
-                                        <!-- Add comment -->
-                                        <div class="d-flex mb-3">
-                                            <!-- Avatar -->
-                                            <div class="avatar avatar-xs me-2">
-                                                <a href="">
+                                            <!-- Add comment -->
+                                            <div class="d-flex mb-3">
+                                                <!-- Avatar -->
+                                                <div class="avatar avatar-xs me-2">
                                                     <?php if (!empty($logged_in_user_pic)) { ?>
                                                         <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $curr_id . "/" . $logged_in_user_pic; ?>" alt="">
                                                     <?php } else { ?>
                                                         <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
                                                     <?php } ?>
-                                                </a>
-                                            </div>
-                                            <!-- Comment box  -->
-                                            <form class="nav nav-item w-100 position-relative">
-                                                <textarea data-autoresize="" class="form-control pe-5 bg-light" rows="1" placeholder="Add a comment..."></textarea>
-                                                <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit">
-                                                    <i class="fa-solid fa-paper-plane"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                        <!-- Comment wrap START -->
-                                        <ul class="comment-wrap list-unstyled">
-                                            <!-- Comment item START -->
-                                            <li class="comment-item">
-                                                <div class="d-flex position-relative px-5 mt-4">
-                                                    <!-- Avatar -->
-                                                    <div class="avatar avatar-xs">
-                                                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile2.jpg" alt=""></a>
-                                                    </div>
-                                                    <div class="ms-2">
-                                                        <!-- Comment by -->
-                                                        <div class="bg-light rounded-start-top-0 rounded">
-                                                            <div class="d-flex justify-content-between">
-                                                                <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>
-                                                                <small class="ms-2">5hr</small>
-                                                            </div>
-                                                            <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>
-                                                        </div>
-                                                        <!-- Comment react -->
-                                                        <ul class="nav nav-divider py-2 small">
-                                                            <li class="nav-item">
-                                                                <a class="nav-link" href="#!"> Like (3)</a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link" href="#!"> Reply</a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link" href="#!"> View 5 replies</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
                                                 </div>
 
-                                            </li>
+                                                <!-- Comment box  -->
+                                                <form class="nav nav-item w-100 position-relative" method="post" id="commentBox" data-post-id="<?= $post_id; ?>">
+                                                    <textarea data-autoresize="" class="form-control pe-5 bg-light" rows="2" placeholder="Add a comment..."></textarea>
+                                                    <button class="commentBtn nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit">
+                                                        <i class="fa-solid fa-paper-plane"></i>
+                                                    </button>
+                                                </form>
 
-                                            <!-- Comment item END -->
-                                        </ul>
-                                    </div>
-
-                                    <!-- Card body END -->
-
-                                    <!-- Card footer START -->
-                                    <div class="card-footer border-0 pt-0">
-                                        <!-- Load more comments -->
-                                        <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
-                                            <div class="spinner-dots me-2">
-                                                <span class="spinner-dot"></span>
-                                                <span class="spinner-dot"></span>
-                                                <span class="spinner-dot"></span>
                                             </div>
-                                            Load more comments
-                                        </a>
+
+                                            <!-- Comment wrap START -->
+                                            <ul class="comment-wrap list-unstyled">
+                                                <!-- Comment item START -->
+                                                <li class="comment-item">
+                                                    <div class="d-flex position-relative px-5 mt-4 flex-column individual_comment<?= $post_id; ?>">
+                                                        <?php
+                                                        $get_comment_query = "SELECT * FROM comment_table LEFT JOIN users_table ON comment_table.comment_owner = users_table.id WHERE comment_table.post_id = '$post_id' ";
+
+                                                        $get_comment_query_run = mysqli_query($conn, $get_comment_query);
+
+                                                        while ($get_comment_data = mysqli_fetch_assoc($get_comment_query_run)) {
+                                                            // var_dump($get_comment_data);
+                                                            $comment_owner_id          = $get_comment_data['comment_owner'];
+                                                            $comment_owner_profile_pic = $get_comment_data['user_profile_pic'];
+                                                            $comment_owner_name        = $get_comment_data['first_name'] . " " . $get_comment_data['last_name'];
+                                                            $comment_owner_username    = $get_comment_data['user_name'];
+                                                            $comment_text              = $get_comment_data['comment_text'];
+                                                            $comment_time              = $get_comment_data['comment_date'];
+
+                                                        ?>
+
+                                                            <div class="ms-2 ">
+                                                                <!-- Comment by -->
+                                                                <div class="bg-light rounded-start-top-0 rounded users_comment">
+                                                                    <div class="d-flex mb-3">
+                                                                        <div class="avatar avatar-xs">
+                                                                            <?php if (!empty($comment_owner_profile_pic)) { ?>
+                                                                                <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $comment_owner_id . "/" . $comment_owner_profile_pic; ?>" alt="">
+                                                                            <?php } else { ?>
+                                                                                <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                                                            <?php } ?>
+                                                                        </div>
+                                                                        <div class="d-block">
+                                                                            <div class="d-flex" style="margin: 0 10px">
+                                                                                <h6 class="mb-1"> <a href=""> <?= $comment_owner_username; ?> </a></h6>
+                                                                                <small class="ms-2 text-secondary"><?= $comment_time; ?></small>
+                                                                            </div>
+                                                                            <p class="small mb-0" style="margin: 0 10px; text-align: justify; line-height: 1.4;"><?= $comment_text; ?></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <?php } ?>
+                                                    </div>
+
+                                                </li>
+
+                                                <!-- Comment item END -->
+                                            </ul>
+
+                                        </div>
+
+                                        <!-- Card body END -->
+
+                                        <!-- Card footer START -->
+                                        <div class="card-footer border-0 pt-0">
+                                            <!-- Load more comments -->
+                                            <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
+                                                <div class="spinner-dots me-2">
+                                                    <span class="spinner-dot"></span>
+                                                    <span class="spinner-dot"></span>
+                                                    <span class="spinner-dot"></span>
+                                                </div>
+                                                Load more comments
+                                            </a>
+                                        </div>
+                                        <!-- Card footer END -->
                                     </div>
-                                    <!-- Card footer END -->
-                                </div>
-                                <!-- Card feed item END -->
+                                    <!-- Card feed item END -->
 
 
+                                <?php } ?>
 
                             <?php } ?>
                         </div>
@@ -726,56 +732,10 @@ $receiver = $_GET['user_id'];
     });
 </script>
 
-
-
-
 <!-- Follow User -->
-<script>
-    $(document).ready(function() {
-        // Click event for the follow button
-        $(document).on('click', '.follow_btn', function() {
+<script src="../../assets/js/followUser.js"></script>
 
-            // const userId = $(this).data('user-id');
-
-            const button = $(this);
-            const userId = button.data('user-id');
-
-            // AJAX request
-            $.ajax({
-                type: 'POST',
-                url: '<?= BASE_URL ?>src/controller/follow_action.php',
-                data: {
-                    userId: userId
-                },
-                dataType: 'json',
-                success: function(response) {
-                    if (response.status === 'success') {
-                        console.log($("#total-follower-count"))
-
-                        if (response.follow_status == 1) {
-                            console.log(response);
-                            $("#follow-btn-container").html(`<button  class=" btn btn-outline-secondary me-3" data-bs-toggle="modal" data-bs-target="#unfollow${userId}" style="padding: 10px 50px;"><i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong></button>`);
-
-                            $('#total-follower-count').text(response.followers_count);
-                        } else {
-                            $(".btn-close").click();
-                            $("#follow-btn-container").html(`<button data-user-id=${userId} class="follow_btn btn btn-outline-primary me-3" style="padding: 10px 50px;"><i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong></button>`);
-                            
-                            $('#total-follower-count').text(response.followers_count);
-                        }
-                    } else {
-                        console.log('Error: ' + response.message);
-                    }
-                },
-                error: function() {
-                    console.log('AJAX request failed');
-                }
-            });
-        });
-    });
-</script>
-
-
+<script src="../../assets/js/postComment.js"></script>
 
 <?php
 require_once("../../includes/Footer.php");
