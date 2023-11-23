@@ -47,7 +47,7 @@
                                     <div class="avatar avatar-story avatar-xl">
                                         <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
                                     </div>
-                                    <h6 class="card-title mb-1 mt-3"> <a href="#!"> Amanda Reed </a></h6>
+                                    <h6 class="card-title mb-1 mt-3"> <a href="#!"> Prince Rajpoot </a></h6>
                                     <p class="mb-0 small lh-sm">16 mutual connections</p>
                                 </div>
                                 <!-- Card footer -->
@@ -74,7 +74,7 @@
                                     <div class="avatar avatar-xl">
                                         <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
                                     </div>
-                                    <h6 class="card-title mb-1 mt-3"> <a href="#!"> Samuel Bishop </a></h6>
+                                    <h6 class="card-title mb-1 mt-3"> <a href="#!"> Prince Rajpoot </a></h6>
                                     <p class="mb-0 small lh-sm">22 mutual connections</p>
                                 </div>
                                 <!-- Card footer -->
@@ -101,7 +101,7 @@
                                     <div class="avatar avatar-xl">
                                         <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
                                     </div>
-                                    <h6 class="card-title mb-1 mt-3"> <a href="#"> Bryan Knight </a></h6>
+                                    <h6 class="card-title mb-1 mt-3"> <a href="#"> Prince Rajpoot </a></h6>
                                     <p class="mb-0 small lh-sm">1 mutual connection</p>
                                 </div>
                                 <!-- Card footer -->
@@ -128,7 +128,7 @@
                                     <div class="avatar avatar-xl">
                                         <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
                                     </div>
-                                    <h6 class="card-title mb-1 mt-3"> <a href="#!"> Amanda Reed </a></h6>
+                                    <h6 class="card-title mb-1 mt-3"> <a href="#!"> Prince Rajpoot </a></h6>
                                     <p class="mb-0 small lh-sm">15 mutual connections</p>
                                 </div>
                                 <!-- Card footer -->
