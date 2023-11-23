@@ -49,21 +49,29 @@ $curr_id = $_SESSION['id'];
                         <tbody class="tabular_card">
                             <?php
 
-                            // $search_user_query  = "SELECT * FROM users_table JOIN follows_table ON users_table.id = follows_table.user_id WHERE users_table.id != '$curr_id' ";
+                            // $search_user_query  = "SELECT * FROM users_table RIGHT JOIN follows_table ON users_table.id = follows_table.user_id WHERE users_table.id != '$curr_id' ";
 
-                            $search_user_query  = "SELECT * FROM users_table";
+                            $search_user_query  = "SELECT * FROM users_table WHERE id != '$curr_id'";
                             $search_user_result = mysqli_query($conn, $search_user_query);
+
+                            $user_follower_id_query  = "SELECT user_id FROM follows_table WHERE follower_id = '$curr_id' and follow_status = '1'";
+                            $user_follower_id = mysqli_query($conn, $user_follower_id_query);
+                            $user_follower_id_array = array();
+
+                            while ($row = mysqli_fetch_array($user_follower_id, MYSQLI_ASSOC)) {
+                                array_push($user_follower_id_array, $row['user_id']);
+                            }
 
                             if ($search_user_result) {
 
                                 foreach ($search_user_result as $search_data) {
-
                                     $user_id           = $search_data["id"];
                                     $user_fullname     = $search_data["first_name"] . " " . $search_data["last_name"];
                                     $user_shortname    = $search_data["user_name"];
                                     $user_profile_pic  = $search_data["user_profile_pic"];
 
                                     $follow_status     = $search_data["follow_status"];
+                                    $follower_status = in_array($user_id, $user_follower_id_array);
 
                                     $search_profileUrl = "FriendProfile.php?user_id=" . $user_id;
 
@@ -81,8 +89,9 @@ $curr_id = $_SESSION['id'];
                                             <a class="text-heading font-semibold" href="<?= $search_profileUrl; ?>">
                                                 <?php echo strtoupper($user_fullname); ?>
                                             </a>
-                                            <?php if ($follow_status == 1) { ?>
-                                                <small class="text-success">(Following)</small>
+                                            <?php if ($follower_status == 1) { ?>
+                                                <small class="ms-2 badge rounded-pill text-bg-success">Following</small>
+                                                <!-- <small class="text-success">(Following)</small> -->
                                             <?php } ?>
 
                                         </td>
