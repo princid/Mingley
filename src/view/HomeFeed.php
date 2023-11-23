@@ -458,18 +458,6 @@ require_once("../controller/show_post_on_feed.php");
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!-- Comment react -->
-                                                        <!-- <ul class="nav nav-divider py-2 small">
-                                                            <li class="nav-item">
-                                                                <a class="nav-link" href="#!"> Like (3)</a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link" href="#!"> Reply</a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link" href="#!"> View 5 replies</a>
-                                                            </li>
-                                                        </ul> -->
                                                     </div>
                                                 <?php } ?>
                                             </div>
@@ -585,8 +573,6 @@ require_once("../controller/show_post_on_feed.php");
                     console.log('AJAX reaquest failed...');
                 }
             })
-            // document.getElementById("commentBox").reset();
-            // return false;
         })
     })
 </script>
