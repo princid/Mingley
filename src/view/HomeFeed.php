@@ -149,7 +149,7 @@ require_once("../controller/show_post_on_feed.php");
                         $post_author             = $feed_post_data['first_name'] . " " . $feed_post_data['last_name'];
                         $post_author_profile_pic = $feed_post_data['user_profile_pic'];
                         $post_caption            = $feed_post_data['post_caption'];
-                        $posted_at               = $feed_post_data['posted_at'];
+                        $posted_at               = $feed_post_data['post_time']. " - ". $feed_post_data['post_date'];
                         $all_post_images         = explode(',', $feed_post_data['post_images']);
                         $carousel_id             = 'carouselIndicators_' . $post_id;
                         $friend_profileUrl       = "FriendProfile.php?user_id=" . $post_user_id;
@@ -345,7 +345,7 @@ require_once("../controller/show_post_on_feed.php");
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">
                                                 <i class="fa-regular fa-comment"></i>
-                                                Comments (12)
+                                                Comments
                                             </a>
                                         </li>
                                         <!-- Card share action START -->
