@@ -2,6 +2,7 @@
 
 session_start();
 require("../../config/connectDB.php");
+require("../../includes/DateTime.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['postId']) && isset($_POST['commentContent'])) {
     $postId = $_POST['postId'];
@@ -9,16 +10,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['postId']) && isset($_
     $commentOwner = $_SESSION['id'];
 
     // Inserting the comment into the database
-    $comment_query = "INSERT INTO comment_table(comment_owner, post_id, comment_date, comment_text) VALUES ($commentOwner, $postId, NOW(), '$commentContent')";
+    $comment_query = "INSERT INTO comment_table(comment_owner, post_id, comment_date, comment_time, comment_text) VALUES ($commentOwner, $postId, '$date', '$time', '$commentContent')";
     $comment_query_run = mysqli_query($conn, $comment_query);
 
     if ($comment_query_run) {
         // Getting all the additional information about the comment
-        $get_comment_info_query = "SELECT c.comment_owner, c.comment_date, c.comment_text, u.user_name, u.user_profile_pic
+        $get_comment_info_query = "SELECT c.comment_owner, c.comment_date, c.comment_time, c.comment_text, c.comment_created, u.user_name, u.user_profile_pic
                                    FROM comment_table c
                                    LEFT JOIN users_table u ON c.comment_owner = u.id
                                    WHERE c.post_id = '$postId'
-                                   ORDER BY c.comment_date DESC
+                                   ORDER BY c.comment_created DESC
                                    LIMIT 1";
         $get_comment_info_query_run = mysqli_query($conn, $get_comment_info_query);
 
@@ -28,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['postId']) && isset($_
                 'message' => 'Comment added successfully',
                 'commentInfo' => $get_comment_info_data,
             ]);
+            // var_dump($get_comment_info_data);
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Failed to retrieve comment information']);
         }

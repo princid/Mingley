@@ -18,13 +18,33 @@ function signUp($conn, $table, $first_name, $last_name, $user_name, $user_email,
         $signUp_query = "INSERT INTO $table (first_name, last_name, user_name, user_email, user_password) VALUES ('$first_name', '$last_name', '$user_name', '$user_email', '$user_password')";
         $signUp_query_run = mysqli_query($conn, $signUp_query);
 
-        if($signUp_query_run){
+        if ($signUp_query_run) {
             return "Registered Successfully!";
-        }else{
+        } else {
             return "Error: " . mysqli_error($conn);
         }
     }
 }
+
+
+// Function to let users log in 
+function signIn($conn, $table, $user_email, $user_password)
+{
+    $signIn_check = "SELECT id, user_email, user_password FROM $table WHERE user_email = '$user_email' AND user_password = '$user_password' ";
+    $signIn_check_run = mysqli_query($conn, $signIn_check);
+
+    if (mysqli_num_rows($signIn_check_run) > 0) {
+        while ($row = mysqli_fetch_assoc($signIn_check_run)) {
+            $_SESSION["id"] = $row['id'];
+            $_SESSION["first_name"] = $row['first_name'];
+
+            return "Logged In Successfully!";
+        }
+    } else {
+        return "Error: OOPS! Something went wrong...";
+    }
+}
+
 
 // Update Query
 function update($conn, $table_name, $set_data, $condition)
@@ -49,35 +69,15 @@ function update($conn, $table_name, $set_data, $condition)
     }
 }
 
-// Function to let users log in 
-function signIn($conn, $table, $user_email, $user_password)
-{
-    $signIn_check = "SELECT id, user_email, user_password FROM $table WHERE user_email = '$user_email' AND user_password = '$user_password' ";
-    // $stmt_signIn_check = mysqli_prepare($conn, $signIn_check);
-    $signIn_check_run = mysqli_query($conn, $signIn_check);
-
-    if (mysqli_num_rows($signIn_check_run) > 0) {
-        while($row = mysqli_fetch_assoc($signIn_check_run)) {
-            $_SESSION["id"] = $row['id'];
-            $_SESSION["first_name"] = $row['first_name'];
-            // var_dump($row);
-            // exit;
-            return "Logged In Successfully!";
-        }
-    }
-    else{
-        return "Error: OOPS! Something went wrong...";
-    }
-}
-
 
 // Function to fetch user's details
-function fetchUserDetails($conn, $fetch_table, $condition){
+function fetchUserDetails($conn, $fetch_table, $condition)
+{
     $fetch_query = "SELECT * FROM $fetch_table WHERE $condition";
     $fetch_query_run = mysqli_query($conn, $fetch_query);
 
-    if($fetch_query_run && mysqli_num_rows($fetch_query_run) > 0) {
-        
+    if ($fetch_query_run && mysqli_num_rows($fetch_query_run) > 0) {
+
         $row = mysqli_fetch_assoc($fetch_query_run);
 
         $_SESSION['id'] = $row['id'];
@@ -87,104 +87,37 @@ function fetchUserDetails($conn, $fetch_table, $condition){
 
 
 // Function to update user's profile, such as name, email, bio, etc..
-function updateProfile($conn, $table, $first_name, $last_name, $user_name, $user_email, $user_bio, $condition){
+function updateProfile($conn, $table, $first_name, $last_name, $user_name, $user_email, $user_bio, $condition)
+{
+    $update_query = " UPDATE $table SET first_name = '$first_name', last_name = '$last_name', user_name = '$user_name', user_email = '$user_email', user_bio = '$user_bio' WHERE $condition ";
+    $update_query_run = mysqli_query($conn, $update_query);
 
-    // $check_user = "SELECT id FROM $table WHERE user_email = '$user_email' OR user_name = '$user_name' ";
-    // $check_user_run = mysqli_query($conn, $check_user);
-
-    // if (mysqli_num_rows($check_user_run) > 0) {
-    //     // Email or Username already exists
-    //     return "Email/Username already exists! Try with another Email ID/Username.";
-    // } else {
-        $update_query = " UPDATE $table SET first_name = '$first_name', last_name = '$last_name', user_name = '$user_name', user_email = '$user_email', user_bio = '$user_bio' WHERE $condition ";
-        $update_query_run = mysqli_query($conn, $update_query);
-
-        if ($update_query_run) {
-            return "Your Data Updated Successfully!";
-        } else {
-            return "Error: " . mysqli_error($conn);
-        }
+    if ($update_query_run) {
+        return "Your Data Updated Successfully!";
+    } else {
+        return "Error: " . mysqli_error($conn);
+    }
     // }
-    
+
 }
 
 
 
 // Function to create post (upload post)
-function createPost($conn, $table, $user_id, $caption, $imageNamesAsString){
-    // var_dump($users_table);
-    // echo "rahoooooo";
-    $insertPostQuery = "INSERT INTO $table (user_id, post_caption, post_images) VALUES ('$user_id', '$caption', '$imageNamesAsString')";
+function createPost($conn, $table, $user_id, $caption, $imageNamesAsString, $date, $time)
+{
+    $insertPostQuery = "INSERT INTO $table (user_id, post_caption, post_images, post_date, post_time) VALUES ('$user_id', '$caption', '$imageNamesAsString', '$date', '$time')";
+
     $insertPostQuery_run = mysqli_query($conn, $insertPostQuery);
 
-
-    if($insertPostQuery_run){
-
-        // $post_data = mysqli_fetch_assoc($show_post_run);
-
-        // $_SESSION['id'] = $post_data['id'];
-
+    if ($insertPostQuery_run) {
         return "Post successfully uploaded...";
-
-    }else{
+    } else {
         return "Error: " . mysqli_error($conn);
     }
-
 }
 
-
-
-// Function to show posts on Home Page's feed.
-// function show_post_on_feed($conn, $users_table, $posts_table, $feed_post_condition){
-
-//     $show_post = "SELECT * FROM $users_table JOIN $posts_table ON $feed_post_condition ORDER BY $posts_table.posted_at DESC";
-
-//     $show_post_run = mysqli_query($conn, $show_post);
-
-//     $post_data = array();
-
-//     if($show_post_run && mysqli_num_rows($show_post_run) > 0){
-
-//         while ($data = mysqli_fetch_assoc($show_post_run)) {
-//             $post_data[] = $data;
-//         }
-
-
-//         return $post_data;
-//     }
-// }
-
-
-
-// BY GPT BABA
-// Function to show posts on Home Page's feed.
-// function show_post_on_feed($conn, $users_table, $posts_table, $likes_table, $feed_post_condition, $current_user_id)
-// {
-//     $show_post = "SELECT 
-//                     $users_table.*,
-//                     $posts_table.*,
-//                     COUNT(CASE WHEN $likes_table.like_status = 1 THEN 1 END) AS likes_count,
-//                     MAX($likes_table.like_status) AS like_status
-//                 FROM $users_table
-//                 JOIN $posts_table ON $feed_post_condition
-//                 LEFT JOIN $likes_table ON $posts_table.post_id = $likes_table.post_id AND $likes_table.liked_by_id = $current_user_id
-//                 GROUP BY $posts_table.post_id
-//                 ORDER BY $posts_table.posted_at DESC";
-
-//     $show_post_run = mysqli_query($conn, $show_post);
-
-//     $post_data = array();
-
-//     if ($show_post_run && mysqli_num_rows($show_post_run) > 0) {
-
-//         while ($data = mysqli_fetch_assoc($show_post_run)) {
-//             $post_data[] = $data;
-//         }
-
-//         return $post_data;
-//     }
-// }
-
+// Function to show post on Home Feed page. 
 function show_post_on_feed($conn, $users_table, $posts_table, $likes_table, $feed_post_condition, $current_user_id)
 {
     $show_post = "SELECT 
@@ -213,7 +146,7 @@ function show_post_on_feed($conn, $users_table, $posts_table, $likes_table, $fee
 }
 
 
-
+// Function to show post on Profile page.
 function show_post_on_profile($conn, $users_table, $posts_table, $likes_table, $profile_feed_condition, $where_condition, $current_user_id)
 {
     $show_post = "SELECT 
@@ -243,7 +176,7 @@ function show_post_on_profile($conn, $users_table, $posts_table, $likes_table, $
 }
 
 
-
+// Function to show Post on friend's profile page.
 function show_post_on_friends_profile($conn, $users_table, $posts_table, $likes_table, $profile_feed_condition, $where_condition, $id)
 {
     $show_post = "SELECT 
@@ -273,69 +206,13 @@ function show_post_on_friends_profile($conn, $users_table, $posts_table, $likes_
 }
 
 
-
-
-
-
-// foreach ($post_data as $post) {
-//     // var_dump($post);
-//     // echo "Post Title: " . $post['post_caption'] . "<br>";
-//     // echo "Post Content: " . $post['post_images'] . "<br>";
-//     // echo "Post Owner: " . $post['first_name'] . "<br>";
-//     $post_author = $post["first_name"]. " ". $post["last_name"];
-//     $post_caption = $post["post_caption"];
-//     $post_images = $post["post_images"];
-// }
-
-
-// Function to show our own posts on our profile.
-// function show_post_on_profile($conn, $users_table, $posts_table, $profile_feed_condition, $where_condition){
-
-//     $show_profile_post = "SELECT * FROM $users_table JOIN $posts_table ON $profile_feed_condition WHERE $where_condition ORDER BY $posts_table.posted_at DESC";
-
-//     $show_profile_post_run = mysqli_query($conn, $show_profile_post);
-
-//     $profile_post_data = array();
-
-//     if($show_profile_post_run && mysqli_num_rows($show_profile_post_run) > 0){
-
-//         while ($my_data = mysqli_fetch_assoc($show_profile_post_run)) {
-//             $profile_post_data[] = $my_data;
-//         }
-
-//         return $profile_post_data;
-//     }
-// }
-
-
-// Function to check other users profile
-// function show_post_on_friends_profile($conn, $users_table, $posts_table, $profile_feed_condition, $where_condition){
-
-//     $show_profile_post = "SELECT * FROM $users_table JOIN $posts_table ON $profile_feed_condition WHERE $where_condition ORDER BY $posts_table.posted_at DESC";
-
-//     $show_profile_post_run = mysqli_query($conn, $show_profile_post);
-
-//     $profile_post_data = array();
-
-//     if($show_profile_post_run && mysqli_num_rows($show_profile_post_run) > 0){
-
-//         while ($my_data = mysqli_fetch_assoc($show_profile_post_run)) {
-//             $profile_post_data[] = $my_data;
-//         }
-
-//         return $profile_post_data;
-//     }
-// }
-
-
 // Function to update the user's profile picture
-function update_profile_pic($conn, $table, $profile_pic_name, $condition){
-    
-    $update_profile_pic = "UPDATE $table SET user_profile_pic = '$profile_pic_name' WHERE $condition ";
-    
-    $update_profile_pic_run = mysqli_query($conn, $update_profile_pic);
+function update_profile_pic($conn, $table, $profile_pic_name, $condition)
+{
 
-    // var_dump($conn);
+    $update_profile_pic = "UPDATE $table SET user_profile_pic = '$profile_pic_name' WHERE $condition ";
+
+    $update_profile_pic_run = mysqli_query($conn, $update_profile_pic);
 
     if ($update_profile_pic_run) {
         return "Your Profile Pic Updated Successfully!";
@@ -346,7 +223,8 @@ function update_profile_pic($conn, $table, $profile_pic_name, $condition){
 
 
 // Function for showing all the unknown users on Home page's right bar to send them friend request
-function getAllUserRecord($conn, $getAll_table){
+function getAllUserRecord($conn, $getAll_table)
+{
 
     $getAllUser = "SELECT * FROM $getAll_table ";
 
@@ -354,15 +232,12 @@ function getAllUserRecord($conn, $getAll_table){
 
     $getAllUser_data = array();
 
-    if($getAllUser_run && mysqli_num_rows($getAllUser_run) > 0){
+    if ($getAllUser_run && mysqli_num_rows($getAllUser_run) > 0) {
         while ($my_data = mysqli_fetch_assoc($getAllUser_run)) {
             $getAllUser_data[] = $my_data;
         }
         return $getAllUser_data;
-        // return mysqli_fetch_assoc($getAllUser_run);
-
     }
-    // return null;
 }
 
 
@@ -376,13 +251,11 @@ function currentUser($conn, $getAll_table, $user_id)
 
     if ($getAllUser_run && mysqli_num_rows($getAllUser_run) > 0) {
         return mysqli_fetch_assoc($getAllUser_run);
-
     }
     return null;
 }
 
 // Function for Post Like
-
 function toggleLike($conn, $postID, $userID)
 {
     $checkQuery = "SELECT * FROM likes_table WHERE post_id = $postID AND liked_by_id = $userID";
@@ -409,8 +282,7 @@ function toggleLike($conn, $postID, $userID)
 }
 
 // Function to Count Post Like
-
-function likesCounter($conn, $likes_table,$postID)
+function likesCounter($conn, $likes_table, $postID)
 {
     // Query to check total likes on a post
     $checkQuery = "SELECT COUNT(like_id) as total_likes FROM $likes_table WHERE post_id = $postID and like_status = '1'";
@@ -426,10 +298,7 @@ function likesCounter($conn, $likes_table,$postID)
 }
 
 
-function postComment(){
-
-}
-
+// Function to Count post
 function countPost($conn, $posts_table, $condition1, $condition2)
 {
     $post_count = "SELECT user_id, COUNT(post_id) AS total_posts
@@ -439,13 +308,7 @@ function countPost($conn, $posts_table, $condition1, $condition2)
 
     $post_count_run = mysqli_query($conn, $post_count);
 
-    // $getPost_count = array();
-
     if ($post_count_run && mysqli_num_rows($post_count_run) > 0) {
-        // while ($my_data = mysqli_fetch_assoc($post_count_run)) {
-        //     $getPost_count[] = $my_data;
-        // }
-        // return $getPost_count;
 
         return mysqli_fetch_assoc($post_count_run);
     }
@@ -453,6 +316,7 @@ function countPost($conn, $posts_table, $condition1, $condition2)
 }
 
 
+// Function to count Followers
 function countFollowers($conn, $follows_table, $user_id)
 {
     $query = "SELECT
@@ -472,7 +336,7 @@ function countFollowers($conn, $follows_table, $user_id)
 }
 
 
-
+// Function to count Followings
 function countFollowings($conn, $follows_table, $user_id)
 {
     $query = "SELECT
@@ -492,7 +356,9 @@ function countFollowings($conn, $follows_table, $user_id)
 }
 
 
-function showFollowers($conn, $follows_table, $users_table, $user_id){
+// Function to display Follower's data
+function showFollowers($conn, $follows_table, $users_table, $user_id)
+{
     $show_follower_query = "SELECT *
                             FROM $follows_table INNER JOIN $users_table ON $follows_table.follower_id = $users_table.id
                             WHERE user_id = $user_id AND follow_status = '1'";
@@ -501,7 +367,7 @@ function showFollowers($conn, $follows_table, $users_table, $user_id){
 
     $get_followers = array();
 
-    if($result && mysqli_num_rows($result) > 0) {
+    if ($result && mysqli_num_rows($result) > 0) {
 
         while ($my_data = mysqli_fetch_assoc($result)) {
             $get_followers[] = $my_data;
@@ -510,7 +376,10 @@ function showFollowers($conn, $follows_table, $users_table, $user_id){
     }
 }
 
-function showFollowings($conn, $follows_table, $users_table, $user_id){
+
+// Function to display Following's data
+function showFollowings($conn, $follows_table, $users_table, $user_id)
+{
     $show_follower_query = "SELECT *
                             FROM $follows_table INNER JOIN $users_table ON $follows_table.user_id = $users_table.id
                             WHERE follower_id = $user_id AND follow_status = '1'";
@@ -519,7 +388,7 @@ function showFollowings($conn, $follows_table, $users_table, $user_id){
 
     $get_followings = array();
 
-    if($result && mysqli_num_rows($result) > 0) {
+    if ($result && mysqli_num_rows($result) > 0) {
         while ($my_data = mysqli_fetch_assoc($result)) {
             $get_followings[] = $my_data;
         }

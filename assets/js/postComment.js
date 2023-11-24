@@ -56,7 +56,7 @@ $(document).ready(function () {
                                   commentInfo.user_name
                                 } </a></h6>
                                 <small class="ms-2 text-secondary">${
-                                  commentInfo.comment_date
+                                  commentInfo.comment_date + " - " + commentInfo.comment_time
                                 }</small>
                             </div>
                             <p class="small mb-0" style="margin: 0 10px; text-align: justify; line-height: 1.4;">${

@@ -1,5 +1,3 @@
-
-
 <!-- Left Bar Starts -->
 <div class="col-lg-3">
     <aside class="widget-area">
@@ -8,9 +6,7 @@
         <div class="card card-profile widget-item p-0 rounded-2">
             <div class="profile-banner">
                 <figure class="profile-banner-small">
-                    <a href="profile.html">
-                        <img src="../../assets/img/banner2.png" class="rounded-2" alt="">
-                    </a>
+                    <img src="../../assets/img/banner2.png" class="rounded-2" alt="">
                     <a href="Profile.php" class="profile-thumb-2">
                         <?php if (!empty($user_profile_pic)) { ?>
                             <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">

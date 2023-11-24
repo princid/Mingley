@@ -44,7 +44,6 @@ $user_id = $_SESSION['id'];
                                                 <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="" style="width: 3rem;">
                                                 <i class="fa fa-circle text-success position-absolute rounded-circle border border-white border-3" style="bottom: -5px; left: 30px;"></i>
                                             <?php } ?>
-                                            <!-- <i class="fa fa-circle text-success position-absolute rounded-circle border border-white border-3" style="bottom: 72px; left: 50px;"></i> -->
                                             <h6><?= $full_name; ?></h6>
                                         </a>
                                     </li>

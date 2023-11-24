@@ -94,8 +94,9 @@ require_once("../controller/show_post_on_feed.php");
                                             </div>
 
                                             <div id="preview" class="p-3">
-                                                <h3>Image Preview</h3>
-                                                <div id="image_preview"></div>
+                                                <h3 class="text-center">Image Preview</h3>
+                                                <div id="image_preview">
+                                                </div>
                                             </div>
 
                                             <div class="modal-footer">
@@ -149,7 +150,7 @@ require_once("../controller/show_post_on_feed.php");
                         $post_author             = $feed_post_data['first_name'] . " " . $feed_post_data['last_name'];
                         $post_author_profile_pic = $feed_post_data['user_profile_pic'];
                         $post_caption            = $feed_post_data['post_caption'];
-                        $posted_at               = $feed_post_data['posted_at'];
+                        $posted_at               = $feed_post_data['post_time'] . " - " . $feed_post_data['post_date'];
                         $all_post_images         = explode(',', $feed_post_data['post_images']);
                         $carousel_id             = 'carouselIndicators_' . $post_id;
                         $friend_profileUrl       = "FriendProfile.php?user_id=" . $post_user_id;
@@ -345,7 +346,7 @@ require_once("../controller/show_post_on_feed.php");
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">
                                                 <i class="fa-regular fa-comment"></i>
-                                                Comments (12)
+                                                Comments
                                             </a>
                                         </li>
                                         <!-- Card share action START -->
@@ -373,11 +374,11 @@ require_once("../controller/show_post_on_feed.php");
                                     <div class="d-flex mb-3">
                                         <!-- Avatar -->
                                         <div class="avatar avatar-xs me-2">
-                                                <?php if (!empty($user_profile_pic)) { ?>
-                                                    <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
-                                                <?php } else { ?>
-                                                    <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
-                                                <?php } ?>
+                                            <?php if (!empty($user_profile_pic)) { ?>
+                                                <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
+                                            <?php } else { ?>
+                                                <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
+                                            <?php } ?>
                                         </div>
 
                                         <!-- Comment box  -->
@@ -406,7 +407,7 @@ require_once("../controller/show_post_on_feed.php");
                                                     $comment_owner_name        = $get_comment_data['first_name'] . " " . $get_comment_data['last_name'];
                                                     $comment_owner_username    = $get_comment_data['user_name'];
                                                     $comment_text              = $get_comment_data['comment_text'];
-                                                    $comment_time              = $get_comment_data['comment_date'];
+                                                    $comment_time              = $get_comment_data['comment_date'] . " - " . $get_comment_data['comment_time'];
 
                                                 ?>
 
@@ -431,7 +432,7 @@ require_once("../controller/show_post_on_feed.php");
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                 <?php } ?>
                                             </div>
 
@@ -505,6 +506,8 @@ require_once("../controller/show_post_on_feed.php");
 <script src="../../assets/js/postCRUD.js"></script>
 
 <script src="../../assets/js/postComment.js"></script>
+
+<script src="../../assets/js/postPreview.js"></script>
 
 
 <?php

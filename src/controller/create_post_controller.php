@@ -3,6 +3,7 @@ session_start();
 
 require_once("../model/Query.php");
 require_once("fetch_user_controller.php");
+require_once("../../includes/DateTime.php");
 
 if (isset($_POST['upload_button'])) {
     $user_id = $_SESSION["id"];
@@ -49,7 +50,7 @@ if (isset($_POST['upload_button'])) {
 
     $table = 'posts_table';
 
-    $result_post = createPost($conn, $table, $user_id, $caption, $imageNamesAsString);
+    $result_post = createPost($conn, $table, $user_id, $caption, $imageNamesAsString, $date, $time);
 
     if ($result_post === "Post successfully uploaded...") {
         $_SESSION["message"] = $result_post;
