@@ -356,6 +356,10 @@ h6{
 }
 
 
+.news_items{
+    font-size: small;
+}
+
 /************************************** JQUERY TABLE STYLING START Search page ***********************************************/
 #table_id th {
     background-color: #337ab7;
@@ -537,33 +541,6 @@ h6{
 /* Following table jQuery styling ends */
 
 
-/*------------------------------------------------------------------
-Table of content
--------------------
-1. Start Header Area
-2. slider area start
-3. features area css start
-4. hot deals area css start
-5. product
-6. categories area
-7. testimonial
-8. blog
-9. shop grid view
-10. shop list view
-11. product details
-12. checkout
-13. cart
-14. wishlist
-15. my account
-16. compare
-17. login register
-18. about us
-19. contact us
-20. banner
-21. modal
-22. sidebar
-23. footer
--------------------------------------------------------------------*/
 /*------ Typography Style Start ------*/
 body {
     color: #444444;
@@ -574,7 +551,6 @@ body {
 
     /* font-family: "Inter", sans-serif; */
 }
-
 
 
 a {
@@ -641,16 +617,12 @@ img {
 
 .btn,
 button {
-    /* border: none; */
     cursor: pointer;
-    /* outline: none; */
-    /* padding: 0; */
     -webkit-box-shadow: none;
     box-shadow: none;
     -webkit-transition: 0.4s;
     -o-transition: 0.4s;
     transition: 0.4s;
-    /* background-color: transparent; */
 }
 
 .btn:active,
@@ -971,11 +943,6 @@ textarea:focus {
     font-size: 25px;
 }
 
-@media only screen and (max-width: 767.98px) {
-    .scroll-top {
-        display: none;
-    }
-}
 
 .scroll-top i {
     line-height: 50px;
