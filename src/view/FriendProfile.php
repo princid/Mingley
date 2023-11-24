@@ -418,7 +418,7 @@ $receiver = $_GET['user_id'];
                                                             $comment_owner_name        = $get_comment_data['first_name'] . " " . $get_comment_data['last_name'];
                                                             $comment_owner_username    = $get_comment_data['user_name'];
                                                             $comment_text              = $get_comment_data['comment_text'];
-                                                            $comment_time              = $get_comment_data['comment_date'];
+                                                            $comment_time              = $get_comment_data['comment_date'] . " - " . $get_comment_data['comment_time'];
 
                                                         ?>
 
@@ -692,7 +692,7 @@ $receiver = $_GET['user_id'];
     $(document).ready(function() {
         const follower_table = $('#follower_table_id').DataTable({
             "paging": true,
-            "pageLength": 2,
+            "pageLength": 10,
             "order": [1, 'asc'],
             "pagingType": "simple_numbers",
             "language": {
@@ -712,7 +712,7 @@ $receiver = $_GET['user_id'];
 
         const following_table = $('#following_table_id').DataTable({
             "paging": true,
-            "pageLength": 2,
+            "pageLength": 10,
             "order": [1, 'asc'],
             "pagingType": "simple_numbers",
             "language": {
