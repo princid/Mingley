@@ -1,4 +1,6 @@
 const BASE_URL = "http://localhost/PHP_Assesments/Mingley/";
+// const BASE_URL= "http://localhost/Demo/PHP_Practice/Mingley/";
+
 $(document).ready(function () {
   $(".commentBtn").on("click", function (e) {
     e.preventDefault();
@@ -15,7 +17,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: "POST",
-      url: "../controller/comment_controller.php",
+      url: BASE_URL+"src/controller/comment_controller.php",
       data: {
         postId: postId,
         commentContent: commentContent,
