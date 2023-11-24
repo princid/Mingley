@@ -406,7 +406,7 @@ require_once("../controller/show_post_on_feed.php");
                                                     $comment_owner_name        = $get_comment_data['first_name'] . " " . $get_comment_data['last_name'];
                                                     $comment_owner_username    = $get_comment_data['user_name'];
                                                     $comment_text              = $get_comment_data['comment_text'];
-                                                    $comment_time              = $get_comment_data['comment_date'];
+                                                    $comment_time              = $get_comment_data['comment_date']. " - ". $get_comment_data['comment_time'];
 
                                                 ?>
 
