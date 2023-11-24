@@ -261,6 +261,11 @@ h6{
     display: none;
 }
 
+.preview-post{
+    height: 20rem;
+    width: 100%;
+}
+
 .card-body{
     flex: none !important;
 }
