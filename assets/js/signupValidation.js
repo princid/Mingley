@@ -67,10 +67,10 @@ class registerForm {
     if (username.length === 0) {
       this.setError("username", "*Username cannot be blank!");
       returnVal = false;
-    } else if (!/^[a-z]+$/.test(username)) {
+    } else if (!/^[a-z0-9]+$/.test(username)) {
       this.setError(
         "username",
-        "*Username must contain only lowercase letters."
+        "*Username must contain only lowercase letters and numbers."
       );
       returnVal = false;
     } else if (username.length < 3) {
