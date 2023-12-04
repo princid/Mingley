@@ -140,7 +140,8 @@ let signUp_form = document.getElementById("signUp_form");
 
 signUp_form.addEventListener("submit", (event) => {
   if (!registerObj.validateForm(event)) {
-    event.preventDefault(); // Prevent form submission if validation fails
+    // Prevent form submission if validation fails
+    event.preventDefault();
   }
 });
 

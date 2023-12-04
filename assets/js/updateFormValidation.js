@@ -1,6 +1,10 @@
+
+console.log("Validation starts....")
+
 class updateForm {
   setError(errType, error) {
     const elements = document.getElementsByClassName(errType);
+    console.log(elements);
     if (elements.length > 0) {
       elements[0].innerText = error;
     }
@@ -22,7 +26,7 @@ class updateForm {
     this.clearErrors();
 
     // Validating First Name
-    let firstname = document.getElementById("firstname").value.trim(); // Trim whitespace
+    let firstname = document.getElementById("firstname").value.trim(); // .trim() function basically Trims the whitespace
     if (firstname.length === 0) {
       this.setError("firstname", "*Firstname cannot be blank!");
       returnVal = false;
@@ -41,7 +45,7 @@ class updateForm {
     }
 
     // Validating Last Name
-    let lastname = document.getElementById("lastname").value.trim(); // Trim whitespace
+    let lastname = document.getElementById("lastname").value.trim();
     if (lastname.length === 0) {
       this.setError("lastname", "*Lastname cannot be blank!");
       returnVal = false;
@@ -64,10 +68,10 @@ class updateForm {
     if (username.length === 0) {
       this.setError("username", "*Username cannot be blank!");
       returnVal = false;
-    } else if (!/^[a-z]+$/.test(username)) {
+    } else if (!/^[a-z0-9]+$/.test(username)) {
       this.setError(
         "username",
-        "*Username must contain only lowercase letters."
+        "*Username must contain only lowercase letters and numbers."
       );
       returnVal = false;
     } else if (username.length < 3) {
@@ -93,9 +97,12 @@ class updateForm {
 
     // If there are no errors, allow form submission
     if (returnVal) {
-      document.getElementById("update_form").submit(); // Use getElementById
+      document.getElementById("update_form").submit();
+      // event.currentTarget.submit();
+      // console.log("Validation ends : ", returnVal);
     }
   }
+
 }
 
 let updateObj = new updateForm();
@@ -104,8 +111,7 @@ let update_form = document.getElementById("update_form");
 
 update_form.addEventListener("submit", (event) => {
   if (!updateObj.validateForm(event)) {
-    event.preventDefault(); // Prevent form submission if validation fails
+    // Prevent form submission if validation fails
+    event.preventDefault();
   }
 });
-
-// console.log("Prince");
