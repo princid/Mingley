@@ -3556,7 +3556,7 @@ if (isset($_POST['upload_button'])) {
 
     $table = 'posts_table';
 
-    $result_post = createPost($conn, $table, $user_id, $caption, $imageNamesAsString);
+    // $result_post = createPost($conn, $table, $user_id, $caption, $imageNamesAsString);
 
     // $myname = $result_post['user_name'];
 
@@ -4109,3 +4109,119 @@ if (isset($_POST['upload_button'])) {
     </div>
 </div>
 <!-- Card follow START -->
+
+
+
+
+<!-- Profile Right bar followers card -->
+<div class="card-body position-relative">
+    <div class="row g-3">
+
+        <div class="col-6">
+            <!-- Friends item START -->
+            <div class="card text-center h-100 myFriend">
+                <!-- Card body -->
+                <div class="card-body p-2 pb-0">
+                    <div class="avatar avatar-story avatar-xl">
+                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
+                    </div>
+                    <h6 class="card-title mb-1 mt-3"> <a href="#!"> Prince Rajpoot </a></h6>
+                    <p class="mb-0 small lh-sm">16 mutual connections</p>
+                </div>
+                <!-- Card footer -->
+                <div class="card-footer p-2 border-0 profile_friend">
+
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message">
+                        <i class="bi bi-chat-left-text"></i>
+                    </button>
+
+                    <button class="btn btn-sm btn-danger remove_friend" data-bs-toggle=" tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend">
+                        <i class="fa-solid fa-user-xmark" style="color: #ffffff;"></i>
+                    </button>
+
+                </div>
+            </div>
+            <!-- Friends item END -->
+        </div>
+
+        <div class="col-6">
+            <!-- Friends item START -->
+            <div class="card text-center h-100">
+                <!-- Card body -->
+                <div class="card-body p-2 pb-0">
+                    <div class="avatar avatar-xl">
+                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
+                    </div>
+                    <h6 class="card-title mb-1 mt-3"> <a href="#!"> Prince Rajpoot </a></h6>
+                    <p class="mb-0 small lh-sm">22 mutual connections</p>
+                </div>
+                <!-- Card footer -->
+                <div class="card-footer p-2 border-0 profile_friend">
+
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message">
+                        <i class="bi bi-chat-left-text"></i>
+                    </button>
+
+                    <button class="btn btn-sm btn-danger remove_friend" data-bs-toggle=" tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend">
+                        <i class="fa-solid fa-user-xmark" style="color: #ffffff;"></i>
+                    </button>
+
+                </div>
+            </div>
+            <!-- Friends item END -->
+        </div>
+
+        <div class="col-6">
+            <!-- Friends item START -->
+            <div class="card text-center h-100">
+                <!-- Card body -->
+                <div class="card-body p-2 pb-0">
+                    <div class="avatar avatar-xl">
+                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
+                    </div>
+                    <h6 class="card-title mb-1 mt-3"> <a href="#"> Prince Rajpoot </a></h6>
+                    <p class="mb-0 small lh-sm">1 mutual connection</p>
+                </div>
+                <!-- Card footer -->
+                <div class="card-footer p-2 border-0 profile_friend">
+
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message">
+                        <i class="bi bi-chat-left-text"></i>
+                    </button>
+
+                    <button class="btn btn-sm btn-danger remove_friend" data-bs-toggle=" tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend">
+                        <i class="fa-solid fa-user-xmark" style="color: #ffffff;"></i>
+                    </button>
+
+                </div>
+            </div>
+            <!-- Friends item END -->
+        </div>
+
+        <div class="col-6">
+            <!-- Friends item START -->
+            <div class="card text-center h-100">
+                <!-- Card body -->
+                <div class="card-body p-2 pb-0">
+                    <div class="avatar avatar-xl">
+                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
+                    </div>
+                    <h6 class="card-title mb-1 mt-3"> <a href="#!"> Prince Rajpoot </a></h6>
+                    <p class="mb-0 small lh-sm">15 mutual connections</p>
+                </div>
+                <!-- Card footer -->
+                <div class="card-footer p-2 border-0 profile_friend">
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message">
+                        <i class="bi bi-chat-left-text"></i>
+                    </button>
+
+                    <button class="btn btn-sm btn-danger remove_friend" data-bs-toggle=" tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend">
+                        <i class="fa-solid fa-user-xmark" style="color: #ffffff;"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Friends item END -->
+        </div>
+
+    </div>
+</div>
