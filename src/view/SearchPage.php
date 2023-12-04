@@ -90,7 +90,8 @@ $curr_id = $_SESSION['id'];
                                                 <?php echo strtoupper($user_fullname); ?>
                                             </a>
                                             <?php if ($follower_status == 1) { ?>
-                                                <small class="ms-2 badge rounded-pill text-bg-success">Following</small>
+                                                <!-- <small class="ms-2 badge rounded-pill text-bg-success">Following</small> -->
+                                                <i class="fa-solid fa-user-check ms-2" title="You are following @<?php echo $user_shortname; ?>" style="color: #279f1e;"></i>
                                                 <!-- <small class="text-success">(Following)</small> -->
                                             <?php } ?>
 
