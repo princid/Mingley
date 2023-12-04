@@ -395,3 +395,13 @@ function showFollowings($conn, $follows_table, $users_table, $user_id)
         return $get_followings;
     }
 }
+
+
+// Function to insert the Notifications
+function insertNotification($conn, $receiver_id, $notif_type, $postId, $sender_id, $notif_content) 
+{
+    $notif_query = "INSERT INTO notifications (receiver_id, sender_id, notif_type, notif_content, post_id, notif_time)
+              VALUES ('$receiver_id', '$notif_type', '$postId', '$sender_id', '$notif_content', NOW())";
+
+    mysqli_query($conn, $notif_query);
+}

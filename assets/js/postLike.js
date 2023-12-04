@@ -1,4 +1,9 @@
 $(document).ready(function () {
+
+//   function insertNotification($receiver_id, $notif_type, $postId, $sender_id, $notif_content ) {
+//     console.log("Notification : ", $receiver_id, $notif_type, $postId, $sender_id, $notif_content);
+//   }
+
   let like_btn = document.querySelectorAll(".likesAnchor");
   like_btn.forEach((el) => {
     el.addEventListener("click", (e) => {
@@ -10,7 +15,6 @@ $(document).ready(function () {
       const likeCounter = el.querySelector("#likes_count_" + postID);
 
       $.ajax({
-        //   url: "../controller/like_controller.php",
         url: "../../src/controller/like_controller.php",
         method: "POST",
         data: {
@@ -28,6 +32,16 @@ $(document).ready(function () {
             postLike.classList.add("fa-solid");
             postLike.style.color = "red";
             $(this).data("like-status", 1);
+
+            // Inserting the notification
+            // insertNotification(
+            //   response["receiver_id"],
+            //   "like",
+            //   postID,
+            //   response["sender_id"],
+            //   "Someone has liked your post"
+            // );
+
           } else if (response["like_status"] === "unliked") {
             likeCounter.innerHTML = response["likes_count"];
             targetElement.dataset["likeStatus"] = 0;
@@ -48,5 +62,5 @@ $(document).ready(function () {
       });
     });
   });
-  $(document).on("click", ".likesAnchor", function (event) {});
+  // $(document).on("click", ".likesAnchor", function (event) {});
 });

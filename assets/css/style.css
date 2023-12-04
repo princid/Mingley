@@ -1,19 +1,10 @@
-
-
-
-
 /* Google font "inter" */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Inter&family=Montserrat&family=Nunito+Sans:opsz@6..12&family=Open+Sans&family=Playfair+Display:wght@700&family=Poppins:ital,wght@0,400;1,500&family=Roboto:wght@300;400&display=swap');
-
-
 
 /* Bootstrap Icons */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
 
-
 @import url('https://fonts.googleapis.com/css2?family=Agdasima&family=Poppins&display=swap');
-
-
 
 /************************* For Sign Up & Sign In Form ************************************/
 .signBtn{

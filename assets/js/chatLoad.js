@@ -10,9 +10,6 @@ $(document).ready(function () {
       return false;
     }
 
-    // const datastr =
-    //   "message=" + textmsg + "&receive=" + receive + "&send=" + send;
-
     $.ajax({
       url: "../../response/chatlog.php",
       type: "POST",
@@ -38,8 +35,6 @@ $(document).ready(function () {
   $(function () {
     const receive = $("#receive").val();
     const send = $("#send").val();
-
-    // const dataStr = "receive=" + receive + "&send=" + send;
 
     setInterval(function () {
       $.ajax({

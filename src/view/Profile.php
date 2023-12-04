@@ -131,37 +131,7 @@ $receiver = $_GET['user_id'];
                                 </div>
                             </div>
 
-                            <!-- Update Banner Image -->
-                            <!-- <button class="btn btn-danger-soft me-2 bannerUpdate" type="button" data-bs-toggle="modal" data-bs-target="#modalEditBanner">
-                                <i class="bi bi-pencil-fill pe-1"></i>
-                                Edit Banner
-                            </button> -->
-
-                            <!-- Modal for banner updation -->
-                            <div class="modal fade" id="modalEditBanner" tabindex="-1" aria-labelledby="editBanner" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="editBanner"><strong>Update Banner</strong></h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-
-                                        <form action="<?= BASE_URL ?>src/controller/update_profile_controller.php" method="post" id="update_form" name="update_form">
-                                            <div class="modal-body">
-
-                                                <input type="file" name="" id="">
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-outline-secondary p-2" data-bs-dismiss="modal">Close</button>
-                                                <!-- <button type="button" class="btn btn-outline-success p-2">SAVE CHANGES</button> -->
-                                                <input class="btn w-25 btn-outline-success p-2" type="submit" name="Submit" value="SAVE CHANGES">
-                                            </div>
-                                        </form>
-
-                                    </div>
-                                </div>
-                            </div>
+                            
 
                         </div>
 
@@ -253,7 +223,7 @@ $receiver = $_GET['user_id'];
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn w-25 btn-outline-secondary p-2" data-bs-dismiss="modal">CLOSE</button>
-                                                    <!-- <button type="button" class="btn btn-outline-success p-2">SAVE CHANGES</button> -->
+
                                                     <input class="btn w-25 btn-outline-success p-2" type="submit" name="Submit" value="SAVE CHANGES">
                                                 </div>
                                             </form>
@@ -300,10 +270,9 @@ $receiver = $_GET['user_id'];
 
 
                             <!-- Post input -->
-                            <!-- <form class="w-100"> -->
                             <input class="form-control pe-4 border-0" placeholder="Share your thoughts..." data-bs-toggle="modal" data-bs-target="#modalCreateFeed">
 
-                            <!-- Modal -->
+                            <!-- Modal for creating new post -->
                             <div class="modal fade" id="modalCreateFeed" tabindex="-1" aria-labelledby="sharePost" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
@@ -340,23 +309,22 @@ $receiver = $_GET['user_id'];
                                     </div>
                                 </div>
                             </div>
-                            <!-- </form> -->
-
 
                         </div>
+
                         <!-- Share feed toolbar START -->
                         <ul class="nav nav-pills nav-stack small fw-normal">
                             <li class="nav-item">
-                                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionPhoto"> <i class="bi bi-image-fill text-success pe-2"></i>Photo</a>
+                                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#modalCreateFeed"> <i class="bi bi-image-fill text-success pe-2"></i>Photo</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionVideo"> <i class="bi bi-camera-reels-fill text-info pe-2"></i>Video</a>
+                                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#modalCreateFeed"> <i class="bi bi-camera-reels-fill text-info pe-2"></i>Video</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link bg-light py-1 px-2 mb-0" data-bs-toggle="modal" data-bs-target="#modalCreateEvents"> <i class="bi bi-calendar2-event-fill text-danger pe-2"></i>Event </a>
+                                <a href="#" class="nav-link bg-light py-1 px-2 mb-0" data-bs-toggle="modal" data-bs-target="#modalCreateFeed"> <i class="bi bi-calendar2-event-fill text-danger pe-2"></i>Event </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#modalCreateFeed"> <i class="bi bi-emoji-smile-fill text-warning pe-2"></i>Feeling /Activity</a>
+                                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#modalCreateFeed"> <i class="bi bi-emoji-smile-fill text-warning pe-2"></i>Feeling / Activity</a>
                             </li>
                             <li class="nav-item dropdown ms-lg-auto">
                                 <a class="nav-link bg-light py-1 px-2 mb-0" href="#" id="feedActionShare" data-bs-toggle="dropdown" aria-expanded="false">
@@ -412,7 +380,6 @@ $receiver = $_GET['user_id'];
                                 $friend_profileUrl = "FriendProfile.php?user_id=" . $post_user_id;
 
                                 $like_status = $feed_post_data["like_status"];
-                                // $count_like = $feed_post_data['likes_count'];
 
                                 if ($feed_post_data["is_deleted"] != 1) {
                             ?>
@@ -437,7 +404,6 @@ $receiver = $_GET['user_id'];
                                                             <h6 class="nav-item card-title mb-0"> <a href="#!"> <?= $post_author; ?> </a></h6>
                                                         </div>
                                                         <span class="nav-item small"> <?= $posted_at; ?></span>
-                                                        <!-- <p class="mb-0 small">Web Developer at Mind2Web</p> -->
                                                     </div>
                                                 </div>
 
@@ -654,7 +620,7 @@ $receiver = $_GET['user_id'];
                                                                         </div>
                                                                         <div class="d-block">
                                                                             <div class="d-flex" style="margin: 0 10px">
-                                                                                <h6 class="mb-1"> <a href=""> <?= $comment_owner_username; ?> </a></h6>
+                                                                                <h6 class="mb-1"> <?= $comment_owner_username; ?> </h6>
                                                                                 <small class="ms-2 text-secondary"><?= $comment_time; ?></small>
                                                                             </div>
                                                                             <p class="small mb-0" style="margin: 0 10px; text-align: justify; line-height: 1.4;"><?= $comment_text; ?></p>
@@ -898,12 +864,12 @@ $receiver = $_GET['user_id'];
 </div>
 <!-- Scroll to Top End -->
 
+<script src="../../assets/js/updateFormValidation.js"></script>
+
 <script src="../../assets/js/jquery.js"></script>
 
-<script src="<?= BASE_URL ?>assets/js/updateFormValidation.js"></script>
 <script src="../../assets/js/postLike.js"></script>
 <script src="../../assets/js/postCRUD.js"></script>
-
 
 <script src="../../assets/js/alertMessage.js"></script>
 
