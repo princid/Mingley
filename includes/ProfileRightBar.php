@@ -31,121 +31,77 @@
             <div class="card rounded">
                 <!-- Card header START -->
                 <div class="card-header d-sm-flex justify-content-between align-items-end border-0">
-                    <h5 class="card-title">Followers <span class="badge bg-danger bg-opacity-10 text-danger">230</span></h5>
-                    <a class="btn btn-primary-soft btn-sm" href="#!"> See all friends</a>
+                    <h5 class="card-title">Saved Posts <span class="badge bg-primary bg-opacity-10 text-primary">02</span></h5>
+                    <!-- <a class="btn btn-primary-soft btn-sm" href="#!"> See all friends</a> -->
                 </div>
                 <!-- Card header END -->
                 <!-- Card body START -->
                 <div class="card-body position-relative">
-                    <div class="row g-3">
 
-                        <div class="col-6">
-                            <!-- Friends item START -->
-                            <div class="card text-center h-100 myFriend">
-                                <!-- Card body -->
-                                <div class="card-body p-2 pb-0">
-                                    <div class="avatar avatar-story avatar-xl">
-                                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
-                                    </div>
-                                    <h6 class="card-title mb-1 mt-3"> <a href="#!"> Prince Rajpoot </a></h6>
-                                    <p class="mb-0 small lh-sm">16 mutual connections</p>
-                                </div>
-                                <!-- Card footer -->
-                                <div class="card-footer p-2 border-0 profile_friend">
-
-                                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message">
-                                        <i class="bi bi-chat-left-text"></i>
-                                    </button>
-
-                                    <button class="btn btn-sm btn-danger remove_friend" data-bs-toggle=" tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend">
-                                        <i class="fa-solid fa-user-xmark" style="color: #ffffff;"></i>
-                                    </button>
-
-                                </div>
-                            </div>
-                            <!-- Friends item END -->
+                    <div id="carouselExampleDark" class="carousel carousel-dark slide">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
                         </div>
+                        <div class="carousel-inner">
 
-                        <div class="col-6">
-                            <!-- Friends item START -->
-                            <div class="card text-center h-100">
-                                <!-- Card body -->
-                                <div class="card-body p-2 pb-0">
-                                    <div class="avatar avatar-xl">
-                                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
-                                    </div>
-                                    <h6 class="card-title mb-1 mt-3"> <a href="#!"> Prince Rajpoot </a></h6>
-                                    <p class="mb-0 small lh-sm">22 mutual connections</p>
-                                </div>
-                                <!-- Card footer -->
-                                <div class="card-footer p-2 border-0 profile_friend">
-
-                                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message">
-                                        <i class="bi bi-chat-left-text"></i>
-                                    </button>
-
-                                    <button class="btn btn-sm btn-danger remove_friend" data-bs-toggle=" tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend">
-                                        <i class="fa-solid fa-user-xmark" style="color: #ffffff;"></i>
-                                    </button>
-
-                                </div>
+                            <div class="carousel-item active" data-bs-interval="10000">
+                                <img src="../../assets/img/chatbg.jpg" style="width: 100%; height: 150px; object-fit: cover;" alt="">
                             </div>
-                            <!-- Friends item END -->
-                        </div>
 
-                        <div class="col-6">
-                            <!-- Friends item START -->
-                            <div class="card text-center h-100">
-                                <!-- Card body -->
-                                <div class="card-body p-2 pb-0">
-                                    <div class="avatar avatar-xl">
-                                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
-                                    </div>
-                                    <h6 class="card-title mb-1 mt-3"> <a href="#"> Prince Rajpoot </a></h6>
-                                    <p class="mb-0 small lh-sm">1 mutual connection</p>
-                                </div>
-                                <!-- Card footer -->
-                                <div class="card-footer p-2 border-0 profile_friend">
-
-                                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message">
-                                        <i class="bi bi-chat-left-text"></i>
-                                    </button>
-
-                                    <button class="btn btn-sm btn-danger remove_friend" data-bs-toggle=" tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend">
-                                        <i class="fa-solid fa-user-xmark" style="color: #ffffff;"></i>
-                                    </button>
-
-                                </div>
+                            <div class="carousel-item" data-bs-interval="2000">
+                                <img src="../../assets/img/chatbg2.jpg" style="width: 100%; height: 150px; object-fit: cover;" alt="">
                             </div>
-                            <!-- Friends item END -->
-                        </div>
 
-                        <div class="col-6">
-                            <!-- Friends item START -->
-                            <div class="card text-center h-100">
-                                <!-- Card body -->
-                                <div class="card-body p-2 pb-0">
-                                    <div class="avatar avatar-xl">
-                                        <a href="#!"><img class="avatar-img rounded-circle" src="../../assets/img/profile6.jpg" alt=""></a>
-                                    </div>
-                                    <h6 class="card-title mb-1 mt-3"> <a href="#!"> Prince Rajpoot </a></h6>
-                                    <p class="mb-0 small lh-sm">15 mutual connections</p>
-                                </div>
-                                <!-- Card footer -->
-                                <div class="card-footer p-2 border-0 profile_friend">
-                                    <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send message" data-bs-original-title="Send message">
-                                        <i class="bi bi-chat-left-text"></i>
-                                    </button>
-
-                                    <button class="btn btn-sm btn-danger remove_friend" data-bs-toggle=" tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend">
-                                        <i class="fa-solid fa-user-xmark" style="color: #ffffff;"></i>
-                                    </button>
-                                </div>
+                            <div class="carousel-item">
+                                <img src="../../assets/img/chatbg7.jpg" style="width: 100%; height: 150px; object-fit: cover;" alt="">
                             </div>
-                            <!-- Friends item END -->
-                        </div>
 
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
+
+                    <br>
+                    
+                    <div id="carouselExampleDark2" class="carousel carousel-dark slide">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleDark2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleDark2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleDark2" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+
+                            <div class="carousel-item active" data-bs-interval="10000">
+                                <img src="../../assets/img/chatbg.jpg" style="width: 100%; height: 150px; object-fit: cover;" alt="">
+                            </div>
+
+                            <div class="carousel-item" data-bs-interval="2000">
+                                <img src="../../assets/img/chatbg2.jpg" style="width: 100%; height: 150px; object-fit: cover;" alt="">
+                            </div>
+
+                            <div class="carousel-item">
+                                <img src="../../assets/img/chatbg7.jpg" style="width: 100%; height: 150px; object-fit: cover;" alt="">
+                            </div>
+                            
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark2" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark2" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
                 </div>
                 <!-- Card body END -->
             </div>
