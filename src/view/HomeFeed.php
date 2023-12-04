@@ -112,16 +112,16 @@ require_once("../controller/show_post_on_feed.php");
                         <!-- Share feed toolbar START -->
                         <ul class="nav nav-pills nav-stack small fw-normal">
                             <li class="nav-item">
-                                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionPhoto"> <i class="bi bi-image-fill text-success pe-2"></i>Photo</a>
+                                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#modalCreateFeed"> <i class="bi bi-image-fill text-success pe-2"></i>Photo</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionVideo"> <i class="bi bi-camera-reels-fill text-info pe-2"></i>Video</a>
+                                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#modalCreateFeed"> <i class="bi bi-camera-reels-fill text-info pe-2"></i>Video</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link bg-light py-1 px-2 mb-0" data-bs-toggle="modal" data-bs-target="#modalCreateEvents"> <i class="bi bi-calendar2-event-fill text-danger pe-2"></i>Event </a>
+                                <a href="#" class="nav-link bg-light py-1 px-2 mb-0" data-bs-toggle="modal" data-bs-target="#modalCreateFeed"> <i class="bi bi-calendar2-event-fill text-danger pe-2"></i>Event </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#modalCreateFeed"> <i class="bi bi-emoji-smile-fill text-warning pe-2"></i>Feeling /Activity</a>
+                                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#modalCreateFeed"> <i class="bi bi-emoji-smile-fill text-warning pe-2"></i>Feeling / Activity</a>
                             </li>
                             <li class="nav-item dropdown ms-lg-auto">
                                 <a class="nav-link bg-light py-1 px-2 mb-0" href="#" id="feedActionShare" data-bs-toggle="dropdown" aria-expanded="false">
@@ -352,7 +352,7 @@ require_once("../controller/show_post_on_feed.php");
                                         <!-- Card share action START -->
                                         <li class="nav-item dropdown ms-sm-auto">
                                             <a class="nav-link mb-0" href="#" id="cardShareAction" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa-solid fa-share-nodes"></i> Share (3)
+                                                <i class="fa-solid fa-share-nodes"></i> Share
                                             </a>
                                             <!-- Card share action dropdown menu -->
                                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction">
@@ -424,7 +424,7 @@ require_once("../controller/show_post_on_feed.php");
                                                                 </div>
                                                                 <div class="d-block">
                                                                     <div class="d-flex" style="margin: 0 10px">
-                                                                        <h6 class="mb-1"> <a href=""> <?= $comment_owner_username; ?> </a></h6>
+                                                                        <h6 class="mb-1"> <?= $comment_owner_username; ?> </h6>
                                                                         <small class="ms-2 text-secondary"><?= $comment_time; ?></small>
                                                                     </div>
                                                                     <p class="small mb-0" style="margin: 0 10px; text-align: justify; line-height: 1.4;"><?= $comment_text; ?></p>
