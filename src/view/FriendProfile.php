@@ -21,17 +21,21 @@ $total_followings = $followings_count['followings_count'];
 require_once("../controller/show_post_on_profile.php");
 
 require_once("../controller/getAllUserRecord.php");
-$logged_in_user_pic = $current_user_data[0]["user_profile_pic"];
-
 $current_user_fullname    = $current_user_data["first_name"] . " " . $current_user_data["last_name"];
 $current_username         = $current_user_data["user_name"];
 $current_user_profile_pic = $current_user_data["user_profile_pic"];
 $current_user_email       = $current_user_data["user_email"];
 $current_user_bio         = $current_user_data["user_bio"];
 
-
 $curr_id = $_SESSION['id'];
 $receiver = $_GET['user_id'];
+
+// Query to select logged in user's profile picture.
+$logged_in_user = "SELECT user_profile_pic FROM users_table WHERE id = '$curr_id' ";
+$logged_in_user_run = mysqli_query($conn, $logged_in_user);
+
+$logged_in_data = mysqli_fetch_assoc($logged_in_user_run);
+$logged_in_user_pic = $logged_in_data['user_profile_pic'];
 
 
 ?>
@@ -69,7 +73,6 @@ $receiver = $_GET['user_id'];
 
                             <!-- Profile Avatar -->
                             <div class="position-absolute" style="width: 12rem; height: 12rem; margin: 20px; top:20%; left:40%;">
-                                <!-- <img class="avatar-img rounded-circle border border-white border-3" src="../../assets/img/profile6.png" alt=""> -->
                                 <?php if (!empty($current_user_profile_pic)) { ?>
                                     <img class="avatar-img rounded-circle border border-white border-3" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $current_user_profile_pic; ?>" alt="">
                                 <?php } else { ?>
@@ -234,7 +237,7 @@ $receiver = $_GET['user_id'];
                                 if ($feed_post_data["is_deleted"] != 1) {
                             ?>
 
-                                    <div class="card rounded-2">
+                                    <div class="card rounded-2 w-75 mx-auto">
                                         <!-- Card header START -->
                                         <div class="card-header border-0 pb-0">
                                             <div class="d-flex align-items-center justify-content-between">
@@ -252,7 +255,7 @@ $receiver = $_GET['user_id'];
                                                     <!-- Info -->
                                                     <div>
                                                         <div class="nav nav-divider">
-                                                            <h6 class="nav-item card-title mb-0"> <a href="#!"> <?= $post_author; ?> </a></h6>
+                                                            <h6 class="nav-item card-title mb-0"> <a href=""> <?= $post_author; ?> </a></h6>
                                                         </div>
                                                         <span class="nav-item small"> <?= $posted_at; ?></span>
                                                     </div>
@@ -264,29 +267,17 @@ $receiver = $_GET['user_id'];
                                                     </a>
                                                     <!-- Card feed action dropdown menu -->
 
-                                                    <?php if ($post_user_id == $_SESSION['id']) { ?>
 
-                                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
-                                                            <li><a class="dropdown-item" href="#"> <i class="fa-regular fa-bookmark pe-2"></i>Save post</a></li>
-                                                            <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-pencil pe-2"></i>Edit Post </a></li>
-
-                                                            <li>
-                                                                <hr class="dropdown-divider">
-                                                            </li>
-                                                            <li><a class="dropdown-item text-danger" href="#"> <i class="fa-regular fa-trash-can pe-2"></i>Delete post</a></li>
-                                                        </ul>
-                                                    <?php } else { ?>
-                                                        <!-- Card feed action dropdown menu -->
-                                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
-                                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
-                                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
-                                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
-                                                            <li>
-                                                                <hr class="dropdown-divider">
-                                                            </li>
-                                                            <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
-                                                        </ul>
-                                                    <?php } ?>
+                                                    <!-- Card feed action dropdown menu -->
+                                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
+                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
+                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
+                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
+                                                        <li>
+                                                            <hr class="dropdown-divider">
+                                                        </li>
+                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+                                                    </ul>
 
                                                 </div>
                                                 <!-- Card feed action dropdown END -->
@@ -349,20 +340,19 @@ $receiver = $_GET['user_id'];
                                                     <a class="nav-link active likesAnchor" href="#" data-post-id="<?= $post_id ?>" data-like-status="<?= $like_status ?>">
                                                         <i class="fa-<?= $like_status ? 'solid text-danger' : 'regular' ?> fa-heart postLike" data-post-id="<?= $post_id ?>"></i>
                                                         Likes (<span id="likes_count_<?= $post_id; ?>"><?= $feed_post_data['likes_count'] ?></span>)
-                                                        <!-- <span id="likes_count_<?= $post_id; ?>">(<?= $count_like ?>)</span> Likes -->
                                                     </a>
                                                 </li>
 
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="#!">
                                                         <i class="fa-regular fa-comment"></i>
-                                                        Comments (12)
+                                                        Comments
                                                     </a>
                                                 </li>
                                                 <!-- Card share action START -->
                                                 <li class="nav-item dropdown ms-sm-auto">
                                                     <a class="nav-link mb-0" href="#" id="cardShareAction" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="fa-solid fa-share-nodes"></i> Share (3)
+                                                        <i class="fa-solid fa-share-nodes"></i> Share
                                                     </a>
                                                     <!-- Card share action dropdown menu -->
                                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction">
@@ -386,7 +376,9 @@ $receiver = $_GET['user_id'];
                                                 <div class="avatar avatar-xs me-2">
                                                     <?php if (!empty($logged_in_user_pic)) { ?>
                                                         <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $curr_id . "/" . $logged_in_user_pic; ?>" alt="">
-                                                    <?php } else { ?>
+                                                    <?php } else {
+                                                        echo "ggbdgd" ?>
+
                                                         <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
                                                     <?php } ?>
                                                 </div>
@@ -435,7 +427,7 @@ $receiver = $_GET['user_id'];
                                                                         </div>
                                                                         <div class="d-block">
                                                                             <div class="d-flex" style="margin: 0 10px">
-                                                                                <h6 class="mb-1"> <a href=""> <?= $comment_owner_username; ?> </a></h6>
+                                                                                <h6 class="mb-1"> <?= $comment_owner_username; ?> </h6>
                                                                                 <small class="ms-2 text-secondary"><?= $comment_time; ?></small>
                                                                             </div>
                                                                             <p class="small mb-0" style="margin: 0 10px; text-align: justify; line-height: 1.4;"><?= $comment_text; ?></p>
@@ -470,7 +462,6 @@ $receiver = $_GET['user_id'];
                                         <!-- Card footer END -->
                                     </div>
                                     <!-- Card feed item END -->
-
 
                                 <?php } ?>
 
@@ -554,10 +545,7 @@ $receiver = $_GET['user_id'];
 
                                             </tr>
 
-
                                         <?php } ?>
-
-
 
                                     </tbody>
                                 </table>
@@ -642,10 +630,7 @@ $receiver = $_GET['user_id'];
 
                                             </tr>
 
-
                                         <?php } ?>
-
-
 
                                     </tbody>
                                 </table>
