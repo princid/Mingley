@@ -388,7 +388,6 @@ require_once("../controller/show_post_on_feed.php");
                                                 <i class="fa-solid fa-paper-plane"></i>
                                             </button>
                                         </form>
-
                                     </div>
 
                                     <!-- Comment wrap START -->
