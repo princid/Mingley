@@ -57,79 +57,21 @@ if (empty($_SESSION['id'])) {
                                         <div class="card notifDropdownDiv">
                                             <div class="card-header d-flex justify-content-between align-items-center">
                                                 <h6 class="m-0">Notifications <span class="badge bg-danger bg-opacity-10 text-danger ms-2">4 new</span></h6>
-                                                <a class="small" href="">Clear all</a>
                                             </div>
                                             <div class="card-body p-0">
                                                 <ul class="list-group list-group-flush list-unstyled notifDropdownUL">
-                                                    <!-- Notif item -->
-                                                    <li>
-                                                        <div class="list-group-item list-group-item-action rounded badge-unread d-flex border-0 mb-1 p-3">
-                                                            <div class="avatar text-center d-none d-sm-inline-block">
-                                                                <div class="avatar-img rounded-circle bg-primary"><span class="text-white position-absolute top-50 start-50 translate-middle fw-bold">MS</span></div>
-                                                            </div>
-                                                            <div class="ms-sm-3">
-                                                                <div class=" d-flex">
-                                                                    <p class="small mb-2"><b>MS Dhoni</b> sent you a friend request.</p>
-                                                                    <p class="small ms-3 text-nowrap text-end">Just now</p>
-                                                                </div>
-                                                                <div class="d-flex">
-                                                                    <button class="btn btn-sm py-1 btn-primary me-2">Accept </button>
-                                                                    <button class="btn btn-sm py-1 btn-danger-soft">Delete </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <!-- Notif item -->
-                                                    <li>
-                                                        <div class="list-group-item list-group-item-action rounded badge-unread d-flex border-0 mb-1 p-3 position-relative">
-                                                            <div class="avatar text-center d-none d-sm-inline-block">
-                                                                <div class="avatar-img rounded-circle bg-danger"><span class="text-white position-absolute top-50 start-50 translate-middle fw-bold">VK</span></div>
-                                                            </div>
-                                                            <div class="ms-sm-3 d-flex">
-                                                                <div>
-                                                                    <p class="small mb-2">Wish <b>Virat Kohli</b> a happy birthday (Nov 12)</p>
-                                                                    <button class="btn btn-sm btn-outline-success py-2 px-2 me-2">Say happy birthday 🎂</button>
-                                                                </div>
-                                                                <p class="small ms-3">2min</p>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <!-- Notif item -->
-                                                    <li>
-                                                        <a href="" class="list-group-item list-group-item-action rounded d-flex border-0 mb-1 p-3">
-                                                            <div class="avatar text-center d-none d-sm-inline-block">
-                                                                <div class="avatar-img rounded-circle bg-success"><span class="text-white position-absolute top-50 start-50 translate-middle fw-bold">WB</span></div>
-                                                            </div>
-                                                            <div class="ms-sm-3" style="margin: auto">
-                                                                <div class="d-flex">
-                                                                    <p class="small mb-2">Mingley has 15 like and 1 new activity</p>
-                                                                    <p class="small ms-3">1hr</p>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                    <!-- Notif item -->
-                                                    <li>
-                                                        <a href="" class="list-group-item list-group-item-action rounded d-flex border-0 p-3 mb-1">
-                                                            <div class="avatar text-center d-none d-sm-inline-block">
-                                                                <img class="avatar-img rounded-circle" src="../../assets/img/profile6.png" alt="">
-                                                            </div>
-                                                            <div class="ms-sm-3 d-flex">
-                                                                <p class="small mb-2"><b>Bootstrap in the news:</b> The search giant’s parent company, Alphabet, just joined an exclusive club of tech stocks.</p>
-                                                                <p class="small ms-3">4hr</p>
-                                                            </div>
-                                                        </a>
-                                                    </li>
+                                                    
                                                 </ul>
                                             </div>
                                             <div class="card-footer text-center notifDropdownFooter">
-                                                <a href="" class="btn btn-sm btn-primary-soft">See all incoming activity</a>
+                                                <a href="" class="btn btn-sm btn-primary-soft">Clear All</a>
                                             </div>
                                         </div>
 
                                     </div>
 
                                 </li>
+
                             </ul>
                         </nav>
                     </div>
