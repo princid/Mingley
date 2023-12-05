@@ -599,7 +599,7 @@ $logged_in_user_pic = $logged_in_data['user_profile_pic'];
                                                         <img title="<?php echo $user_shortname; ?>" src="<?php echo BASE_URL ?>assets/profile_pic/profileDummy.png" class="avatar avatar-sm rounded-circle me-2">
                                                     <?php } ?>
 
-                                                    <?php if ($user_id == $receiver) { ?>
+                                                    <?php if ($user_id != $curr_id) { ?>
                                                         <a class="text-heading font-semibold text-truncate" href="<?= $following_profileUrl; ?>">
                                                             <?php echo strtoupper($user_fullname); ?>
                                                         </a>
