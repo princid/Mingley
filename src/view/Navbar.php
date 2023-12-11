@@ -59,14 +59,50 @@ if (empty($_SESSION['id'])) {
                                                 <h6 class="m-0">Notifications <span class="badge bg-danger bg-opacity-10 text-danger ms-2">4 new</span></h6>
                                             </div>
                                             <div class="card-body p-0">
-                                                <ul class="list-group list-group-flush list-unstyled notifDropdownUL">
-                                                    
-                                                </ul>
+                                                <?php
+
+                                                $get_notif  = "SELECT * FROM notif_table JOIN follows_table WHERE receiver_id = $id AND receiver_id = follows_table.user_id AND sender_id = follows_table.follower_id AND follows_table.follow_status = 1 ORDER BY notif_id DESC";
+
+                                                $get_notif_result = mysqli_query($conn, $get_notif);
+
+                                                if ($get_notif_result && mysqli_num_rows($get_notif_result) > 0) {
+                                                    foreach ($get_notif_result as $notif_data) {
+
+                                                        $sender_name   = $notif_data['sender_name'];
+                                                        $notif_content = $notif_data["notif_content"];
+                                                        $notif_timing  = $notif_data["notif_date"] . " - " . $notif_data["notif_time"];
+
+                                                ?>
+                                                        <ul class="list-group list-group-flush list-unstyled notifDropdownUL">
+                                                            <li class="list-group-item">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="avatar me-3">
+                                                                        <div class="avatar-img rounded-circle bg-primary">
+                                                                            <span class="text-white position-absolute top-50 start-50 translate-middle fw-bold senderInitial"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="flex-grow-1">
+                                                                        <p class="mb-0"><b><?= $sender_name; ?> </b><?= $notif_content; ?></p>
+                                                                        <small class="text-muted"><?= $notif_timing; ?></small>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    <?php
+                                                    }
+                                                } else { ?>
+                                                    <ul class="list-group list-group-flush list-unstyled notifDropdownUL">
+                                                        <li class="list-group-item">No new notifications</li>
+                                                    </ul>
+                                                <?php
+                                                }
+                                                ?>
                                             </div>
                                             <div class="card-footer text-center notifDropdownFooter">
-                                                <a href="" class="btn btn-sm btn-primary-soft">Clear All</a>
+                                                <a href="" class="btn btn-sm btn-primary-soft" id="clearNotifications">Clear All</a>
                                             </div>
                                         </div>
+
 
                                     </div>
 
@@ -112,7 +148,7 @@ if (empty($_SESSION['id'])) {
                                         </div>
 
                                         <a class="dropdown-item btn btn-primary-soft btn-sm my-2 text-center" href="Profile.php">
-                                            View profile
+                                            My Profile
                                         </a>
                                     </li>
 
@@ -137,3 +173,28 @@ if (empty($_SESSION['id'])) {
     </div>
 </header>
 <!-- header area end -->
+
+<script>
+    const senderInitials = document.querySelectorAll('.senderInitial');
+    const notificationContainer = document.querySelector('.notifDropdownUL');
+
+    <?php
+    if ($get_notif_result) {
+        $index = 0;
+        foreach ($get_notif_result as $notif_data) {
+            $notif_content_first_char = !empty($notif_data["sender_name"]) ? json_encode(substr($notif_data["sender_name"], 0, 1)) : "''";
+            echo "senderInitials[$index].innerHTML = $notif_content_first_char;";
+            $index++;
+        }
+    }
+    ?>
+
+    // Add event listener for Clear All button
+    const clearNotificationsButton = document.getElementById('clearNotifications');
+    clearNotificationsButton.addEventListener('click', function(event) {
+        event.preventDefault();
+
+        // Clear existing notifications
+        notificationContainer.innerHTML = '<li class="list-group-item">No new notifications</li>';
+    });
+</script>
