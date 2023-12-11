@@ -131,7 +131,7 @@ $receiver = $_GET['user_id'];
                                 </div>
                             </div>
 
-                            
+
 
                         </div>
 
@@ -858,11 +858,14 @@ $receiver = $_GET['user_id'];
 <div class="scroll-top visible">
     <i class="fa-solid fa-hand-point-up"></i>
 </div>
-
-<div class="chat_icon visible">
-    <i class="fa-regular fa-message" style="color: #ffffff;"></i>
-</div>
 <!-- Scroll to Top End -->
+
+<a href="Chat.php">
+    <div class="chat_icon visible">
+        <i class="fa-regular fa-message" style="color: #ffffff;"></i>
+    </div>
+</a>
+
 
 <script src="../../assets/js/updateFormValidation.js"></script>
 
