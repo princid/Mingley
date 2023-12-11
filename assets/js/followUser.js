@@ -4,7 +4,7 @@ $(document).ready(function () {
   $(document).on("click", ".follow_btn", function () {
     const button = $(this);
     const userId = button.data("user-id");
-    console.log(userId);
+    // console.log(userId);
 
     // AJAX request
     $.ajax({
@@ -16,19 +16,13 @@ $(document).ready(function () {
       dataType: "json",
       success: function (response) {
         if (response.status === "success") {
-          console.log($("#total-follower-count"));
+          // console.log($("#total-follower-count"));
 
           if (response.follow_status == 1) {
-            // User is now following, add a notification
-            addNotification(
-              userId,
-              response.follower_name,
-              "started following you",
-              response.currentUserId
-            );
-            console.log(userId, "again");
-            console.log(response.currentUserId);
+            console.log(userId, "userId");
+            console.log(response.currentUserId, "currentUserId");
 
+            // Add this console message in the notification for the receiver user.
             console.log("@" + response.follower_name, "started following you");
 
             console.log(response);
@@ -57,37 +51,6 @@ $(document).ready(function () {
       },
     });
 
-    // Function to add a notification dynamically
-    function addNotification(userId, senderName, action, currentUserId) {
-      senderName = senderName || "Unknown User";
-
-      const notificationContainer =
-        userId === currentUserId
-          ? ".notifDropdownUL"
-          : ".followedUserNotificationUL";
-
-      const notificationItem = `
-        <li>
-          <div class="list-group-item list-group-item-action rounded badge-unread d-flex border-0 mb-1 p-3">
-            <div class="avatar text-center d-none d-sm-inline-block">
-              <div class="avatar-img rounded-circle bg-primary"><span class="text-white position-absolute top-50 start-50 translate-middle fw-bold">${senderName.charAt(
-                0
-              )}</span></div>
-            </div>
-            <div class="ms-sm-3">
-              <div class="d-flex">
-                <p class="small mb-2"><b>${senderName}</b> ${action}.</p>
-                <p class="small ms-3 text-nowrap text-end">Just now</p>
-              </div>
-              <div class="d-flex">
-                <!-- Add any additional UI elements or actions here -->
-              </div>
-            </div>
-          </div>
-        </li>`;
-
-      $(notificationContainer).prepend(notificationItem);
-    }
   });
 });
 
