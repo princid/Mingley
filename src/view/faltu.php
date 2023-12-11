@@ -4225,3 +4225,91 @@ if (isset($_POST['upload_button'])) {
 
     </div>
 </div>
+
+
+<!-- followUser.js -->
+<script>
+    $(document).ready(function() {
+        $(document).on("click", ".follow_btn", function() {
+            const button = $(this);
+            const userId = button.data("user-id");
+            // console.log(userId);
+
+            // AJAX request
+            $.ajax({
+                type: "POST",
+                url: "../controller/follow_action.php",
+                data: {
+                    userId: userId,
+                },
+                dataType: "json",
+                success: function(response) {
+                    if (response.status === "success") {
+                        // console.log($("#total-follower-count"));
+
+                        if (response.follow_status == 1) {
+                            // User is now following, so adding a notification here.
+                            addNotification(
+                                response.follower_name,
+                                "started following you",
+                                response.time
+                            );
+                            console.log(userId, "userId");
+                            console.log(response.currentUserId, "currentUserId");
+
+                            // Add this console message in the notification for the receiver user.
+                            console.log("@" + response.follower_name, "started following you");
+
+                            console.log(response);
+                            $("#follow-btn-container").html(
+                                `<button class=" btn btn-outline-secondary me-3" data-bs-toggle="modal" data-bs-target="#unfollow${userId}" style="padding: 10px 50px;"><i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong></button>`
+                            );
+
+                            $("#total-follower-count").text(response.followers_count);
+                        } else {
+                            $(".btn-close").click();
+                            $("#follow-btn-container").html(
+                                `<button data-user-id=${userId} class="follow_btn btn btn-outline-primary me-3" style="padding: 10px 50px;"><i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong></button>`
+                            );
+
+                            $("#total-follower-count").text(response.followers_count);
+                        }
+                    } else {
+                        console.log("Error: " + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log("AJAX request failed");
+                    console.log("XHR:", xhr);
+                    console.log("Status:", status);
+                    console.log("Error:", error);
+                },
+            });
+
+            // Function to add a notification dynamically
+
+            function addNotification(senderName, action, time) {
+                senderName = senderName || "Unknown User";
+
+                const senderInitial = senderName.charAt(0).toUpperCase();
+
+                const notificationItem = `
+            <li class="list-group-item">
+            <div class="d-flex align-items-center">
+            <div class="avatar me-3">
+            <div class="avatar-img rounded-circle bg-primary">
+            <span class="text-white position-absolute top-50 start-50 translate-middle fw-bold">${senderInitial}</span>
+            </div>
+            </div>
+            <div class="flex-grow-1">
+            <p class="mb-0"><b>${senderName}</b> ${action}.</p>
+            <small class="text-muted">${time}</small>
+            </div>
+            </div>
+            </li>`;
+
+                $(".notifDropdownUL").prepend(notificationItem);
+            }
+        });
+    });
+</script>
