@@ -1,10 +1,7 @@
-
-console.log("Validation starts....")
-
 class updateForm {
   setError(errType, error) {
     const elements = document.getElementsByClassName(errType);
-    console.log(elements);
+    // console.log(elements);
     if (elements.length > 0) {
       elements[0].innerText = error;
     }
