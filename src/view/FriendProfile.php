@@ -655,11 +655,13 @@ $logged_in_user_pic = $logged_in_data['user_profile_pic'];
 <div class="scroll-top visible">
     <i class="fa-solid fa-hand-point-up"></i>
 </div>
-
-<div class="chat_icon visible">
-    <i class="fa-regular fa-message" style="color: #ffffff;"></i>
-</div>
 <!-- Scroll to Top End -->
+
+<a href="Chat.php">
+    <div class="chat_icon visible">
+        <i class="fa-regular fa-message" style="color: #ffffff;"></i>
+    </div>
+</a>
 
 <!-- Including jQuery -->
 <script src="../../assets/js/jquery.js"></script>
