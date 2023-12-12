@@ -59,39 +59,46 @@
 
                 <ul class="nav nav-link-secondary flex-column fw-bold gap-2">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fa-solid fa-house pe-2"></i>
-                            <span> Feed </span>
-                        </a>
-                    </li>
-                    <!-- <li class="nav-item">
-                                        <a class="nav-link" href="my-profile-connections.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/person-outline-filled.svg" alt=""><span>Connections </span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="blog.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/earth-outline-filled.svg" alt=""><span>Latest News </span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="events.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/calendar-outline-filled.svg" alt=""><span>Events </span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="groups.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/chat-outline-filled.svg" alt=""><span>Groups </span></a>
-                                    </li> -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fa-solid fa-bell pe-2"></i>
-                            <span>Notifications </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="">
-                            <i class="fa-solid fa-gear pe-2"></i>
-                            <span>Settings </span>
+                            <i class="fa-solid fa-rotate-right pe-2"></i>
+                            <span> Refresh Feed </span>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="SearchPage.php">
+                            <i class="fa-solid fa-magnifying-glass pe-2"></i>
+                            <span> Search Minglers </span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="Profile.php">
+                            <i class="fa-regular fa-user pe-2"></i>
+                            <span> View your Profile </span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="Chat.php">
+                            <i class="fa-regular fa-message pe-2"></i>
+                            <span> Chat with Minglers </span>
+                        </a>
+                    </li>
+
+                    <?php if ($_SESSION['id'] && $current_user_data['user_role_status'] == 1) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../admin/Dashboard.php">
+                            <i class="fa-solid fa-chart-pie pe-2"></i>
+                            <span> Admin Dashboard </span>
+                        </a>
+                    </li>
+                    <?php } ?>
                 </ul>
+
             </div>
-            <div class="card-footer text-center py-2">
-                <a class="btn btn-link btn-sm" href="Profile.php">View Profile </a>
+            <div class="card-footer py-2 mt-2">
+                <small>Hey <strong><?= $first_name; ?></strong>! Have fun on <strong class="brand_name">Mingley</strong>...</small>
             </div>
 
         </div>
