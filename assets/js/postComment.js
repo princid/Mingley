@@ -52,9 +52,9 @@ $(document).ready(function () {
                         </div>
                         <div class="d-block">
                             <div class="d-flex" style="margin: 0 10px">
-                                <h6 class="mb-1"> <a href=""> ${
+                                <h6 class="mb-1"> ${
                                   commentInfo.user_name
-                                } </a></h6>
+                                } </h6>
                                 <small class="ms-2 text-secondary">${
                                   commentInfo.comment_date + " - " + commentInfo.comment_time
                                 }</small>
