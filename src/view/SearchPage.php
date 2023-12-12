@@ -51,7 +51,7 @@ $curr_id = $_SESSION['id'];
 
                             // $search_user_query  = "SELECT * FROM users_table RIGHT JOIN follows_table ON users_table.id = follows_table.user_id WHERE users_table.id != '$curr_id' ";
 
-                            $search_user_query  = "SELECT * FROM users_table WHERE id != '$curr_id'";
+                            $search_user_query  = "SELECT * FROM users_table WHERE id != '$curr_id' AND is_deleted = 0";
                             $search_user_result = mysqli_query($conn, $search_user_query);
 
                             $user_follower_id_query  = "SELECT user_id FROM follows_table WHERE follower_id = '$curr_id' and follow_status = '1'";

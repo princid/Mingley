@@ -21,6 +21,14 @@ $total_followings = $followings_count['followings_count'];
 require_once("../controller/show_post_on_profile.php");
 
 require_once("../controller/getAllUserRecord.php");
+
+// Check if the user exists
+if ($current_user_data == null) {
+    // Redirect to home page, if the user doesn't exist or have already deleted their account.
+    echo '<script>window.location.href = "HomeFeed.php";</script>';
+    exit();
+}
+
 $current_user_fullname    = $current_user_data["first_name"] . " " . $current_user_data["last_name"];
 $current_username         = $current_user_data["user_name"];
 $current_user_profile_pic = $current_user_data["user_profile_pic"];
@@ -36,6 +44,13 @@ $logged_in_user_run = mysqli_query($conn, $logged_in_user);
 
 $logged_in_data = mysqli_fetch_assoc($logged_in_user_run);
 $logged_in_user_pic = $logged_in_data['user_profile_pic'];
+
+
+// Check if user_id is present in the URL
+if (!isset($_GET['user_id']) || empty($_GET['user_id'])) {
+    echo '<script>window.location.href = "HomeFeed.php";</script>';
+    exit();
+}
 
 
 ?>
@@ -85,8 +100,13 @@ $logged_in_user_pic = $logged_in_data['user_profile_pic'];
                         <div class="mt-sm-4 d-flex" style="align-items: flex-start; justify-content:space-between; ">
                             <!-- Info -->
                             <div class="userInfo">
-                                <h1 class="mb-0 h5"><?= $current_user_fullname; ?> <i class="bi bi-patch-check-fill text-primary small"></i></h1>
-                                <p><?= "@" . $current_username ?></p>
+                                <?php if (!empty($current_user_fullname) && !empty($current_username)) { ?>
+                                    <h1 class="mb-0 h5"><?= $current_user_fullname; ?> <i class="bi bi-patch-check-fill text-primary small"></i></h1>
+                                    <p><?= "@" . $current_username ?></p>
+                                <?php } else { ?>
+                                    <h1 class="mb-0 h5">Deleted Mingley User <i class="bi bi-patch-check-fill text-primary small"></i></h1>
+                                    <p>@deleted</p>
+                                <?php } ?>
                             </div>
 
                             <div class="userDetails">
@@ -131,45 +151,45 @@ $logged_in_user_pic = $logged_in_data['user_profile_pic'];
                         <div class="card-footer mt-3 pt-2 pb-0 d-flex justify-content-center">
                             <?php
                             // Check if the user is already being followed
-                            $query = "SELECT * FROM follows_table WHERE user_id = $receiver AND follower_id = $curr_id";
+                            $query = "SELECT * FROM follows_table JOIN users_table ON follows_table.user_id = users_table.id WHERE user_id = $receiver AND follower_id = $curr_id AND users_table.is_deleted = 0";
                             $result = mysqli_query($conn, $query);
 
                             $follow_data = mysqli_fetch_assoc($result);
+                            // if (!empty($follow_data)) {
                             ?>
-                            <div class="d-inline" id="follow-btn-container">
-                                <?php
-                                if (mysqli_num_rows($result) > 0 && $follow_data['follow_status'] == 1) {
-                                ?>
-                                    <button class=" btn btn-outline-secondary me-3" data-bs-toggle="modal" data-bs-target="#unfollow<?= $receiver ?>" style="padding: 10px 50px;"><i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong></button>
-                                    <!-- unfollow Button modal -->
-                                    <!-- <button type="button" class="btn btn-primary" >
-                                        Launch static backdrop modal
-                                    </button> -->
+                                <div class="d-inline" id="follow-btn-container">
+                                    <?php
+                                    if (mysqli_num_rows($result) > 0 && $follow_data['follow_status'] == 1) {
+                                    ?>
+                                        <button class=" btn btn-outline-secondary me-3" data-bs-toggle="modal" data-bs-target="#unfollow<?= $receiver ?>" style="padding: 10px 50px;"><i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong></button>
 
-                                <?php } else { ?>
-                                    <button data-user-id="<?= $receiver; ?>" class="follow_btn btn btn-outline-primary me-3" style="padding: 10px 50px;"><i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong></button>
-                                <?php } ?>
-                            </div>
-                            <!-- Modal -->
-                            <div class="modal fade" id="unfollow<?= $receiver ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fw-bold fs-5" id="staticBackdropLabel">Unfollow Confirmation</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p class="fs-6">Are you sure you want to unfollow this account?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button data-user-id="<?= $receiver; ?>" type="button" class="follow_btn btn btn-danger fs-6">Unfollow</button>
+                                    <?php } else { ?>
+                                        <button data-user-id="<?= $receiver; ?>" class="follow_btn btn btn-outline-primary me-3" style="padding: 10px 50px;"><i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong></button>
+                                    <?php } ?>
+                                </div>
+
+                                <!-- Unfollow Modal -->
+                                <div class="modal fade" id="unfollow<?= $receiver ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fw-bold fs-5" id="staticBackdropLabel">Unfollow Confirmation</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="fs-6">Are you sure you want to unfollow this account?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button data-user-id="<?= $receiver; ?>" type="button" class="follow_btn btn btn-danger fs-6">Unfollow</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <a href="Chat.php?sender=<?php echo $curr_id; ?>&receiver=<?php echo $receiver; ?>"><button class="btn btn-outline-success" style="padding: 10px 50px;"><i class=" fa-regular fa-message pe-3"></i> <strong>Message</strong></button></a>
+                                <a href="Chat.php?sender=<?php echo $curr_id; ?>&receiver=<?php echo $receiver; ?>"><button class="btn btn-outline-success" style="padding: 10px 50px;"><i class=" fa-regular fa-message pe-3"></i> <strong>Message</strong></button></a>
                         </div>
+
+
 
                     </div>
                     <!-- My profile END -->
@@ -197,6 +217,8 @@ $logged_in_user_pic = $logged_in_data['user_profile_pic'];
                     </div>
 
 
+
+
                     <!-- Tabs navs start -->
                     <ul class="nav nav-tabs nav-justified mb-3" id="ex1" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -219,22 +241,22 @@ $logged_in_user_pic = $logged_in_data['user_profile_pic'];
 
                             <?php foreach ($profile_feed_result as $feed_post_data) {
 
-                                $post_id = $feed_post_data["post_id"];
-                                $post_user_id = $feed_post_data["user_id"];
-                                $post_author = $feed_post_data['first_name'] . " " . $feed_post_data['last_name'];
-                                $post_author_username = $feed_post_data['user_name'];
-                                $post_author_bio = $feed_post_data['user_bio'];
-                                $post_author_email = $feed_post_data['user_email'];
-                                $post_author_profile_pic = $feed_post_data['user_profile_pic'];
-                                $post_caption = $feed_post_data['post_caption'];
-                                $posted_at = $feed_post_data['posted_at'];
-                                $all_post_images = explode(',', $feed_post_data['post_images']);
+                                    $post_id = $feed_post_data["post_id"];
+                                    $post_user_id = $feed_post_data["user_id"];
+                                    $post_author = $feed_post_data['first_name'] . " " . $feed_post_data['last_name'];
+                                    $post_author_username = $feed_post_data['user_name'];
+                                    $post_author_bio = $feed_post_data['user_bio'];
+                                    $post_author_email = $feed_post_data['user_email'];
+                                    $post_author_profile_pic = $feed_post_data['user_profile_pic'];
+                                    $post_caption = $feed_post_data['post_caption'];
+                                    $posted_at = $feed_post_data['posted_at'];
+                                    $all_post_images = explode(',', $feed_post_data['post_images']);
 
-                                $like_status = $feed_post_data["like_status"];
+                                    $like_status = $feed_post_data["like_status"];
 
-                                $carousel_id = 'carouselIndicators_' . $post_id;
+                                    $carousel_id = 'carouselIndicators_' . $post_id;
 
-                                if ($feed_post_data["is_deleted"] != 1) {
+                                    if ($feed_post_data["is_deleted"] != 1) {
                             ?>
 
                                     <div class="card rounded-2 w-75 mx-auto">
@@ -244,7 +266,7 @@ $logged_in_user_pic = $logged_in_data['user_profile_pic'];
                                                 <div class="d-flex align-items-center">
                                                     <!-- Avatar -->
                                                     <div class="avatar me-2">
-                                                        <a href="#">
+                                                        <a href="javascript:void(0)">
                                                             <?php if (!empty($post_author_profile_pic)) { ?>
                                                                 <img class="avatar-img rounded-circle border border-primary border-2 p-1" src="<?= BASE_URL ?>assets/profile_pic/<?= $post_user_id . "/" . $post_author_profile_pic; ?>" alt="">
                                                             <?php } else { ?>
@@ -255,7 +277,7 @@ $logged_in_user_pic = $logged_in_data['user_profile_pic'];
                                                     <!-- Info -->
                                                     <div>
                                                         <div class="nav nav-divider">
-                                                            <h6 class="nav-item card-title mb-0"> <a href=""> <?= $post_author; ?> </a></h6>
+                                                            <h6 class="nav-item card-title mb-0"> <a href="javascript:void(0)"> <?= $post_author; ?> </a></h6>
                                                         </div>
                                                         <span class="nav-item small"> <?= $posted_at; ?></span>
                                                     </div>
@@ -270,13 +292,13 @@ $logged_in_user_pic = $logged_in_data['user_profile_pic'];
 
                                                     <!-- Card feed action dropdown menu -->
                                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
-                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
-                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
-                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
+                                                        <li><a class="dropdown-item" href="javascript:void(0)"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
+                                                        <li><a class="dropdown-item" href="javascript:void(0)"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
+                                                        <li><a class="dropdown-item" href="javascript:void(0)"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
                                                         <li>
                                                             <hr class="dropdown-divider">
                                                         </li>
-                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+                                                        <li><a class="dropdown-item" href="javascript:void(0)"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
                                                     </ul>
 
                                                 </div>
@@ -399,7 +421,7 @@ $logged_in_user_pic = $logged_in_data['user_profile_pic'];
                                                 <li class="comment-item">
                                                     <div class="d-flex position-relative px-5 mt-4 flex-column individual_comment<?= $post_id; ?>">
                                                         <?php
-                                                        $get_comment_query = "SELECT * FROM comment_table LEFT JOIN users_table ON comment_table.comment_owner = users_table.id WHERE comment_table.post_id = '$post_id' ";
+                                                        $get_comment_query = "SELECT * FROM comment_table LEFT JOIN users_table ON comment_table.comment_owner = users_table.id WHERE comment_table.post_id = '$post_id' AND users_table.is_deleted = 0 ";
 
                                                         $get_comment_query_run = mysqli_query($conn, $get_comment_query);
 
@@ -486,7 +508,7 @@ $logged_in_user_pic = $logged_in_data['user_profile_pic'];
 
                                         $follower_query  = "SELECT *
                                                                 FROM follows_table INNER JOIN users_table ON follows_table.follower_id = users_table.id
-                                                                WHERE user_id = $receiver AND follow_status = '1'";
+                                                                WHERE user_id = $receiver AND follow_status = '1' AND users_table.is_deleted = 0 ";
 
                                         $follower_query_result = mysqli_query($conn, $follower_query);
 
@@ -571,7 +593,7 @@ $logged_in_user_pic = $logged_in_data['user_profile_pic'];
 
                                         $following_query  = "SELECT *
                                                                 FROM follows_table INNER JOIN users_table ON follows_table.user_id = users_table.id
-                                                                WHERE follower_id = $receiver AND follow_status = '1'";
+                                                                WHERE follower_id = $receiver AND follow_status = '1' AND users_table.is_deleted = 0";
 
                                         $following_query_result = mysqli_query($conn, $following_query);
 

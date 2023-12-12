@@ -23,6 +23,8 @@ require_once("../controller/create_post_controller.php");
 
 require_once("../controller/show_post_on_feed.php");
 
+require_once("../controller/getAllUserRecord.php");
+
 
 ?>
 
@@ -396,7 +398,7 @@ require_once("../controller/show_post_on_feed.php");
                                         <li class="comment-item">
                                             <div class="d-flex position-relative px-5 mt-4 flex-column individual_comment<?= $post_id; ?>">
                                                 <?php
-                                                $get_comment_query = "SELECT * FROM comment_table LEFT JOIN users_table ON comment_table.comment_owner = users_table.id WHERE comment_table.post_id = '$post_id' ";
+                                                $get_comment_query = "SELECT * FROM comment_table LEFT JOIN users_table ON comment_table.comment_owner = users_table.id WHERE comment_table.post_id = '$post_id' AND users_table.is_deleted = 0 ";
 
                                                 $get_comment_query_run = mysqli_query($conn, $get_comment_query);
 
