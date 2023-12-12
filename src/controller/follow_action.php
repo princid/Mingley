@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['userId'])) {
                     $updatedStatus = mysqli_fetch_assoc($updatedStatusResult)['follow_status'];
 
                     // Counting Current Total Followers
-                    $followers_count = countFollowers($conn, 'follows_table', $userId);
+                    $followers_count = countFollowers($conn, 'follows_table', 'users_table', $userId);
                     $followers_count['followers_count'] = empty($followers_count['followers_count']) ? 0 : $followers_count['followers_count'];
 
                     echo json_encode(['status' => 'success', 'message' => 'Follow status updated', 'follow_status' => $updatedStatus, 'followers_count' => $followers_count['followers_count'], 'follower_name' => $follower_name, 'currentUserId' => $followerId, 'time' => $date . " - " . $time]);

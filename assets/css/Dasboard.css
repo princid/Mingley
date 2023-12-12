@@ -1,0 +1,378 @@
+
+@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+
+/* Bootstrap Icons */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+
+
+@import url('https://fonts.googleapis.com/css2?family=Agdasima&family=Poppins&display=swap');
+
+
+.brand_logo{
+    background: -webkit-linear-gradient(0deg, #2276a3 0%, #ff00c8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.trademark{
+    font-weight: lighter;
+}
+
+.navbar{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: rgb(28,148,145);
+    background: linear-gradient(90deg, #17ddd6 14%, rgb(54, 199, 172) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    /* background-repeat: no-repeat;
+    background-size: cover;
+    backdrop-filter: blur(10px); */
+}
+
+.nav_container{
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.avatar{
+    object-fit: cover;
+}
+
+.top_card{
+    background-image: url(../img/bg11.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* border: none; */
+    /* border-bottom: 2px solid #000; */
+}
+
+.top_card .card-body{
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: none;
+    border-bottom: 2px solid #039691;
+}
+.headerCard{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-header{
+    background: rgb(193,251,241);
+    background: linear-gradient(90deg, rgba(193,251,241,1) 0%, rgba(126,246,225,1) 100%);
+}
+
+.table{
+    border-color: rgb(180, 180, 180) !important;
+}
+
+.table th{
+    font-size: 14px !important;
+}
+
+.table td{
+    font-size: 14px !important;
+}
+
+.tabular_card{
+    background: rgb(193,251,241);
+    background: radial-gradient(circle, rgba(193,251,241,1) 0%, rgba(255,255,255,1) 50%, rgba(126,246,225,1) 100%);
+}
+
+.tabular_card td img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.update-role-btn{
+    border: none;
+    box-shadow: 0 10px 25px rgba(49, 49, 49, 0.6);
+}
+
+.editBtn{
+    margin-right: 10px;
+    background-color: #007BFF;
+    border: none;
+    box-shadow: 0 10px 25px rgba(49, 49, 49, 0.6);
+}
+
+.delBtn{
+    border: none;
+    box-shadow: 0 10px 25px rgba(49, 49, 49, 0.6);
+}
+
+.address_text{
+    color: #555555ec;
+}
+
+.change_status_div{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+}
+
+.toggle_div{
+    display: flex;
+}
+
+.statusBtn{
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+    text-align: center;
+    padding: 0;
+    background-color: #078d3f;
+    border: none;
+}
+
+.activateBtn{
+    background-color: #078d3f;
+    border: none;
+    box-shadow: 0 10px 25px rgba(49, 49, 49, 0.6);
+}
+
+.bi-arrow-repeat{
+    color: #fff;
+    font-size: large;
+}
+
+.bi-pencil-square{
+    /* background-color: #007BFF; */
+    color: #fff;
+    font-size: large;
+}
+
+.bi-trash-fill{
+    font-size: large;
+}
+
+.bi-person-check{
+    font-size: large;
+}
+
+/* For Toggle switch design */
+.switch input { 
+    display:none;
+}
+.switch {
+    display:inline-block;
+    width:50px;
+    height:20px;
+    margin:8px;
+    position:relative;
+}
+/* Style Wired */
+.slider {
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    border-radius:30px;
+    box-shadow:0 0 0 2px #777, 0 0 4px #777;
+    cursor:pointer;
+    border:4px solid transparent;
+    overflow:hidden;
+     transition:.4s;
+}
+.slider:before {
+    position:absolute;
+    content:"";
+    width:100%;
+    height:100%;
+    background:#777;
+    border-radius:30px;
+    transform:translateX(-30px);
+    transition:.4s;
+}
+
+input:checked + .slider:before {
+    transform:translateX(30px);
+    background:limeGreen;
+}
+input:checked + .slider {
+    box-shadow:0 0 0 2px limeGreen,0 0 2px limeGreen;
+}
+
+/* Style Flat */
+.switch.flat .slider {
+ box-shadow:none;
+}
+.switch.flat .slider:before {
+  background:#FFF;
+}
+.switch.flat input:checked + .slider:before {
+ background:white;
+}
+.switch.flat input:checked + .slider {
+  background:limeGreen;
+}
+/* Toggle Switch design ends here */
+
+/* Select Box designing */
+.selectBtn{
+    background-color: #17a2b8;
+    border: none;
+    color: #fff;
+    width: 65%;
+    margin-right: 10px;
+}
+
+.selectBtn:hover{
+    background-color: #108496;
+    border: none;
+    color: #fff;
+}
+
+.modal{
+    width: fit-content !important;
+    height: fit-content !important;
+}
+
+.modal p{
+    margin-bottom: 30px;
+}
+
+.modal a:hover{
+    /* text-decoration: none !important; */
+    color: #fff;
+}
+
+.closeBtn{
+    background-color: #616161;
+    border: none;
+    font-size: 16px;
+    padding: 10px 30px;
+    float: left;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+    text-decoration: none;
+    color: #ffffff;
+    border-bottom: 2px solid #fff;
+}
+
+.delAnchor{
+    background-color: #D70040;
+    border: none;
+    font-size: 16px;
+    padding: 10px 30px;
+    float: right;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+    text-decoration: none;
+    color: #ffffff;
+    border-bottom: 2px solid #fff;
+    border-radius: 0;
+}
+
+
+.activateAnchor{
+    background-color: #18b803;
+    border: none;
+    font-size: 16px;
+    padding: 10px 30px;
+    float: right;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+    text-decoration: none;
+    color: #ffffff;
+    border-bottom: 2px solid #fff;
+    border-radius: 0;
+}
+
+
+
+/* jQuery Table Styling */
+
+/* Customizing the DataTable's header background and font */
+#table_id th {
+    background-color: #337ab7;
+    color: #fff;
+    font-weight: bold;
+}
+
+#table_id tr {
+    background-color: #f9f9f900;
+}
+
+/* Styling the selected rows */
+#table_id tr.selected {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+/* Styling the pagination controls */
+.dataTables_paginate {
+    background-color: #f9f9f9;
+}
+
+/* Customizing the search input field */
+
+#table_id_filter input {
+    border: 1px solid #ccc;
+    padding: 5px 15px;
+    margin: 20px 0 20px 20px;
+    border-radius: 20px;
+}
+
+/* Customizing the search label */
+#table_id_filter label {
+    font-weight: bold;
+}
+
+/* Show entries of jQuery Table */
+/* Customizing the appearance of the length of the menu container */
+.dataTables_length {
+    margin: 20px 20px 20px 0;
+}
+
+/* Styling the "Show X entries" label */
+.dataTables_length label {
+    font-weight: bold;  
+}
+
+/* Styling the select (dropdown) element */
+.dataTables_length select {
+    width: auto; 
+    padding: 4px; 
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    
+}
+
+/* Styling the "entries" text */
+.dataTables_length select:after {
+    content: " entries";
+}
+
+/* Styling the "Show X entries" label when it's selected */
+.dataTables_length select option:checked {
+    background-color: #007BFF;
+    color: white; 
+}
+
+/* Styling the dropdown arrow icon */
+.dataTables_length select::after {
+    content: "▼";
+    margin-left: 5px;
+}
+
+/* Style the pagination */
+.dataTables_wrapper .dataTables_paginate {
+    text-align: center; /* Center the pagination */
+    margin-top: 20px; /* Add margin from the top */
+}
+
+.dataTables_info {
+    margin-top: 20px; /* Add margin from the top */
+}

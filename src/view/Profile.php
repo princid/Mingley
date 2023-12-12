@@ -73,6 +73,7 @@ $receiver = $_GET['user_id'];
                                     <i class="fa-solid fa-pencil" style="color: #ffffff;"></i>
                                 </button>
 
+                                <!-- Update Profile Image Modal -->
                                 <div class="modal fade" id="modalEditImage" tabindex="-1" aria-labelledby="modalImage" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
@@ -99,12 +100,7 @@ $receiver = $_GET['user_id'];
                                                     <div class="profilePicButtons d-flex" style="justify-content:space-between; align-items:center;">
 
                                                         <div class="changeButton">
-                                                            <!-- <button class="btn btn-danger-soft me-2 " type="button">
-                                                                <i class="fa-solid fa-pencil" style="color: #0555e1;"></i>
-                                                                Change
-                                                            </button> -->
                                                             <input type="file" name="profile_pic" id="profile_pic" accept=".jpg, .jpeg, .png, .gif">
-
                                                         </div>
 
                                                         <div class="removeButton">
@@ -116,11 +112,9 @@ $receiver = $_GET['user_id'];
 
                                                     </div>
 
-
-
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-outline-secondary w-25 p-2" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-outline-secondary w-25 p-2" data-bs-dismiss="modal">CLOSE</button>
 
                                                     <input class="btn w-25 btn-outline-success p-2" type="submit" name="edit_profile_pic" id="edit_profile_pic" value="SAVE CHANGES">
                                                 </div>
@@ -239,14 +233,46 @@ $receiver = $_GET['user_id'];
                                     </button>
                                     <!-- Card share action dropdown menu -->
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">
-                                        <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-share pe-2"></i>Share profile in a message</a></li>
-                                        <!-- <li><a class="dropdown-item" href="#"> <i class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to PDF</a></li> -->
-                                        <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-lock pe-2"></i>Lock profile</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0)"> <i class="fa-solid fa-share pe-2"></i>Share profile in a message</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0)"> <i class="fa-solid fa-lock pe-2"></i>Lock profile</a></li>
+
+                                        <!-- Account delete button -->
+                                        <li>
+                                            <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteAccount">
+                                                <i class="fa-solid fa-user-slash pe-2" style="color: #e60000;"></i>Delete Account
+                                            </button>
+                                        </li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-gear pe-2"></i>Profile settings</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0)"> <i class="fa-solid fa-gear pe-2"></i>Profile settings</a></li>
                                     </ul>
+
+                                    <!-- Modal to Delete the Account -->
+                                    <div class="modal fade" id="modalDeleteAccount" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelAccount" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabelAccount">Delete Account Confirmation!!!</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+
+                                                <form action="<?= BASE_URL ?>src/controller/account_delete.php" method="post">
+                                                    <div class="modal-body">
+                                                        <p>Are You sure you want to Delete your Account ?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+
+                                                        <button type="button" class="btn w-25 btn-outline-secondary p-2" data-bs-dismiss="modal">CLOSE</button>
+
+                                                        <input style="width: 150px" class="btn btn-outline-danger p-2" type="submit" name="delete_account_btn" id="delete_account_btn" value="DELETE ACCOUNT">
+
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -401,7 +427,7 @@ $receiver = $_GET['user_id'];
                                                     <!-- Info -->
                                                     <div>
                                                         <div class="nav nav-divider">
-                                                            <h6 class="nav-item card-title mb-0"> <a href="#!"> <?= $post_author; ?> </a></h6>
+                                                            <h6 class="nav-item card-title mb-0"> <a href="javascript:void(0)"> <?= $post_author; ?> </a></h6>
                                                         </div>
                                                         <span class="nav-item small"> <?= $posted_at; ?></span>
                                                     </div>
@@ -414,7 +440,7 @@ $receiver = $_GET['user_id'];
                                                     </a>
                                                     <!-- Card feed action dropdown menu -->
                                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
-                                                        <li><a class="dropdown-item" href="#"> <i class="fa-regular fa-bookmark pe-2"></i>Save post</a></li>
+                                                        <li><a class="dropdown-item" href="javascript:void(0)"> <i class="fa-regular fa-bookmark pe-2"></i>Save post</a></li>
                                                         <li><button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalEditPost<?= $post_id ?>"> <i class="fa-solid fa-pencil pe-2"></i>Edit Post </button></li>
                                                         <li>
                                                             <hr class="dropdown-divider">
@@ -427,11 +453,11 @@ $receiver = $_GET['user_id'];
                                                     </ul>
 
                                                     <!-- Modal to Edit Post -->
-                                                    <div class="modal fade" id="modalEditPost<?= $post_id ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="modalEditPost<?= $post_id ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelEdit" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Post</h1>
+                                                                    <h1 class="modal-title fs-5" id="staticBackdropLabelEdit">Edit Post</h1>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
 
@@ -442,7 +468,7 @@ $receiver = $_GET['user_id'];
 
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-outline-secondary p-2" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn w-25 btn-outline-secondary p-2" data-bs-dismiss="modal">CLOSE</button>
                                                                     <!-- <button type="button" class="btn btn-outline-success p-2">SAVE CHANGES</button> -->
                                                                     <input class="btn w-25 btn-outline-danger p-2 edit_btn" data-post-id="<?= $post_id ?>" id="" type="button" name="Submit" value="UPDATE POST">
                                                                 </div>
@@ -463,7 +489,7 @@ $receiver = $_GET['user_id'];
                                                                     <p>Are You sure you want to Delete this Post ?</p>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-outline-secondary p-2" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn w-25 btn-outline-secondary p-2" data-bs-dismiss="modal">CLOSE</button>
                                                                     <!-- <button type="button" class="btn btn-outline-success p-2">SAVE CHANGES</button> -->
                                                                     <input class="btn w-25 btn-outline-danger p-2 delete_btn" type="button" id="" data-post-id="<?= $post_id ?>" value="DELETE POST">
                                                                 </div>
@@ -534,7 +560,6 @@ $receiver = $_GET['user_id'];
                                                     <a class="nav-link active likesAnchor" href="#" data-post-id="<?= $post_id ?>" data-like-status="<?= $like_status ?>">
                                                         <i class="fa-<?= $like_status ? 'solid text-danger' : 'regular' ?> fa-heart postLike" data-post-id="<?= $post_id ?>"></i>
                                                         Likes (<span id="likes_count_<?= $post_id; ?>"><?= $feed_post_data['likes_count'] ?></span>)
-                                                        <!-- <span id="likes_count_<?= $post_id; ?>">(<?= $count_like ?>)</span> Likes -->
                                                     </a>
                                                 </li>
 
@@ -592,7 +617,7 @@ $receiver = $_GET['user_id'];
                                                 <li class="comment-item">
                                                     <div class="d-flex position-relative px-5 mt-4 flex-column individual_comment<?= $post_id; ?>">
                                                         <?php
-                                                        $get_comment_query = "SELECT * FROM comment_table LEFT JOIN users_table ON comment_table.comment_owner = users_table.id WHERE comment_table.post_id = '$post_id' ";
+                                                        $get_comment_query = "SELECT * FROM comment_table LEFT JOIN users_table ON comment_table.comment_owner = users_table.id WHERE comment_table.post_id = '$post_id' AND users_table.is_deleted = 0 ";
 
                                                         $get_comment_query_run = mysqli_query($conn, $get_comment_query);
 
@@ -679,7 +704,7 @@ $receiver = $_GET['user_id'];
 
                                         $follower_query  = "SELECT *
                                                                 FROM follows_table INNER JOIN users_table ON follows_table.follower_id = users_table.id
-                                                                WHERE user_id = $curr_id AND follow_status = '1'";
+                                                                WHERE user_id = $curr_id AND follow_status = '1' AND users_table.is_deleted = 0 ";
 
                                         $follower_query_result = mysqli_query($conn, $follower_query);
 
@@ -768,7 +793,7 @@ $receiver = $_GET['user_id'];
 
                                         $following_query  = "SELECT *
                                                                 FROM follows_table INNER JOIN users_table ON follows_table.user_id = users_table.id
-                                                                WHERE follower_id = $curr_id AND follow_status = '1'";
+                                                                WHERE follower_id = $curr_id AND follow_status = '1' AND users_table.is_deleted = 0 ";
 
                                         $following_query_result = mysqli_query($conn, $following_query);
 

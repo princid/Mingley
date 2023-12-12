@@ -30,7 +30,7 @@ function signUp($conn, $table, $first_name, $last_name, $user_name, $user_email,
 // Function to let users log in 
 function signIn($conn, $table, $user_email, $user_password)
 {
-    $signIn_check = "SELECT id, user_email, user_password FROM $table WHERE user_email = '$user_email' AND user_password = '$user_password' ";
+    $signIn_check = "SELECT id, user_email, user_password FROM $table WHERE user_email = '$user_email' AND user_password = '$user_password' AND is_deleted = 0 ";
     $signIn_check_run = mysqli_query($conn, $signIn_check);
 
     if (mysqli_num_rows($signIn_check_run) > 0) {
@@ -71,9 +71,9 @@ function update($conn, $table_name, $set_data, $condition)
 
 
 // Function to fetch user's details
-function fetchUserDetails($conn, $fetch_table, $condition)
+function fetchUserDetails($conn, $fetch_table, $condition, $del_condition)
 {
-    $fetch_query = "SELECT * FROM $fetch_table WHERE $condition";
+    $fetch_query = "SELECT * FROM $fetch_table WHERE $condition AND $del_condition";
     $fetch_query_run = mysqli_query($conn, $fetch_query);
 
     if ($fetch_query_run && mysqli_num_rows($fetch_query_run) > 0) {
@@ -118,7 +118,7 @@ function createPost($conn, $table, $user_id, $caption, $imageNamesAsString, $dat
 }
 
 // Function to show post on Home Feed page. 
-function show_post_on_feed($conn, $users_table, $posts_table, $likes_table, $feed_post_condition, $current_user_id)
+function show_post_on_feed($conn, $users_table, $posts_table, $likes_table, $feed_post_condition, $del_condition, $current_user_id)
 {
     $show_post = "SELECT 
                     $users_table.*,
@@ -126,7 +126,7 @@ function show_post_on_feed($conn, $users_table, $posts_table, $likes_table, $fee
                     (SELECT COUNT(*) FROM $likes_table WHERE $likes_table.post_id = $posts_table.post_id AND $likes_table.like_status = 1) AS likes_count,
                     MAX($likes_table.like_status) AS like_status
                 FROM $users_table
-                JOIN $posts_table ON $feed_post_condition
+                JOIN $posts_table ON $feed_post_condition AND $del_condition
                 LEFT JOIN $likes_table ON $posts_table.post_id = $likes_table.post_id AND $likes_table.liked_by_id = $current_user_id
                 GROUP BY $posts_table.post_id
                 ORDER BY $posts_table.posted_at DESC";
@@ -147,7 +147,7 @@ function show_post_on_feed($conn, $users_table, $posts_table, $likes_table, $fee
 
 
 // Function to show post on Profile page.
-function show_post_on_profile($conn, $users_table, $posts_table, $likes_table, $profile_feed_condition, $where_condition, $current_user_id)
+function show_post_on_profile($conn, $users_table, $posts_table, $likes_table, $profile_feed_condition, $where_condition, $del_condition, $current_user_id)
 {
     $show_post = "SELECT 
                     $users_table.*,
@@ -157,7 +157,7 @@ function show_post_on_profile($conn, $users_table, $posts_table, $likes_table, $
                 FROM $users_table
                 JOIN $posts_table ON $profile_feed_condition
                 LEFT JOIN $likes_table ON $posts_table.post_id = $likes_table.post_id AND $likes_table.liked_by_id = $current_user_id
-                WHERE $where_condition
+                WHERE $where_condition AND $del_condition
                 GROUP BY $posts_table.post_id
                 ORDER BY $posts_table.posted_at DESC";
 
@@ -177,7 +177,7 @@ function show_post_on_profile($conn, $users_table, $posts_table, $likes_table, $
 
 
 // Function to show Post on friend's profile page.
-function show_post_on_friends_profile($conn, $users_table, $posts_table, $likes_table, $profile_feed_condition, $where_condition, $id)
+function show_post_on_friends_profile($conn, $users_table, $posts_table, $likes_table, $profile_feed_condition, $where_condition, $del_condition, $id)
 {
     $show_post = "SELECT 
                     $users_table.*,
@@ -185,9 +185,9 @@ function show_post_on_friends_profile($conn, $users_table, $posts_table, $likes_
                     (SELECT COUNT(*) FROM $likes_table WHERE $likes_table.post_id = $posts_table.post_id AND $likes_table.like_status = 1) AS likes_count,
                     MAX($likes_table.like_status) AS like_status
                 FROM $users_table
-                JOIN $posts_table ON $profile_feed_condition
+                JOIN $posts_table ON $profile_feed_condition 
                 LEFT JOIN $likes_table ON $posts_table.post_id = $likes_table.post_id AND $likes_table.liked_by_id = $id
-                WHERE $where_condition
+                WHERE $where_condition AND $del_condition
                 GROUP BY $posts_table.post_id
                 ORDER BY $posts_table.posted_at DESC";
 
@@ -226,7 +226,7 @@ function update_profile_pic($conn, $table, $profile_pic_name, $condition)
 function getAllUserRecord($conn, $getAll_table)
 {
 
-    $getAllUser = "SELECT * FROM $getAll_table ";
+    $getAllUser = "SELECT * FROM $getAll_table WHERE is_deleted = 0 ";
 
     $getAllUser_run = mysqli_query($conn, $getAllUser);
 
@@ -245,7 +245,7 @@ function getAllUserRecord($conn, $getAll_table)
 function currentUser($conn, $getAll_table, $user_id)
 {
 
-    $getAllUser = "SELECT * FROM $getAll_table WHERE id = '$user_id' ";
+    $getAllUser = "SELECT * FROM $getAll_table WHERE id = '$user_id' AND is_deleted = 0 ";
 
     $getAllUser_run = mysqli_query($conn, $getAllUser);
 
@@ -317,13 +317,14 @@ function countPost($conn, $posts_table, $condition1, $condition2)
 
 
 // Function to count Followers
-function countFollowers($conn, $follows_table, $user_id)
+function countFollowers($conn, $follows_table, $users_table, $user_id)
 {
     $query = "SELECT
                 user_id,
                 COUNT(*) AS followers_count
             FROM $follows_table
-            WHERE user_id = $user_id AND follow_status = '1'
+            JOIN $users_table ON $follows_table.follower_id = $users_table.id
+            WHERE user_id = $user_id AND $follows_table.follow_status = '1' AND $users_table.is_deleted = '0'
             GROUP BY user_id";
 
     $result = mysqli_query($conn, $query);
@@ -337,13 +338,14 @@ function countFollowers($conn, $follows_table, $user_id)
 
 
 // Function to count Followings
-function countFollowings($conn, $follows_table, $user_id)
+function countFollowings($conn, $follows_table, $users_table, $user_id)
 {
     $query = "SELECT
                 follower_id AS user_id,
                 COUNT(*) AS followings_count
             FROM $follows_table
-            WHERE follower_id = $user_id AND follow_status = '1'
+            JOIN $users_table ON $follows_table.user_id = $users_table.id
+            WHERE follower_id = $user_id AND $follows_table.follow_status = '1' AND $users_table.is_deleted = '0'
             GROUP BY follower_id";
 
     $result = mysqli_query($conn, $query);
@@ -361,7 +363,7 @@ function showFollowers($conn, $follows_table, $users_table, $user_id)
 {
     $show_follower_query = "SELECT *
                             FROM $follows_table INNER JOIN $users_table ON $follows_table.follower_id = $users_table.id
-                            WHERE user_id = $user_id AND follow_status = '1'";
+                            WHERE user_id = $user_id AND follow_status = '1' AND $users_table.is_deleted = 0";
 
     $result = mysqli_query($conn, $show_follower_query);
 
@@ -382,7 +384,7 @@ function showFollowings($conn, $follows_table, $users_table, $user_id)
 {
     $show_follower_query = "SELECT *
                             FROM $follows_table INNER JOIN $users_table ON $follows_table.user_id = $users_table.id
-                            WHERE follower_id = $user_id AND follow_status = '1'";
+                            WHERE follower_id = $user_id AND follow_status = '1' AND $users_table.is_deleted = 0";
 
     $result = mysqli_query($conn, $show_follower_query);
 
@@ -405,3 +407,4 @@ function insertNotification($conn, $receiver_id, $notif_type, $postId, $sender_i
 
     mysqli_query($conn, $notif_query);
 }
+

@@ -12,7 +12,9 @@ if (!empty($_SESSION)) {
 
     $condition = " id = '$id' ";
 
-    $result = fetchUserDetails($conn, $fetch_table, $condition);
+    $del_condition = "is_deleted = 0";
+
+    $result = fetchUserDetails($conn, $fetch_table, $condition, $del_condition);
 
     $first_name = $result['first_name'];
     $last_name = $result['last_name'];

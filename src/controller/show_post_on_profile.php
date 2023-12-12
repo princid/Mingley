@@ -21,7 +21,9 @@ if (!empty($_SESSION)) {
 
     $where_condition = " $id = $posts_table.user_id ";
 
+    $del_condition = " $users_table.is_deleted = 0 ";
+
     // $profile_feed_result = show_post_on_profile($conn, $users_table, $posts_table, $profile_feed_condition, $where_condition);
-    $profile_feed_result = show_post_on_profile($conn, $users_table, $posts_table, $likes_table, $profile_feed_condition, $where_condition, $current_user_id);
+    $profile_feed_result = show_post_on_profile($conn, $users_table, $posts_table, $likes_table, $profile_feed_condition, $where_condition,  $del_condition, $current_user_id);
 
 }
