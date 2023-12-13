@@ -27,28 +27,28 @@ if (empty($_SESSION['id'])) {
 
                                 <!-- Home Page -->
                                 <li class="<?= $active_item == 1 ? 'active' : ''; ?>">
-                                    <a href="HomeFeed.php">
+                                    <a title="Home" href="HomeFeed.php">
                                         <i class="fa-solid fa-house"></i>
                                     </a>
                                 </li>
 
                                 <!-- Chat Page -->
                                 <li class="msg <?= $active_item == 2 ? 'active' : ''; ?>">
-                                    <a class="msg-trigger-btn" href="Chat.php">
+                                    <a title="Chat with Minglers" class="msg-trigger-btn" href="Chat.php">
                                         <i class="fa-solid fa-message"></i>
                                     </a>
                                 </li>
 
                                 <!-- Search Page -->
                                 <li class="search-trigger <?= $active_item == 3 ? 'active' : ''; ?>">
-                                    <a class="search-trigger-btn" href="SearchPage.php">
+                                    <a title="Search Other Minglers" class="search-trigger-btn" href="SearchPage.php">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </a>
                                 </li>
 
                                 <!-- Notification Dropdown -->
                                 <li class="notification-trigger">
-                                    <a class="msg-trigger-btn" href="" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a title="Notifications" class="msg-trigger-btn" href="" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-bell"></i><span class="position-absolute top-10 translate-middle badge border border-light rounded-circle bg-danger p-1"><span class="visually-hidden">unread messages</span></span>
                                     </a>
 
@@ -107,6 +107,15 @@ if (empty($_SESSION['id'])) {
                                     </div>
 
                                 </li>
+
+                                <!-- If you're super admin, then this icon will be displayed on your navbar -->
+                                <?php if ($user_role == 1) { ?>
+                                    <li>
+                                        <a title="Admin Dashboard" class="" href=<?php echo BASE_URL . "admin/Dashboard.php" ?>>
+                                            <i class="fa-solid fa-chart-pie pe-2"></i>
+                                        </a>
+                                    </li>
+                                <?php } ?>
 
                             </ul>
                         </nav>

@@ -23,7 +23,6 @@ $total_followings = $followings_count['followings_count'];
 require_once("../controller/show_post_on_profile.php");
 
 $curr_id = $_SESSION['id'];
-// $curr_id = $_SESSION['id'];
 $receiver = $_GET['user_id'];
 
 ?>
@@ -237,11 +236,20 @@ $receiver = $_GET['user_id'];
                                         <li><a class="dropdown-item" href="javascript:void(0)"> <i class="fa-solid fa-lock pe-2"></i>Lock profile</a></li>
 
                                         <!-- Account delete button -->
-                                        <li>
-                                            <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteAccount">
-                                                <i class="fa-solid fa-user-slash pe-2" style="color: #e60000;"></i>Delete Account
-                                            </button>
-                                        </li>
+
+                                        <!-- If you're super admin, then you don't have a button to delete your account -->
+                                        <?php if ($user_role == 1) { ?>
+                                            <li>
+                                                <a title="Admin Dashboard" class="dropdown-item" href=<?php echo BASE_URL . "admin/Dashboard.php" ?>> <i class=" fa-solid fa-chart-pie pe-2"></i>Dashboard</a>
+                                            </li>
+                                        <?php } else { ?>
+                                            <li>
+                                                <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteAccount">
+                                                    <i class="fa-solid fa-user-slash pe-2" style="color: #e60000;"></i>Delete Account
+                                                </button>
+                                            </li>
+                                        <?php } ?>
+
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>

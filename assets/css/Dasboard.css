@@ -9,13 +9,25 @@
 
 
 .brand_logo{
-    background: -webkit-linear-gradient(0deg, #2276a3 0%, #ff00c8 100%);
+    background: -webkit-linear-gradient(150deg, #2276a3 0%, #ff00c8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    width: fit-content;
 }
 
 .trademark{
     font-weight: lighter;
+}
+
+.alertBox{
+    text-align: center;
+    width: fit-content;
+    margin: auto;
+}
+
+.alertBox h1{
+    font-size: 20px;
+    width: 100%;
 }
 
 .navbar{
@@ -28,9 +40,6 @@
     justify-content: center;
     align-items: center;
     min-height: 100%;
-    /* background-repeat: no-repeat;
-    background-size: cover;
-    backdrop-filter: blur(10px); */
 }
 
 .nav_container{
@@ -46,8 +55,6 @@
     background-image: url(../img/bg11.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    /* border: none; */
-    /* border-bottom: 2px solid #000; */
 }
 
 .top_card .card-body{

@@ -50,6 +50,9 @@ $logged_in_user_pic = $logged_in_data['user_profile_pic'];
 if (!isset($_GET['user_id']) || empty($_GET['user_id'])) {
     echo '<script>window.location.href = "HomeFeed.php";</script>';
     exit();
+}else if($_GET['user_id'] == $curr_id){
+    echo '<script>window.location.href = "Profile.php";</script>';
+    exit();
 }
 
 

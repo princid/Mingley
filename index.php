@@ -27,7 +27,9 @@
     <div style="margin-top: 20%;">
         <h1 class="text-center">Welcome to <strong class="brand_name">Mingley</strong></h1>
         <br>
-        <a href="src/view/SignUp.php" style="display: block; text-align: center; font-size: 25px; text-decoration:none;">Click here to Explore Mingley</a>
+        <a href="src/view/SignUp.php" style="display: block; margin: auto; font-size: 25px; width:fit-content">Click here to Explore Mingley</a>
+
+        <a href="src/view/ContactPage.php" style="display: block; margin: auto; margin-top:20px; font-size: 20px; width:fit-content;">Contact Us</a>
     </div>
 
 
