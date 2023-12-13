@@ -4,6 +4,13 @@ session_start();
 
 $user_id = $_SESSION['id'];
 
+
+// Check if user_id is present in the URL
+if ($_GET['receiver'] == $user_id) {
+    echo '<script>window.location.href = "Chat.php";</script>';
+    exit();
+}
+
 ?>
 
 
@@ -26,7 +33,7 @@ $user_id = $_SESSION['id'];
                     <div class="user-list-box gap-2 mb-3 mt-3">
                         <ul>
                             <?php
-                            $query = "SELECT * FROM users_table WHERE users_table.id != '$user_id' ";
+                            $query = "SELECT * FROM users_table WHERE users_table.id != '$user_id' AND users_table.is_deleted = 0 ";
                             $result = mysqli_query($conn, $query);
                             if ($result) {
                                 foreach ($result as $list) {
@@ -34,7 +41,6 @@ $user_id = $_SESSION['id'];
                                     $profile_pic = $list["user_profile_pic"];
                                     $list_id = $list["id"];
                             ?>
-
                                     <li>
                                         <a href="<?= BASE_URL ?>src/view/Chat.php?sender=<?php echo $user_id; ?>&receiver=<?php echo $list_id; ?>" class="d-flex align-items-center gap-3 mb-3 position-relative">
                                             <?php if (!empty($profile_pic)) { ?>
@@ -50,7 +56,8 @@ $user_id = $_SESSION['id'];
                                     <hr>
 
                             <?php }
-                            } ?>
+                            }
+                            ?>
                         </ul>
                     </div>
 

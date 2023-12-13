@@ -1,0 +1,181 @@
+/* New Form style */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito+Sans:opsz@6..12&family=Open+Sans&family=Playfair+Display:wght@700&family=Poppins:ital,wght@0,400;1,500&family=Roboto:wght@300;400&display=swap'); */
+body{
+    /* background-image: url(../images/bg1.png); */
+    /* background-repeat: no-repeat;
+    background-size: cover;
+    font-family: Lato,sans-serif;
+    height: 93.4vh; */
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+    /* bottom: 0; */
+    font-family: Lato,sans-serif;
+    background-color: #e8f7f6;
+}
+
+.brand_name{
+    background: -webkit-linear-gradient(150deg, #2276a3 0%, #ff00c8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    width: fit-content;
+    line-height: normal;
+    margin-top: 0;
+}
+
+.brand_logo{
+    width: 40px;
+    display: flex;
+    margin: 4% auto 0;
+    justify-content: center;
+}
+
+.container{
+    display: flex;
+    margin: auto ;
+    width: 1000px;
+    border: solid 2px #120A19;
+    box-shadow: 0 15px 45px rgba(0,0,0,.6);
+    /* border-radius: 10px; */
+    
+
+}
+
+.contactForm{
+    background: rgb(222,24,224);
+    background: linear-gradient(148deg, rgba(222,24,224,1) 8%, rgba(90,21,174,1) 56%, rgba(76,17,112,1) 100%);
+    padding: 10px;
+    width: 100%;
+    color: #fff;
+}
+
+.contactDetails{
+    background-color: #fff;
+    padding: 10px;
+    width: 100%;
+}
+
+.contactDetails p{
+    margin-left: 35px;
+}
+
+.contactOptions{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 35px;
+}
+
+h1{
+    display: flex;
+    margin: 4% auto;
+    justify-content: center;
+    font-size: 30px ;
+    /* font-size: 60px; */
+    font-family: 'Playfair Display', serif;
+    line-height: 1.1;
+}
+
+h2{
+    font-family: 'Playfair Display', serif;
+    margin-left: 40px;
+    border-bottom: 2px solid #cecece;
+    width: fit-content;
+    padding-bottom: 8px;
+}
+
+/* hr{
+    width: 60%;
+    border: 1px solid #120A19;
+} */
+label{
+    display: block;
+    padding: 10px;
+    margin: 0 35px;
+    font-weight: 700;
+    /* font-family: 'Roboto', sans-serif; */
+}
+
+input {
+    margin-top: 10px;
+    width: 100%;
+    height: 30px;
+    border: solid 2px #120A19;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid #b8b8b8;
+    color: #fff;
+}
+
+.submit_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 6px;
+    width: 85%;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 700;
+    background-color: #de18e0;
+    /* background: #000000;
+    background: linear-gradient(196deg, #3d3d3d 0%, #000000 100%); */
+    color: #fff;
+    margin: 30px auto;
+    border: none;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+}
+
+.submit_btn i{
+    margin-left: 20px;
+}
+
+.submit_btn:hover{
+    /* background: #000000;
+    background: linear-gradient(169deg, #3d3d3d 0%, #000000 100%); */
+    background-color: #dd18e0cc;
+}
+
+textarea{
+    /* display: block; */
+    /* margin: 2% auto 0; */
+    width: 100%;
+    /* height: 22vh; */
+    height: 80px;
+    color: #fff;
+    /* border-radius: 5px; */
+    border: solid 2px #120A19;
+    border: solid 2px #120A19;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid #b8b8b8;
+}
+
+.formError{
+    color: rgb(255, 153, 0);
+    font-size: 15px;
+    margin-top: 5px;
+    font-weight: normal;
+}
+
+
+footer{
+    background: rgb(18, 71, 5);
+    background: linear-gradient(169deg, rgb(36, 5, 71) 0%, rgba(20, 0, 36, 1) 50%, rgb(60, 5, 71) 100%);
+    /* background: rgb(222,24,224);
+    background: linear-gradient(188deg, rgba(222,24,224,1) 8%, rgba(90,21,174,1) 56%, rgba(76,17,112,1) 100%); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 20px;
+    margin-top: 40px;
+}
+
+
+.contactFooter{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+}

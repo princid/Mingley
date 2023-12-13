@@ -30,18 +30,25 @@ function signUp($conn, $table, $first_name, $last_name, $user_name, $user_email,
 // Function to let users log in 
 function signIn($conn, $table, $user_email, $user_password)
 {
-    $signIn_check = "SELECT id, user_email, user_password FROM $table WHERE user_email = '$user_email' AND user_password = '$user_password' AND is_deleted = 0 ";
+    $signIn_check = "SELECT id, user_email, user_password, user_role_status FROM $table WHERE user_email = '$user_email' AND user_password = '$user_password' AND is_deleted = 0 ";
     $signIn_check_run = mysqli_query($conn, $signIn_check);
 
     if (mysqli_num_rows($signIn_check_run) > 0) {
         while ($row = mysqli_fetch_assoc($signIn_check_run)) {
             $_SESSION["id"] = $row['id'];
             $_SESSION["first_name"] = $row['first_name'];
+            $_SESSION["user_role_status"] = $row['user_role_status'];
 
-            return "Logged In Successfully!";
+            return [
+                "status" => "Logged In Successfully!",
+                "user_role_status" => $row['user_role_status']
+            ];
         }
     } else {
-        return "Error: OOPS! Something went wrong...";
+        // return "Error: OOPS! Something went wrong...";
+        return [
+            "status" => "Error: OOPS! Something went wrong..."
+        ];
     }
 }
 

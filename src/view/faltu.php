@@ -4313,3 +4313,20 @@ if (isset($_POST['upload_button'])) {
         });
     });
 </script>
+
+
+<!-- Dashboard toggle switch -->
+<td>
+    <div class="change_status_div">
+        <div class="toggle_div">
+            <label class="switch">
+                <input type="checkbox" class="status-toggle" data-user-id="<?php echo $user_data['id'];
+                                                                            ?>" <?php echo $user_data['is_deleted'] != 1 ? 'checked' : '';
+                                                                                ?>>
+                <span class="slider"></span>
+            </label>
+        </div>
+        <button title="Save status" class="btn btn-sm btn-success save-status-btn statusBtn" data-user-id="<?php echo $user_data['id'];
+                                                                                                            ?>"><i class="bi bi-check-circle-fill"></i></button>
+    </div>
+</td>

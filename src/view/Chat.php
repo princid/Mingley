@@ -9,18 +9,55 @@ require_once("../../includes/Header.php");
 
 require("Navbar.php");
 
+require_once("../model/Query.php");
+
 // require_once("../controller/getAllUserRecord.php");
 
+$loggedInUserId = $_SESSION['id'];
 
-if (isset($_GET['sender']) && $_GET['receiver'] == null) {
-    echo "<script>window.location='HomeFeed.php';</script>";
-} else {
+// Check if both sender and receiver parameters are set
+if (isset($_GET['sender']) && isset($_GET['receiver'])) {
     $sender   = $_GET["sender"];
     $receiver = $_GET["receiver"];
+
+    // Check if the logged-in user is the sender
+    if ($sender != $loggedInUserId) {
+        echo "<script>window.location='HomeFeed.php';</script>";
+        exit();
+    }
+
+    // Check if the receiver ID exists in the database
+    $receiverInfoQuery = "SELECT * FROM users_table WHERE id = $receiver";
+    $receiverInfoQuery_run = mysqli_query($conn, $receiverInfoQuery);
+
+    if (!$receiverInfoQuery_run || mysqli_num_rows($receiverInfoQuery_run) === 0) {
+        // Redirect to HomeFeed.php if the receiver ID doesn't exist
+        echo "<script>window.location='HomeFeed.php';</script>";
+        exit();
+    }
+
+    // Check if the receiver ID is the same as the sender ID
+    if ($receiver == $loggedInUserId) {
+        // Redirect to HomeFeed.php if the receiver ID matches the logged-in user's ID
+        echo "<script>window.location='HomeFeed.php';</script>";
+        exit();
+    }
+
+    // Check if the receiver's account is deleted
+    $checkQuery = "SELECT is_deleted FROM users_table WHERE id = $receiver";
+    $checkQuery_run = mysqli_query($conn, $checkQuery);
+
+    if ($checkQuery_run) {
+        $row = mysqli_fetch_assoc($checkQuery_run);
+
+        if ($row['is_deleted'] == 1) {
+            // Redirect to HomeFeed.php if the receiver's account is deleted
+            echo "<script>window.location='HomeFeed.php';</script>";
+            exit();
+        }
+    }
 }
 
-
-// $user_id = $_SESSION['id'];
 
 ?>
 
