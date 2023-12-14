@@ -2,7 +2,7 @@
 
 session_start();
 
-$title = "Search Users";
+$title = "Search Minglers";
 
 $active_item = 3;
 
