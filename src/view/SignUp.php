@@ -25,6 +25,16 @@ require_once("../../config/constants.php");
         </div>
     <?php } ?>
 
+    <?php
+    // Check if there are validation errors in the session
+    if (isset($_SESSION['errors']) && count($_SESSION['errors']) > 0) {
+        foreach ($_SESSION['errors'] as $error) {
+            echo '<div class="alert alert-danger" role="alert">' . $error . '</div>';
+        }
+        unset($_SESSION['errors']); // Clear the errors after displaying them
+    }
+    ?>
+
     <div class=" form-signin w-100 h-75 d-flex flex-col align-items-center justify-content-center text-center">
 
         <form id="signUp_form" class="w-50" name="myForm" method="post" action="<?= BASE_URL ?>src/controller/FormAction.php">
