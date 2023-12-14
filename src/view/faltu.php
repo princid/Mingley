@@ -4330,3 +4330,41 @@ if (isset($_POST['upload_button'])) {
                                                                                                             ?>"><i class="bi bi-check-circle-fill"></i></button>
     </div>
 </td>
+
+
+<!-- Profile Page userDetails, such as count of posts, followers, followings -->
+<div class="userDetails">
+    <div class="hstack gap-2 gap-xl-3 justify-content-start">
+        <!-- User stat item -->
+        <div style="text-align:center">
+            <?php if (!empty($total_posts)) { ?>
+                <h6 class="mb-0"><?= $total_posts; ?></h6>
+            <?php } else { ?>
+                <h6 class="mb-0">0</h6>
+            <?php } ?>
+            <small>Posts</small>
+        </div>
+        <!-- Divider -->
+        <div class="vr"></div>
+        <!-- User stat item -->
+        <div style="text-align:center">
+            <?php if (!empty($total_followers)) { ?>
+                <h6 class="mb-0"><?= $total_followers; ?></h6>
+            <?php } else { ?>
+                <h6 class="mb-0">0</h6>
+            <?php } ?>
+            <small>Followers</small>
+        </div>
+        <!-- Divider -->
+        <div class="vr"></div>
+        <!-- User stat item -->
+        <div style="text-align:center">
+            <?php if (!empty($total_followings)) { ?>
+                <h6 class="mb-0"><?= $total_followings; ?></h6>
+            <?php } else { ?>
+                <h6 class="mb-0">0</h6>
+            <?php } ?>
+            <small>Followings</small>
+        </div>
+    </div>
+</div>
