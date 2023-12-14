@@ -23,22 +23,22 @@
 
         <ul class="nav small mt-4 justify-content-center lh-1">
             <li class="nav-item">
-                <a class="nav-link" href="">About</a>
+                <a class="nav-link" href="javascript:void(0)">About</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">Settings</a>
+                <a class="nav-link" href="javascript:void(0)">Settings</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" target="_blank" href="">Support </a>
+                <a class="nav-link" href="javascript:void(0)">Support </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" target="_blank" href="">Docs </a>
+                <a class="nav-link" href="javascript:void(0)">Docs </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">Help</a>
+                <a class="nav-link" target="_blank" href="ContactPage.php">Help</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">Privacy &amp; terms</a>
+                <a class="nav-link" href="javascript:void(0)">Privacy &amp; terms</a>
             </li>
         </ul>
 

@@ -50,7 +50,7 @@ $logged_in_user_pic = $logged_in_data['user_profile_pic'];
 if (!isset($_GET['user_id']) || empty($_GET['user_id'])) {
     echo '<script>window.location.href = "HomeFeed.php";</script>';
     exit();
-}else if($_GET['user_id'] == $curr_id){
+} else if ($_GET['user_id'] == $curr_id) {
     echo '<script>window.location.href = "Profile.php";</script>';
     exit();
 }
@@ -92,7 +92,9 @@ if (!isset($_GET['user_id']) || empty($_GET['user_id'])) {
                             <!-- Profile Avatar -->
                             <div class="position-absolute" style="width: 12rem; height: 12rem; margin: 20px; top:20%; left:40%;">
                                 <?php if (!empty($current_user_profile_pic)) { ?>
-                                    <img class="avatar-img rounded-circle border border-white border-3" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $current_user_profile_pic; ?>" alt="">
+                                    <a href="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $current_user_profile_pic; ?>" target="_blank">
+                                        <img class="avatar-img rounded-circle border border-white border-3" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $current_user_profile_pic; ?>" alt="">
+                                    </a>
                                 <?php } else { ?>
                                     <img class="avatar-img rounded-circle border border-white border-3" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
                                 <?php } ?>
@@ -160,36 +162,36 @@ if (!isset($_GET['user_id']) || empty($_GET['user_id'])) {
                             $follow_data = mysqli_fetch_assoc($result);
                             // if (!empty($follow_data)) {
                             ?>
-                                <div class="d-inline" id="follow-btn-container">
-                                    <?php
-                                    if (mysqli_num_rows($result) > 0 && $follow_data['follow_status'] == 1) {
-                                    ?>
-                                        <button class=" btn btn-outline-secondary me-3" data-bs-toggle="modal" data-bs-target="#unfollow<?= $receiver ?>" style="padding: 10px 50px;"><i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong></button>
+                            <div class="d-inline" id="follow-btn-container">
+                                <?php
+                                if (mysqli_num_rows($result) > 0 && $follow_data['follow_status'] == 1) {
+                                ?>
+                                    <button class=" btn btn-outline-secondary me-3" data-bs-toggle="modal" data-bs-target="#unfollow<?= $receiver ?>" style="padding: 10px 50px;"><i class="fa-solid fa-user-check pe-3"></i> <strong>Following</strong></button>
 
-                                    <?php } else { ?>
-                                        <button data-user-id="<?= $receiver; ?>" class="follow_btn btn btn-outline-primary me-3" style="padding: 10px 50px;"><i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong></button>
-                                    <?php } ?>
-                                </div>
+                                <?php } else { ?>
+                                    <button data-user-id="<?= $receiver; ?>" class="follow_btn btn btn-outline-primary me-3" style="padding: 10px 50px;"><i class="fa-solid fa-user-plus pe-3"></i> <strong>Follow</strong></button>
+                                <?php } ?>
+                            </div>
 
-                                <!-- Unfollow Modal -->
-                                <div class="modal fade" id="unfollow<?= $receiver ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fw-bold fs-5" id="staticBackdropLabel">Unfollow Confirmation</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p class="fs-6">Are you sure you want to unfollow this account?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button data-user-id="<?= $receiver; ?>" type="button" class="follow_btn btn btn-danger fs-6">Unfollow</button>
-                                            </div>
+                            <!-- Unfollow Modal -->
+                            <div class="modal fade" id="unfollow<?= $receiver ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fw-bold fs-5" id="staticBackdropLabel">Unfollow Confirmation</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="fs-6">Are you sure you want to unfollow this account?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button data-user-id="<?= $receiver; ?>" type="button" class="follow_btn btn btn-danger fs-6">Unfollow</button>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="Chat.php?sender=<?php echo $curr_id; ?>&receiver=<?php echo $receiver; ?>"><button class="btn btn-outline-success" style="padding: 10px 50px;"><i class=" fa-regular fa-message pe-3"></i> <strong>Message</strong></button></a>
+                            </div>
+                            <a href="Chat.php?sender=<?php echo $curr_id; ?>&receiver=<?php echo $receiver; ?>"><button class="btn btn-outline-success" style="padding: 10px 50px;"><i class=" fa-regular fa-message pe-3"></i> <strong>Message</strong></button></a>
                         </div>
 
 
@@ -225,13 +227,28 @@ if (!isset($_GET['user_id']) || empty($_GET['user_id'])) {
                     <!-- Tabs navs start -->
                     <ul class="nav nav-tabs nav-justified mb-3" id="ex1" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="ex3-tab-1" data-bs-toggle="tab" href="#ex3-tabs-1" role="tab" aria-controls="ex3-tabs-1" aria-selected="true"><strong>Posts</strong></a>
+                            <a class="nav-link active text-truncate" id="ex3-tab-1" data-bs-toggle="tab" href="#ex3-tabs-1" role="tab" aria-controls="ex3-tabs-1" aria-selected="true"><span class="badge bg-primary bg-opacity-10 text-primary me-2"><?php if (!empty($total_posts)) { ?>
+                                        <h6 class="mb-0"><?= $total_posts; ?></h6>
+                                    <?php } else { ?>
+                                        <h6 class="mb-0">0</h6>
+                                    <?php } ?>
+                                </span> <strong>Posts </strong></a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="ex3-tab-2" data-bs-toggle="tab" href="#ex3-tabs-2" role="tab" aria-controls="ex3-tabs-2" aria-selected="false"><strong>Followers</strong></a>
+                            <a class="nav-link text-truncate" id="ex3-tab-2" data-bs-toggle="tab" href="#ex3-tabs-2" role="tab" aria-controls="ex3-tabs-2" aria-selected="false"><span class="badge bg-primary bg-opacity-10 text-success me-2"><?php if (!empty($total_followers)) { ?>
+                                        <h6 class="mb-0"><?= $total_followers; ?></h6>
+                                    <?php } else { ?>
+                                        <h6 class="mb-0">0</h6>
+                                    <?php } ?>
+                                </span> <strong>Followers </strong></a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="ex3-tab-3" data-bs-toggle="tab" href="#ex3-tabs-3" role="tab" aria-controls="ex3-tabs-3" aria-selected="false"><strong>Followings</strong></a>
+                            <a class="nav-link text-truncate" id="ex3-tab-3" data-bs-toggle="tab" href="#ex3-tabs-3" role="tab" aria-controls="ex3-tabs-3" aria-selected="false"><span class="badge bg-primary bg-opacity-10 text-primary me-2"><?php if (!empty($total_followings)) { ?>
+                                        <h6 class="mb-0"><?= $total_followings; ?></h6>
+                                    <?php } else { ?>
+                                        <h6 class="mb-0">0</h6>
+                                    <?php } ?>
+                                </span> <strong>Followings </strong></a>
                         </li>
                     </ul>
                     <!-- Tabs navs end -->
@@ -244,22 +261,22 @@ if (!isset($_GET['user_id']) || empty($_GET['user_id'])) {
 
                             <?php foreach ($profile_feed_result as $feed_post_data) {
 
-                                    $post_id = $feed_post_data["post_id"];
-                                    $post_user_id = $feed_post_data["user_id"];
-                                    $post_author = $feed_post_data['first_name'] . " " . $feed_post_data['last_name'];
-                                    $post_author_username = $feed_post_data['user_name'];
-                                    $post_author_bio = $feed_post_data['user_bio'];
-                                    $post_author_email = $feed_post_data['user_email'];
-                                    $post_author_profile_pic = $feed_post_data['user_profile_pic'];
-                                    $post_caption = $feed_post_data['post_caption'];
-                                    $posted_at = $feed_post_data['posted_at'];
-                                    $all_post_images = explode(',', $feed_post_data['post_images']);
+                                $post_id = $feed_post_data["post_id"];
+                                $post_user_id = $feed_post_data["user_id"];
+                                $post_author = $feed_post_data['first_name'] . " " . $feed_post_data['last_name'];
+                                $post_author_username = $feed_post_data['user_name'];
+                                $post_author_bio = $feed_post_data['user_bio'];
+                                $post_author_email = $feed_post_data['user_email'];
+                                $post_author_profile_pic = $feed_post_data['user_profile_pic'];
+                                $post_caption = $feed_post_data['post_caption'];
+                                $posted_at = $feed_post_data['posted_at'];
+                                $all_post_images = explode(',', $feed_post_data['post_images']);
 
-                                    $like_status = $feed_post_data["like_status"];
+                                $like_status = $feed_post_data["like_status"];
 
-                                    $carousel_id = 'carouselIndicators_' . $post_id;
+                                $carousel_id = 'carouselIndicators_' . $post_id;
 
-                                    if ($feed_post_data["is_deleted"] != 1) {
+                                if ($feed_post_data["is_deleted"] != 1) {
                             ?>
 
                                     <div class="card rounded-2 w-75 mx-auto">

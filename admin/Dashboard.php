@@ -179,7 +179,7 @@ if ($fetch_query_run) {
                         <?php } ?>
                     </ul>
                 </div>
-                
+
             </div>
         </nav>
 
@@ -577,39 +577,32 @@ if ($fetch_query_run) {
                     "searchPlaceholder": "Search..."
                 }
             });
-        });
 
+            // For Filtering the Data
+            // Initial load of the DataTable with all data
+            table.columns(3).search('').draw();
 
-        // For Filtering the Data
-        // Initial load of the DataTable with all data
-        table.columns(3).search('').draw();
+            // Add change event handler to the dropdown
+            $('#userStatusFilter').on('change', function() {
+                var status = $(this).val();
 
-        // Add change event handler to the dropdown
-        $('#userStatusFilter').on('change', function() {
-            var status = $(this).val();
+                if (status === 'all') {
+                    // Show all rows
+                    table.columns(3).search('').draw();
+                } else if (status === 'active') {
+                    // Filter rows based on active status
+                    table.columns(3).search('Active').draw();
+                } else if (status === 'inactive') {
+                    // Filter rows based on inactive status
+                    table.columns(3).search('Inactive').draw();
+                }
+            });
 
-            if (status === 'all') {
-                // Show all rows
-                table.columns(3).search('').draw();
-            } else if (status === 'active') {
-                // Filter rows based on active status
-                table.columns(3).search('Active').draw();
-            } else if (status === 'inactive') {
-                // Filter rows based on inactive status
-                table.columns(3).search('Inactive').draw();
-            }
         });
     </script>
 
     <!-- For alerting the messages -->
-    <script>
-        const alertBox = document.querySelector(".alertBox");
-        setTimeout(() => {
-            alertBox.innerHTML = "";
-        }, 3000);
-    </script>
-
-    <!-- <script src="../assets/js/alertMessage.js"></script> -->
+    <script src="../assets/js/alertMessage.js"></script>
 
 </body>
 
