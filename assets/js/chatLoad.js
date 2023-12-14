@@ -45,7 +45,7 @@ $(document).ready(function () {
           send: send 
         },
         success: function (e) {
-          $("#chat_load").html(e);
+          $("#chat_load").html(e.trim());
         },
       });
     }, 100);

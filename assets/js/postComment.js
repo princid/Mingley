@@ -75,6 +75,7 @@ $(document).ready(function () {
       },
       error: function (xhr, status, error) {
         console.log("AJAX request failed...");
+        console.log("XHR: " + xhr);
         console.log("Status: " + status);
         console.log("Error: " + error);
       },
