@@ -61,7 +61,9 @@ $receiver = $_GET['user_id'];
                             <!-- Profile Avatar -->
                             <div class=" position-relative" style="width: 10rem; height:10rem; margin: 20px;">
                                 <?php if (!empty($user_profile_pic)) { ?>
-                                    <img class="avatar-img rounded-circle border border-white border-3" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
+                                    <a href="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" target="_blank">
+                                        <img class="avatar-img rounded-circle border border-white border-3" src="<?= BASE_URL ?>assets/profile_pic/<?= $id . "/" . $user_profile_pic; ?>" alt="">
+                                    </a>
                                 <?php } else { ?>
                                     <img class="avatar-img rounded-circle border border-white border-3" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="">
                                 <?php } ?>
@@ -135,6 +137,7 @@ $receiver = $_GET['user_id'];
                                 <p><?= "@" . $user_name ?></p>
                             </div>
 
+                            <!-- userDetails, such as count of posts, followers, followings are here -->
                             <div class="userDetails">
                                 <div class="hstack gap-2 gap-xl-3 justify-content-start">
                                     <!-- User stat item -->
@@ -171,15 +174,49 @@ $receiver = $_GET['user_id'];
                                 </div>
                             </div>
 
-
-                            <!-- Button -->
-                            <div class="d-flex justify-content-center">
-
-                                <!-- Update Profile -->
-                                <button class="btn btn-danger-soft me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalEditProfile">
-                                    <i class="bi bi-pencil-fill pe-1"></i>
-                                    Edit profile
+                            <!-- Profile dropdown button for delete profile, and edit profile -->
+                            <div class="dropdown ms-sm-4">
+                                <!-- Card share action menu -->
+                                <button class="icon-md btn btn-light" type="button" id="profileAction2" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-ellipsis"></i>
                                 </button>
+                                <!-- Card share action dropdown menu -->
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">
+                                    <!-- <li><a class="dropdown-item" href="javascript:void(0)"> <i class="fa-solid fa-share pe-2"></i>Share profile in a message</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0)"> <i class="fa-solid fa-lock pe-2"></i>Lock profile</a></li>
+
+
+                                    <li><a class="dropdown-item" href="javascript:void(0)"> <i class="fa-solid fa-gear pe-2"></i>Profile settings</a></li> -->
+
+                                    <li>
+                                        <!-- Update Profile -->
+                                        <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#modalEditProfile">
+                                            <i class="bi bi-pencil-fill pe-2"></i>
+                                            Edit profile
+                                        </button>
+                                    </li>
+
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+
+                                    <!-- If you're super admin, then you don't have a button to delete your account -->
+                                    <?php if ($user_role == 1) { ?>
+                                        <li>
+                                            <a title="Admin Dashboard" class="dropdown-item" href=<?php echo BASE_URL . "admin/Dashboard.php" ?>> <i class=" fa-solid fa-chart-pie pe-2"></i>Dashboard</a>
+                                        </li>
+                                    <?php } else { ?>
+                                        <!-- Account delete button for normal users -->
+                                        <li>
+                                            <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteAccount">
+                                                <i class="fa-solid fa-user-slash pe-2" style="color: #e60000;"></i>Delete Account
+                                            </button>
+                                        </li>
+                                    <?php } ?>
+
+
+                                </ul>
+
 
                                 <!-- Modal for Profile Edit -->
                                 <div class="modal fade" id="modalEditProfile" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
@@ -224,71 +261,37 @@ $receiver = $_GET['user_id'];
                                     </div>
                                 </div>
 
-
-                                <div class="dropdown ms-sm-4">
-                                    <!-- Card share action menu -->
-                                    <button class="icon-md btn btn-light" type="button" id="profileAction2" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="bi bi-three-dots"></i>
-                                    </button>
-                                    <!-- Card share action dropdown menu -->
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">
-                                        <li><a class="dropdown-item" href="javascript:void(0)"> <i class="fa-solid fa-share pe-2"></i>Share profile in a message</a></li>
-                                        <li><a class="dropdown-item" href="javascript:void(0)"> <i class="fa-solid fa-lock pe-2"></i>Lock profile</a></li>
-
-                                        <!-- Account delete button -->
-
-                                        <!-- If you're super admin, then you don't have a button to delete your account -->
-                                        <?php if ($user_role == 1) { ?>
-                                            <li>
-                                                <a title="Admin Dashboard" class="dropdown-item" href=<?php echo BASE_URL . "admin/Dashboard.php" ?>> <i class=" fa-solid fa-chart-pie pe-2"></i>Dashboard</a>
-                                            </li>
-                                        <?php } else { ?>
-                                            <li>
-                                                <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteAccount">
-                                                    <i class="fa-solid fa-user-slash pe-2" style="color: #e60000;"></i>Delete Account
-                                                </button>
-                                            </li>
-                                        <?php } ?>
-
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="javascript:void(0)"> <i class="fa-solid fa-gear pe-2"></i>Profile settings</a></li>
-                                    </ul>
-
-                                    <!-- Modal to Delete the Account -->
-                                    <div class="modal fade" id="modalDeleteAccount" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelAccount" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="staticBackdropLabelAccount">Delete Account Confirmation!!!</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-
-                                                <form action="<?= BASE_URL ?>src/controller/account_delete.php" method="post">
-                                                    <div class="modal-body">
-                                                        <p>Are You sure you want to Delete your Account ?</p>
-                                                    </div>
-                                                    <div class="modal-footer">
-
-                                                        <button type="button" class="btn w-25 btn-outline-secondary p-2" data-bs-dismiss="modal">CLOSE</button>
-
-                                                        <input style="width: 150px" class="btn btn-outline-danger p-2" type="submit" name="delete_account_btn" id="delete_account_btn" value="DELETE ACCOUNT">
-
-                                                    </div>
-                                                </form>
+                                <!-- Modal to Delete the Account -->
+                                <div class="modal fade" id="modalDeleteAccount" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelAccount" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="staticBackdropLabelAccount">Delete Account Confirmation!!!</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
+
+                                            <form action="<?= BASE_URL ?>src/controller/account_delete.php" method="post">
+                                                <div class="modal-body">
+                                                    <p>Are You sure you want to Delete your Account ?</p>
+                                                </div>
+                                                <div class="modal-footer">
+
+                                                    <button type="button" class="btn w-25 btn-outline-secondary p-2" data-bs-dismiss="modal">CLOSE</button>
+
+                                                    <input style="width: 150px" class="btn btn-outline-danger p-2" type="submit" name="delete_account_btn" id="delete_account_btn" value="DELETE ACCOUNT">
+
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
-
                                 </div>
+
                             </div>
 
                         </div>
 
                     </div>
                     <!-- My profile END -->
-
 
                     <!-- Share feed START -->
                     <div class="card card-body rounded-2">
@@ -383,18 +386,33 @@ $receiver = $_GET['user_id'];
                     <!-- Tabs navs -->
                     <ul class="nav nav-tabs nav-justified mb-3" id="ex1" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="ex3-tab-1" data-bs-toggle="tab" href="#ex3-tabs-1" role="tab" aria-controls="ex3-tabs-1" aria-selected="true"><strong>Posts</strong></a>
+                            <a class="nav-link active text-truncate" id="ex3-tab-1" data-bs-toggle="tab" href="#ex3-tabs-1" role="tab" aria-controls="ex3-tabs-1" aria-selected="true"><span class="badge bg-primary bg-opacity-10 text-primary me-2"><?php if (!empty($total_posts)) { ?>
+                                        <h6 class="mb-0"><?= $total_posts; ?></h6>
+                                    <?php } else { ?>
+                                        <h6 class="mb-0">0</h6>
+                                    <?php } ?>
+                                </span> <strong>Posts </strong></a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="ex3-tab-2" data-bs-toggle="tab" href="#ex3-tabs-2" role="tab" aria-controls="ex3-tabs-2" aria-selected="false"><strong>Followers</strong></a>
+                            <a class="nav-link text-truncate" id="ex3-tab-2" data-bs-toggle="tab" href="#ex3-tabs-2" role="tab" aria-controls="ex3-tabs-2" aria-selected="false"><span class="badge bg-primary bg-opacity-10 text-success me-2"><?php if (!empty($total_followers)) { ?>
+                                        <h6 class="mb-0"><?= $total_followers; ?></h6>
+                                    <?php } else { ?>
+                                        <h6 class="mb-0">0</h6>
+                                    <?php } ?>
+                                </span> <strong>Followers </strong></a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="ex3-tab-3" data-bs-toggle="tab" href="#ex3-tabs-3" role="tab" aria-controls="ex3-tabs-3" aria-selected="false"><strong>Followings</strong></a>
+                            <a class="nav-link text-truncate" id="ex3-tab-3" data-bs-toggle="tab" href="#ex3-tabs-3" role="tab" aria-controls="ex3-tabs-3" aria-selected="false"><span class="badge bg-primary bg-opacity-10 text-primary me-2"><?php if (!empty($total_followings)) { ?>
+                                        <h6 class="mb-0"><?= $total_followings; ?></h6>
+                                    <?php } else { ?>
+                                        <h6 class="mb-0">0</h6>
+                                    <?php } ?>
+                                </span> <strong>Followings </strong></a>
                         </li>
                     </ul>
 
+                    <!-- Tab Contents START -->
                     <div class="tab-content" id="ex2-content">
-
                         <!-- Showing Posts Here -->
                         <div class="tab-pane fade show active" id="ex3-tabs-1" role="tabpanel" aria-labelledby="ex3-tab-1">
                             <!-- Card feed item START -->
@@ -870,7 +888,7 @@ $receiver = $_GET['user_id'];
                         </div>
 
                     </div>
-                    <!-- Tabs content -->
+                    <!-- Tab Contents END -->
 
                 </div>
                 <!-- Main content END -->
