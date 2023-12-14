@@ -239,7 +239,7 @@ require_once("../controller/getAllUserRecord.php");
 
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-outline-secondary p-2" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn w-25 btn-outline-secondary p-2" data-bs-dismiss="modal">CLOSE</button>
                                                                 <!-- <button type="button" class="btn btn-outline-success p-2">SAVE CHANGES</button> -->
                                                                 <input class="btn w-25 btn-outline-danger p-2 edit_btn" data-post-id="<?= $post_id ?>" id="" type="button" name="Submit" value="UPDATE POST">
                                                             </div>
@@ -261,7 +261,7 @@ require_once("../controller/getAllUserRecord.php");
                                                                 <p>Are You sure you want to Delete this Post ?</p>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-outline-secondary p-2" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn w-25 btn-outline-secondary p-2" data-bs-dismiss="modal">CLOSE</button>
                                                                 <!-- <button type="button" class="btn btn-outline-success p-2">SAVE CHANGES</button> -->
                                                                 <input class="btn w-25 btn-outline-danger p-2 delete_btn" type="button" id="" data-post-id="<?= $post_id ?>" value="DELETE POST">
                                                             </div>
@@ -272,13 +272,13 @@ require_once("../controller/getAllUserRecord.php");
                                             <?php } else { ?>
                                                 <!-- Card feed action dropdown menu -->
                                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
-                                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
-                                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
-                                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
+                                                    <li><a class="dropdown-item" href="javascript:void(0)"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
+                                                    <li><a class="dropdown-item" href="javascript:void(0)"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
+                                                    <li><a class="dropdown-item" href="javascript:void(0)"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
                                                     <li>
                                                         <hr class="dropdown-divider">
                                                     </li>
-                                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+                                                    <li><a class="dropdown-item" href="javascript:void(0)"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
                                                 </ul>
                                             <?php } ?>
 
