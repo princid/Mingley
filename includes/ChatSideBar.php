@@ -63,7 +63,7 @@ if ($_GET['receiver'] == $user_id) {
 
                     <!-- View more button -->
                     <div class=" d-grid mt-3">
-                        <a class="btn btn-sm btn-primary-soft" href="#!">View more</a>
+                        <a class="btn btn-sm btn-primary-soft" href="javascript:void(0)">View more</a>
                     </div>
                 </div>
                 <!-- Card body END -->
