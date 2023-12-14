@@ -2,7 +2,7 @@
 
 session_start();
 
-$title = "Chat with your Friends";
+$title = "Chat with other Minglers";
 $active_item = 2;
 
 require_once("../../includes/Header.php");
@@ -95,19 +95,29 @@ if (isset($_GET['sender']) && isset($_GET['receiver'])) {
                             $result = mysqli_query($conn, $query);
                             if ($result) {
                                 foreach ($result as $list) {
-                                    $full_name = $list["first_name"] . " " . $list["last_name"];
-                                    $profile_pic = $list["user_profile_pic"];
-                                    $list_id = $list["id"];
+                                    $full_name         = $list["first_name"] . " " . $list["last_name"];
+                                    $username          = $list['user_name'];
+                                    $profile_pic       = $list["user_profile_pic"];
+                                    $list_id           = $list["id"];
+                                    $friend_profileUrl = "FriendProfile.php?user_id=" . $list_id;
                             ?>
                                     <?php if (!empty($profile_pic)) { ?>
-                                        <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $list_id . "/" . $profile_pic; ?>" alt="" style="width: 3rem; height: 3rem;">
+                                        <a href="<?= $friend_profileUrl; ?>">
+                                            <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/<?= $list_id . "/" . $profile_pic; ?>" alt="" style="width: 3rem; height: 3rem;">
+                                        </a>
 
                                     <?php } else { ?>
-                                        <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="" style="width: 3rem;">
+                                        <a href="<?= $friend_profileUrl; ?>">
+                                            <img class="avatar-img rounded-circle" src="<?= BASE_URL ?>assets/profile_pic/profileDummy.png" alt="" style="width: 3rem;">
+                                        </a>
 
                                     <?php } ?>
-                                    <!-- <i class="fa fa-circle text-success position-absolute rounded-circle border border-white border-3" style="bottom: 72px; left: 50px;"></i> -->
-                                    <h6><?= $full_name; ?></h6>
+
+                                    <a href="<?= $friend_profileUrl; ?>">
+                                        <h6><?= $full_name; ?></h6>
+                                        <small>@<?= $username; ?></small>
+                                    </a>
+
                             <?php }
                             } ?>
 
@@ -132,7 +142,7 @@ if (isset($_GET['sender']) && isset($_GET['receiver'])) {
                                         <?php } ?>
                                     </a>
                                 </div>
-                                
+
                                 <!-- chat input box -->
                                 <form class="nav nav-item w-100 position-relative" id="chatForm" method="post">
                                     <input type="hidden" id="receive" value="<?php echo $receiver; ?>">
