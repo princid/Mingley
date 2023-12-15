@@ -17,6 +17,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['userId'])) {
         $followerData = mysqli_fetch_assoc($followerResult);
         $follower_name = $followerData['user_name'];
 
+        // Check if the action is "mark_all_as_read"
+        if (isset($_POST['action']) && $_POST['action'] === 'mark_all_as_read') {
+            // Update the is_read column in the notif_table
+            $updateIsReadQuery = "UPDATE notif_table SET is_read = 1 WHERE receiver_id = $followerId";
+            $updateIsReadResult = mysqli_query($conn, $updateIsReadQuery);
+
+            if ($updateIsReadResult) {
+                // Successfully marked all notifications as read
+                echo json_encode(['status' => 'success', 'message' => 'All notifications marked as read']);
+            } else {
+                // Error in database operation
+                echo json_encode(['status' => 'error', 'message' => 'Failed to mark all notifications as read']);
+            }
+            exit; // Exit the script after handling the "mark_all_as_read" action
+        }
+
         // Check if the user is already being followed
         $query = "SELECT * FROM follows_table WHERE user_id = $userId AND follower_id = $followerId";
         $result = mysqli_query($conn, $query);

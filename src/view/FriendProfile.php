@@ -573,7 +573,7 @@ if (!isset($_GET['user_id']) || empty($_GET['user_id'])) {
 
                                                 <td class="text-center">
                                                     <?php if ($user_id != $curr_id) { ?>
-                                                        <a href="Chat.php?sender=<?php echo $curr_id; ?>&receiver=<?php echo $user_id; ?>"><button type="button" class="btn btn-outline-success"><i class="fa-regular fa-message"></i></button></a>
+                                                        <a  href="Chat.php?sender=<?php echo $curr_id; ?>&receiver=<?php echo $user_id; ?>"><button type="button" class="btn btn-outline-success"><i class="fa-regular fa-message"></i></button></a>
                                                     <?php } ?>
                                                 </td>
 

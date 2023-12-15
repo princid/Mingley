@@ -72,43 +72,57 @@ if (empty($_SESSION['id'])) {
                                                         $notif_content = $notif_data["notif_content"];
                                                         $notif_timing  = $notif_data["notif_date"] . " - " . $notif_data["notif_time"];
 
+                                                        if ($notif_data['is_read'] == 0) {
+                                                            $unreadNotificationsExist = true; // Set the flag to true
+
                                                 ?>
-                                                        <ul class="list-group list-group-flush list-unstyled notifDropdownUL">
-                                                            <li class="list-group-item">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="avatar me-3">
-                                                                        <div class="avatar-img rounded-circle bg-primary">
-                                                                            <span class="text-white position-absolute top-50 start-50 translate-middle fw-bold senderInitial"></span>
+                                                            <ul class="list-group list-group-flush list-unstyled notifDropdownUL">
+                                                                <li class="list-group-item">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="avatar me-3">
+                                                                            <div class="avatar-img rounded-circle bg-primary">
+                                                                                <span class="text-white position-absolute top-50 start-50 translate-middle fw-bold senderInitial"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="flex-grow-1">
+                                                                            <p class="mb-0"><b><?= $sender_name; ?> </b><?= $notif_content; ?></p>
+                                                                            <small class="text-muted"><?= $notif_timing; ?></small>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="flex-grow-1">
-                                                                        <p class="mb-0"><b><?= $sender_name; ?> </b><?= $notif_content; ?></p>
-                                                                        <small class="text-muted"><?= $notif_timing; ?></small>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
+                                                                </li>
+                                                            </ul>
+
+                                                        <?php
+                                                        }
+                                                    }
+                                                    if ($unreadNotificationsExist) { // Display the button only if there are unread notifications
+                                                        ?>
+                                                        <div class="card-footer text-center notifDropdownFooter">
+                                                            <a href="" class="btn btn-sm btn-primary-soft" id="clearNotifications"><i class="fa-solid fa-check pe-2"></i> Mark all as read </a>
+                                                        </div>
+                                                    <?php
+                                                    } else { // If no unread notifications, display the "No new notification!" message
+                                                    ?>
+                                                        <div class="card-footer text-center notifDropdownFooter">
+                                                            <a href="" class="btn btn-sm btn-primary-soft"><i class="fa-solid fa-xmark pe-2"></i> No new notification! </a>
+                                                        </div>
                                                     <?php
                                                     }
-                                                } else { ?>
-                                                    <ul class="list-group list-group-flush list-unstyled notifDropdownUL">
-                                                        <li class="list-group-item">No new notifications</li>
-                                                    </ul>
+                                                } else { // If there are no notifications at all
+                                                    ?>
+                                                    <div class="card-footer text-center notifDropdownFooter">
+                                                        <a href="" class="btn btn-sm btn-primary-soft"><i class="fa-solid fa-check pe-2"></i> No new notification! </a>
+                                                    </div>
                                                 <?php
                                                 }
                                                 ?>
                                             </div>
-                                            <div class="card-footer text-center notifDropdownFooter">
-                                                <a href="" class="btn btn-sm btn-primary-soft" id="clearNotifications">Clear All</a>
-                                            </div>
                                         </div>
-
-
                                     </div>
 
                                 </li>
 
-                                <!-- If you're super admin, then this icon will be displayed on your navbar -->
+                                <!-- Only if you're super admin, then this icon will be displayed on your navbar -->
                                 <?php if ($user_role == 1) { ?>
                                     <li>
                                         <a title="Admin Dashboard" class="" href=<?php echo BASE_URL . "admin/Dashboard.php" ?>>
@@ -183,6 +197,8 @@ if (empty($_SESSION['id'])) {
 </header>
 <!-- header area end -->
 
+<script src="../../assets/js/jquery.js"></script>
+
 <script>
     const senderInitials = document.querySelectorAll('.senderInitial');
     const notificationContainer = document.querySelector('.notifDropdownUL');
@@ -198,12 +214,21 @@ if (empty($_SESSION['id'])) {
     }
     ?>
 
-    // Add event listener for Clear All button
-    const clearNotificationsButton = document.getElementById('clearNotifications');
-    clearNotificationsButton.addEventListener('click', function(event) {
-        event.preventDefault();
+</script>
 
-        // Clear existing notifications
-        notificationContainer.innerHTML = '<li class="list-group-item">No new notifications</li>';
+
+<script>
+    $(document).ready(function() {
+        $('#clearNotifications').on('click', function(e) {
+            e.preventDefault();
+
+            // Send an AJAX request to mark all notifications as read
+            $.post('../controller/follow_action.php', {
+                action: 'mark_all_as_read',
+                userId: <?php echo $id; ?>
+            }, function(response) {
+                console.log(response);
+            });
+        });
     });
 </script>

@@ -90,9 +90,7 @@ $curr_id = $_SESSION['id'];
                                                 <?php echo strtoupper($user_fullname); ?>
                                             </a>
                                             <?php if ($follower_status == 1) { ?>
-                                                <!-- <small class="ms-2 badge rounded-pill text-bg-success">Following</small> -->
                                                 <i class="fa-solid fa-user-check ms-2" title="You are following @<?php echo $user_shortname; ?>" style="color: #279f1e;"></i>
-                                                <!-- <small class="text-success">(Following)</small> -->
                                             <?php } ?>
 
                                         </td>
@@ -102,7 +100,7 @@ $curr_id = $_SESSION['id'];
                                         </td>
 
                                         <td class="text-end">
-                                            <a href="<?= $search_profileUrl; ?>"><button type="button" class="btn btn-outline-primary">View Profile</button></a>
+                                            <a title="View Profile" href="<?= $search_profileUrl; ?>"><button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></button></a>
                                         </td>
 
                                     </tr>
