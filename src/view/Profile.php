@@ -126,8 +126,6 @@ $receiver = $_GET['user_id'];
                                 </div>
                             </div>
 
-
-
                         </div>
 
                         <div class="mt-sm-4 d-flex" style="align-items: flex-start; justify-content:space-between; ">
