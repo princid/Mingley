@@ -45,7 +45,7 @@ if (isset($_POST['edit_profile_pic'])) {
         header("location: http://localhost/PHP_Assesments/Mingley/src/view/Profile.php");
         exit;
     } else {
-        $_SESSION["message"] = $profile_pic_result;
+        $_SESSION["error"] = $profile_pic_result;
         header("location: http://localhost/PHP_Assesments/Mingley/src/view/Profile.php");
         exit;
     }

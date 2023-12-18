@@ -34,16 +34,20 @@ require_once("../controller/getAllUserRecord.php");
     <div class="main-wrapper pt-80">
         <div class="container">
 
-            <?php if (isset($_SESSION['message'])) { ?>
+            <?php if (isset($_SESSION['message']) || isset($_SESSION['error'])) { ?>
                 <div class="alertBox">
-                    <div class="alert alert-success" role="alert">
-                        <h1>
-                            <?php
-                            echo $_SESSION['message'];
-                            unset($_SESSION['message']);
-                            ?>
-                        </h1>
-                    </div>
+                    <?php if (isset($_SESSION['message'])) { ?>
+                        <div class="alert alert-success" role="alert">
+                            <h1><?php echo $_SESSION['message']; ?></h1>
+                        </div>
+                    <?php } elseif (isset($_SESSION['error'])) { ?>
+                        <div class="alert alert-danger" role="alert">
+                            <h1><?php echo $_SESSION['error']; ?></h1>
+                        </div>
+                    <?php } ?>
+
+                    <?php unset($_SESSION['message']); ?>
+                    <?php unset($_SESSION['error']); ?>
                 </div>
             <?php } ?>
             <div id="msg"></div>
@@ -87,8 +91,15 @@ require_once("../controller/getAllUserRecord.php");
                                                 <br>
                                                 <br>
 
-                                                <input type="file" name="files[]" id="upload_file" accept=".jpg, .jpeg, .png, .gif" multiple>
+                                                <label class="btn btn-outline-primary pe-3 upload_prof_img mb-3 w-100 fw-bold">
+                                                    <i class="fa-solid fa-upload pe-2"></i>
+                                                    UPLOAD IMAGES
+                                                    <input type="file" name="files[]" id="upload_file" accept=".jpg, .jpeg, .png, .gif" multiple required>
+                                                </label>
+                                                <br>
                                                 <small class="text-primary">Allowed File Type - jpg, jpeg, png, gif</small>
+                                                <br>
+                                                <small class="text-success">Allowed Maximum File Size = 2 MB</small>
 
                                                 <br>
                                                 <small class="text-danger" id="max_upload_error">You can upload up to 10 images only.</small>

@@ -45,14 +45,14 @@ body{
     background: rgb(222,24,224);
     background: linear-gradient(148deg, rgba(222,24,224,1) 8%, rgba(90,21,174,1) 56%, rgba(76,17,112,1) 100%);
     padding: 10px;
-    width: 100%;
+    width: 50%;
     color: #fff;
 }
 
 .contactDetails{
     background-color: #fff;
     padding: 10px;
-    width: 100%;
+    width: 50%;
 }
 
 .contactDetails p{
@@ -96,9 +96,9 @@ label{
     /* font-family: 'Roboto', sans-serif; */
 }
 
-input {
+.contactForm input {
     margin-top: 10px;
-    width: 100%;
+    width: 535px;
     height: 30px;
     border: solid 2px #120A19;
     border: none;
@@ -139,7 +139,7 @@ input {
 textarea{
     /* display: block; */
     /* margin: 2% auto 0; */
-    width: 100%;
+    width: 535px;
     /* height: 22vh; */
     height: 80px;
     color: #fff;

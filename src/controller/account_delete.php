@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] && isset($_POST['delete_account_btn'])) {
 
     // Validating the ID
     if (!is_numeric($account_id)) {
-        $_SESSION["message"] = "Invalid user ID";
+        $_SESSION["error"] = "Invalid user ID";
         header("location: " . BASE_URL . "src/view/Profile.php");
         exit;
     }
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] && isset($_POST['delete_account_btn'])) {
         header("location: " . BASE_URL . "src/view/SignIn.php");
         exit;
     } else {
-        $_SESSION["message"] = "Error: OOPS! Something went wrong...";
+        $_SESSION["error"] = "Error: OOPS! Something went wrong...";
         header("location: " . BASE_URL . "src/view/Profile.php");
         exit;
     }

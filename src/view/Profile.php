@@ -34,16 +34,20 @@ $receiver = $_GET['user_id'];
 
         <div class="container">
 
-            <?php if (isset($_SESSION['message'])) { ?>
+            <?php if (isset($_SESSION['message']) || isset($_SESSION['error'])) { ?>
                 <div class="alertBox">
-                    <div class="alert alert-success" role="alert">
-                        <h1>
-                            <?php
-                            echo $_SESSION['message'];
-                            unset($_SESSION['message']);
-                            ?>
-                        </h1>
-                    </div>
+                    <?php if (isset($_SESSION['message'])) { ?>
+                        <div class="alert alert-success" role="alert">
+                            <h1><?php echo $_SESSION['message']; ?></h1>
+                        </div>
+                    <?php } elseif (isset($_SESSION['error'])) { ?>
+                        <div class="alert alert-danger" role="alert">
+                            <h1><?php echo $_SESSION['error']; ?></h1>
+                        </div>
+                    <?php } ?>
+
+                    <?php unset($_SESSION['message']); ?>
+                    <?php unset($_SESSION['error']); ?>
                 </div>
             <?php } ?>
             <div id="msg"></div>
@@ -101,12 +105,16 @@ $receiver = $_GET['user_id'];
                                                     <div class="profilePicButtons d-flex" style="justify-content:space-between; align-items:center;">
 
                                                         <div class="changeButton">
-                                                            <input type="file" name="profile_pic" id="profile_pic" accept=".jpg, .jpeg, .png, .gif">
+                                                            <label class="btn btn-outline-primary pe-3 upload_prof_img">
+                                                                <i class="fa-solid fa-upload pe-2"></i>
+                                                                Upload image
+                                                                <input type="file" name="profile_pic" id="profile_pic" accept=".jpg, .jpeg, .png, .gif">
+                                                            </label>
                                                         </div>
 
                                                         <div class="removeButton">
                                                             <button class="btn btn-outline-danger pe-3 removeBtn" data-user-id="<?= $curr_id ?>" type="button">
-                                                                <i class="fa-solid fa-trash-can"></i>
+                                                                <i class="fa-solid fa-trash-can pe-2"></i>
                                                                 Remove
                                                             </button>
                                                         </div>
@@ -321,11 +329,17 @@ $receiver = $_GET['user_id'];
                                                 <br>
                                                 <br>
 
-                                                <input type="file" name="files[]" id="upload_file" accept=".jpg, .jpeg, .png, .gif" multiple>
+                                                <label class="btn btn-outline-primary pe-3 upload_prof_img mb-3 w-100 fw-bold">
+                                                    <i class="fa-solid fa-upload pe-2"></i>
+                                                    UPLOAD IMAGES
+                                                    <input type="file" name="files[]" id="upload_file" accept=".jpg, .jpeg, .png, .gif" multiple required>
+                                                </label>
+                                                <br>
                                                 <small class="text-primary">Allowed File Type - jpg, jpeg, png, gif</small>
+                                                <br>
+                                                <small class="text-success">Allowed Maximum File Size = 2 MB</small>
 
                                                 <br>
-
                                                 <small class="text-danger" id="max_upload_error">You can upload up to 10 images only.</small>
 
                                             </div>
