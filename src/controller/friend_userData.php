@@ -11,13 +11,5 @@ if (!empty($_SESSION)) {
 
     $getAll_table = 'users_table';
 
-    // $posts_table = 'posts_table';
-
-    // $profile_feed_condition = " $users_table.id = $posts_table.user_id ";
-
-    // $where_condition = " $id = $posts_table.user_id ";
-
     $fetch_user_result = getAllUserRecord($conn, $getAll_table);
-    // $fetch_username = $fetch_user_result['user_name'];
-    // var_dump($fetch_username);
 }

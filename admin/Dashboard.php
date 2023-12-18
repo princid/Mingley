@@ -188,16 +188,20 @@ if ($fetch_query_run) {
             <!-- Header -->
             <header class="bg-surface-primary mb-5 pt-6">
 
-                <?php if (isset($_SESSION['message'])) { ?>
+                <?php if (isset($_SESSION['message']) || isset($_SESSION['error'])) { ?>
                     <div class="alertBox">
-                        <div class="alert alert-success" role="alert">
-                            <h1>
-                                <?php
-                                echo $_SESSION['message'];
-                                unset($_SESSION['message']);
-                                ?>
-                            </h1>
-                        </div>
+                        <?php if (isset($_SESSION['message'])) { ?>
+                            <div class="alert alert-success" role="alert">
+                                <h1><?php echo $_SESSION['message']; ?></h1>
+                            </div>
+                        <?php } elseif (isset($_SESSION['error'])) { ?>
+                            <div class="alert alert-danger" role="alert">
+                                <h1><?php echo $_SESSION['error']; ?></h1>
+                            </div>
+                        <?php } ?>
+
+                        <?php unset($_SESSION['message']); ?>
+                        <?php unset($_SESSION['error']); ?>
                     </div>
                 <?php } ?>
                 <div id="msg"></div>

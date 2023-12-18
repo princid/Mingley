@@ -1,13 +1,8 @@
 <?php
-require("../../config/constants.php");
-// include("../../includes/Header.php");
-// include("Navbar.php");
+session_start();
 
-// Checking if Session is active or not
-// if (empty($_SESSION['id'])) {
-//     header("location: ./SignIn.php");
-//     exit();
-// }
+require("../../config/constants.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -30,11 +25,36 @@ require("../../config/constants.php");
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
+    <!-- Bootstrap CSS CDN Link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Bootstrap JS CDN Link -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
 
-    <div class="col-md-2 d-flex">
+    <div class="mb-5">
+
+        <?php if (isset($_SESSION['message']) || isset($_SESSION['error'])) { ?>
+            <div class="alertBox">
+                <?php if (isset($_SESSION['message'])) { ?>
+                    <div class="alert alert-success" role="alert">
+                        <h1><?php echo $_SESSION['message']; ?></h1>
+                    </div>
+                <?php } elseif (isset($_SESSION['error'])) { ?>
+                    <div class="alert alert-danger" role="alert">
+                        <h1><?php echo $_SESSION['error']; ?></h1>
+                    </div>
+                <?php } ?>
+
+                <?php unset($_SESSION['message']); ?>
+                <?php unset($_SESSION['error']); ?>
+            </div>
+        <?php } ?>
+        <div id="msg"></div>
+
         <!-- brand logo start -->
         <div class="brand-logo text-center">
             <a href="javascript:void(0)">
@@ -45,7 +65,7 @@ require("../../config/constants.php");
         <h1 class="brand_name">Mingley</h1>
     </div>
 
-    <div class="container">
+    <div class="container p-2">
 
         <div class="contactForm">
             <h2>Send us a message</h2>
@@ -99,6 +119,8 @@ require("../../config/constants.php");
 
 
     <script src="../../assets/js/contactFormValidation.js"></script>
+
+    <script src="../../assets/js/alertMessage.js"></script>
 
 </body>
 

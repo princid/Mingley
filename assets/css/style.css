@@ -351,6 +351,61 @@ h6{
     font-size: small;
 }
 
+
+/* Upload file button styling starts */
+.upload_file input{display:none}
+
+.upload_file{
+  padding: 1rem 1.5rem;
+  background:#1f66fd;
+  box-shadow:2px 2px 2px #aaa;
+  font: 1em Arial, sans-serif;
+  color:#fff;
+  position:relative;
+  cursor:pointer;
+  margin-bottom: 20px;
+  /*
+  No text-selection on buttons
+  */
+  user-select:none; 
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.upload_file:active{
+ top:2px; 
+ box-shadow:none;
+}
+
+/* Upload file button styling ends */
+
+.upload_prof_img input{display:none}
+
+.upload_prof_img{
+  padding: 10px;
+  background: transparent;
+  box-shadow: 2px 2px 2px #aaa;
+  font: 1em Arial, sans-serif;
+  color: #1f66fd;
+  position: relative;
+  cursor: pointer;
+  height: 38px;
+  /*
+  No text-selection on buttons
+  */
+  user-select:none; 
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.upload_prof_img:active{
+ top:2px; 
+ box-shadow:none;
+}
+
+
 /************************************** JQUERY TABLE STYLING START Search page ***********************************************/
 #table_id th {
     background-color: #337ab7;

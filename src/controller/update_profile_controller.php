@@ -24,7 +24,7 @@ if (($_SERVER['REQUEST_METHOD'] == "POST") && !empty($_SESSION)) {
         header("location: http://localhost/PHP_Assesments/Mingley/src/view/Profile.php");
         exit;
     } else {
-        $_SESSION["message"] = $result;
+        $_SESSION["error"] = $result;
         header("location: http://localhost/PHP_Assesments/Mingley/src/view/Profile.php");
         exit;
     }

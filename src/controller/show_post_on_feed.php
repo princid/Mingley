@@ -24,14 +24,3 @@ if (!empty($_SESSION)) {
     
     
 }
-// echo "<pre>";
-// print_r($feed_post_result);
-
-// foreach($feed_post_result as $feed_post_data){
-//     $post_author = $feed_post_data['first_name'] . " " . $feed_post_data["last_name"];
-//     // var_dump($post_author);
-// }
-
-// $post_author = $feed_post_result['first_name']. " ". $feed_post_result["last_name"];
-
-// var_dump($post_author);

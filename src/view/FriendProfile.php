@@ -65,18 +65,23 @@ if (!isset($_GET['user_id']) || empty($_GET['user_id'])) {
 
         <div class="container">
 
-            <?php if (isset($_SESSION['message'])) { ?>
+            <?php if (isset($_SESSION['message']) || isset($_SESSION['error'])) { ?>
                 <div class="alertBox">
-                    <div class="alert alert-success" role="alert">
-                        <h1>
-                            <?php
-                            echo $_SESSION['message'];
-                            unset($_SESSION['message']);
-                            ?>
-                        </h1>
-                    </div>
+                    <?php if (isset($_SESSION['message'])) { ?>
+                        <div class="alert alert-success" role="alert">
+                            <h1><?php echo $_SESSION['message']; ?></h1>
+                        </div>
+                    <?php } elseif (isset($_SESSION['error'])) { ?>
+                        <div class="alert alert-danger" role="alert">
+                            <h1><?php echo $_SESSION['error']; ?></h1>
+                        </div>
+                    <?php } ?>
+
+                    <?php unset($_SESSION['message']); ?>
+                    <?php unset($_SESSION['error']); ?>
                 </div>
             <?php } ?>
+            <div id="msg"></div>
 
             <div class="row g-4">
 
@@ -304,11 +309,10 @@ if (!isset($_GET['user_id']) || empty($_GET['user_id'])) {
                                                 </div>
                                                 <!-- Card feed action dropdown START -->
                                                 <div class="dropdown">
-                                                    <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <a href="javascript:void(0)" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction" data-bs-toggle="dropdown" aria-expanded="false">
                                                         <i class="bi bi-three-dots"></i>
                                                     </a>
                                                     <!-- Card feed action dropdown menu -->
-
 
                                                     <!-- Card feed action dropdown menu -->
                                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
@@ -492,7 +496,7 @@ if (!isset($_GET['user_id']) || empty($_GET['user_id'])) {
                                         <!-- Card footer START -->
                                         <div class="card-footer border-0 pt-0">
                                             <!-- Load more comments -->
-                                            <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
+                                            <a href="javascript:void(0)" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
                                                 <div class="spinner-dots me-2">
                                                     <span class="spinner-dot"></span>
                                                     <span class="spinner-dot"></span>
@@ -573,7 +577,7 @@ if (!isset($_GET['user_id']) || empty($_GET['user_id'])) {
 
                                                 <td class="text-center">
                                                     <?php if ($user_id != $curr_id) { ?>
-                                                        <a  href="Chat.php?sender=<?php echo $curr_id; ?>&receiver=<?php echo $user_id; ?>"><button type="button" class="btn btn-outline-success"><i class="fa-regular fa-message"></i></button></a>
+                                                        <a href="Chat.php?sender=<?php echo $curr_id; ?>&receiver=<?php echo $user_id; ?>"><button type="button" class="btn btn-outline-success"><i class="fa-regular fa-message"></i></button></a>
                                                     <?php } ?>
                                                 </td>
 

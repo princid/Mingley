@@ -25,7 +25,7 @@ if (isset($_POST['Submit'])) {
             exit;
         } 
     } else {
-        $_SESSION["message"] = $result['status'];
+        $_SESSION["error"] = $result['status'];
         header("location: ".BASE_URL."src/view/SignIn.php");
         exit;
     }
