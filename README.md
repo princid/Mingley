@@ -75,7 +75,7 @@ Access Mingley at http://localhost:8000 in your browser.
 
 Once installed, you can access Mingley through your browser, register as a new user, create and manage posts, view content from other users, and interact with others on the platform.
 
-**Database**
+###Database
 
 The MySQL database for Mingley includes tables for:
 
@@ -86,7 +86,7 @@ Likes
 Notifications
 Each table is designed to support the dynamic interactions in Mingley and can be customized to fit additional features or data requirements.
 
-Contributing
+###Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -104,7 +104,7 @@ Push to the branch
 git push origin feature/YourFeature
 ```
 Open a pull request.
-**License**
+###License
 
 Distributed under the MIT License. See LICENSE for more information.
 
