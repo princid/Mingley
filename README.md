@@ -58,6 +58,7 @@ Follow these instructions to get a local copy of Mingley up and running.
    ```bash
    git clone https://github.com/princid/Mingley.git
    cd Mingley
+   git checkout developmentV1
 2. **Database Setup**
 Create a new MySQL database.
 Import the database structure from the provided mingley.sql file in the root directory.
