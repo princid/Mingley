@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR);
 session_start();
 
 // Including Contants
@@ -209,12 +210,12 @@ if ($fetch_query_run) {
                 <div class="container-fluid">
                     <div class="mb-npx">
                         <div class="row align-items-center">
-                            <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                            <div class="col-sm-4 col-12 mb-4 mb-sm-0">
                                 <!-- Title -->
                                 <h2 class="mb-0 brand_logo">Mingley</h2>
                             </div>
                             <!-- Actions -->
-                            <div class="col-sm-6 col-12 text-sm-end">
+                            <div class="col-sm-8 col-12 text-sm-end">
                                 <div class="mx-n1">
                                     <a href="../src/view/HomeFeed.php" class="btn btn-sm btn-warning border-base mx-1">
                                         <span class=" pe-2">
