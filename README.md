@@ -5,6 +5,7 @@ Welcome to **Mingley**, a dynamic and engaging social media web application craf
 ## Table of Contents
 
 - [About the Project](#about-the-project)
+- [Visuals](#visuals-of-mingley)
 - [Built With](#built-with)
 - [Features](#features)
 - [Getting Started](#getting-started)
