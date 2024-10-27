@@ -91,7 +91,11 @@ Each table is designed to support the dynamic interactions in Mingley and can be
 Contributions are welcome! Please follow these steps:
 
 Fork the repository.
-Create a new branch 
+Checkout to the current dev branch:
+```
+git checkout developmentV1
+```
+Then, create a new branch 
 ```
 git checkout -b feature/YourFeature
 ```
