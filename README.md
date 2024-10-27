@@ -20,6 +20,22 @@ Welcome to **Mingley**, a dynamic and engaging social media web application craf
 
 Mingley is a feature-rich social media web app that allows users to create profiles, post content, comment on posts, and connect with others. The platform is built on a stack that optimizes performance, responsiveness, and user interaction, making Mingley a vibrant and seamless social experience.
 
+
+## Visuals of Mingley:
+
+<details>
+  <summary>Click Here to see the visuals of Mingley...</summary>
+  <br>
+ 
+### Admin Panel:
+![image](https://github.com/user-attachments/assets/74104644-9c5d-476f-a648-42422aef1007)
+
+ 
+ <br>
+</details>
+
+
+
 ## Built With
 
 Mingley is powered by:
