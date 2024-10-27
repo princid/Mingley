@@ -5,6 +5,7 @@ Welcome to **Mingley**, a dynamic and engaging social media web application craf
 ## Table of Contents
 
 - [About the Project](#about-the-project)
+- [Visuals](#visuals-of-mingley)
 - [Built With](#built-with)
 - [Features](#features)
 - [Getting Started](#getting-started)
@@ -28,8 +29,7 @@ Mingley is a feature-rich social media web app that allows users to create profi
   <br>
  
 ### Admin Panel:
-![image](https://github.com/user-attachments/assets/74104644-9c5d-476f-a648-42422aef1007)
-
+coming soon...
  
  <br>
 </details>
