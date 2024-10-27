@@ -27,7 +27,10 @@ Mingley is a feature-rich social media web app that allows users to create profi
 <details>
   <summary>Click Here to see the visuals of Mingley...</summary>
   <br>
- 
+
+### SignUp Page:
+![image](https://github.com/user-attachments/assets/b2524298-44d7-4cd4-ba03-2892055a4326)
+
 ### Admin Panel:
 coming soon...
  
