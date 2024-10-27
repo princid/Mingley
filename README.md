@@ -31,8 +31,26 @@ Mingley is a feature-rich social media web app that allows users to create profi
 ### SignUp Page:
 ![image](https://github.com/user-attachments/assets/b2524298-44d7-4cd4-ba03-2892055a4326)
 
+### Login Page:
+![image](https://github.com/user-attachments/assets/a01fd5e7-f28a-4c88-8594-1543746d8575)
+
+### Feed/Home Page:
+![image](https://github.com/user-attachments/assets/e0be847a-e237-420a-890c-6be1bda8e194)
+
+### Two-way communication (realtime chat) Page:
+![image](https://github.com/user-attachments/assets/cbe6815c-9254-4f30-b753-07db8622a956)
+![image](https://github.com/user-attachments/assets/2084914b-182e-49c6-a86e-92fe571c51f8)
+
+### Profile Page:
+![image](https://github.com/user-attachments/assets/02ae4331-e55f-4844-b9bd-55c2c619bdbb)
+
+### Friend's Profile Page:
+![image](https://github.com/user-attachments/assets/0382f0e6-28d3-4170-a35b-b2b2da275e3c)
+
+
 ### Admin Panel:
-coming soon...
+![image](https://github.com/user-attachments/assets/d1d07d24-2cc2-4af7-ba7d-944b4249513a)
+
  
  <br>
 </details>
